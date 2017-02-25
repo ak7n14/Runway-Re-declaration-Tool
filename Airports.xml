@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<airport>
-	<name>LONDON HEATHROW</name>
+<airport name="LONDON HEATHROW">
 	
 	<runway>
 		<designator>09R</designator>
