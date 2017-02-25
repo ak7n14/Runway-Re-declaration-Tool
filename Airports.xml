@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<airport>
+	<name>LONDON HEATHROW</name>
+	
+	<runway>
+		<designator>09R</designator>
+		<TORA>3658</TORA>
+		<TODA>3658</TODA>
+		<ASDA>3658</ASDA>
+		<LDA>3350</LDA>
+	</runway>
+	
+	<runway>
+		<designator>27L</designator>
+		<TORA>3658</TORA>
+		<TODA>3658</TODA>
+		<ASDA>3658</ASDA>
+		<LDA>3658</LDA>
+	</runway>
+	
+	<runway>
+		<designator>09L</designator>
+		<TORA>3901</TORA>
+		<TODA>3901</TODA>
+		<ASDA>3901</ASDA>
+		<LDA>3592</LDA>
+	</runway>
+	
+	<runway>
+		<designator>27R</designator>
+		<TORA>3882</TORA>
+		<TODA>3960</TODA>
+		<ASDA>3882</ASDA>
+		<LDA>3882</LDA>
+	</runway>
+	
+</airport>
