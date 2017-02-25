@@ -59,4 +59,18 @@ public class XMLImporter
         return airports;
     }
 
+
+    public Airport getAirportByName(String name)
+    {
+        ArrayList<Airport> airports = importAirports();
+
+        for(Airport airport : airports)
+        {
+            if(airport.getName().equals(name.toUpperCase()))
+                return airport;
+        }
+
+        return null;
+    }
+
 }
