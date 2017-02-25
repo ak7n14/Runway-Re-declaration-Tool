@@ -12,6 +12,7 @@ public class XMLTester
         ArrayList<Airport> airportArrayList = importer.importAirports();
 
         System.out.println(airportArrayList.get(0).toString());
+        System.out.println(airportArrayList.get(1).toString());
     }
 
 }
