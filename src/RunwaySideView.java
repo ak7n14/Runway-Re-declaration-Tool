@@ -14,9 +14,11 @@ public class RunwaySideView extends JPanel{
     //start of displace LDA
     private int LDAStart;
 
-    //initial y position and height are constant in sideview
-    private final int Y = 300;
-    private final int HEIGHT = 10;
+    //initial y position and height of runway
+    private final int RUNWAY_Y = 300;
+    private final int RUNWAY_HEIGHT = 10;
+
+    //initial y position and height are constants for
 
     //defines size of runway
     public RunwaySideView(int start, int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength) {
@@ -25,7 +27,7 @@ public class RunwaySideView extends JPanel{
         this.runwayLength = runwayLength;
 
         //stores all ends in hashmap
-        runwayEnds = new HashMap<String, Integer>();
+        runwayEnds = new HashMap<>();
         runwayEnds.put("TODA", start + TODALength);
         runwayEnds.put("TORA", start + TORALength);
         runwayEnds.put("ASDA", start + ASDALength);
@@ -46,29 +48,102 @@ public class RunwaySideView extends JPanel{
         super.paintComponent(g);
 
         this.drawRunway(g);
-        this.drawSeparatorEnd(g, runwayEnds.get("TODA"));
-        this.drawSeparatorEnd(g, runwayEnds.get("TORA"));
-        this.drawSeparatorEnd(g, runwayEnds.get("ASDA"));
-        this.drawSeparatorEnd(g, runwayEnds.get("LDA"));
+        this.drawAllSeparators(g);
     }
     //--------------------------
 
     //draws runway
-    private void drawRunway(Graphics g){
+    public void drawRunway(Graphics g){
         g.setColor(Color.black);
-        g.fillRect(start, Y, runwayLength, HEIGHT);
+        g.fillRect(start, RUNWAY_Y, runwayLength, RUNWAY_HEIGHT);
     }
 
     //draws a seperator to see ends of different strip components with displacedStart (used by LDA)
-    private void drawSeparatorEnd(Graphics g, int x){
+    public void drawSeparator(Graphics g, int x){
         //x is where the runway component ends
         //height is altered so separator is visible
         g.setColor(Color.RED);
-        g.fillRect(x, Y, 2, HEIGHT + 10);
+        g.fillRect(x, RUNWAY_Y, 2, RUNWAY_HEIGHT + 10);
     }
 
-    private void drawLabels(Graphics g){
+    //loops through hashmap and displays seperators
+    public void drawAllSeparators(Graphics g){
 
+        //draws end separators
+        for(String key : runwayEnds.keySet()){
+            this.drawSeparator(g, runwayEnds.get(key));
+        }
+
+        //draw start separators
+        this.drawSeparator(g, start);
+        this.drawSeparator(g, LDAStart);
+
+        //draws separator labels
+        this.drawLabels(g);
+    }
+
+    //draws labels and handles overlapping
+    public void drawLabels(Graphics g){
+
+        //string data of runwayEnd labels
+        HashMap<String, Point> stringData = this.calculateStringDimensions(runwayEnds.keySet());
+
+        //alters overlapping labels
+       this.removeOverlap(stringData, g);
+
+        //draws labels
+        for(String key : stringData.keySet()) {
+            Point currentPoint = stringData.get(key);
+            g.drawString(key, currentPoint.x, currentPoint.y);
+        }
+    }
+
+    //stops labels overlapping
+    public void removeOverlap(HashMap<String, Point> stringData, Graphics g){
+
+        for(String currentKey : stringData.keySet()){
+
+            //point info of current key
+            Point currentPoint = stringData.get(currentKey);
+            int currentY = currentPoint.y;
+            int currentX = currentPoint.x;
+
+            //loop through all strings
+            for(String key : stringData.keySet()) {
+
+                //doesn't move out of the way of itself
+                if (!key.equals(currentKey)){
+
+                    int stringWidth = g.getFontMetrics().stringWidth(key); //get width of string
+                    Point otherPoint = stringData.get(key);
+
+                    //changes y position if overlap in x direction and only changes if they are both on the same y level
+                    if (currentX >= otherPoint.x && currentX <= otherPoint.x + stringWidth && currentY == otherPoint.y) {
+                        stringData.put(currentKey, new Point(currentX, currentY + 10)); //move item down
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    //returns dimensions of strings in a set
+    public HashMap<String, Point> calculateStringDimensions(Set<String> keys){
+        HashMap<String, Point> stringData = new HashMap<>();
+
+        int stringY = RUNWAY_Y + RUNWAY_HEIGHT + 20; //start of string (y)
+
+        for(String key : keys){
+            int stringX = runwayEnds.get(key); //start of string (x)
+
+            //creates relations between string and its dimensions
+            stringData.put(key, new Point(stringX, stringY));
+        }
+
+        stringData.put("Start", new Point(start, stringY));
+        stringData.put("LDAStart", new Point(LDAStart, stringY));
+        return stringData;
     }
 
 }
