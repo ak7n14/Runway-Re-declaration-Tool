@@ -7,6 +7,9 @@ public class XMLImporter
 {
 
 
+
+    // method reads a default XML file containing airport data
+    // returns an ArrayList of Airport type
     public ArrayList<Airport> importAirports()
     {
         ArrayList<Airport> airports = new ArrayList<Airport>();
@@ -33,19 +36,19 @@ public class XMLImporter
 
                 for(int j = 0; j < runwayList.getLength(); j++)
                 {
-                    String desigrator;
+                    String designator;
                     Node runwayNode = runwayList.item(j);
                     if(runwayNode.getNodeType() == Node.ELEMENT_NODE)
                     {
                         Element element = (Element) runwayNode;
 
-                        desigrator = element.getElementsByTagName("designator").item(0).getTextContent();
+                        designator = element.getElementsByTagName("designator").item(0).getTextContent();
                         int TORA = Integer.parseInt(element.getElementsByTagName("TORA").item(0).getTextContent());
                         int TODA = Integer.parseInt(element.getElementsByTagName("TODA").item(0).getTextContent());
                         int ASDA = Integer.parseInt(element.getElementsByTagName("ASDA").item(0).getTextContent());
                         int LDA = Integer.parseInt(element.getElementsByTagName("LDA").item(0).getTextContent());
 
-                        runways.add(new Runway(desigrator, TODA, TODA, ASDA, LDA));
+                        runways.add(new Runway(designator, TODA, TODA, ASDA, LDA));
                     }
                 }
 
@@ -60,6 +63,9 @@ public class XMLImporter
     }
 
 
+    // Lazy way of getting an airport by passing a name to the method
+    // It has to read the whole file to return one airport
+    // (depending on performance this will be changed)
     public Airport getAirportByName(String name)
     {
         ArrayList<Airport> airports = importAirports();
