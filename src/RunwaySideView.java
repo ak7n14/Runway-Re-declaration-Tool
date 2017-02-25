@@ -4,8 +4,8 @@ import java.util.*;
 
 public class RunwaySideView extends JPanel{
 
-    //Stores different components of runway and their lengths
-    private HashMap<String, Integer> runways;
+    //Stores different components of runway and where they end
+    private HashMap<String, Integer> runwayEnds;
     private int runwayLength;
 
     //start of TODA, TORA, ASDA and LDA(with no displaced threshold)
@@ -24,12 +24,12 @@ public class RunwaySideView extends JPanel{
         this.LDAStart = LDAStart;
         this.runwayLength = runwayLength;
 
-        //stores all lengths in hashmap
-        runways = new HashMap<String, Integer>();
-        runways.put("TODA", TODALength);
-        runways.put("TORA", TORALength);
-        runways.put("ASDA", ASDALength);
-        runways.put("LDA", LDALength);
+        //stores all ends in hashmap
+        runwayEnds = new HashMap<String, Integer>();
+        runwayEnds.put("TODA", start + TODALength);
+        runwayEnds.put("TORA", start + TORALength);
+        runwayEnds.put("ASDA", start + ASDALength);
+        runwayEnds.put("LDA", LDAStart + LDALength);
     }
 
     //for testing only
@@ -46,10 +46,10 @@ public class RunwaySideView extends JPanel{
         super.paintComponent(g);
 
         this.drawRunway(g);
-        this.drawSeparatorEnd(g, runways.get("TODA"));
-        this.drawSeparatorEnd(g, runways.get("TORA"));
-        this.drawSeparatorEnd(g, runways.get("ASDA"));
-        this.drawSeparatorEnd(g, runways.get("LDA"));
+        this.drawSeparatorEnd(g, runwayEnds.get("TODA"));
+        this.drawSeparatorEnd(g, runwayEnds.get("TORA"));
+        this.drawSeparatorEnd(g, runwayEnds.get("ASDA"));
+        this.drawSeparatorEnd(g, runwayEnds.get("LDA"));
     }
     //--------------------------
 
@@ -59,17 +59,16 @@ public class RunwaySideView extends JPanel{
         g.fillRect(start, Y, runwayLength, HEIGHT);
     }
 
-    //draws a seperator to see ends of different strip components
-    private void drawSeparatorEnd(Graphics g, int length){
-        //x is where the runway component end
+    //draws a seperator to see ends of different strip components with displacedStart (used by LDA)
+    private void drawSeparatorEnd(Graphics g, int x){
+        //x is where the runway component ends
         //height is altered so separator is visible
-        g.fillRect(start + length, Y, 2, HEIGHT + 10);
+        g.setColor(Color.RED);
+        g.fillRect(x, Y, 2, HEIGHT + 10);
     }
 
+    private void drawLabels(Graphics g){
 
-
-
-
-
+    }
 
 }
