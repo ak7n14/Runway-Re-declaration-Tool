@@ -9,7 +9,7 @@ public abstract class RunwayView {
     private int runwayLength;
 
     //start of TODA, TORA, ASDA and LDA(with no displaced threshold)
-    private int start;
+    final int START = 100;
 
     //start of displace LDA
     private int LDAStart;
@@ -17,18 +17,18 @@ public abstract class RunwayView {
     //initial y position and height of runway
     protected abstract int RUNWAY_Y();
     protected abstract int RUNWAY_HEIGHT();
-    protected abstract int SEPARATOR_HEIGHT();
+    
+    private final int SEPARATOR_HEIGHT = 10;
 
-    public RunwayView(int start, int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength) {
-        this.start = start;
+    RunwayView(int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength) {
         this.LDAStart = LDAStart;
         this.runwayLength = runwayLength;
 
         //stores all ends in hashmap
         runwayEnds = new HashMap<>();
-        runwayEnds.put("TODA", start + TODALength);
-        runwayEnds.put("TORA", start + TORALength);
-        runwayEnds.put("ASDA", start + ASDALength);
+        runwayEnds.put("TODA", START + TODALength);
+        runwayEnds.put("TORA", START + TORALength);
+        runwayEnds.put("ASDA", START + ASDALength);
         runwayEnds.put("LDA", LDAStart + LDALength);
         this.runwayLength = runwayLength;
     }
@@ -36,14 +36,14 @@ public abstract class RunwayView {
     //for updating parts of runway
     //must call drawAll after to display updates
     public void updateView( int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength){
-        runwayEnds.put("TODA", start + TODALength);
-        runwayEnds.put("TORA", start + TORALength);
-        runwayEnds.put("ASDA", start + ASDALength);
+        runwayEnds.put("TODA", START + TODALength);
+        runwayEnds.put("TORA", START + TORALength);
+        runwayEnds.put("ASDA", START + ASDALength);
         runwayEnds.put("LDA", LDAStart + LDALength);
     }
 
     //draws runway, seperators and labels
-    public void drawAll(Graphics g){
+    protected void drawAll(Graphics g){
         this.drawRunway(g);
         this.drawAllSeparators(g);
         //draws separator labels
@@ -51,9 +51,9 @@ public abstract class RunwayView {
     }
 
     //draws runway
-    private void drawRunway(Graphics g){
+    void drawRunway(Graphics g){
         g.setColor(Color.black);
-        g.fillRect(start, RUNWAY_Y(), runwayLength, RUNWAY_HEIGHT());
+        g.fillRect(START, RUNWAY_Y(), runwayLength, RUNWAY_HEIGHT());
     }
 
     //draws a seperator to see ends of different strip components with displacedStart (used by LDA)
@@ -61,24 +61,24 @@ public abstract class RunwayView {
         //x is where the runway component ends
         //height is altered so separator is visible
         g.setColor(Color.RED);
-        g.fillRect(x, RUNWAY_Y(), 2, RUNWAY_HEIGHT() + SEPARATOR_HEIGHT());
+        g.fillRect(x, RUNWAY_Y(), 2, RUNWAY_HEIGHT() + SEPARATOR_HEIGHT);
     }
 
     //loops through hashmap and displays seperators
-    private void drawAllSeparators(Graphics g){
+    void drawAllSeparators(Graphics g){
 
         //draws end separators
         for(String key : runwayEnds.keySet()){
             this.drawSeparator(g, runwayEnds.get(key));
         }
 
-        //draw start separators
-        this.drawSeparator(g, start);
+        //draw START separators
+        this.drawSeparator(g, START);
         this.drawSeparator(g, LDAStart);
     }
 
     //draws labels and handles overlapping
-    private void drawLabels(Graphics g){
+    void drawLabels(Graphics g){
 
         //string data of runwayEnd labels
         HashMap<String, Point> stringData = this.calculateStringDimensions(runwayEnds.keySet());
@@ -127,18 +127,21 @@ public abstract class RunwayView {
     private HashMap<String, Point> calculateStringDimensions(Set<String> keys){
         HashMap<String, Point> stringData = new HashMap<>();
 
-        int stringY = RUNWAY_Y() + RUNWAY_HEIGHT() + 20; //start of string (y)
+        int stringY = RUNWAY_Y() + RUNWAY_HEIGHT() + 20; //START of string (y)
 
         for(String key : keys){
-            int stringX = runwayEnds.get(key); //start of string (x)
+            int stringX = runwayEnds.get(key); //START of string (x)
 
             //creates relations between string and its dimensions
             stringData.put(key, new Point(stringX, stringY));
         }
 
-        stringData.put("Start", new Point(start, stringY));
+        stringData.put("Start", new Point(START, stringY));
         stringData.put("LDAStart", new Point(LDAStart, stringY));
         return stringData;
     }
 
+    int getRunwayLength() {
+        return runwayLength;
+    }
 }

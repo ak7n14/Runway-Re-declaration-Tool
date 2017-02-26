@@ -3,14 +3,14 @@ import java.awt.*;
 
 public class PaintTester extends JPanel {
 
-    RunwaySideView rsw;
-    Obstacle obs;
+   private RunwayView rsw;
+   private Obstacle obs;
 
     public PaintTester() {
-        int[] x = {100, 100, 200, 200};
-        int[] y = {100, 200, 100, 200};
+        int[] x = {100, 200, 200, 300, 100};
+        int[] y = {100, 100, 200, 300, 200};
 
-        rsw = new RunwaySideView(100, 100, 500, 300, 400, 300, 500);
+        rsw = new RunwayTopView(100, 500, 300, 400, 300, 500, 10);
         obs = new Obstacle();
 
 
@@ -42,7 +42,7 @@ public class PaintTester extends JPanel {
     //--------------------------
 
 
-    public RunwaySideView getRsw() {
+    public RunwayView getRsw() {
         return rsw;
     }
 }

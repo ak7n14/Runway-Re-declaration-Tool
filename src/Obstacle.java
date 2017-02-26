@@ -16,8 +16,8 @@ public class Obstacle {
     private int[] topViewX;
     private int[] topViewY;
 
-    Polygon shapeSide;
-    Polygon shapeTop;
+    private Polygon shapeSide;
+    private Polygon shapeTop;
 
     //draws polygon
     public void drawShape(Graphics g, Polygon polygon){
@@ -30,7 +30,9 @@ public class Obstacle {
     public void setSideY(int... ys){
         sideViewY = ys;
     }
-    public void setSideX(int... xs) { sideViewX = xs; }
+    public void setSideX(int... xs) {
+        sideViewX = xs;
+    }
 
     //set coords with variable number of points for top view
     public void setTopY(int... ys){
@@ -47,13 +49,13 @@ public class Obstacle {
     }
 
     //create side view of shape
-    public void createSidePolygon(){
-        shapeSide = new Polygon(sideViewX,sideViewY, sideViewX.length - 1);
+    private void createSidePolygon(){
+        shapeSide = new Polygon(sideViewX,sideViewY, sideViewX.length);
     }
 
     //create top view of shape
-    public void createTopPolygon(){
-        shapeTop = new Polygon(topViewX,topViewY, topViewX.length - 1);
+    private void createTopPolygon(){
+        shapeTop = new Polygon(topViewX,topViewY, topViewX.length);
     }
 
     //get shapes associated with obstacle
