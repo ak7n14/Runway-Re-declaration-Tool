@@ -12,8 +12,15 @@ public class PaintTester extends JPanel {
 
         rsw = new RunwaySideView(100, 100, 500, 300, 400, 300, 500);
         obs = new Obstacle();
-        obs.setX(x);
-        obs.setY(y);
+
+
+        obs.setSideX(x);
+        obs.setSideY(y);
+        obs.setTopX(x);
+        obs.setTopY(y);
+
+        obs.createSidePolygon();
+        obs.createTopPolygon();
     }
 
     //for testing only
@@ -31,7 +38,7 @@ public class PaintTester extends JPanel {
         super.paintComponent(g);
 
         rsw.drawAll(g);
-        obs.createPolygon(g);
+        obs.drawShape(g, obs.getShapeSide());
     }
     //--------------------------
 
