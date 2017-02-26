@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
-public class RunwaySideView extends JPanel{
+public class RunwaySideView {
 
     //Stores different components of runway and where they end
     private HashMap<String, Integer> runwayEnds;
@@ -34,32 +34,22 @@ public class RunwaySideView extends JPanel{
         runwayEnds.put("LDA", LDAStart + LDALength);
     }
 
-    //for testing only
-    //----------------------
-    public static void main(String[] args) {
-        JFrame jframe = new JFrame();
-        jframe.setSize(1000, 400);
-
-        jframe.add(new RunwaySideView(100, 100,500, 300, 400, 300,500 ));
-        jframe.setVisible(true);
-    }
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
+    //draws runway, seperators and labels
+    public void drawAll(Graphics g){
         this.drawRunway(g);
         this.drawAllSeparators(g);
+        //draws separator labels
+        this.drawLabels(g);
     }
-    //--------------------------
 
     //draws runway
-    public void drawRunway(Graphics g){
+    private void drawRunway(Graphics g){
         g.setColor(Color.black);
         g.fillRect(start, RUNWAY_Y, runwayLength, RUNWAY_HEIGHT);
     }
 
     //draws a seperator to see ends of different strip components with displacedStart (used by LDA)
-    public void drawSeparator(Graphics g, int x){
+    private void drawSeparator(Graphics g, int x){
         //x is where the runway component ends
         //height is altered so separator is visible
         g.setColor(Color.RED);
@@ -67,7 +57,7 @@ public class RunwaySideView extends JPanel{
     }
 
     //loops through hashmap and displays seperators
-    public void drawAllSeparators(Graphics g){
+    private void drawAllSeparators(Graphics g){
 
         //draws end separators
         for(String key : runwayEnds.keySet()){
@@ -77,13 +67,10 @@ public class RunwaySideView extends JPanel{
         //draw start separators
         this.drawSeparator(g, start);
         this.drawSeparator(g, LDAStart);
-
-        //draws separator labels
-        this.drawLabels(g);
     }
 
     //draws labels and handles overlapping
-    public void drawLabels(Graphics g){
+    private void drawLabels(Graphics g){
 
         //string data of runwayEnd labels
         HashMap<String, Point> stringData = this.calculateStringDimensions(runwayEnds.keySet());
@@ -99,7 +86,7 @@ public class RunwaySideView extends JPanel{
     }
 
     //stops labels overlapping
-    public void removeOverlap(HashMap<String, Point> stringData, Graphics g){
+    private void removeOverlap(HashMap<String, Point> stringData, Graphics g){
 
         for(String currentKey : stringData.keySet()){
 
@@ -129,7 +116,7 @@ public class RunwaySideView extends JPanel{
     }
 
     //returns dimensions of strings in a set
-    public HashMap<String, Point> calculateStringDimensions(Set<String> keys){
+    private HashMap<String, Point> calculateStringDimensions(Set<String> keys){
         HashMap<String, Point> stringData = new HashMap<>();
 
         int stringY = RUNWAY_Y + RUNWAY_HEIGHT + 20; //start of string (y)
