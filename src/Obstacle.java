@@ -25,6 +25,7 @@ public class Obstacle {
         sideViewY = new ArrayList<>();
         topViewX = new ArrayList<>();
         topViewY = new ArrayList<>();
+
     }
 
     //draws polygon
