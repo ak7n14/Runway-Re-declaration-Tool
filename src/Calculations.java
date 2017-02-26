@@ -14,11 +14,20 @@ public class Calculations {
 		obsLoc=loc;
 	}
 	
-	public void calculateLda(){
+	public void calculateLda(String direction){
+		if (direction=="towards")
+			calculateLdaTowards();
+		else if(direction=="over")
+			calculateLdaOver();
+	}
+	public void calculateLdaOver(){
 		reLda=runway.getTORA()-obsLoc-(obsHeight*50)-60;
 		reThreshold = runway.getTODA()-reLda;
 	}
 	
+	public void calculateLdaTowards(){
+		
+	}
 	
 	public int getdThreshold() {
 		reThreshold= runway.getTODA()-reLda;
@@ -29,6 +38,7 @@ public class Calculations {
 	public int getReLda() {
 		return reLda;
 	}
+	
 	
 
 }
