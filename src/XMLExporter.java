@@ -9,6 +9,12 @@ import java.util.*;
 public class XMLExporter
 {
 
+    public void saveAirportData(ArrayList<Airport> airports)
+    {
+        backupFile("Airports");
+        exportAiports("Airports", airports);
+    }
+
     public void exportAiports(String filename, ArrayList<Airport> airports)
     {
         try
@@ -58,7 +64,7 @@ public class XMLExporter
         return airportNode;
     }
 
-    private Node getRunway(Document document, String designator, int TORA, int TODA, int ASDA, int LDA, int threasholdDisplacement)
+    private Node getRunway(Document document, String designator, int TORA, int TODA, int ASDA, int LDA, int thresholdDisplacement)
     {
         Element runway = document.createElement("runway");
 
@@ -67,7 +73,7 @@ public class XMLExporter
         runway.appendChild(getRunwayFields(document, runway, "TODA", ""+TODA));
         runway.appendChild(getRunwayFields(document, runway, "ASDA", ""+ASDA));
         runway.appendChild(getRunwayFields(document, runway, "LDA", ""+LDA));
-        runway.appendChild(getRunwayFields(document, runway, "displacement", ""+threasholdDisplacement));
+        runway.appendChild(getRunwayFields(document, runway, "displacement", ""+thresholdDisplacement));
 
         return runway;
     }
