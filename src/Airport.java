@@ -36,7 +36,8 @@ public class Airport
                         + "\n\t\t TORA: " + runways.get(i).getTORA()
                         + "\n\t\t TODA: " + runways.get(i).getTODA()
                         + "\n\t\t ASDA: " + runways.get(i).getASDA()
-                        + "\n\t\t LDA: " + runways.get(i).getLDA();
+                        + "\n\t\t LDA: " + runways.get(i).getLDA()
+                        + "\n\t\t Threashold displacement: " + runways.get(i).getThreasholdDisplacement();
         }
 
         return output;

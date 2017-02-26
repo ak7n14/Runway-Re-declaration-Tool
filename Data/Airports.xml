@@ -9,6 +9,7 @@
 			<TODA>3658</TODA>
 			<ASDA>3658</ASDA>
 			<LDA>3350</LDA>
+			<displacement>308</displacement>
 		</runway>
 	
 		<runway>
@@ -17,6 +18,7 @@
 			<TODA>3658</TODA>
 			<ASDA>3658</ASDA>
 			<LDA>3658</LDA>
+			<displacement>0</displacement>
 		</runway>
 	
 		<runway>
@@ -25,6 +27,7 @@
 			<TODA>3901</TODA>
 			<ASDA>3901</ASDA>
 			<LDA>3592</LDA>
+			<displacement>309</displacement>
 		</runway>
 	
 		<runway>
@@ -33,6 +36,7 @@
 			<TODA>3960</TODA>
 			<ASDA>3882</ASDA>
 			<LDA>3882</LDA>
+			<displacement>0</displacement>
 		</runway>
 	
 	</airport>
@@ -45,6 +49,7 @@
 			<TODA>3040</TODA>
 			<ASDA>2565</ASDA>
 			<LDA>2243</LDA>
+			<displacement>0</displacement>
 		</runway>
 	
 		<runway>
@@ -53,6 +58,7 @@
 			<TODA>2703</TODA>
 			<ASDA>2565</ASDA>
 			<LDA>2148</LDA>
+			<displacement>0</displacement>
 		</runway>
 	
 		<runway>
@@ -61,6 +67,7 @@
 			<TODA>3311</TODA>
 			<ASDA>3233</ASDA>
 			<LDA>2766</LDA>
+			<displacement>0</displacement>
 		</runway>
 	
 		<runway>
@@ -69,6 +76,7 @@
 			<TODA>3399</TODA>
 			<ASDA>3316</ASDA>
 			<LDA>2831</LDA>
+			<displacement>0</displacement>
 		</runway>
 	
 	</airport>

@@ -1,3 +1,4 @@
+import java.io.StringWriter;
 import java.util.*;
 /**
  * Created by Mikolaj on 25/02/2017.
@@ -11,10 +12,17 @@ public class XMLTester
 
         ArrayList<Airport> airportArrayList = importer.importAirports();
 
-        //System.out.println(airportArrayList.get(0).toString());
-        //System.out.println(airportArrayList.get(1).toString());
+       // System.out.println(airportArrayList.get(0).toString());
+       // System.out.println(airportArrayList.get(1).toString());
 
-        System.out.print(importer.getAirportByName("LONDON GATWICK").toString());
+       // System.out.print(importer.getAirportByName("LONDON GATWICK").toString());
+
+
+        XMLExporter exporter = new XMLExporter();
+
+      //  exporter.exportAiports("outputTest", airportArrayList);
+
+        exporter.backupFile("outputTest");
 
     }
 

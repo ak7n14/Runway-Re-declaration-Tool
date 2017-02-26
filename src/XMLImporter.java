@@ -15,7 +15,7 @@ public class XMLImporter
         ArrayList<Airport> airports = new ArrayList<Airport>();
         try
         {
-            File airportFile = new File("Airports.xml");
+            File airportFile = new File("Data/outputTest.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -47,8 +47,9 @@ public class XMLImporter
                         int TODA = Integer.parseInt(element.getElementsByTagName("TODA").item(0).getTextContent());
                         int ASDA = Integer.parseInt(element.getElementsByTagName("ASDA").item(0).getTextContent());
                         int LDA = Integer.parseInt(element.getElementsByTagName("LDA").item(0).getTextContent());
+                        int displacement = Integer.parseInt(element.getElementsByTagName("displacement").item(0).getTextContent());
 
-                        runways.add(new Runway(designator, TODA, TODA, ASDA, LDA));
+                        runways.add(new Runway(designator, TODA, TODA, ASDA, LDA, displacement));
                     }
                 }
 
@@ -78,5 +79,6 @@ public class XMLImporter
 
         return null;
     }
+
 
 }
