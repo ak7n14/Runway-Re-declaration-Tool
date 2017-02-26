@@ -17,8 +17,8 @@ public class RunwayTopView extends RunwayView{
     protected int RUNWAY_HEIGHT() { return 200; }
     private final int DASHED_HEIGHT = RUNWAY_Y() + (RUNWAY_HEIGHT()/2);
 
-    public RunwayTopView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int runwayNumberR, int jpanelSize) {
-        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, jpanelSize);
+    public RunwayTopView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int runwayNumberR, int jpanelWidth, int jpanelHeight) {
+        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, jpanelWidth, jpanelHeight);
         this.runwayNumberR = runwayNumberR;
     }
 

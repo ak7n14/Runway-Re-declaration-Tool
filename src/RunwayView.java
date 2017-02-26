@@ -16,6 +16,7 @@ public abstract class RunwayView {
 
     //for scaling
     private int jpanelWidth;
+    private int jpanelHeight;
 
     //start of parts of runway
     private int start;
@@ -27,11 +28,12 @@ public abstract class RunwayView {
     
     private final int SEPARATOR_HEIGHT = 10;
 
-    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int jpanelWidth) {
+    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int jpanelWidth, int jpanelHeight) {
         this.LDAStart = LDAStart;
         this.runwayLength = runwayLength;
         this.start = start;
         this.jpanelWidth = jpanelWidth;
+        this.jpanelHeight = jpanelHeight;
 
         //stores all ends in hashmap
         runwayEnds = new HashMap<>();
@@ -62,7 +64,7 @@ public abstract class RunwayView {
     //draws runway
     void drawRunway(Graphics g){
         g.setColor(Color.black);
-        g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), RUNWAY_HEIGHT());
+        g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), this.scalingHeight(RUNWAY_HEIGHT()));
     }
 
     //draws a seperator to see ends of different strip components
@@ -157,5 +159,10 @@ public abstract class RunwayView {
     //scales objects for JPanel
     int scaling(int x){
         return (int)((double)x/(double)runwayLength * (double)jpanelWidth) - 2 * START;
+    }
+
+    //scales objects for JPanel
+    int scalingHeight(int y){
+        return (int)((double)y/(double)RUNWAY_HEIGHT() * (double)jpanelHeight) - 2 * START;
     }
 }

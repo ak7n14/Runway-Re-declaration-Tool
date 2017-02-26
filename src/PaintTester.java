@@ -7,12 +7,12 @@ public class PaintTester extends JPanel {
    private Obstacle obs;
 
     public PaintTester() {
-        int[] x = {100, 200, 200, 300, 100};
-        int[] y = {100, 100, 200, 300, 200};
+        int[] x = {0, 100, 100, 200, 0};
+        int[] y = {0, 0, 100, 200, 100};
 
-        rsw = new RunwayTopView(100, 100, 500, 300, 400, 300, 500, 10,1000);
+        rsw = new RunwayTopView(100, 100, 500, 300, 400, 300, 500, 10,1000, 400);
         obs = new Obstacle();
-
+        obs.setCurrentRunway(rsw);
 
         obs.setSideX(x);
         obs.setSideY(y);

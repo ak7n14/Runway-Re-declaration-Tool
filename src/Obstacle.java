@@ -6,18 +6,26 @@ import java.util.*;
 //call drawShape to display
 public class Obstacle {
 
-    private final int RUNWAY_Y = 300;
+    //stores current runway
+    private RunwayView currentRunway;
 
     //x and y coordinates of points in polygon for side view
-    private int[] sideViewX;
-    private int[] sideViewY;
+    private ArrayList<Integer> sideViewX;
+    private ArrayList<Integer> sideViewY;
 
     //x and y coordinates of points in polygon for top view
-    private int[] topViewX;
-    private int[] topViewY;
+    private ArrayList<Integer> topViewX;
+    private ArrayList<Integer> topViewY;
 
     private Polygon shapeSide;
     private Polygon shapeTop;
+
+    public Obstacle() {
+        sideViewX = new ArrayList<>();
+        sideViewY = new ArrayList<>();
+        topViewX = new ArrayList<>();
+        topViewY = new ArrayList<>();
+    }
 
     //draws polygon
     public void drawShape(Graphics g, Polygon polygon){
@@ -26,20 +34,34 @@ public class Obstacle {
         g2.fill(polygon);
     }
 
-    //set coords with variable number of points for side view
-    public void setSideY(int... ys){
-        sideViewY = ys;
+    public void setCurrentRunway(RunwayView rv){
+        currentRunway = rv;
     }
-    public void setSideX(int... xs) {
-        sideViewX = xs;
+
+    //set coords with variable number of points for side view
+    //loops through coords and scales proportionally to runway (0,0) is top left of runway
+    public void setSideY(int... ys){
+        for(int y : ys){
+            sideViewY.add(currentRunway.scalingHeight(y) + 3 * currentRunway.START);
+        }
+    }
+
+    public void setSideX(int... xs){
+        for(int x : xs){
+            sideViewX.add(currentRunway.scaling(x) + 3 * currentRunway.START);
+        }
     }
 
     //set coords with variable number of points for top view
     public void setTopY(int... ys){
-        topViewY = ys;
+        for(int y : ys){
+            topViewY.add(currentRunway.scalingHeight(y) + 3 * currentRunway.START);
+        }
     }
     public void setTopX(int... xs){
-        topViewX = xs;
+        for(int x : xs){
+            topViewY.add(currentRunway.scaling(x) + 3 * currentRunway.START);
+        }
     }
 
     //create both shapes
@@ -50,12 +72,12 @@ public class Obstacle {
 
     //create side view of shape
     private void createSidePolygon(){
-        shapeSide = new Polygon(sideViewX,sideViewY, sideViewX.length);
+        shapeSide = new Polygon(convertToArray(sideViewX),convertToArray(sideViewY), sideViewX.size());
     }
 
     //create top view of shape
     private void createTopPolygon(){
-        shapeTop = new Polygon(topViewX,topViewY, topViewX.length);
+        shapeTop = new Polygon(convertToArray(topViewX),convertToArray(topViewY), topViewX.size());
     }
 
     //get shapes associated with obstacle
@@ -65,5 +87,11 @@ public class Obstacle {
 
     public Polygon getShapeTop() {
         return shapeTop;
+    }
+
+    //takes an arraylist puts it into a stream and then maps each element to itself and place elements in int array
+    //Integer arraylists dont map to int arrays, this is the solution
+    private int[] convertToArray(ArrayList<Integer> al){
+        return al.stream().mapToInt(i->i).toArray();
     }
 }
