@@ -1,3 +1,4 @@
+import java.io.StringWriter;
 import java.util.*;
 /**
  * Created by Mikolaj on 25/02/2017.
@@ -15,6 +16,8 @@ public class XMLTester
         System.out.println(airportArrayList.get(1).toString());
 
        // System.out.print(importer.getAirportByName("LONDON GATWICK").toString());
+
+
 
     }
 
