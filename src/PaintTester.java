@@ -19,8 +19,7 @@ public class PaintTester extends JPanel {
         obs.setTopX(x);
         obs.setTopY(y);
 
-        obs.createSidePolygon();
-        obs.createTopPolygon();
+        obs.createShapes();
     }
 
     //for testing only
