@@ -15,7 +15,7 @@ public class XMLImporter
         ArrayList<Airport> airports = new ArrayList<Airport>();
         try
         {
-            File airportFile = new File("Data/outputTest.xml");
+            File airportFile = new File("Data/Airports.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -61,6 +61,77 @@ public class XMLImporter
         }
 
         return airports;
+    }
+
+    public ArrayList<Obstacle> importObstacles()
+    {
+        ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+        try
+        {
+            File obstacleFile = new File("Data/Obstacles.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            Document document = builder.parse(obstacleFile);
+            document.getDocumentElement().normalize();
+
+            NodeList obstacleList = document.getElementsByTagName("obstacle");
+
+            for(int i = 0; i < obstacleList.getLength(); i++)
+            {
+                Node obstacleNode = obstacleList.item(i);
+                String obstacleName = obstacleNode.getAttributes().getNamedItem("name").getTextContent();
+                int height = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("height").getTextContent());
+                int noOfTop = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("noOfTop").getTextContent());
+                int noOfSide = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("noOfSide").getTextContent());
+
+                int[] topX = new int[noOfTop];
+                int[] topY = new int[noOfTop];
+                int[] sideX = new int[noOfSide];
+                int[] sideY = new int[noOfSide];
+
+                if(obstacleNode.getNodeType() == Node.ELEMENT_NODE)
+                {
+                    Element obstacleElement = (Element) obstacleNode;
+
+                    Element topXElement = (Element) obstacleElement.getElementsByTagName("topX").item(0);
+                    Element topYElement = (Element) obstacleElement.getElementsByTagName("topY").item(0);
+                    Element sideXElement = (Element) obstacleElement.getElementsByTagName("sideX").item(0);
+                    Element sideYElement = (Element) obstacleElement.getElementsByTagName("sideY").item(0);
+
+                    for(int j = 0; j < noOfTop; j++)
+                    {
+                        topX[j] = Integer.parseInt(topXElement.getElementsByTagName("topX"+j).item(0).getTextContent());
+                        topY[j] = Integer.parseInt(topYElement.getElementsByTagName("topY"+j).item(0).getTextContent());
+                        System.out.println(topXElement.getElementsByTagName("topX"+j).item(0).getTextContent());
+                        System.out.println(topYElement.getElementsByTagName("topY"+j).item(0).getTextContent());
+                    }
+
+                    for(int j = 0; j < noOfSide; j++)
+                    {
+                        sideX[j] = Integer.parseInt(sideXElement.getElementsByTagName("sideX"+j).item(0).getTextContent());
+                        sideY[j] = Integer.parseInt(sideYElement.getElementsByTagName("sideY"+j).item(0).getTextContent());
+                        System.out.println(sideXElement.getElementsByTagName("sideX"+j).item(0).getTextContent());
+                        System.out.println(sideYElement.getElementsByTagName("sideY"+j).item(0).getTextContent());
+                    }
+
+                    Obstacle obstacle = new Obstacle();
+                    obstacle.setSideX(sideX);
+                   // obstacle.setSideY(sideY);
+                    //obstacle.setTopX(topX);
+                   // obstacle.setTopY(topY);
+
+                    obstacles.add(obstacle);
+                }
+
+
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return obstacles;
     }
 
 

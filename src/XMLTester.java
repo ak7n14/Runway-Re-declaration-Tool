@@ -17,12 +17,14 @@ public class XMLTester
 
        // System.out.print(importer.getAirportByName("LONDON GATWICK").toString());
 
+        ArrayList<Obstacle> obstacleArrayList = importer.importObstacles();
+
 
         XMLExporter exporter = new XMLExporter();
 
       //  exporter.exportAiports("outputTest", airportArrayList);
 
-        exporter.backupFile("outputTest");
+       // exporter.backupFile("outputTest");
 
     }
 
