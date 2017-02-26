@@ -13,12 +13,13 @@ public class Calculations {
 	
 	
 	
-	public Calculations(Runway runway, int obsheight,int loc, int blastAllowence){
+	public Calculations(Runway runway, int obsheight,int loc){
 		this.runway = runway;
 		this.obsHeight=obsheight;
 		obsLoc=loc;
 		ALS =0;
 		RESA=240;
+		engineBlastAllowance=300;//For now later can be taken as input(Depends on flight)
 	}
 
 	
