@@ -18,6 +18,9 @@ public class XMLTester
        // System.out.print(importer.getAirportByName("LONDON GATWICK").toString());
 
 
+        XMLExporter exporter = new XMLExporter();
+
+      //  exporter.exportAiports("outputTest", airportArrayList);
 
     }
 
