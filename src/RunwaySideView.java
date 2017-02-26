@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
+//Initiate with runway values
+//call drawAll to display
+//call updateSideView + drawAll to display update
 public class RunwaySideView {
 
     //Stores different components of runway and where they end
@@ -28,6 +31,15 @@ public class RunwaySideView {
 
         //stores all ends in hashmap
         runwayEnds = new HashMap<>();
+        runwayEnds.put("TODA", start + TODALength);
+        runwayEnds.put("TORA", start + TORALength);
+        runwayEnds.put("ASDA", start + ASDALength);
+        runwayEnds.put("LDA", LDAStart + LDALength);
+    }
+
+    //for updating parts of runway
+    //must call drawAll after to display updates
+    public void updateSideView( int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength){
         runwayEnds.put("TODA", start + TODALength);
         runwayEnds.put("TORA", start + TORALength);
         runwayEnds.put("ASDA", start + ASDALength);

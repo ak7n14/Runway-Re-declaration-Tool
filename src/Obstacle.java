@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.util.*;
 
+//Set side objects and top objects x and y coordinates for each point of polygon
+//call createShapes to create side and top object
+//call drawShape to display
 public class Obstacle {
 
     private final int RUNWAY_Y = 300;
@@ -35,6 +38,12 @@ public class Obstacle {
     }
     public void setTopX(int... xs){
         topViewX = xs;
+    }
+
+    //create both shapes
+    public void createShapes(){
+        this.createSidePolygon();
+        this.createTopPolygon();
     }
 
     //create side view of shape
