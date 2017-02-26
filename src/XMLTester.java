@@ -12,8 +12,8 @@ public class XMLTester
 
         ArrayList<Airport> airportArrayList = importer.importAirports();
 
-        System.out.println(airportArrayList.get(0).toString());
-        System.out.println(airportArrayList.get(1).toString());
+       // System.out.println(airportArrayList.get(0).toString());
+       // System.out.println(airportArrayList.get(1).toString());
 
        // System.out.print(importer.getAirportByName("LONDON GATWICK").toString());
 
@@ -21,6 +21,8 @@ public class XMLTester
         XMLExporter exporter = new XMLExporter();
 
       //  exporter.exportAiports("outputTest", airportArrayList);
+
+        exporter.backupFile("outputTest");
 
     }
 

@@ -79,4 +79,28 @@ public class XMLExporter
         field.appendChild(document.createTextNode(value));
         return field;
     }
+
+    public void backupFile(String filename)
+    {
+        try
+        {
+            FileInputStream inputStream = new FileInputStream(new File("Data/"+filename+".xml"));
+            FileOutputStream outputStream = new FileOutputStream(new File("Data/"+filename+"_backup.xml"));
+
+            byte[] buffer = new byte[1024];
+            int length;
+
+            while((length = inputStream.read(buffer)) > 0)
+                outputStream.write(buffer, 0, length);
+
+            inputStream.close();
+            outputStream.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
 }
