@@ -10,7 +10,7 @@ public class PaintTester extends JPanel {
         int[] x = {100, 200, 200, 300, 100};
         int[] y = {100, 100, 200, 300, 200};
 
-        rsw = new RunwayTopView(100, 500, 300, 400, 300, 500, 10);
+        rsw = new RunwayTopView(100, 100, 500, 300, 400, 300, 500, 10,1000);
         obs = new Obstacle();
 
 

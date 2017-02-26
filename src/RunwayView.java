@@ -8,11 +8,18 @@ public abstract class RunwayView {
     private HashMap<String, Integer> runwayEnds;
     private int runwayLength;
 
-    //start of TODA, TORA, ASDA and LDA(with no displaced threshold)
+    //start of runway
     final int START = 100;
 
     //start of displace LDA
     private int LDAStart;
+
+    //for scaling
+    private int jpanelWidth;
+
+    //start of parts of runway
+    private int start;
+
 
     //initial y position and height of runway
     protected abstract int RUNWAY_Y();
@@ -20,16 +27,18 @@ public abstract class RunwayView {
     
     private final int SEPARATOR_HEIGHT = 10;
 
-    RunwayView(int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength) {
+    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int jpanelWidth) {
         this.LDAStart = LDAStart;
         this.runwayLength = runwayLength;
+        this.start = start;
+        this.jpanelWidth = jpanelWidth;
 
         //stores all ends in hashmap
         runwayEnds = new HashMap<>();
-        runwayEnds.put("TODA", START + TODALength);
-        runwayEnds.put("TORA", START + TORALength);
-        runwayEnds.put("ASDA", START + ASDALength);
-        runwayEnds.put("LDA", LDAStart + LDALength);
+        runwayEnds.put("TODA", TODALength);
+        runwayEnds.put("TORA", TORALength);
+        runwayEnds.put("ASDA", ASDALength);
+        runwayEnds.put("LDA", LDALength);
         this.runwayLength = runwayLength;
     }
 
@@ -53,15 +62,15 @@ public abstract class RunwayView {
     //draws runway
     void drawRunway(Graphics g){
         g.setColor(Color.black);
-        g.fillRect(START, RUNWAY_Y(), runwayLength, RUNWAY_HEIGHT());
+        g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), RUNWAY_HEIGHT());
     }
 
-    //draws a seperator to see ends of different strip components with displacedStart (used by LDA)
+    //draws a seperator to see ends of different strip components
     private void drawSeparator(Graphics g, int x){
         //x is where the runway component ends
         //height is altered so separator is visible
         g.setColor(Color.RED);
-        g.fillRect(x, RUNWAY_Y(), 2, RUNWAY_HEIGHT() + SEPARATOR_HEIGHT);
+        g.fillRect(this.scaling(x) + start, RUNWAY_Y(), 2, RUNWAY_HEIGHT() + SEPARATOR_HEIGHT);
     }
 
     //loops through hashmap and displays seperators
@@ -130,7 +139,7 @@ public abstract class RunwayView {
         int stringY = RUNWAY_Y() + RUNWAY_HEIGHT() + 20; //START of string (y)
 
         for(String key : keys){
-            int stringX = runwayEnds.get(key); //START of string (x)
+            int stringX = this.scaling(runwayEnds.get(key)) + start; //START of string (x)
 
             //creates relations between string and its dimensions
             stringData.put(key, new Point(stringX, stringY));
@@ -143,5 +152,10 @@ public abstract class RunwayView {
 
     int getRunwayLength() {
         return runwayLength;
+    }
+
+    //scales objects for JPanel
+    int scaling(int x){
+        return (int)((double)x/(double)runwayLength * (double)jpanelWidth) - 2 * START;
     }
 }

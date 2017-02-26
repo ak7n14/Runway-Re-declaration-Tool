@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.SplittableRandom;
@@ -16,8 +17,8 @@ public class RunwayTopView extends RunwayView{
     protected int RUNWAY_HEIGHT() { return 200; }
     private final int DASHED_HEIGHT = RUNWAY_Y() + (RUNWAY_HEIGHT()/2);
 
-    public RunwayTopView(int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int runwayNumberR) {
-        super(LDAStart, TODALength, TORALength, ASDALength, LDALength, runwayLength);
+    public RunwayTopView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int runwayNumberR, int jpanelSize) {
+        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, jpanelSize);
         this.runwayNumberR = runwayNumberR;
     }
 
@@ -37,11 +38,13 @@ public class RunwayTopView extends RunwayView{
     //draws a white dashed line in middle of runway
     private void drawCenterLine(Graphics2D g2){
 
+        //create a dashed format for line
         Stroke dashed = new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{15, 5}, 0);
 
+        //set format of line and draw it
         g2.setStroke(dashed);
         g2.setColor(Color.WHITE);
-        g2.drawLine(START + 50, DASHED_HEIGHT, START + this.getRunwayLength() - 50, DASHED_HEIGHT);
+        g2.drawLine(START + 50, DASHED_HEIGHT, START + this.scaling(this.getRunwayLength()) - 50, DASHED_HEIGHT);
     }
 
     //draws left and right runway numbers
@@ -60,7 +63,9 @@ public class RunwayTopView extends RunwayView{
 
         //second parameter centers text on runway
         //due to rotation axes flip, x' = -y, y' = x
-        g2.drawString(runwayString,  - RUNWAY_Y() - RUNWAY_HEIGHT()/2 - metrics.stringWidth(runwayString)/2, START + this.getRunwayLength() - 10);
+        //gets runway end shifts by 10 left (scales
+        //shifts left by START
+        g2.drawString(runwayString,  - RUNWAY_Y() - RUNWAY_HEIGHT()/2 - metrics.stringWidth(runwayString)/2, this.scaling(START + this.getRunwayLength() - 10) - START);
 
         //LEFT NUMBER
         //makes text vertical facing towards left edge of runway
@@ -70,7 +75,9 @@ public class RunwayTopView extends RunwayView{
 
         //second parameter centers text on runway
         //due to rotation axes flip,  x' = y, y' = -x
-        g2.drawString(runwayString,  RUNWAY_Y() + RUNWAY_HEIGHT()/2 - metrics.stringWidth(runwayString)/2, -START - 10);
+        //shifts right by START and 10
+        //shifts right by 10
+        g2.drawString(runwayString,  RUNWAY_Y() + RUNWAY_HEIGHT()/2 - metrics.stringWidth(runwayString)/2, -this.scaling(START + 10) - START);
 
         //reset rotation to normal
         g2.rotate(-Math.PI/2);

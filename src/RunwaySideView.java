@@ -12,7 +12,9 @@ public class RunwaySideView extends RunwayView{
     //initial y position and height are constants for
 
     //defines size of runway
-    public RunwaySideView(int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength) {
-        super(LDAStart, TODALength, TORALength, ASDALength, LDALength, runwayLength);
+    public RunwaySideView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int jpanelSize) {
+        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, jpanelSize);
     }
+
+
 }
