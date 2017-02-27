@@ -37,7 +37,11 @@ public class Airport
                         + "\n\t\t TODA: " + runways.get(i).getTODA()
                         + "\n\t\t ASDA: " + runways.get(i).getASDA()
                         + "\n\t\t LDA: " + runways.get(i).getLDA()
-                        + "\n\t\t Threashold displacement: " + runways.get(i).getThreasholdDisplacement();
+                        + "\n\t\t Threashold displacement: " + runways.get(i).getThreasholdDisplacement()
+                        + "\n\t\t Runway Length: " + runways.get(i).getRunwayLenght()
+                        + "\n\t\t Runway Width: " + runways.get(i).getRunwayWidth()
+                        + "\n\t\t Strip Length: " + runways.get(i).getStripLength()
+                        + "\n\t\t Strip Width: " + runways.get(i).getRunwayWidth();
         }
 
         return output;

@@ -48,8 +48,12 @@ public class XMLImporter
                         int ASDA = Integer.parseInt(element.getElementsByTagName("ASDA").item(0).getTextContent());
                         int LDA = Integer.parseInt(element.getElementsByTagName("LDA").item(0).getTextContent());
                         int displacement = Integer.parseInt(element.getElementsByTagName("displacement").item(0).getTextContent());
+                        int runwayLength = Integer.parseInt(element.getElementsByTagName("runwayLength").item(0).getTextContent());
+                        int runwayWidth = Integer.parseInt(element.getElementsByTagName("runwayWidth").item(0).getTextContent());
+                        int stripLength = Integer.parseInt(element.getElementsByTagName("stripLength").item(0).getTextContent());
+                        int stripWidth = Integer.parseInt(element.getElementsByTagName("stripWidth").item(0).getTextContent());
 
-                        runways.add(new Runway(designator, TODA, TODA, ASDA, LDA, displacement));
+                        runways.add(new Runway(designator, TODA, TODA, ASDA, LDA, displacement, runwayLength, runwayWidth, stripLength, stripWidth));
                     }
                 }
 

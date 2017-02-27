@@ -10,6 +10,10 @@
 			<ASDA>3658</ASDA>
 			<LDA>3350</LDA>
 			<displacement>308</displacement>
+			<runwayLength>3660</runwayLength>
+			<runwayWidth>50</runwayWidth>
+			<stripLength>4022</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 	
 		<runway>
@@ -19,6 +23,10 @@
 			<ASDA>3658</ASDA>
 			<LDA>3658</LDA>
 			<displacement>0</displacement>
+			<runwayLength>3660</runwayLength>
+			<runwayWidth>50</runwayWidth>
+			<stripLength>4022</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 	
 		<runway>
@@ -28,6 +36,10 @@
 			<ASDA>3901</ASDA>
 			<LDA>3592</LDA>
 			<displacement>309</displacement>
+			<runwayLength>3902</runwayLength>
+			<runwayWidth>50</runwayWidth>
+			<stripLength>4022</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 	
 		<runway>
@@ -37,6 +49,10 @@
 			<ASDA>3882</ASDA>
 			<LDA>3882</LDA>
 			<displacement>0</displacement>
+			<runwayLength>3902</runwayLength>
+			<runwayWidth>50</runwayWidth>
+			<stripLength>4022</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 	
 	</airport>
@@ -50,6 +66,10 @@
 			<ASDA>2565</ASDA>
 			<LDA>2243</LDA>
 			<displacement>0</displacement>
+			<runwayLength>2565</runwayLength>
+			<runwayWidth>45</runwayWidth>
+			<stripLength>2685</stripLength>
+			<stripWidth>150</stripWidth>
 		</runway>
 	
 		<runway>
@@ -59,6 +79,10 @@
 			<ASDA>2565</ASDA>
 			<LDA>2148</LDA>
 			<displacement>0</displacement>
+			<runwayLength>2565</runwayLength>
+			<runwayWidth>45</runwayWidth>
+			<stripLength>2685</stripLength>
+			<stripWidth>150</stripWidth>
 		</runway>
 	
 		<runway>
@@ -68,6 +92,10 @@
 			<ASDA>3233</ASDA>
 			<LDA>2766</LDA>
 			<displacement>0</displacement>
+			<runwayLength>3316</runwayLength>
+			<runwayWidth>45</runwayWidth>
+			<stripLength>3436</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 	
 		<runway>
@@ -77,6 +105,10 @@
 			<ASDA>3316</ASDA>
 			<LDA>2831</LDA>
 			<displacement>0</displacement>
+			<runwayLength>3316</runwayLength>
+			<runwayWidth>45</runwayWidth>
+			<stripLength>3436</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 	
 	</airport>
@@ -89,6 +121,10 @@
 			<ASDA>1723</ASDA>
 			<LDA>1650</LDA>
 			<displacement>0</displacement>
+			<runwayLength>1723</runwayLength>
+			<runwayWidth>37</runwayWidth>
+			<stripLength>1843</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 		<runway>
 			<designator>20</designator>
@@ -97,6 +133,10 @@
 			<ASDA>1650</ASDA>
 			<LDA>1605</LDA>
 			<displacement>0</displacement>
+			<runwayLength>1723</runwayLength>
+			<runwayWidth>37</runwayWidth>
+			<stripLength>1843</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 	</airport>
 
@@ -108,6 +148,10 @@
 			<ASDA>2162</ASDA>
 			<LDA>2162</LDA>
 			<displacement>0</displacement>
+			<runwayLength>2162</runwayLength>
+			<runwayWidth>46</runwayWidth>
+			<stripLength>2280</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 		<runway>
 			<designator>26</designator>
@@ -116,6 +160,10 @@
 			<ASDA>2219</ASDA>
 			<LDA>2080</LDA>
 			<displacement>0</displacement>
+			<runwayLength>2162</runwayLength>
+			<runwayWidth>46</runwayWidth>
+			<stripLength>2280</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 	</airport>
 
@@ -127,6 +175,10 @@
 			<ASDA>1319</ASDA>
 			<LDA>1319</LDA>
 			<displacement>0</displacement>
+			<runwayLength>1508</runwayLength>
+			<runwayWidth>30</runwayWidth>
+			<stripLength>1818</stripLength>
+			<stripWidth>120</stripWidth>
 		</runway>
 		<runway>
 			<designator>27</designator>
@@ -135,6 +187,10 @@
 			<ASDA>1319</ASDA>
 			<LDA>1319</LDA>
 			<displacement>0</displacement>
+			<runwayLength>1508</runwayLength>
+			<runwayWidth>30</runwayWidth>
+			<stripLength>1818</stripLength>
+			<stripWidth>120</stripWidth>
 		</runway>
 	</airport>
 
@@ -146,6 +202,10 @@
 			<ASDA>3046</ASDA>
 			<LDA>2748</LDA>
 			<displacement>0</displacement>
+			<runwayLength>3049</runwayLength>
+			<runwayWidth>46</runwayWidth>
+			<stripLength>3168</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 		<runway>
 			<designator>22</designator>
@@ -154,6 +214,10 @@
 			<ASDA>3049</ASDA>
 			<LDA>3049</LDA>
 			<displacement>0</displacement>
+			<runwayLength>3049</runwayLength>
+			<runwayWidth>46</runwayWidth>
+			<stripLength>3168</stripLength>
+			<stripWidth>300</stripWidth>
 		</runway>
 	</airport>
 </airports>

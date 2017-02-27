@@ -12,7 +12,7 @@ public class XMLTester
 
         ArrayList<Airport> airportArrayList = importer.importAirports();
 
-       // System.out.println(airportArrayList.get(2).toString());
+        System.out.println(airportArrayList.get(2).toString());
        // System.out.println(airportArrayList.get(1).toString());
 
        // System.out.print(importer.getAirportByName("LONDON GATWICK").toString());
