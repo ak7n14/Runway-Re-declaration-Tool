@@ -80,4 +80,80 @@
 		</runway>
 	
 	</airport>
+
+	<airport name="SOUTHAMPTON">
+		<runway>
+			<designator>02</designator>
+			<TORA>1723</TORA>
+			<TODA>1831</TODA>
+			<ASDA>1723</ASDA>
+			<LDA>1650</LDA>
+			<displacement>0</displacement>
+		</runway>
+		<runway>
+			<designator>20</designator>
+			<TORA>1650</TORA>
+			<TODA>1805</TODA>
+			<ASDA>1650</ASDA>
+			<LDA>1605</LDA>
+			<displacement>0</displacement>
+		</runway>
+	</airport>
+
+	<airport name="LONDON LUTON">
+		<runway>
+			<designator>08</designator>
+			<TORA>2162</TORA>
+			<TODA>3243</TODA>
+			<ASDA>2162</ASDA>
+			<LDA>2162</LDA>
+			<displacement>0</displacement>
+		</runway>
+		<runway>
+			<designator>26</designator>
+			<TORA>2162</TORA>
+			<TODA>3243</TODA>
+			<ASDA>2219</ASDA>
+			<LDA>2080</LDA>
+			<displacement>0</displacement>
+		</runway>
+	</airport>
+
+	<airport name="LONDON CITY">
+		<runway>
+			<designator>09</designator>
+			<TORA>1199</TORA>
+			<TODA>1319</TODA>
+			<ASDA>1319</ASDA>
+			<LDA>1319</LDA>
+			<displacement>0</displacement>
+		</runway>
+		<runway>
+			<designator>27</designator>
+			<TORA>1199</TORA>
+			<TODA>1385</TODA>
+			<ASDA>1319</ASDA>
+			<LDA>1319</LDA>
+			<displacement>0</displacement>
+		</runway>
+	</airport>
+
+	<airport name="LONDON STANSTED">
+		<runway>
+			<designator>04</designator>
+			<TORA>3046</TORA>
+			<TODA>3338</TODA>
+			<ASDA>3046</ASDA>
+			<LDA>2748</LDA>
+			<displacement>0</displacement>
+		</runway>
+		<runway>
+			<designator>22</designator>
+			<TORA>3049</TORA>
+			<TODA>3316</TODA>
+			<ASDA>3049</ASDA>
+			<LDA>3049</LDA>
+			<displacement>0</displacement>
+		</runway>
+	</airport>
 </airports>

@@ -15,7 +15,7 @@ public class XMLImporter
         ArrayList<Airport> airports = new ArrayList<Airport>();
         try
         {
-            File airportFile = new File("Data/outputTest.xml");
+            File airportFile = new File("Data/Airports.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
