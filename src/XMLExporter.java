@@ -58,13 +58,14 @@ public class XMLExporter
         for(Runway runway : runwayList)
         {
             airportNode.appendChild(getRunway(document, runway.getDesignator(), runway.getTORA(), runway.getTODA(),
-                    runway.getASDA(), runway.getLDA(), runway.getThreasholdDisplacement()));
+                    runway.getASDA(), runway.getLDA(), runway.getThreasholdDisplacement(), runway.getRunwayLenght(),
+                    runway.getRunwayWidth(), runway.getStripLength(), runway.getStripWidth()));
         }
 
         return airportNode;
     }
 
-    private Node getRunway(Document document, String designator, int TORA, int TODA, int ASDA, int LDA, int thresholdDisplacement)
+    private Node getRunway(Document document, String designator, int TORA, int TODA, int ASDA, int LDA, int thresholdDisplacement, int runwayLength, int runwayWidth, int stripLength, int stripWidth)
     {
         Element runway = document.createElement("runway");
 
@@ -74,6 +75,10 @@ public class XMLExporter
         runway.appendChild(getRunwayFields(document, runway, "ASDA", ""+ASDA));
         runway.appendChild(getRunwayFields(document, runway, "LDA", ""+LDA));
         runway.appendChild(getRunwayFields(document, runway, "displacement", ""+thresholdDisplacement));
+        runway.appendChild(getRunwayFields(document, runway, "runwayLength", ""+runwayLength));
+        runway.appendChild(getRunwayFields(document, runway, "runwayWidth", ""+runwayWidth));
+        runway.appendChild(getRunwayFields(document, runway, "stripLength", ""+stripLength));
+        runway.appendChild(getRunwayFields(document, runway, "stripWidth", ""+stripWidth));
 
         return runway;
     }

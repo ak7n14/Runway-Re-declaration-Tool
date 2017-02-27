@@ -8,9 +8,15 @@ public class Runway
     private int ASDA;
     private int LDA;
     private int threasholdDisplacement;
+    private int runwayLenght;
+    private int runwayWidth;
+    private int stripLength;
+    private int stripWidth;
 
 
-    public Runway(String designator, int TORA, int TODA, int ASDA, int LDA, int threasholdDisplacement)
+
+
+    public Runway(String designator, int TORA, int TODA, int ASDA, int LDA, int threasholdDisplacement, int runwayLenght, int runwayWidth, int stripLength, int stripWidth)
     {
         this.designator = designator;
         this.TORA = TORA;
@@ -18,6 +24,11 @@ public class Runway
         this.ASDA = ASDA;
         this.LDA = LDA;
         this.threasholdDisplacement = threasholdDisplacement;
+        this.runwayLenght = runwayLenght;
+        this.runwayWidth = runwayWidth;
+        this.stripLength = stripLength;
+        this.stripWidth = stripWidth;
+
     }
 
     public String getDesignator()
@@ -47,5 +58,21 @@ public class Runway
 
     public int getThreasholdDisplacement() {
         return threasholdDisplacement;
+    }
+
+    public int getRunwayLenght() {
+        return runwayLenght;
+    }
+
+    public int getRunwayWidth() {
+        return runwayWidth;
+    }
+
+    public int getStripLength() {
+        return stripLength;
+    }
+
+    public int getStripWidth() {
+        return stripWidth;
     }
 }

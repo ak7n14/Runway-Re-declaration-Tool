@@ -25,43 +25,43 @@ public class Calculations {
 	
 	//Call the appropriate method according to condition
 	public void calculateLda(String direction){
-		if (direction=="towards")
+		if (direction=="Towards")
 			calculateLdaTowards();
-		else if(direction=="over")
+		else if(direction=="Over")
 			calculateLdaOver();
 	}
 
 	
 	//Calculate the landing distance over the obstacle
-	public void calculateLdaOver(){
+	void calculateLdaOver(){
 		reLda=runway.getTORA()-obsLoc-getALS()-60;
 	}
 	
 	
 	//Calculate the landing distance towards obstacle
-	public void calculateLdaTowards(){
+	void calculateLdaTowards(){
 		reLda= obsLoc-RESA-60;//Deduction from usable runway
 	}
 	
 	
 	//Call the appropriate method according to condition
 	public void calculateTORA(String direction){
-		if (direction=="towards")
+		if (direction=="Towards")
 			calculateTORATowards();
-		else if(direction=="after")
+		else if(direction=="After")
 			calculateTORAAfter();
 	}
 	
 	
 	//Calculate taking off distance towards obstacle
-	public void calculateTORATowards(){
+	void calculateTORATowards(){
 		reTORA=obsLoc+runway.getThreasholdDisplacement()-getALS()-60;
 		reTODA=reTORA;
 		reASDA=reTORA;
 	}
 	
 	//Calculate taking off distance after the obstacle(Displaced distance)
-	public void calculateTORAAfter(){
+	void calculateTORAAfter(){
 		reTORA = runway.getTORA()-obsLoc-engineBlastAllowance;
 		reTODA = runway.getTODA()-obsLoc-engineBlastAllowance;
 		reASDA = runway.getASDA()-obsLoc-engineBlastAllowance;
@@ -93,6 +93,17 @@ public class Calculations {
 	}
 	public int getReTORA() {
 		return reTORA;
+	}
+	
+	public Runway getRunway() {
+		return runway;
+	}
+	
+	public int getObsLoc() {
+		return obsLoc;
+	}
+	public int getEngineBlastAllowance() {
+		return engineBlastAllowance;
 	}
 
 }

@@ -4,22 +4,23 @@ import java.awt.*;
 public class PaintTester extends JPanel {
 
    private RunwayView rsw;
-   private Obstacle obs;
+   private ObstacleBack obs;
+   private ObstacleView obsView;
 
     public PaintTester() {
         int[] x = {0, 100, 100, 200, 0};
         int[] y = {0, 0, 100, 200, 100};
 
         rsw = new RunwayTopView(100, 100, 500, 300, 400, 300, 500, "10R",1000, 400);
-        obs = new Obstacle();
-        obs.setCurrentRunway(rsw);
+        obs = new ObstacleBack();
 
         obs.setSideX(x);
         obs.setSideY(y);
         obs.setTopX(x);
         obs.setTopY(y);
 
-        obs.createShapes();
+        obsView = new ObstacleView(obs, rsw);
+        obsView.createShapes();
     }
 
     //for testing only
@@ -37,7 +38,7 @@ public class PaintTester extends JPanel {
         super.paintComponent(g);
 
         rsw.drawAll(g);
-        obs.drawShape(g, obs.getShapeSide());
+        obsView.drawShape(g, "side");
     }
     //--------------------------
 
