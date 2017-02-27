@@ -22,9 +22,11 @@ public class CalculationMainScreen {
 	JFrame window;
 	JPanel frame;
 	Airport airport;
+	JPanel calculationPanel;
 	public CalculationMainScreen(Airport airport){
 		this.airport = airport;//Selected airport from the 1st screen
 	    init(airport.getName());//Initialize GUI
+	    calculationPanel = new JPanel();
 	}
 	
 	//Initialise gui
@@ -108,7 +110,8 @@ public class CalculationMainScreen {
 	}
 	//prints details to screen
 	public void printCalcLandOver(Calculations calc){
-		   JPanel calculationPanel = new JPanel();
+		   calculationPanel.removeAll();
+		   calculationPanel.updateUI();
 		   calculationPanel.setLayout(new GridLayout(3,2));
 		   calculationPanel.add(new JLabel("Re- calculated LDA = "));
 		   calculationPanel.add(new JLabel("TORA - Obstacle Location - ALS -60"));
@@ -123,7 +126,8 @@ public class CalculationMainScreen {
 	
 	//prints details to screen
 	public void printCalcLandTowards(Calculations calc){
-		JPanel calculationPanel = new JPanel();
+	    calculationPanel.removeAll();
+		calculationPanel.updateUI();
 		calculationPanel.setLayout(new GridLayout(3,2));
 		calculationPanel.add(new JLabel("Re- calculated LDA = "));
 		calculationPanel.add(new JLabel("Obstacle Location - RESA - 60"));
@@ -137,7 +141,8 @@ public class CalculationMainScreen {
 	}
 	//prints details to screen
 	public void printCalcTakeOffTowards(Calculations calc){
-		JPanel calculationPanel = new JPanel();
+		calculationPanel.removeAll();
+		calculationPanel.updateUI();
 		calculationPanel.setLayout(new GridLayout(5,2));
 		calculationPanel.add(new JLabel("Re- calculated TORA = "));
 		calculationPanel.add(new JLabel("Obstacle Location + Threshold Displacement - ALS - 60"));
@@ -156,7 +161,8 @@ public class CalculationMainScreen {
 	//Prints details to screen
 	public void printTakeOffAfter(Calculations calc){
 		
-		JPanel calculationPanel = new JPanel();
+		calculationPanel.removeAll();
+		calculationPanel.updateUI();
 		calculationPanel.setLayout(new GridLayout(9,2));
 		calculationPanel.add(new JLabel("Re- calculated TORA = "));
 		calculationPanel.add(new JLabel("TORA - Obtacle Location - Engine Blast Allowence"));
