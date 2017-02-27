@@ -119,11 +119,11 @@ public class XMLImporter
                         System.out.println(sideYElement.getElementsByTagName("sideY"+j).item(0).getTextContent());
                     }
 
-                    Obstacle obstacle = new Obstacle();
+                    ObstacleBack obstacle = new ObstacleBack();
                     obstacle.setSideX(sideX);
-                   // obstacle.setSideY(sideY);
-                    //obstacle.setTopX(topX);
-                   // obstacle.setTopY(topY);
+                    obstacle.setSideY(sideY);
+                    obstacle.setTopX(topX);
+                    obstacle.setTopY(topY);
 
                     obstacles.add(obstacle);
                 }
