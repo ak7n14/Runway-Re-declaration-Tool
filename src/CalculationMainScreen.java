@@ -143,7 +143,8 @@ public class CalculationMainScreen {
 	public void printCalcTakeOffTowards(Calculations calc){
 		calculationPanel.removeAll();
 		calculationPanel.updateUI();
-		calculationPanel.setLayout(new GridLayout(5,2));
+		calculationPanel.setLayout(new GridLayout(6,2));
+
 		calculationPanel.add(new JLabel("Re- calculated TORA = "));
 		calculationPanel.add(new JLabel("Obstacle Location + Threshold Displacement - ALS - 60"));
 		calculationPanel.add(new JLabel(""));
