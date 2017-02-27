@@ -46,4 +46,4 @@ Thumbs.db
 _build
 .idea/compiler.xml
 .idea/misc.xml
-Runway Re-Declaration Tool.iml
+*.iml
