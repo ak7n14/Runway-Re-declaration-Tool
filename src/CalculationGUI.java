@@ -56,7 +56,7 @@ public class CalculationGUI{
 		
 		public void actionPerformed(ActionEvent e) {
 			
-			initSecondFrame((String)dropdown.getItemAt(dropdown.getSelectedIndex()));//Shady way to get correct option the regular one was not working
+			initSecondFrame((String)dropdown.getSelectedItem());
 			CalculationMainScreen gui2 = new CalculationMainScreen(airport);
 			frame.setVisible(false);
 			

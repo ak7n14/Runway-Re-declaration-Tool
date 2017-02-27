@@ -42,6 +42,16 @@ public class Airport
 
         return output;
     }
+    
+    public Runway getRunwayByDesignator(String desig){
+    	for(int i=0;i<runways.size();i++){
+    		if(runways.get(i).getDesignator()==desig){
+    			return runways.get(i);
+    		}
+    	}
+    	System.err.println("RunwayNotFound");
+    	return null;
+    }
 
 
 }
