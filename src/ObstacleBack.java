@@ -1,5 +1,8 @@
+import com.sun.deploy.util.ArrayUtil;
+
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class ObstacleBack extends Obstacle{
     //stores current runway
@@ -7,6 +10,8 @@ public class ObstacleBack extends Obstacle{
 
     private Polygon shapeSide;
     private Polygon shapeTop;
+
+    private int height;
 
     public ObstacleBack() {
         super();
@@ -16,6 +21,7 @@ public class ObstacleBack extends Obstacle{
     //loops through coords and scales proportionally to runway (0,0) is top left of runway
     public void setSideY(int... ys){
         sideViewY = ys;
+        height = maxArray(sideViewY);
     }
 
     public void setSideX(int... xs){
@@ -30,4 +36,19 @@ public class ObstacleBack extends Obstacle{
         topViewX = xs;
     }
 
+    public int maxArray(int[] ary){
+        int max = ary[0];
+
+        for (int i = 1; i < ary.length; i++) {
+            if (ary[i] > max) {
+                max = ary[i];
+            }
+        }
+
+        return max;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }

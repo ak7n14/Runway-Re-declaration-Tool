@@ -11,7 +11,7 @@ public class PaintTester extends JPanel {
         int[] x = {0, 100, 100, 0};
         int[] y = {0, 0, 100, 100};
 
-        rsw = new RunwayTopView(100, 100, 500, 300, 400, 300, 500, "10R",1000, 400);
+        rsw = new RunwaySideView(100, 100, 500, 300, 400, 300, 500,1000, 400);
         obs = new ObstacleBack();
 
         obs.setSideX(x);
@@ -38,7 +38,7 @@ public class PaintTester extends JPanel {
         super.paintComponent(g);
 
         rsw.drawAll(g);
-        obsView.drawShape(g, "top");
+        obsView.drawShape(g, "side");
     }
     //--------------------------
 

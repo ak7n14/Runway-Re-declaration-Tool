@@ -163,6 +163,6 @@ public abstract class RunwayView {
 
     //scales objects for JPanel
     int scalingHeight(int y){
-        return (int)((double)y/(double)200 * (double)jpanelHeight) - 2 * RUNWAY_Y();
+        return (int)((double)y/(double)RUNWAY_HEIGHT() * (double)jpanelHeight) - 2 * RUNWAY_Y();
     }
 }
