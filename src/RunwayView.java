@@ -61,7 +61,6 @@ public abstract class RunwayView {
         //draws separator labels
         this.drawLabels(g);
         this.drawScaleX(g);
-        this.drawScaleY(g);
     }
 
     //draws runway
@@ -161,24 +160,24 @@ public abstract class RunwayView {
 
     //scales objects for JPanel in x direction proportional to runway length
     int scaling(int x){
-        return (int)((double)x/((double)runwayLength + 2 * START) * (double)jpanelWidth);
+        return (int)((double)x/(double)runwayLength * ((double)jpanelWidth - 2 * START));
     }
 
     //scales objects for JPanel in y direction proportional to height of runway
     int scalingHeight(int y){
-        return (int)((double)y/((double)RUNWAY_HEIGHT() + 2 * RUNWAY_Y()) * (double)jpanelHeight);
+        return (int)((double)y/(double)RUNWAY_HEIGHT() * ((double)jpanelHeight - 2 * RUNWAY_Y()));
     }
 
     public void drawScaleX(Graphics g){
         g.setColor(Color.BLACK);
-        g.fillRect(50,50, oneMeterX(), 2);
+        g.fillRect(50,50, fiftyMeterX(), 2);
     }
 
     public void drawScaleY(Graphics g){
         g.setColor(Color.BLACK);
-        g.fillRect(50,50, 2, oneMeterY());
+        g.fillRect(50,50, 2, fiftyMeterY());
     }
 
-    public abstract int oneMeterX();
-    public abstract int oneMeterY();
+    public abstract int fiftyMeterX();
+    public abstract int fiftyMeterY();
 }

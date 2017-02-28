@@ -54,4 +54,6 @@ public class ObstacleBack extends Obstacle{
     public int getHeight() {
         return height;
     }
+
+
 }

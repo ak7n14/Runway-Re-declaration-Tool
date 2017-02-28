@@ -89,12 +89,12 @@ public class RunwayTopView extends RunwayView{
     }
 
     @Override
-    public int oneMeterX() {
-        return -this.scaling(1);
+    public int fiftyMeterX() {
+        return this.scaling(50);
     }
 
     @Override
-    public int oneMeterY() {
-        return -(this.scalingHeight(1));
+    public int fiftyMeterY() {
+        return this.scalingHeight(50);
     }
 }

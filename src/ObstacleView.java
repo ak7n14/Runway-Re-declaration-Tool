@@ -30,12 +30,18 @@ public class ObstacleView extends Obstacle{
     //draws polygon (either side or top)
     public void drawShape(Graphics g, String sideOrTop){
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.RED);
 
         if(sideOrTop.equals("side")) {
+            //scales image based on object before displaying
+            RunwaySideView rsw = (RunwaySideView) currentRunway;
+            rsw.setObstacle(this);
+            rsw.drawScaleY(g);
+
+            g2.setColor(Color.RED);
             g2.fill(shapeSide);
         }
         else {
+            g2.setColor(Color.RED);
             g2.fill(shapeTop);
         }
     }
@@ -103,7 +109,8 @@ public class ObstacleView extends Obstacle{
     //scaling for obstacles based on runway and not whole JPanel
     //scales obstacles in Jpanel based on height of obstacle
     int scalingSideHeight(int y){
-        return (int)((double) currentRunway.RUNWAY_Y() - (double)y/((double)ob.getHeight() + currentRunway.jpanelHeight - currentRunway.RUNWAY_Y() - currentRunway.RUNWAY_HEIGHT()) * ((double)currentRunway.jpanelHeight));
+        int bottomGap = currentRunway.jpanelHeight - currentRunway.RUNWAY_Y();
+        return (int)((double) currentRunway.RUNWAY_Y() - (double)y/((double)ob.getHeight()) * ((double)currentRunway.jpanelHeight - 2 * bottomGap));
     }
 
     //updates with new info
