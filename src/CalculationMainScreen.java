@@ -40,7 +40,7 @@ public class CalculationMainScreen {
 		//Basic window Declarations
 		window = new JFrame(name);
 		window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE) ;
-	    window.setSize(1120,600);
+	    window.setSize(1120,420);
 	    panel = window.getContentPane();
 	    panel.setLayout(new GridLayout(3,1));
 	    panel.setLayout(new FlowLayout());
@@ -105,7 +105,7 @@ public class CalculationMainScreen {
 	    directionPanel.add(awayOver);
 	    frame.add(directionPanel).setSize(1000, 100);
 	    
-	    //buttons fot submitting
+	    //buttons for submitting
 	   JPanel Buttonpanel = new JPanel();
 	   JButton calculate = new JButton("Calculate");
 	   Buttonpanel.add(calculate);
@@ -117,6 +117,8 @@ public class CalculationMainScreen {
 	   calculate.addActionListener(new CalculateListener(runwayDrop,objHeight,objLoc,landing,towards,airport,objLocCentreLine));
 	}
 	
+	//Adding labels to the screen when object is too far from the center line
+	//Runway does not have to be re calculated
 	public void printObsOutOfRunway(Calculations calc,String Direction){
 		calculationPanel.removeAll();
 		calculationPanel.updateUI();
@@ -132,6 +134,8 @@ public class CalculationMainScreen {
 		l.setBackground(Color.green);
 		l.setOpaque(true);
 		calculationPanel.add(l);
+	
+		//Checking if plane is landin
 		if(Direction =="Landing"){
 			calculationPanel.setLayout(new GridLayout(2,2));
 			JLabel label1= new JLabel("LDA");
@@ -143,7 +147,8 @@ public class CalculationMainScreen {
 			calculationPanel.add(label1);
 			calculationPanel.add(label2);
 		}
-		
+	
+		//If plane is taking off
 		else {
 			calculationPanel.setLayout(new GridLayout(3,2));
 			JLabel label2= new JLabel(String.format("TORA = %d meters",calc.getRunway().getTORA()));
@@ -168,7 +173,8 @@ public class CalculationMainScreen {
 		frame.updateUI();
 		
 	}
-	//prints details to screen
+	
+	//prints labels with details to screen when plane is landing over the object
 	public void printCalcLandOver(Calculations calc){
 		   calculationPanel.removeAll();
 		   calculationPanel.updateUI();
@@ -186,6 +192,8 @@ public class CalculationMainScreen {
 		   calculationPanel.add(new JLabel (equation));
 		   calculationPanel.add(new JLabel(""));
 		   calculationPanel.add(new JLabel(String.format("= %d meters",calc.getReLda())));
+		 
+		   //Updating color of the panel depending on if the runway distance is sufficient or not
 		   if(calc.getReLda()>plane.getMinLandingDis()+100){
 			   calculationPanel.setBackground(Color.GREEN);
 		   }
@@ -202,7 +210,7 @@ public class CalculationMainScreen {
 		   frame.updateUI();
 	}
 	
-	//prints details to screen
+	//prints details to screen when plane is landing to the object
 	public void printCalcLandTowards(Calculations calc){
 		
 	    calculationPanel.removeAll();
@@ -219,10 +227,12 @@ public class CalculationMainScreen {
 		calculationPanel.add(new JLabel (equation));
 		calculationPanel.add(new JLabel(""));
 		calculationPanel.add(new JLabel(String.format("= %d meters",calc.getReLda())));
+		
+		//Changing color of the panel according to the condition(If runway is sufficient)
 		if(calc.getReLda()>plane.getMinLandingDis()+100){
 			   calculationPanel.setBackground(Color.GREEN);
 		   }
-		   else if(calc.getReLda()>plane.getMinLandingDis()){
+		   else if(calc.getReLda()<plane.getMinLandingDis()){
 			   calculationPanel.setBackground(Color.RED);
 			   calculationPanel.add(new JLabel("Minimum Distance required to land"));
 			   calculationPanel.add(new JLabel(String.format("= %d meters", plane.getMinLandingDis())));
@@ -234,7 +244,8 @@ public class CalculationMainScreen {
 		panel.add(calculationPanel);
 		frame.updateUI();
 	}
-	//prints details to screen
+	
+	//prints details to screen when plane is taking off towards the object
 	public void printCalcTakeOffTowards(Calculations calc){
 		calculationPanel.removeAll();
 		calculationPanel.updateUI();
@@ -256,6 +267,8 @@ public class CalculationMainScreen {
 		calculationPanel.add(new JLabel(String.format("= %d meters",calc.getReTORA())));
 		calculationPanel.add(new JLabel("Re- calculated ASDA = Re- calculated TORA"));
 		calculationPanel.add(new JLabel(String.format("= %d meters",calc.getReTORA())));
+		
+		//Changing color of the panel according to the condition(If runway is sufficient)
 		if(calc.getReTORA()>plane.getMinTakeoffDis()+100 
 				&& calc.getReTODA()>plane.getMinTakeoffDis()+100 
 				&& calc.getReASDA()>plane.getMinTakeoffDis()+100 ){
@@ -312,6 +325,9 @@ public class CalculationMainScreen {
 		calculationPanel.add(new JLabel (equation2));
 		calculationPanel.add(new JLabel(""));
 		calculationPanel.add(new JLabel(String.format("= %d meters",calc.getReASDA())));
+		
+		
+		//Changing color of the panel according to the condition(If runway is sufficient)
 		if(calc.getReTORA()>plane.getMinTakeoffDis()+100 
 				&& calc.getReTODA()>plane.getMinTakeoffDis()+100 
 				&& calc.getReASDA()>plane.getMinTakeoffDis()+100 ){
@@ -333,6 +349,8 @@ public class CalculationMainScreen {
 		
 		
 	}
+	
+	//Listener for the calculate button
 	class CalculateListener implements ActionListener{
 
 		Calculations calc;
@@ -345,6 +363,9 @@ public class CalculationMainScreen {
 		Airport airport;
 		int obsLocCentreLine;
 		JTextField temp;
+		
+		
+		//Default constructions for initializations
 		public CalculateListener(JComboBox runwayDrop,JTextField objHeight,JTextField objLoc,JRadioButton landing,JRadioButton towards,Airport airport,JTextField obsLocCentreLine){	
 			this.runwayDrop=runwayDrop;
 			runwayDrop.setSelectedIndex(-1);
@@ -356,6 +377,7 @@ public class CalculationMainScreen {
 			temp= obsLocCentreLine;
 			
 		}
+		
 		//Calls correct methods for calculations and printing to the screen
 		public void actionPerformed(ActionEvent e) {
 			obsLocCentreLine = Integer.parseInt(temp.getText());
@@ -363,29 +385,29 @@ public class CalculationMainScreen {
 			calc = new Calculations(runway,Integer.parseInt(objHeight.getText()),Integer.parseInt(objLoc.getText()));
 			if(obsLocCentreLine>75){
 				if (landing.isSelected())
-					printObsOutOfRunway(calc,"Landing");
+					printObsOutOfRunway(calc,"Landing");//Calling landing case
 				else
-					printObsOutOfRunway(calc,"Taking");
+					printObsOutOfRunway(calc,"Taking");//Calling taking off case
 			}
 			else{
-			if(landing.isSelected()){
+			if(landing.isSelected()){//Cases of landing
 				if(direction.isSelected()){
-					calc.calculateLda("Towards");
+					calc.calculateLda("Towards");//When landing towards
 					printCalcLandTowards(calc);
 				
 				}else{
-					calc.calculateLda("Over");	
+					calc.calculateLda("Over");	//When landing over
 					printCalcLandOver(calc);
 				}
 
 			}
-			else{
+			else{//Cases of taking off
 				if(direction.isSelected()){
-					calc.calculateTORA("Towards");
+					calc.calculateTORA("Towards");//When taking off towards the object
 					printCalcTakeOffTowards(calc);
 				}
 				else{
-					calc.calculateTORA("After");
+					calc.calculateTORA("After");//When taking off after the object
 					printTakeOffAfter(calc);
 					}
 				}
