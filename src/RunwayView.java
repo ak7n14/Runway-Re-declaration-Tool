@@ -46,15 +46,16 @@ public abstract class RunwayView {
 
     //for updating parts of runway
     //must call drawAll after to display updates
-    public void updateView( int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength){
-        runwayEnds.put("TODA", START + TODALength);
-        runwayEnds.put("TORA", START + TORALength);
-        runwayEnds.put("ASDA", START + ASDALength);
-        runwayEnds.put("LDA", LDAStart + LDALength);
+    public void updateView(int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength){
+        this.LDAStart = LDAStart;
+        runwayEnds.put("TODA", TODALength);
+        runwayEnds.put("TORA", TORALength);
+        runwayEnds.put("ASDA", ASDALength);
+        runwayEnds.put("LDA", LDALength);
     }
 
     //draws runway, seperators and labels
-    protected void drawAll(Graphics g){
+    public void drawAll(Graphics g){
         this.drawRunway(g);
         this.drawAllSeparators(g);
         //draws separator labels

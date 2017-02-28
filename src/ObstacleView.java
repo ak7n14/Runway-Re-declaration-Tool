@@ -106,4 +106,15 @@ public class ObstacleView extends Obstacle{
         return (int)((double) currentRunway.RUNWAY_Y() - (double)y/((double)ob.getHeight() + currentRunway.jpanelHeight - currentRunway.RUNWAY_Y() - currentRunway.RUNWAY_HEIGHT()) * ((double)currentRunway.jpanelHeight));
     }
 
+    //updates with new info
+    public void updateView(int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength){
+        //updates runway info
+        currentRunway.updateView(LDAStart, TODALength, TORALength, ASDALength, LDALength);
+
+        //scales for new runway
+        setSideX(ob.sideViewX);
+        setSideY(ob.sideViewY);
+        setTopX(ob.topViewX);
+        setTopY(ob.topViewY);
+    }
 }
