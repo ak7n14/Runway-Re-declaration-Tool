@@ -24,4 +24,14 @@ public class RunwaySideView extends RunwayView{
         g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), RUNWAY_HEIGHT());
     }
 
+    @Override
+    public int oneMeterX() {
+        return this.scaling(1);
+    }
+
+    @Override
+    public int oneMeterY() {
+        return 0;
+    }
+
 }

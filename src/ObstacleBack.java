@@ -11,6 +11,7 @@ public class ObstacleBack extends Obstacle{
     private Polygon shapeSide;
     private Polygon shapeTop;
 
+    //highest point of shape
     private int height;
 
     public ObstacleBack() {
@@ -36,6 +37,7 @@ public class ObstacleBack extends Obstacle{
         topViewX = xs;
     }
 
+    //calculates maximum number in an array
     public int maxArray(int[] ary){
         int max = ary[0];
 
@@ -48,6 +50,7 @@ public class ObstacleBack extends Obstacle{
         return max;
     }
 
+    //returns max y coord
     public int getHeight() {
         return height;
     }

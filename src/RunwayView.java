@@ -59,6 +59,8 @@ public abstract class RunwayView {
         this.drawAllSeparators(g);
         //draws separator labels
         this.drawLabels(g);
+        this.drawScaleX(g);
+        this.drawScaleY(g);
     }
 
     //draws runway
@@ -72,7 +74,7 @@ public abstract class RunwayView {
         //x is where the runway component ends
         //height is altered so separator is visible
         g.setColor(Color.RED);
-        g.fillRect(this.scaling(x) + start, RUNWAY_Y(), 2, RUNWAY_HEIGHT() + SEPARATOR_HEIGHT);
+        g.fillRect(this.scaling(x) + START, RUNWAY_Y(), 2, RUNWAY_HEIGHT() + SEPARATOR_HEIGHT);
     }
 
     //loops through hashmap and displays seperators
@@ -84,7 +86,7 @@ public abstract class RunwayView {
         }
 
         //draw START separators
-        this.drawSeparator(g, START);
+        this.drawSeparator(g, start);
         this.drawSeparator(g, LDAStart);
     }
 
@@ -141,14 +143,14 @@ public abstract class RunwayView {
         int stringY = RUNWAY_Y() + RUNWAY_HEIGHT() + 20; //START of string (y)
 
         for(String key : keys){
-            int stringX = this.scaling(runwayEnds.get(key)) + start; //START of string (x)
+            int stringX = this.scaling(runwayEnds.get(key)) + START; //START of string (x)
 
             //creates relations between string and its dimensions
             stringData.put(key, new Point(stringX, stringY));
         }
 
-        stringData.put("Start", new Point(START, stringY));
-        stringData.put("LDAStart", new Point(LDAStart, stringY));
+        stringData.put("Start", new Point(START + scaling(start), stringY));
+        stringData.put("LDAStart", new Point(START + scaling(LDAStart), stringY));
         return stringData;
     }
 
@@ -156,13 +158,26 @@ public abstract class RunwayView {
         return runwayLength;
     }
 
-    //scales objects for JPanel
+    //scales objects for JPanel in x direction proportional to runway length
     int scaling(int x){
-        return (int)((double)x/(double)runwayLength * (double)jpanelWidth) - 2 * START;
+        return (int)((double)x/((double)runwayLength + 2 * START) * (double)jpanelWidth);
     }
 
-    //scales objects for JPanel
+    //scales objects for JPanel in y direction proportional to height of runway
     int scalingHeight(int y){
-        return (int)((double)y/(double)RUNWAY_HEIGHT() * (double)jpanelHeight) - 2 * RUNWAY_Y();
+        return (int)((double)y/((double)RUNWAY_HEIGHT() + 2 * RUNWAY_Y()) * (double)jpanelHeight);
     }
+
+    public void drawScaleX(Graphics g){
+        g.setColor(Color.BLACK);
+        g.fillRect(50,50, oneMeterX(), 2);
+    }
+
+    public void drawScaleY(Graphics g){
+        g.setColor(Color.BLACK);
+        g.fillRect(50,50, 2, oneMeterY());
+    }
+
+    public abstract int oneMeterX();
+    public abstract int oneMeterY();
 }

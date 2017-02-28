@@ -34,6 +34,8 @@ public class RunwayTopView extends RunwayView{
         Graphics2D g2 = (Graphics2D) g;
         this.drawCenterLine(g2);
         this.drawRunwayNumbers(g2);
+        this.drawScaleX(g);
+        this.drawScaleY(g);
     }
 
     //draws a white dashed line in middle of runway
@@ -64,7 +66,7 @@ public class RunwayTopView extends RunwayView{
         //due to rotation axes flip, x' = -y, y' = x
         //gets runway end shifts by 10 left (scales
         //shifts left by START
-        g2.drawString(runwayNumber,  - RUNWAY_Y() - RUNWAY_HEIGHT()/2 - metrics.stringWidth(runwayNumber)/2, this.scaling(START + this.getRunwayLength() - 10) - START);
+        g2.drawString(runwayNumber,  - RUNWAY_Y() - RUNWAY_HEIGHT()/2 - metrics.stringWidth(runwayNumber)/2, this.scaling(this.getRunwayLength()) + START - 10);
 
         //LEFT NUMBER
         //makes text vertical facing towards left edge of runway
@@ -80,9 +82,19 @@ public class RunwayTopView extends RunwayView{
         //due to rotation axes flip,  x' = y, y' = -x
         //shifts right by START and 10
         //shifts right by 10
-        g2.drawString(runwayString,  RUNWAY_Y() + RUNWAY_HEIGHT()/2 - metrics.stringWidth(runwayString)/2, -this.scaling(START + 10) - START);
+        g2.drawString(runwayString,  RUNWAY_Y() + RUNWAY_HEIGHT()/2 - metrics.stringWidth(runwayString)/2, -START - 10);
 
         //reset rotation to normal
         g2.rotate(-Math.PI/2);
+    }
+
+    @Override
+    public int oneMeterX() {
+        return -this.scaling(1);
+    }
+
+    @Override
+    public int oneMeterY() {
+        return -(this.scalingHeight(1));
     }
 }
