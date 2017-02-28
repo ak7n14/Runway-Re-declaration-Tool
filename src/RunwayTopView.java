@@ -14,12 +14,10 @@ public class RunwayTopView extends RunwayView{
 
     @Override
     protected int RUNWAY_Y() { return 100; }
-    @Override
-    protected int RUNWAY_HEIGHT() { return 200; }
-    private final int DASHED_HEIGHT = RUNWAY_Y() + (RUNWAY_HEIGHT()/2);
+    private final int DASHED_HEIGHT = RUNWAY_Y() + this.scalingHeight(runwayHeight/2);
 
-    public RunwayTopView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, String runwayNumber, int jpanelWidth, int jpanelHeight) {
-        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, jpanelWidth, jpanelHeight);
+    public RunwayTopView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, String runwayNumber, int jpanelWidth, int jpanelHeight, int runwayHeight) {
+        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, jpanelWidth, jpanelHeight,runwayHeight);
         this.runwayNumber = runwayNumber;
     }
 
@@ -66,7 +64,7 @@ public class RunwayTopView extends RunwayView{
         //due to rotation axes flip, x' = -y, y' = x
         //gets runway end shifts by 10 left (scales
         //shifts left by START
-        g2.drawString(runwayNumber,  - RUNWAY_Y() - RUNWAY_HEIGHT()/2 - metrics.stringWidth(runwayNumber)/2, this.scaling(this.getRunwayLength()) + START - 10);
+        g2.drawString(runwayNumber,  - RUNWAY_Y() - this.scalingHeight(runwayHeight/2) - metrics.stringWidth(runwayNumber)/2, this.scaling(this.getRunwayLength()) + START - 10);
 
         //LEFT NUMBER
         //makes text vertical facing towards left edge of runway
@@ -75,14 +73,22 @@ public class RunwayTopView extends RunwayView{
         //calculates number on otherside of runway
         String reverseNumber = String.valueOf(36 - Integer.parseInt(runwayNumber.substring(0,2)));
 
+        //gets runway letter
+        String runwayLetter;
+        if(runwayNumber.substring(2).equals("L")){
+            runwayLetter = "R";
+        } else {
+            runwayLetter = "L";
+        }
+
         //gets the runway number and appends side letter (subtract from 36 to get opposite direction
-        String runwayString = reverseNumber + runwayNumber.substring(2);
+        String runwayString = reverseNumber + runwayLetter;
 
         //second parameter centers text on runway
         //due to rotation axes flip,  x' = y, y' = -x
         //shifts right by START and 10
         //shifts right by 10
-        g2.drawString(runwayString,  RUNWAY_Y() + RUNWAY_HEIGHT()/2 - metrics.stringWidth(runwayString)/2, -START - 10);
+        g2.drawString(runwayString,  RUNWAY_Y() + this.scalingHeight(runwayHeight/2) - metrics.stringWidth(runwayString)/2, -START - 10);
 
         //reset rotation to normal
         g2.rotate(-Math.PI/2);

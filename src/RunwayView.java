@@ -24,16 +24,17 @@ public abstract class RunwayView {
 
     //initial y position and height of runway
     protected abstract int RUNWAY_Y();
-    protected abstract int RUNWAY_HEIGHT();
+    protected int runwayHeight;
     
     private final int SEPARATOR_HEIGHT = 10;
 
-    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int jpanelWidth, int jpanelHeight) {
+    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int jpanelWidth, int jpanelHeight, int runwayHeight) {
         this.LDAStart = LDAStart;
         this.runwayLength = runwayLength;
         this.start = start;
         this.jpanelWidth = jpanelWidth;
         this.jpanelHeight = jpanelHeight;
+        this.runwayHeight = runwayHeight;
 
         //stores all ends in hashmap
         runwayEnds = new HashMap<>();
@@ -66,7 +67,7 @@ public abstract class RunwayView {
     //draws runway
     void drawRunway(Graphics g){
         g.setColor(Color.black);
-        g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), this.scalingHeight(RUNWAY_HEIGHT()));
+        g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), this.scalingHeight(runwayHeight));
     }
 
     //draws a seperator to see ends of different strip components
@@ -74,7 +75,7 @@ public abstract class RunwayView {
         //x is where the runway component ends
         //height is altered so separator is visible
         g.setColor(Color.RED);
-        g.fillRect(this.scaling(x) + START, RUNWAY_Y(), 2, RUNWAY_HEIGHT() + SEPARATOR_HEIGHT);
+        g.fillRect(this.scaling(x) + START, RUNWAY_Y(), 2, this.scalingHeight(runwayHeight) + SEPARATOR_HEIGHT);
     }
 
     //loops through hashmap and displays seperators
@@ -140,7 +141,7 @@ public abstract class RunwayView {
     private HashMap<String, Point> calculateStringDimensions(Set<String> keys){
         HashMap<String, Point> stringData = new HashMap<>();
 
-        int stringY = RUNWAY_Y() + RUNWAY_HEIGHT() + 20; //START of string (y)
+        int stringY = RUNWAY_Y() + this.scalingHeight(runwayHeight) + 20; //START of string (y)
 
         for(String key : keys){
             int stringX = this.scaling(runwayEnds.get(key)) + START; //START of string (x)
@@ -165,7 +166,7 @@ public abstract class RunwayView {
 
     //scales objects for JPanel in y direction proportional to height of runway
     int scalingHeight(int y){
-        return (int)((double)y/(double)RUNWAY_HEIGHT() * ((double)jpanelHeight - 2 * RUNWAY_Y()));
+        return (int)((double)y/(double)runwayHeight * ((double)jpanelHeight - 2 * RUNWAY_Y()));
     }
 
     public void drawScaleX(Graphics g){
