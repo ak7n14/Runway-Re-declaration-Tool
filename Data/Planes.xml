@@ -1,0 +1,14 @@
+<Planes>
+    <Plane name="Boeing 787-9">
+        <takeoffLength>2700</takeoffLength>
+        <landingLength>1400</landingLength>
+    </Plane>
+    <Plane name="Airbus A380">
+        <takeoffLength>3000</takeoffLength>
+        <landingLength>1550</landingLength>
+    </Plane>
+    <Plane name="Boeing 767-200">
+        <takeoffLength>1900</takeoffLength>
+        <landingLength>1200</landingLength>
+    </Plane>
+</Planes>
