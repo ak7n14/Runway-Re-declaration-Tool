@@ -67,9 +67,9 @@ public class XMLImporter
         return airports;
     }
 
-    public ArrayList<Obstacle> importObstacles()
+    public ArrayList<ObstacleBack> importObstacles()
     {
-        ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+        ArrayList<ObstacleBack> obstacles = new ArrayList<ObstacleBack>();
         try
         {
             File obstacleFile = new File("Data/Obstacles.xml");
@@ -84,7 +84,7 @@ public class XMLImporter
             for(int i = 0; i < obstacleList.getLength(); i++)
             {
                 Node obstacleNode = obstacleList.item(i);
-                String obstacleName = obstacleNode.getAttributes().getNamedItem("name").getTextContent();
+             //   String obstacleName = obstacleNode.getAttributes().getNamedItem("name").getTextContent();
                 int height = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("height").getTextContent());
                 int noOfTop = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("noOfTop").getTextContent());
                 int noOfSide = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("noOfSide").getTextContent());

@@ -10,14 +10,19 @@ public class XMLTester
     {
         XMLImporter importer = new XMLImporter();
 
-        ArrayList<Airport> airportArrayList = importer.importAirports();
+       // ArrayList<Airport> airportArrayList = importer.importAirports();
 
        // System.out.println(airportArrayList.get(2).toString());
        // System.out.println(airportArrayList.get(1).toString());
 
        // System.out.print(importer.getAirportByName("LONDON GATWICK").toString());
 
-        ArrayList<Obstacle> obstacleArrayList = importer.importObstacles();
+       // ArrayList<ObstacleBack> obstacleArrayList = importer.importObstacles();
+
+        ArrayList<Plane> planes = importer.importPlanes();
+
+
+
 
 
         XMLExporter exporter = new XMLExporter();
@@ -26,7 +31,9 @@ public class XMLTester
 
        // exporter.backupFile("outputTest");
 
-        System.out.println(importer.importPlanes().size());
+        exporter.exportPlanes("outputTest", planes);
+
+        //System.out.println(importer.importPlanes().size());
 
     }
 

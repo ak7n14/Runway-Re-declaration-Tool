@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <obstacles>
-    <obstacle name="737-800" height="25" noOfTop="5" noOfSide="5">
+    <obstacle height="25" noOfTop="5" noOfSide="5">
         <topX>
             <topX0>0</topX0>
             <topX1>100</topX1>

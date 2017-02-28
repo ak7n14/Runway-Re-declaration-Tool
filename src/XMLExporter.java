@@ -91,6 +91,139 @@ public class XMLExporter
         return field;
     }
 
+    public void exportObstacles(String filename, ArrayList<ObstacleBack> obstacles)
+    {
+        try
+        {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.newDocument();
+
+            Element root = document.createElement("obstacles");
+
+            document.appendChild(root);
+
+            for(ObstacleBack obstacle : obstacles)
+            {
+                root.appendChild(getObstacle(document, obstacle));
+            }
+
+
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+            Transformer transformer = tFactory.newTransformer();
+
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource source = new DOMSource(document);
+
+
+            StreamResult file = new StreamResult(new File("Data/"+filename+".xml"));
+
+            transformer.transform(source, file);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Node getObstacle(Document document, ObstacleBack obstacle)
+    {
+        Element obstacleNode = document.createElement("obstacle");
+
+        Element topX = document.createElement("topX");
+        Element topY = document.createElement("topY");
+        Element sideX = document.createElement("sideX");
+        Element sideY = document.createElement("sideY");
+
+        int noOfTop = obstacle.topViewX.length;
+        int noOfSide = obstacle.sideViewX.length;
+
+        int height = obstacle.getHeight();
+
+        for(int i = 0; i < noOfTop; i++)
+        {
+            Element tempX = document.createElement("topX"+i);
+            tempX.appendChild(document.createTextNode(obstacle.topViewX[i]+""));
+            topX.appendChild(tempX);
+
+            Element tempY = document.createElement("topY"+i);
+            tempY.appendChild(document.createTextNode(obstacle.topViewY[i]+""));
+            topY.appendChild(tempY);
+        }
+
+        for(int i = 0; i < noOfSide; i++)
+        {
+            Element tempX = document.createElement("sideX"+i);
+            tempX.appendChild(document.createTextNode(obstacle.sideViewX[i]+""));
+            sideX.appendChild(tempX);
+
+            Element tempY = document.createElement("sideY"+i);
+            tempY.appendChild(document.createTextNode(obstacle.sideViewY[i]+""));
+            sideY.appendChild(tempY);
+        }
+
+        obstacleNode.setAttribute("height", height+"");
+        obstacleNode.setAttribute("noOfTop", noOfTop+"");
+        obstacleNode.setAttribute("noOfSide", noOfSide+"");
+
+        obstacleNode.appendChild(topX);
+        obstacleNode.appendChild(topY);
+        obstacleNode.appendChild(sideX);
+        obstacleNode.appendChild(sideY);
+
+        return obstacleNode;
+    }
+
+    public void exportPlanes(String filename, ArrayList<Plane> planes)
+    {
+        try
+        {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.newDocument();
+
+            Element root = document.createElement("planes");
+
+            document.appendChild(root);
+
+            for(Plane plane : planes)
+            {
+                root.appendChild(getPlane(document, plane));
+            }
+
+
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+            Transformer transformer = tFactory.newTransformer();
+
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource source = new DOMSource(document);
+
+
+            StreamResult file = new StreamResult(new File("Data/"+filename+".xml"));
+
+            transformer.transform(source, file);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Node getPlane(Document document, Plane plane)
+    {
+        Element planeNode = document.createElement("plane");
+
+        planeNode.setAttribute("name", plane.getName());
+
+        Element minTakeoff = document.createElement("takeoffLength");
+        minTakeoff.appendChild(document.createTextNode(plane.getMinTakeoffDis()+""));
+        planeNode.appendChild(minTakeoff);
+
+        Element minLanding = document.createElement("landingLength");
+        minLanding.appendChild(document.createTextNode(plane.getMinLandingDis()+""));
+        planeNode.appendChild(minLanding);
+
+        return planeNode;
+    }
+
     public void backupFile(String filename)
     {
         try
