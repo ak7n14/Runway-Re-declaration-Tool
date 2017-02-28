@@ -21,8 +21,4 @@ public abstract class Obstacle {
     //set coords with variable number of points for top view
     public abstract void setTopY(int... ys);
     public abstract void setTopX(int... xs);
-
-    public String getName() {
-        return name;
-    }
 }

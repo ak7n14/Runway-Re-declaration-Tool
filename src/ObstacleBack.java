@@ -44,5 +44,7 @@ public class ObstacleBack extends Obstacle{
         return height;
     }
 
-
+    public String getName() {
+        return name;
+    }
 }
