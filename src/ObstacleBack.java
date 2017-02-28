@@ -5,12 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class ObstacleBack extends Obstacle{
-    //stores current runway
-    private RunwayView currentRunway;
-
-    private Polygon shapeSide;
-    private Polygon shapeTop;
-
+    
     //highest point of shape
     private int height;
     private String name;
