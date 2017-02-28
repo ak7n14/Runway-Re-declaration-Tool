@@ -11,8 +11,6 @@ public abstract class Obstacle {
     int[] topViewX;
     int[] topViewY;
 
-    private String name;
-
     //set coords with variable number of points for side view
     //loops through coords and scales proportionally to runway (0,0) is top left of runway
     public abstract void setSideY(int... ys);
