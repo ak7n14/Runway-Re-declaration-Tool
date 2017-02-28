@@ -84,7 +84,8 @@ public class XMLImporter
             for(int i = 0; i < obstacleList.getLength(); i++)
             {
                 Node obstacleNode = obstacleList.item(i);
-             //   String obstacleName = obstacleNode.getAttributes().getNamedItem("name").getTextContent();
+                String obstacleName = obstacleNode.getAttributes().getNamedItem("name").getTextContent();
+                System.out.println(obstacleName);
                 int height = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("height").getTextContent());
                 int noOfTop = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("noOfTop").getTextContent());
                 int noOfSide = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("noOfSide").getTextContent());
@@ -115,7 +116,7 @@ public class XMLImporter
                         sideY[j] = Integer.parseInt(sideYElement.getElementsByTagName("sideY"+j).item(0).getTextContent());
                     }
 
-                    ObstacleBack obstacle = new ObstacleBack();
+                    ObstacleBack obstacle = new ObstacleBack(obstacleName, height);
                     obstacle.setSideX(sideX);
                     obstacle.setSideY(sideY);
                     obstacle.setTopX(topX);
@@ -189,5 +190,16 @@ public class XMLImporter
         return null;
     }
 
+    
+    public Plane getPlaneByName(String Name){
+    	ArrayList<Plane> planes = importPlanes();
 
+        for(Plane plane : planes)
+        {
+            if(plane.getName().equals(Name))
+                return plane;
+        }
+
+        return null;
+    }
 }

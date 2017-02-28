@@ -17,9 +17,15 @@ public class XMLTester
 
        // System.out.print(importer.getAirportByName("LONDON GATWICK").toString());
 
-       // ArrayList<ObstacleBack> obstacleArrayList = importer.importObstacles();
+        ArrayList<ObstacleBack> obstacleArrayList = importer.importObstacles();
 
-        ArrayList<Plane> planes = importer.importPlanes();
+        System.out.println(obstacleArrayList.get(0).getName() + " " + obstacleArrayList.get(0).getHeight());
+
+        ObstacleBack o = new ObstacleBack("name", 12);
+
+        System.out.println(o.getName());
+
+      //  ArrayList<Plane> planes = importer.importPlanes();
 
 
 
@@ -31,7 +37,7 @@ public class XMLTester
 
        // exporter.backupFile("outputTest");
 
-        exporter.exportPlanes("outputTest", planes);
+        exporter.exportObstacles("outputTest", obstacleArrayList);
 
         //System.out.println(importer.importPlanes().size());
 
