@@ -161,6 +161,7 @@ public class XMLExporter
             sideY.appendChild(tempY);
         }
 
+        obstacleNode.setAttribute("name", obstacle.getName());
         obstacleNode.setAttribute("height", height+"");
         obstacleNode.setAttribute("noOfTop", noOfTop+"");
         obstacleNode.setAttribute("noOfSide", noOfSide+"");
