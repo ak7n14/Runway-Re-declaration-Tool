@@ -1,6 +1,3 @@
-import java.awt.*;
-import java.util.*;
-
 //Set side objects and top objects x and y coordinates for each point of polygon
 //call createShapes to create side and top object
 //call drawShape to display
@@ -15,10 +12,6 @@ public abstract class Obstacle {
     int[] topViewY;
 
     private String name;
-
-    public Obstacle() {
-       // this.name = name;
-    }
 
     //set coords with variable number of points for side view
     //loops through coords and scales proportionally to runway (0,0) is top left of runway

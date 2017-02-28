@@ -13,16 +13,18 @@ public class ObstacleBack extends Obstacle{
 
     //highest point of shape
     private int height;
+    private String name;
 
-    public ObstacleBack() {
+    public ObstacleBack(String name, int height) {
         super();
+        this.name = name;
+        this.height = height;
     }
 
     //set coords with variable number of points for side view
     //loops through coords and scales proportionally to runway (0,0) is top left of runway
     public void setSideY(int... ys){
         sideViewY = ys;
-        height = maxArray(sideViewY);
     }
 
     public void setSideX(int... xs){
@@ -35,19 +37,6 @@ public class ObstacleBack extends Obstacle{
     }
     public void setTopX(int... xs){
         topViewX = xs;
-    }
-
-    //calculates maximum number in an array
-    public int maxArray(int[] ary){
-        int max = ary[0];
-
-        for (int i = 1; i < ary.length; i++) {
-            if (ary[i] > max) {
-                max = ary[i];
-            }
-        }
-
-        return max;
     }
 
     //returns max y coord

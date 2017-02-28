@@ -12,7 +12,7 @@ public class PaintTester extends JPanel {
         int[] y = {0, 0, 200, 200};
 
         rsw = new RunwaySideView(100, 0, 900, 300, 400, 300, 1000, 1000, 400);
-        obs = new ObstacleBack();
+        obs = new ObstacleBack("nuclear bomb mk2 v1.2.3 heavy armory edition", 200);
 
         obs.setSideX(x);
         obs.setSideY(y);
