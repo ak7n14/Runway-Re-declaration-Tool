@@ -35,4 +35,9 @@ public class RunwaySideView extends RunwayView{
     public int fiftyMeterY() {
         return this.RUNWAY_Y() - ov.scalingSideHeight(50);
     }
+
+    //overides RunwayView so no scaling occurs
+    int scalingHeight(int y){
+        return y;
+    }
 }
