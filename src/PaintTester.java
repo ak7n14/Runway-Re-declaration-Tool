@@ -8,8 +8,8 @@ public class PaintTester extends JPanel {
    private ObstacleView obsView;
 
     public PaintTester() {
-        int[] x = {0, 100, 100, 200, 0};
-        int[] y = {0, 0, 100, 200, 100};
+        int[] x = {0, 100, 100, 0};
+        int[] y = {0, 0, 100, 100};
 
         rsw = new RunwayTopView(100, 100, 500, 300, 400, 300, 500, "10R",1000, 400);
         obs = new ObstacleBack();
@@ -38,7 +38,7 @@ public class PaintTester extends JPanel {
         super.paintComponent(g);
 
         rsw.drawAll(g);
-        obsView.drawShape(g, "side");
+        obsView.drawShape(g, "top");
     }
     //--------------------------
 

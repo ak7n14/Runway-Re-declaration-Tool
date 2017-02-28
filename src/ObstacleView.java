@@ -45,14 +45,14 @@ public class ObstacleView extends Obstacle{
     public void setSideY(int... ys){
         sideViewY = new int[ys.length];
         for(int i = 0; i < ys.length; i++){
-            sideViewY[i] = currentRunway.scalingHeight(ys[i]) + 3 * currentRunway.START;
+            sideViewY[i] = ys[i] + currentRunway.RUNWAY_HEIGHT();
         }
     }
 
     public void setSideX(int... xs){
         sideViewX = new int[xs.length];
         for(int i = 0; i < xs.length; i++){
-            sideViewX[i] = currentRunway.scalingHeight(xs[i]) + 3 * currentRunway.START;
+            sideViewX[i] = currentRunway.scaling(xs[i]) + currentRunway.START;
         }
     }
 
@@ -60,13 +60,13 @@ public class ObstacleView extends Obstacle{
     public void setTopY(int... ys){
         topViewY = new int[ys.length];
         for(int i = 0; i < ys.length; i++){
-            topViewY[i] = currentRunway.scalingHeight(ys[i]) + 3 * currentRunway.START;
+            topViewY[i] = scalingHeight(ys[i]) + currentRunway.RUNWAY_Y();
         }
     }
     public void setTopX(int... xs){
         topViewX = new int[xs.length];
         for(int i = 0; i < xs.length; i++){
-            topViewX[i] = currentRunway.scalingHeight(xs[i]) + 3 * currentRunway.START;
+            topViewX[i] = scaling(xs[i]) + currentRunway.START;
         }
     }
 
@@ -93,5 +93,17 @@ public class ObstacleView extends Obstacle{
 
     public Polygon getShapeTop() {
         return shapeTop;
+    }
+
+
+    //scaling for obstacles based on runway and not whole JPanel
+    //scales objects for JPanel
+    int scaling(int x){
+        return (int)((double)x/(double)currentRunway.runwayLength * ((double)currentRunway.jpanelWidth - 2 * currentRunway.START));
+    }
+
+    //scales objects for JPanel
+    int scalingHeight(int y){
+        return (int)((double)y/(double)200 * ((double)currentRunway.jpanelHeight - 2 * currentRunway.RUNWAY_Y()));
     }
 }

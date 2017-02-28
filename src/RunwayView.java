@@ -6,7 +6,7 @@ public abstract class RunwayView {
 
     //Stores different components of runway and where they end
     private HashMap<String, Integer> runwayEnds;
-    private int runwayLength;
+    int runwayLength;
 
     //start of runway
     final int START = 100;
@@ -15,8 +15,8 @@ public abstract class RunwayView {
     private int LDAStart;
 
     //for scaling
-    private int jpanelWidth;
-    private int jpanelHeight;
+    int jpanelWidth;
+    int jpanelHeight;
 
     //start of parts of runway
     private int start;
@@ -163,6 +163,6 @@ public abstract class RunwayView {
 
     //scales objects for JPanel
     int scalingHeight(int y){
-        return (int)((double)y/(double)RUNWAY_HEIGHT() * (double)jpanelHeight) - 2 * START;
+        return (int)((double)y/(double)200 * (double)jpanelHeight) - 2 * RUNWAY_Y();
     }
 }

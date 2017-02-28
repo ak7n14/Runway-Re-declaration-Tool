@@ -1,3 +1,5 @@
+import java.awt.*;
+
 //Initiate with runway values
 //call drawAll to display
 //call updateSideView + drawAll to display update
@@ -16,5 +18,10 @@ public class RunwaySideView extends RunwayView{
         super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, jpanelWidth, jpanelHeight);
     }
 
+    //draws runway
+    void drawRunway(Graphics g){
+        g.setColor(Color.black);
+        g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), RUNWAY_HEIGHT());
+    }
 
 }
