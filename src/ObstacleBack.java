@@ -1,11 +1,5 @@
-import com.sun.deploy.util.ArrayUtil;
-
-import java.awt.*;
-import java.util.Arrays;
-import java.util.Collections;
-
 public class ObstacleBack extends Obstacle{
-    
+
     //highest point of shape
     private int height;
     private String name;
