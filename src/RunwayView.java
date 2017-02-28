@@ -169,6 +169,7 @@ public abstract class RunwayView {
         return (int)((double)y/(double)runwayHeight * ((double)jpanelHeight - 2 * RUNWAY_Y()));
     }
 
+
     public void drawScaleX(Graphics g){
         g.setColor(Color.BLACK);
         g.fillRect(50,50, fiftyMeterX(), 2);

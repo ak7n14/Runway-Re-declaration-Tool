@@ -11,7 +11,7 @@ public class PaintTester extends JPanel {
         int[] x = {0, 100, 300, 100, 0};
         int[] y = {0, 0, 100, 200, 200};
 
-        rsw = new RunwaySideView(100, 0, 900, 300, 400, 300, 1000,1000, 400);
+        rsw = new RunwayTopView(100, 0, 900, 300, 400, 300, 1000, 500, "22R", 1000, 400);
         obs = new ObstacleBack("nuclear bomb mk2 v1.2.3 heavy armory edition", 200);
 
         obs.setSideX(x);
@@ -19,7 +19,7 @@ public class PaintTester extends JPanel {
         obs.setTopX(x);
         obs.setTopY(y);
 
-        obsView = new ObstacleView(obs, rsw);
+        obsView = new ObstacleView(obs, rsw, 100, 300);
         obsView.createShapes();
     }
 
@@ -38,7 +38,7 @@ public class PaintTester extends JPanel {
         super.paintComponent(g);
 
         rsw.drawAll(g);
-        obsView.drawShape(g, "side");
+        obsView.drawShape(g, "top");
     }
     //--------------------------
 
