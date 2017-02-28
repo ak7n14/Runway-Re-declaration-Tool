@@ -107,16 +107,12 @@ public class XMLImporter
                     {
                         topX[j] = Integer.parseInt(topXElement.getElementsByTagName("topX"+j).item(0).getTextContent());
                         topY[j] = Integer.parseInt(topYElement.getElementsByTagName("topY"+j).item(0).getTextContent());
-                        System.out.println(topXElement.getElementsByTagName("topX"+j).item(0).getTextContent());
-                        System.out.println(topYElement.getElementsByTagName("topY"+j).item(0).getTextContent());
                     }
 
                     for(int j = 0; j < noOfSide; j++)
                     {
                         sideX[j] = Integer.parseInt(sideXElement.getElementsByTagName("sideX"+j).item(0).getTextContent());
                         sideY[j] = Integer.parseInt(sideYElement.getElementsByTagName("sideY"+j).item(0).getTextContent());
-                        System.out.println(sideXElement.getElementsByTagName("sideX"+j).item(0).getTextContent());
-                        System.out.println(sideYElement.getElementsByTagName("sideY"+j).item(0).getTextContent());
                     }
 
                     ObstacleBack obstacle = new ObstacleBack();
@@ -138,6 +134,44 @@ public class XMLImporter
         return obstacles;
     }
 
+
+    public ArrayList<Plane> importPlanes()
+    {
+        ArrayList<Plane> planes = new ArrayList<>();
+
+        try
+        {
+            File planeFile = new File("Data/Planes.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            Document document = builder.parse(planeFile);
+            document.getDocumentElement().normalize();
+
+            NodeList planeList = document.getElementsByTagName("plane");
+
+            for(int i = 0; i < planeList.getLength(); i++)
+            {
+                Node planeNode = planeList.item(i);
+                String planeName = planeNode.getAttributes().getNamedItem("name").getTextContent();
+
+                if(planeNode.getNodeType() == Node.ELEMENT_NODE)
+                {
+                    Element element = (Element) planeNode;
+
+                    planes.add(new Plane(planeName, Integer.parseInt(element.getElementsByTagName("landingLength").item(0).getTextContent()),
+                                Integer.parseInt(element.getElementsByTagName("takeoffLength").item(0).getTextContent())));
+
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return planes;
+    }
 
     // Lazy way of getting an airport by passing a name to the method
     // It has to read the whole file to return one airport
