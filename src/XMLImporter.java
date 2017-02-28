@@ -190,5 +190,16 @@ public class XMLImporter
         return null;
     }
 
+    
+    public Plane getPlaneByName(String Name){
+    	ArrayList<Plane> planes = importPlanes();
 
+        for(Plane plane : planes)
+        {
+            if(plane.getName().equals(Name))
+                return plane;
+        }
+
+        return null;
+    }
 }
