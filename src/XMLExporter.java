@@ -9,12 +9,28 @@ import java.util.*;
 public class XMLExporter
 {
 
+    // save methods allow the user to save the data about Airports, Obstacles and Planes
+    // files are always backed up before being overwritten
     public void saveAirportData(ArrayList<Airport> airports)
     {
         backupFile("Airports");
         exportAiports("Airports", airports);
     }
 
+    public void saveObstacleData(ArrayList<ObstacleBack> obstacles)
+    {
+        backupFile("Obstacles");
+        exportObstacles("Obstacles", obstacles);
+    }
+
+    public void savePlaneData(ArrayList<Plane> planes)
+    {
+        backupFile("Planes");
+        exportPlanes("Planes", planes);
+    }
+
+    // This method allows the user to export a given ArrayList of Airports to an XML file
+    // with a given name
     public void exportAiports(String filename, ArrayList<Airport> airports)
     {
         try
@@ -50,6 +66,7 @@ public class XMLExporter
     }
 
 
+    //This method creates an airport node for XML
     private Node getAirport(Document document, String name, ArrayList<Runway> runwayList)
     {
         Element airportNode = document.createElement("airport");
@@ -65,32 +82,36 @@ public class XMLExporter
         return airportNode;
     }
 
+    // This method creates a runway node for XML
     private Node getRunway(Document document, String designator, int TORA, int TODA, int ASDA, int LDA, int thresholdDisplacement, int runwayLength, int runwayWidth, int stripLength, int stripWidth)
     {
         Element runway = document.createElement("runway");
 
-        runway.appendChild(getRunwayFields(document, runway, "designator", designator));
-        runway.appendChild(getRunwayFields(document, runway, "TORA", ""+TORA));
-        runway.appendChild(getRunwayFields(document, runway, "TODA", ""+TODA));
-        runway.appendChild(getRunwayFields(document, runway, "ASDA", ""+ASDA));
-        runway.appendChild(getRunwayFields(document, runway, "LDA", ""+LDA));
-        runway.appendChild(getRunwayFields(document, runway, "displacement", ""+thresholdDisplacement));
-        runway.appendChild(getRunwayFields(document, runway, "runwayLength", ""+runwayLength));
-        runway.appendChild(getRunwayFields(document, runway, "runwayWidth", ""+runwayWidth));
-        runway.appendChild(getRunwayFields(document, runway, "stripLength", ""+stripLength));
-        runway.appendChild(getRunwayFields(document, runway, "stripWidth", ""+stripWidth));
+        runway.appendChild(getRunwayFields(document, "designator", designator));
+        runway.appendChild(getRunwayFields(document, "TORA", ""+TORA));
+        runway.appendChild(getRunwayFields(document, "TODA", ""+TODA));
+        runway.appendChild(getRunwayFields(document, "ASDA", ""+ASDA));
+        runway.appendChild(getRunwayFields(document, "LDA", ""+LDA));
+        runway.appendChild(getRunwayFields(document, "displacement", ""+thresholdDisplacement));
+        runway.appendChild(getRunwayFields(document, "runwayLength", ""+runwayLength));
+        runway.appendChild(getRunwayFields(document, "runwayWidth", ""+runwayWidth));
+        runway.appendChild(getRunwayFields(document, "stripLength", ""+stripLength));
+        runway.appendChild(getRunwayFields(document, "stripWidth", ""+stripWidth));
 
         return runway;
     }
 
 
-    private Node getRunwayFields(Document document, Element element, String name, String value)
+    // This method returns Nodes with values using given node name and value
+    private Node getRunwayFields(Document document, String name, String value)
     {
         Element field = document.createElement(name);
         field.appendChild(document.createTextNode(value));
         return field;
     }
 
+    // This method allows the user to export a given ArrayList of ObstacleBack to an XML file
+    // with a given name
     public void exportObstacles(String filename, ArrayList<ObstacleBack> obstacles)
     {
         try
@@ -125,6 +146,7 @@ public class XMLExporter
         }
     }
 
+    // This method creates a node for Obstacle containing details of the given ObstacleBack
     private Node getObstacle(Document document, ObstacleBack obstacle)
     {
         Element obstacleNode = document.createElement("obstacle");
@@ -174,6 +196,8 @@ public class XMLExporter
         return obstacleNode;
     }
 
+    // This method allows the user to export a given ArrayList of Planes to an XML file
+    // with a given name
     public void exportPlanes(String filename, ArrayList<Plane> planes)
     {
         try
@@ -208,6 +232,7 @@ public class XMLExporter
         }
     }
 
+    // This method creates a node for Plane containing details of the given Plane
     private Node getPlane(Document document, Plane plane)
     {
         Element planeNode = document.createElement("plane");
@@ -225,6 +250,8 @@ public class XMLExporter
         return planeNode;
     }
 
+    // This method is used to back-up a named file by copying the file to a new file
+    // Back-up file is name in format "<filename>_backup.xml"
     public void backupFile(String filename)
     {
         try

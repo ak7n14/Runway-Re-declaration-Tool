@@ -53,7 +53,7 @@ public class XMLImporter
                         int stripLength = Integer.parseInt(element.getElementsByTagName("stripLength").item(0).getTextContent());
                         int stripWidth = Integer.parseInt(element.getElementsByTagName("stripWidth").item(0).getTextContent());
 
-                        runways.add(new Runway(designator, TODA, TODA, ASDA, LDA, displacement, runwayLength, runwayWidth, stripLength, stripWidth));
+                        runways.add(new Runway(designator, TORA, TODA, ASDA, LDA, displacement, runwayLength, runwayWidth, stripLength, stripWidth));
                     }
                 }
 
@@ -67,6 +67,8 @@ public class XMLImporter
         return airports;
     }
 
+    // method reads a default XML file containing obstacle data
+    // returns an ArrayList of ObstacleBack type
     public ArrayList<ObstacleBack> importObstacles()
     {
         ArrayList<ObstacleBack> obstacles = new ArrayList<ObstacleBack>();
@@ -136,6 +138,8 @@ public class XMLImporter
     }
 
 
+    // method reads a default XML file containing plane data
+    // returns an ArrayList of Plane type
     public ArrayList<Plane> importPlanes()
     {
         ArrayList<Plane> planes = new ArrayList<>();
@@ -191,12 +195,12 @@ public class XMLImporter
     }
 
     
-    public Plane getPlaneByName(String Name){
+    public Plane getPlaneByName(String name){
     	ArrayList<Plane> planes = importPlanes();
 
         for(Plane plane : planes)
         {
-            if(plane.getName().equals(Name))
+            if(plane.getName().equals(name))
                 return plane;
         }
 
