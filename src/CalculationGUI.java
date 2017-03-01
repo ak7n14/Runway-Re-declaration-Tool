@@ -21,7 +21,7 @@ public class CalculationGUI{
 		initFirstFrame();
 	    
 	}
-	
+	//Initialize the gUI
 	void initFirstFrame(){
 		window = new JFrame("Choose Airport");
 		window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE) ;

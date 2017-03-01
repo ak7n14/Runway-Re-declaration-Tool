@@ -40,7 +40,7 @@ public class CalculationMainScreen {
 		//Basic window Declarations
 		window = new JFrame(name);
 		window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE) ;
-	    window.setSize(1120,420);
+	    window.setSize(1160,420);
 	    panel = window.getContentPane();
 	    panel.setLayout(new GridLayout(3,1));
 	    panel.setLayout(new FlowLayout());
@@ -53,6 +53,7 @@ public class CalculationMainScreen {
 	    	runwayDrop.addItem(runway.getDesignator());
 	    }
 	    JPanel runwayPanel = new JPanel();
+	    runwayPanel.add(new JLabel("Choose Runway:"));
 	    runwayPanel.add(runwayDrop);
 	    frame.add(runwayPanel);//Adding runway to main frame
 	    
