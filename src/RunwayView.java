@@ -169,15 +169,30 @@ public abstract class RunwayView {
         return (int)((double)y/(double)runwayHeight * ((double)jpanelHeight - 2 * RUNWAY_Y()));
     }
 
-
+    //draw scales so user can get a feel of how big the runway and obstacles are
     public void drawScaleX(Graphics g){
+
+        //distance of 50 meters
         g.setColor(Color.BLACK);
-        g.fillRect(50,50, fiftyMeterX(), 2);
+        g.fillRect(53,50, fiftyMeterX(), 2);
+
+        //make it pretty
+        g.fillRect(53, 50, 2, -5);
+        g.fillRect(53 + fiftyMeterX(), 50, 2, -5);
+
+        //add label to show what scale is in
+        g.setFont(new Font("Arial", Font.BOLD, 11));
+        g.drawString("50 meters", 55, 65);
     }
 
     public void drawScaleY(Graphics g){
+        //distance of 50 meters
         g.setColor(Color.BLACK);
-        g.fillRect(50,50, 2, fiftyMeterY());
+        g.fillRect(50,53, 2, fiftyMeterY());
+
+        //make it pretty
+        g.fillRect(50, 53, -5, 2);
+        g.fillRect(50, 53 + fiftyMeterY(), -5, 2);
     }
 
     public abstract int fiftyMeterX();

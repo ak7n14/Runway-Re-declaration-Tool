@@ -8,8 +8,8 @@ public class PaintTester extends JPanel {
    private ObstacleView obsView;
 
     public PaintTester() {
-        int[] x = {0, 100, 300, 100, 0};
-        int[] y = {0, 0, 100, 200, 200};
+        int[] x = {0, 10, 30, 10, 0};
+        int[] y = {0, 0, 10, 20, 20};
 
         rsw = new RunwayTopView(100, 0, 900, 300, 400, 300, 1000, 500, "22R", 1000, 400);
         obs = new ObstacleBack("nuclear bomb mk2 v1.2.3 heavy armory edition", 200);
