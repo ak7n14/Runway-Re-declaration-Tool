@@ -24,6 +24,8 @@ public class PaintTester extends JPanel {
 
     private int[] obX;
     private int[] obY;
+    private int[] obSideX;
+    private int[] obSideY;
 
     ArrayList<JLabel> jLabels;
     ArrayList<JTextField> jTextFields;
@@ -102,10 +104,14 @@ public class PaintTester extends JPanel {
         jLabels.add(new JLabel("Offset X"));
         jLabels.add(new JLabel("Offset Y"));
         jLabels.add(new JLabel("Offset Z"));
-        jLabels.add(new JLabel("Coord 1 x,y"));
-        jLabels.add(new JLabel("Coord 2 x,y"));
-        jLabels.add(new JLabel("Coord 3 x,y"));
-        jLabels.add(new JLabel("Coord 4 x,y"));
+        jLabels.add(new JLabel("Coord top 1 x,y"));
+        jLabels.add(new JLabel("Coord top 2 x,y"));
+        jLabels.add(new JLabel("Coord top 3 x,y"));
+        jLabels.add(new JLabel("Coord top 4 x,y"));
+        jLabels.add(new JLabel("Coord side 1 x,y"));
+        jLabels.add(new JLabel("Coord side 2 x,y"));
+        jLabels.add(new JLabel("Coord side 3 x,y"));
+        jLabels.add(new JLabel("Coord side 4 x,y"));
         jLabels.add(new JLabel("Obstacle Height"));
 
         JButton jButton = new JButton("OK");
@@ -145,7 +151,17 @@ public class PaintTester extends JPanel {
             obY[2] = getCoord(11, "y");
             obY[3] = getCoord(12, "y");
 
-            obstacleHeight = getIntField(13);
+            obSideX[0] = getCoord(13, "x");
+            obSideX[1] = getCoord(14, "x");
+            obSideX[2] = getCoord(15, "x");
+            obSideX[3] = getCoord(16, "x");
+
+            obSideY[0] = getCoord(13, "y");
+            obSideY[1] = getCoord(14, "y");
+            obSideY[2] = getCoord(15, "y");
+            obSideY[3] = getCoord(16, "y");
+
+            obstacleHeight = getIntField(17);
 
             jFrame2.setSize(2000, 400);
             jFrame2.add(new PaintTester("side"));
