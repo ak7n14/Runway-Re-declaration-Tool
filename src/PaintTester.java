@@ -4,33 +4,14 @@ import java.util.ArrayList;
 
 public class PaintTester extends JPanel {
 
-   private RunwayView rsw;
-   private ObstacleBack obs;
-   private ObstacleView obsView;
-
-    private int LDAStart = 0;
-    private int start = 0;
-    private int TODALength = 0;
-    private int TORALength = 0;
-    private int ASDALength = 0;
-    private int LDALength = 0;
-    private int runwayLength = 0;
-    private String runwayNumber = "";
-    private int runwayHeight = 0;
-    private int offsetX = 0;
-    private int offsetY = 0;
-    private int offsetZ = 0;
-    private int obstacleHeight = 0;
-
-    private int[] obX;
-    private int[] obY;
-    private int[] obSideX;
-    private int[] obSideY;
+    private RunwayView rsw;
+    private ObstacleBack obs;
+    private ObstacleView obsView;
 
     ArrayList<JLabel> jLabels;
     ArrayList<JTextField> jTextFields;
 
-    public PaintTester(String type) {
+    public PaintTester(String type, int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int runwayHeight, String runwayNumber, int offsetX, int offsetY, int offsetZ, int[] obX, int[] obY, int[] obSideX, int[] obSideY, int obstacleHeight) {
 
         jLabels = new ArrayList<>();
         jTextFields = new ArrayList<>();
@@ -57,12 +38,15 @@ public class PaintTester extends JPanel {
             rsw = new RunwaySideView(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, 1000, 400);
         }
 
+
         //creates obstacle
         if(type.equals("side")||type.equals("top")){
+            obs = new ObstacleBack("nuclear bomb", obstacleHeight);
+
             obs.setSideX(obSideX);
             obs.setSideY(obSideY);
             obs.setTopX(obX);
-            obs.setTopX(obX);
+            obs.setTopY(obY);
 
             obsView = new ObstacleView(obs, rsw, type, offsetX, offsetY, offsetZ);
             obsView.createShapes();
@@ -72,21 +56,17 @@ public class PaintTester extends JPanel {
     //for testing only
     //----------------------
     public static void main(String[] args) {
-        PaintTester pt = new PaintTester("null");
-        JFrame jframe = new JFrame();
-        jframe.setSize(1000, 400);
+        PaintTester pt = new PaintTester("null", 0, 0,0, 0,0,0,0,0,"",0,0,0,null,null,null, null, 0);
 
         pt.GUI();
-
-        jframe.add(pt);
-        jframe.setVisible(true);
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        rsw.drawAll(g);
-        obsView.drawShape(g);
+        if(rsw != null) {
+            rsw.drawAll(g);
+            obsView.drawShape(g);
+        }
     }
     //--------------------------
 
@@ -104,14 +84,8 @@ public class PaintTester extends JPanel {
         jLabels.add(new JLabel("Offset X"));
         jLabels.add(new JLabel("Offset Y"));
         jLabels.add(new JLabel("Offset Z"));
-        jLabels.add(new JLabel("Coord top 1 x,y"));
-        jLabels.add(new JLabel("Coord top 2 x,y"));
-        jLabels.add(new JLabel("Coord top 3 x,y"));
-        jLabels.add(new JLabel("Coord top 4 x,y"));
-        jLabels.add(new JLabel("Coord side 1 x,y"));
-        jLabels.add(new JLabel("Coord side 2 x,y"));
-        jLabels.add(new JLabel("Coord side 3 x,y"));
-        jLabels.add(new JLabel("Coord side 4 x,y"));
+        jLabels.add(new JLabel("Coord top x,z;x2,z2;...;xn,zn"));
+        jLabels.add(new JLabel("Coord side x,y;x2,y2;...;xn,yn"));
         jLabels.add(new JLabel("Obstacle Height"));
 
         JButton jButton = new JButton("OK");
@@ -131,41 +105,40 @@ public class PaintTester extends JPanel {
             JFrame jFrame2 = new JFrame();
             jFrame2.setLayout(new GridLayout(1,2));
 
-            LDAStart = getIntField(0);
-            start = getIntField(1);
-            TODALength = getIntField(2);
-            TORALength = getIntField(3);
-            ASDALength = getIntField(4);
-            LDALength = getIntField(5);
-            runwayLength = getIntField(6);
-            runwayHeight = getIntField(7);
-            runwayNumber = getField(8);
+            int LDAStart = getIntField(0);
+            int start = getIntField(1);
+            int TODALength = getIntField(2);
+            int TORALength = getIntField(3);
+            int ASDALength = getIntField(4);
+            int LDALength = getIntField(5);
+            int runwayLength = getIntField(6);
+            int runwayHeight = getIntField(7);
+            String runwayNumber = getField(8);
 
-            obX[0] = getCoord(9, "x");
-            obX[1] = getCoord(10, "x");
-            obX[2] = getCoord(11, "x");
-            obX[3] = getCoord(12, "x");
+            int offsetX = getIntField(9);
+            int offsetY = getIntField(10);
+            int offsetZ = getIntField(11);
 
-            obY[0] = getCoord(9, "y");
-            obY[1] = getCoord(10, "y");
-            obY[2] = getCoord(11, "y");
-            obY[3] = getCoord(12, "y");
+            int[] obX = new int[4];
+            int[] obY = new int[4];
+            int[] obSideX = new int[4];
+            int[] obSideY = new int[4];
 
-            obSideX[0] = getCoord(13, "x");
-            obSideX[1] = getCoord(14, "x");
-            obSideX[2] = getCoord(15, "x");
-            obSideX[3] = getCoord(16, "x");
 
-            obSideY[0] = getCoord(13, "y");
-            obSideY[1] = getCoord(14, "y");
-            obSideY[2] = getCoord(15, "y");
-            obSideY[3] = getCoord(16, "y");
+            obX = getCoord(12, "x");
 
-            obstacleHeight = getIntField(17);
+            obY = getCoord(12, "y");
+
+
+            obSideX = getCoord(13, "x");
+
+            obSideY = getCoord(13, "y");
+
+            int obstacleHeight = getIntField(14);
 
             jFrame2.setSize(2000, 400);
-            jFrame2.add(new PaintTester("side"));
-            jFrame2.add(new PaintTester("top"));
+            jFrame2.add(new PaintTester("side", LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, runwayHeight, runwayNumber, offsetX, offsetY, offsetZ, obX, obY, obSideX, obSideY, obstacleHeight));
+            jFrame2.add(new PaintTester("top", LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, runwayHeight, runwayNumber, offsetX, offsetY, offsetZ, obX, obY, obSideX, obSideY, obstacleHeight));
             jFrame2.setVisible(true);
         });
 
@@ -185,11 +158,21 @@ public class PaintTester extends JPanel {
     }
 
     //get coords
-    public int getCoord(int loc, String xOrY){
-        if(xOrY.equals("x")){
-            return Integer.parseInt(getField(loc).substring(0,1));
-        } else{
-            return Integer.parseInt(getField(loc).substring(2));
+    public int[] getCoord(int loc, String xOrY){
+        //loops through all coords
+        String[] split = getField(loc).split(";");
+        int[] coords = new int[split.length];
+        for(int i = 0; i < split.length; i++) {
+            //gets x and y
+            String[] xy = split[i].split(",");
+
+            if (xOrY.equals("x")) {
+                coords[i] = Integer.parseInt(xy[0]);
+            } else {
+                coords[i] = Integer.parseInt(xy[1]);
+            }
         }
+
+        return coords;
     }
 }

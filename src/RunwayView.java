@@ -72,7 +72,7 @@ public abstract class RunwayView {
     }
 
     //draws a seperator to see ends of different strip components
-    private void drawSeparator(Graphics g, int x){
+    private void drawSeparator(Graphics g, int x, int start){
         //x is where the runway component ends
         //height is altered so separator is visible
         g.setColor(Color.RED);
@@ -81,15 +81,19 @@ public abstract class RunwayView {
 
     //loops through hashmap and displays seperators
     void drawAllSeparators(Graphics g){
-
         //draws end separators
         for(String key : runwayEnds.keySet()){
-            this.drawSeparator(g, runwayEnds.get(key));
+            if(!key.equals("LDA")) {
+                this.drawSeparator(g, runwayEnds.get(key), start);
+            }
+            else {
+                this.drawSeparator(g, runwayEnds.get(key), LDAStart);
+            }
         }
 
         //draw START separators
-        this.drawSeparator(g, start);
-        this.drawSeparator(g, LDAStart);
+        this.drawSeparator(g, start, 0);
+        this.drawSeparator(g, LDAStart, 0);
     }
 
     //draws labels and handles overlapping
