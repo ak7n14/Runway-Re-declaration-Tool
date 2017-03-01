@@ -59,8 +59,8 @@ public class PaintTester extends JPanel {
 
         //creates obstacle
         if(type.equals("side")||type.equals("top")){
-            obs.setSideX(obX);
-            obs.setSideY(obY);
+            obs.setSideX(obSideX);
+            obs.setSideY(obSideY);
             obs.setTopX(obX);
             obs.setTopX(obX);
 
