@@ -70,8 +70,17 @@ public class RunwayTopView extends RunwayView{
         //makes text vertical facing towards left edge of runway
         g2.rotate(-Math.PI);
 
-        //calculates number on otherside of runway
-        String reverseNumber = String.valueOf(36 - Integer.parseInt(runwayNumber.substring(0,2)));
+        int reverseIntNumber = 36 - Integer.parseInt(runwayNumber.substring(0,2));
+        String reverseNumber;
+
+        //adds a 0 to the front of numbers less than 10
+        if(reverseIntNumber < 10) {
+            //calculates number on otherside of runway
+            reverseNumber = "0" + String.valueOf(reverseIntNumber);
+        }
+        else {
+            reverseNumber = String.valueOf(reverseIntNumber);
+        }
 
         //gets runway letter
         String runwayLetter;

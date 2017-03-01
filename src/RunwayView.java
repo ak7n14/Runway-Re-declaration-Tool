@@ -129,7 +129,6 @@ public abstract class RunwayView {
 
                 //gets respective key value
                 String key = (String)stringData.keySet().toArray()[i];
-                System.out.println(key);
                 //doesn't move out of the way of itself
                 if (!key.equals(currentKey)){
 
