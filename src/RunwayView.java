@@ -1,5 +1,7 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 public abstract class RunwayView {
@@ -123,8 +125,11 @@ public abstract class RunwayView {
             int currentX = currentPoint.x;
 
             //loop through all strings
-            for(String key : stringData.keySet()) {
+            for(int i = 0; i < stringData.size(); i++) {
 
+                //gets respective key value
+                String key = (String)stringData.keySet().toArray()[i];
+                System.out.println(key);
                 //doesn't move out of the way of itself
                 if (!key.equals(currentKey)){
 
@@ -133,7 +138,9 @@ public abstract class RunwayView {
 
                     //changes y position if overlap in x direction and only changes if they are both on the same y level
                     if (currentX >= otherPoint.x && currentX <= otherPoint.x + stringWidth && currentY == otherPoint.y) {
-                        stringData.put(currentKey, new Point(currentX, currentY + 10)); //move item down
+                        stringData.put(currentKey, new Point(currentX, currentY += 10)); //move item down
+                        //reset and check all again
+                        i = -1;
                     }
                 }
             }
