@@ -76,7 +76,7 @@ public abstract class RunwayView {
         //x is where the runway component ends
         //height is altered so separator is visible
         g.setColor(Color.RED);
-        g.fillRect(this.scaling(x) + START, RUNWAY_Y(), 2, this.scalingHeight(runwayHeight) + SEPARATOR_HEIGHT);
+        g.fillRect(this.scaling(x) + START + this.scaling(start), RUNWAY_Y(), 2, this.scalingHeight(runwayHeight) + SEPARATOR_HEIGHT);
     }
 
     //loops through hashmap and displays seperators
@@ -149,7 +149,12 @@ public abstract class RunwayView {
         int stringY = RUNWAY_Y() + this.scalingHeight(runwayHeight) + 20; //START of string (y)
 
         for(String key : keys){
-            int stringX = this.scaling(runwayEnds.get(key)) + START; //START of string (x)
+            int stringX;
+            if(key.equals("LDA")) {
+                stringX = this.scaling(runwayEnds.get(key)) + START + this.scaling(LDAStart); //START of string (x)
+            } else {
+                stringX = this.scaling(runwayEnds.get(key)) + START + this.scaling(start); //START of string (x)
+            }
 
             //creates relations between string and its dimensions
             stringData.put(key, new Point(stringX, stringY));
