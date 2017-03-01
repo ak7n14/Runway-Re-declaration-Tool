@@ -47,11 +47,23 @@ public class PaintTester extends JPanel {
 //        obsView = new ObstacleView(obs, rsw, "top", 100, 0, 300);
 //        obsView.createShapes();
 
+        //creates runway
         if(type.equals("top")) {
             rsw = new RunwayTopView(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, runwayHeight, runwayNumber, 1000, 400);
         }
         else if(type.equals("side")){
             rsw = new RunwaySideView(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, 1000, 400);
+        }
+
+        //creates obstacle
+        if(type.equals("side")||type.equals("top")){
+            obs.setSideX(obX);
+            obs.setSideY(obY);
+            obs.setTopX(obX);
+            obs.setTopX(obX);
+
+            obsView = new ObstacleView(obs, rsw, type, offsetX, offsetY, offsetZ);
+            obsView.createShapes();
         }
     }
 
@@ -146,14 +158,17 @@ public class PaintTester extends JPanel {
         jFrame.setVisible(true);
     }
 
+    //get text from textbox
     public String getField(int loc){
         return jTextFields.get(loc).getText();
     }
 
+    //get int value of field
     public int getIntField(int loc){
         return Integer.parseInt(getField(loc));
     }
 
+    //get coords
     public int getCoord(int loc, String xOrY){
         if(xOrY.equals("x")){
             return Integer.parseInt(getField(loc).substring(0,1));
