@@ -16,7 +16,7 @@ public class RunwaySideView extends RunwayView{
     }
 
     //draws runway
-    void drawRunway(Graphics g){
+    public void drawRunway(Graphics g){
         g.setColor(Color.black);
         g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), runwayHeight);
     }
@@ -34,7 +34,7 @@ public class RunwaySideView extends RunwayView{
     }
 
     //overides RunwayView so no scaling occurs
-    int scalingHeight(int y){
+    public int scalingHeight(int y){
         return y;
     }
 }
