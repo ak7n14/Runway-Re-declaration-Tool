@@ -8,7 +8,6 @@ public class RunwaySideView extends RunwayView{
     //Positioning of graphic elements
     @Override
     protected int RUNWAY_Y() { return 300; }
-    private ObstacleView ov;
     //initial y position and height are constants for
 
     //defines size of runway
@@ -24,15 +23,13 @@ public class RunwaySideView extends RunwayView{
 
     //draws rectangles to show scale 50 meter by 50 meter
     @Override
-    public int fiftyMeterX() {
+    public int MeterX() {
         return this.scaling(50);
     }
 
-    public void setObstacle(ObstacleView ov){
-        this.ov = ov;
-    }
-
-    public int fiftyMeterY() {
+    public int MeterY() {
+        if(ov.getOb().getHeight() < 50)
+            return this.RUNWAY_Y() - ov.scalingSideHeight(10, 0);
         return this.RUNWAY_Y() - ov.scalingSideHeight(50, 0);
     }
 

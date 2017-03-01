@@ -13,22 +13,29 @@ public class ObstacleView extends Obstacle{
 
     //for object positioning
     private int offsetX;
-    private int offsetTopY;
-    private  int offsetSideY;
+    private int offsetZ;
+    private  int offsetY;
 
-    public ObstacleView(ObstacleBack ob, RunwayView rv, int offsetX, int offsetY) {
+    private String runwayType;
+
+    public ObstacleView(ObstacleBack ob, RunwayView rv, String runwayType, int offsetX, int offsetY, int offsetZ) {
         super();
 
         this.ob = ob;
         //runway for scaling
         currentRunway = rv;
 
+        this.runwayType = runwayType;
+
+        //associate an object
+        currentRunway.setObstacle(this);
+
         //scales offset so they relate to the runway in meters
         this.offsetX = scaling(offsetX, 0);
-        this.offsetTopY = scalingHeight(offsetY, 0);
+        this.offsetZ = scalingHeight(offsetZ, 0);
 
-        //
-        this.offsetSideY = scalingSideHeight(offsetY, 0) - currentRunway.RUNWAY_Y();
+        //subtracts runway to invert direction of axis (so it offsets upwards
+        this.offsetY = scalingSideHeight(offsetY, 0) - currentRunway.RUNWAY_Y();
 
         //scales for runway
         setSideX(ob.sideViewX);
@@ -39,13 +46,12 @@ public class ObstacleView extends Obstacle{
     }
 
     //draws polygon (either side or top)
-    public void drawShape(Graphics g, String sideOrTop){
+    public void drawShape(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
 
-        if(sideOrTop.equals("side")) {
+        if(runwayType.equals("side")) {
             //scales image based on object before displaying
             RunwaySideView rsw = (RunwaySideView) currentRunway;
-            rsw.setObstacle(this);
             rsw.drawScaleY(g);
 
             g2.setColor(Color.RED);
@@ -62,7 +68,7 @@ public class ObstacleView extends Obstacle{
     public void setSideY(int... ys){
         sideViewY = new int[ys.length];
         for(int i = 0; i < ys.length; i++){
-            sideViewY[i] = scalingSideHeight(ys[i], offsetSideY);
+            sideViewY[i] = scalingSideHeight(ys[i], offsetY);
         }
     }
 
@@ -77,7 +83,7 @@ public class ObstacleView extends Obstacle{
     public void setTopY(int... ys){
         topViewY = new int[ys.length];
         for(int i = 0; i < ys.length; i++){
-            topViewY[i] = scalingHeight(ys[i], offsetTopY) + currentRunway.RUNWAY_Y();
+            topViewY[i] = scalingHeight(ys[i], offsetZ) + currentRunway.RUNWAY_Y();
         }
     }
     public void setTopX(int... xs){
@@ -140,5 +146,9 @@ public class ObstacleView extends Obstacle{
         setSideY(ob.sideViewY);
         setTopX(ob.topViewX);
         setTopY(ob.topViewY);
+    }
+
+    public ObstacleBack getOb() {
+        return ob;
     }
 }

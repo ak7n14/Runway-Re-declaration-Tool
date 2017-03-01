@@ -21,6 +21,7 @@ public abstract class RunwayView {
     //start of parts of runway
     private int start;
 
+    ObstacleView ov;
 
     //initial y position and height of runway
     protected abstract int RUNWAY_Y();
@@ -174,27 +175,40 @@ public abstract class RunwayView {
 
         //distance of 50 meters
         g.setColor(Color.BLACK);
-        g.fillRect(53,50, fiftyMeterX(), 2);
+        g.fillRect(23,20, MeterX(), 2);
 
         //make it pretty
-        g.fillRect(53, 50, 2, -5);
-        g.fillRect(53 + fiftyMeterX(), 50, 2, -5);
+        g.fillRect(23, 15, 2, 5);
+        g.fillRect(23 + MeterX(), 15, 2, 5);
 
         //add label to show what scale is in
         g.setFont(new Font("Arial", Font.BOLD, 11));
-        g.drawString("50 meters", 55, 65);
+
+        //meter labels change dynamically based on scale
+        if(ov.getOb().getHeight() < 50 && this instanceof RunwaySideView){
+            g.drawString("10 meters", 25, (45 + MeterY())/2);
+            g.drawString("50 meters", (35 + MeterX())/2, 35);
+        }
+        else {
+            g.drawString("50 meters", 25, 35);
+        }
     }
 
     public void drawScaleY(Graphics g){
         //distance of 50 meters
         g.setColor(Color.BLACK);
-        g.fillRect(50,53, 2, fiftyMeterY());
+        g.fillRect(20, 23, 2, MeterY());
 
         //make it pretty
-        g.fillRect(50, 53, -5, 2);
-        g.fillRect(50, 53 + fiftyMeterY(), -5, 2);
+        g.fillRect(15, 23, 5, 2);
+        g.fillRect(15, 23 + MeterY(), 5, 2);
     }
 
-    public abstract int fiftyMeterX();
-    public abstract int fiftyMeterY();
+    public void setObstacle(ObstacleView ov){
+        this.ov = ov;
+    }
+
+    //used for scale display
+    public abstract int MeterX();
+    public abstract int MeterY();
 }
