@@ -66,17 +66,8 @@ public abstract class RunwayView {
         this.drawScaleX(g);
     }
 
-    //draws runway, seperators and labels
-    public void drawAllInitial(Graphics g){
-        this.drawRunway(g);
-        this.drawAllSeparators(g);
-        //draws separator labels
-        this.drawLabels(g);
-        this.drawScaleX(g);
-    }
-
     //draws runway
-    void drawRunway(Graphics g){
+    public void drawRunway(Graphics g){
         g.setColor(Color.black);
         g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), this.scalingHeight(runwayHeight));
     }
@@ -107,7 +98,7 @@ public abstract class RunwayView {
     }
 
     //draws labels and handles overlapping
-    void drawLabels(Graphics g){
+    public void drawLabels(Graphics g){
         g.setColor(Color.RED);
         //string data of runwayEnd labels
         HashMap<String, Point> stringData = this.calculateStringDimensions(runwayEnds.keySet());
@@ -179,17 +170,17 @@ public abstract class RunwayView {
         return stringData;
     }
 
-    int getRunwayLength() {
+    public int getRunwayLength() {
         return runwayLength;
     }
 
     //scales objects for JPanel in x direction proportional to runway length
-    int scaling(int x){
+    public int scaling(int x){
         return (int)((double)x/(double)runwayLength * ((double)jpanelWidth - 2 * START));
     }
 
     //scales objects for JPanel in y direction proportional to height of runway
-    int scalingHeight(int y){
+    public int scalingHeight(int y){
         return (int)((double)y/(double)runwayHeight * ((double)jpanelHeight - 2 * RUNWAY_Y()));
     }
 

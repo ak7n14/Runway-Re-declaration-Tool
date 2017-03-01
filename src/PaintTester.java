@@ -11,6 +11,10 @@ public class PaintTester extends JPanel {
     ArrayList<JLabel> jLabels;
     ArrayList<JTextField> jTextFields;
 
+    public PaintTester(){
+        this("null", 0, 0,0, 0,0,0,0,0,"",0,0,0,null,null,null, null, 0);
+    }
+
     public PaintTester(String type, int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int runwayHeight, String runwayNumber, int offsetX, int offsetY, int offsetZ, int[] obX, int[] obY, int[] obSideX, int[] obSideY, int obstacleHeight) {
 
         jLabels = new ArrayList<>();
@@ -55,10 +59,6 @@ public class PaintTester extends JPanel {
 
     //for testing only
     //----------------------
-    public static void main(String[] args) {
-        PaintTester pt = new PaintTester("null", 0, 0,0, 0,0,0,0,0,"",0,0,0,null,null,null, null, 0);
-        pt.GUI();
-    }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -72,6 +72,8 @@ public class PaintTester extends JPanel {
 
     public void GUI(){
         JFrame jFrame = new JFrame();
+
+        //create labels
         jLabels.add(new JLabel("LDAStart"));
         jLabels.add(new JLabel("Start"));
         jLabels.add(new JLabel("TODA Length"));
@@ -102,6 +104,7 @@ public class PaintTester extends JPanel {
 
         //set data on submit
         jButton.addActionListener(e -> {
+            //on button click
             JFrame jFrame2 = new JFrame();
             jFrame2.setLayout(new GridLayout(1,2));
 
@@ -136,12 +139,14 @@ public class PaintTester extends JPanel {
 
             int obstacleHeight = getIntField(14);
 
+            //add visuals to frame
             jFrame2.setSize(2000, 400);
             jFrame2.add(new PaintTester("side", LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, runwayHeight, runwayNumber, offsetX, offsetY, offsetZ, obX, obY, obSideX, obSideY, obstacleHeight));
             jFrame2.add(new PaintTester("top", LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, runwayHeight, runwayNumber, offsetX, offsetY, offsetZ, obX, obY, obSideX, obSideY, obstacleHeight));
             jFrame2.setVisible(true);
         });
 
+        jFrame.setLocation(0,500); //position on screen
         jFrame.setSize(1000, 400);
         jFrame.setLayout(new FlowLayout());
         jFrame.setVisible(true);
