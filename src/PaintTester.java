@@ -57,7 +57,6 @@ public class PaintTester extends JPanel {
     //----------------------
     public static void main(String[] args) {
         PaintTester pt = new PaintTester("null", 0, 0,0, 0,0,0,0,0,"",0,0,0,null,null,null, null, 0);
-
         pt.GUI();
     }
 
@@ -66,6 +65,7 @@ public class PaintTester extends JPanel {
         if(rsw != null) {
             rsw.drawAll(g);
             obsView.drawShape(g);
+            rsw.drawAllSeparators(g);
         }
     }
     //--------------------------
@@ -119,10 +119,10 @@ public class PaintTester extends JPanel {
             int offsetY = getIntField(10);
             int offsetZ = getIntField(11);
 
-            int[] obX = new int[4];
-            int[] obY = new int[4];
-            int[] obSideX = new int[4];
-            int[] obSideY = new int[4];
+            int[] obX;
+            int[] obY;
+            int[] obSideX;
+            int[] obSideY;
 
 
             obX = getCoord(12, "x");

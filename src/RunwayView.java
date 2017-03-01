@@ -61,6 +61,14 @@ public abstract class RunwayView {
     //draws runway, seperators and labels
     public void drawAll(Graphics g){
         this.drawRunway(g);
+        //draws separator labels
+        this.drawLabels(g);
+        this.drawScaleX(g);
+    }
+
+    //draws runway, seperators and labels
+    public void drawAllInitial(Graphics g){
+        this.drawRunway(g);
         this.drawAllSeparators(g);
         //draws separator labels
         this.drawLabels(g);
@@ -77,12 +85,12 @@ public abstract class RunwayView {
     private void drawSeparator(Graphics g, int x, int start){
         //x is where the runway component ends
         //height is altered so separator is visible
-        g.setColor(Color.RED);
+        g.setColor(Color.CYAN);
         g.fillRect(this.scaling(x) + START + this.scaling(start), RUNWAY_Y(), 2, this.scalingHeight(runwayHeight) + SEPARATOR_HEIGHT);
     }
 
     //loops through hashmap and displays seperators
-    void drawAllSeparators(Graphics g){
+    public void drawAllSeparators(Graphics g){
         //draws end separators
         for(String key : runwayEnds.keySet()){
             if(!key.equals("LDA")) {
@@ -100,7 +108,7 @@ public abstract class RunwayView {
 
     //draws labels and handles overlapping
     void drawLabels(Graphics g){
-
+        g.setColor(Color.RED);
         //string data of runwayEnd labels
         HashMap<String, Point> stringData = this.calculateStringDimensions(runwayEnds.keySet());
 

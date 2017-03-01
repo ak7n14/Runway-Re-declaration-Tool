@@ -61,6 +61,7 @@ public class ObstacleView extends Obstacle{
             g2.setColor(Color.RED);
             g2.fill(shapeTop);
         }
+
     }
 
     //set coords with variable number of points for side view
