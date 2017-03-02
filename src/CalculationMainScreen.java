@@ -26,11 +26,17 @@ public class CalculationMainScreen {
 	Airport airport;
 	JPanel calculationPanel;
 	Plane plane;
+	int changedResa;
+	int changedEng;
+	int tol;
 	public CalculationMainScreen(Airport airport,Plane plane){
 		this.airport = airport;//Selected airport from the 1st screen
 	    init(airport.getName());//Initialize GUI
 	    calculationPanel = new JPanel();
 	    this.plane=plane;
+	    this.changedResa=240;
+	    this.changedEng=300;
+	    this.tol=100;
 	}
 	
 	//Initialise gui
@@ -40,7 +46,7 @@ public class CalculationMainScreen {
 		//Basic window Declarations
 		window = new JFrame(name);
 		window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE) ;
-	    window.setSize(1160,420);
+	    window.setSize(1250,420);
 	    panel = window.getContentPane();
 	    panel.setLayout(new GridLayout(3,1));
 	    panel.setLayout(new FlowLayout());
@@ -108,14 +114,18 @@ public class CalculationMainScreen {
 	    
 	    //buttons for submitting
 	   JPanel Buttonpanel = new JPanel();
+	   Buttonpanel.setLayout(new GridLayout(2,1));
 	   JButton calculate = new JButton("Calculate");
+	   JButton settings = new JButton("Change Default Vaules");
 	   Buttonpanel.add(calculate);
+	   Buttonpanel.add(settings);
 	   frame.add(Buttonpanel);
 	   panel.add(frame);
 	   window.setVisible(true);
 	   
 
-	   calculate.addActionListener(new CalculateListener(runwayDrop,objHeight,objLoc,landing,towards,airport,objLocCentreLine));
+	   calculate.addActionListener(new CalculateListener(runwayDrop,objHeight,objLoc,landing,towards,airport,objLocCentreLine,changedResa,changedEng));
+	   settings.addActionListener(new SettingsListener());
 	}
 	
 	//Adding labels to the screen when object is too far from the center line
@@ -195,7 +205,7 @@ public class CalculationMainScreen {
 		   calculationPanel.add(new JLabel(String.format("= %d meters",calc.getReLda())));
 		 
 		   //Updating color of the panel depending on if the runway distance is sufficient or not
-		   if(calc.getReLda()>plane.getMinLandingDis()+100){
+		   if(calc.getReLda()>plane.getMinLandingDis()+tol){
 			   calculationPanel.setBackground(Color.GREEN);
 		   }
 		   else if(calc.getReLda()<plane.getMinLandingDis()){
@@ -230,7 +240,7 @@ public class CalculationMainScreen {
 		calculationPanel.add(new JLabel(String.format("= %d meters",calc.getReLda())));
 		
 		//Changing color of the panel according to the condition(If runway is sufficient)
-		if(calc.getReLda()>plane.getMinLandingDis()+100){
+		if(calc.getReLda()>plane.getMinLandingDis()+tol){
 			   calculationPanel.setBackground(Color.GREEN);
 		   }
 		   else if(calc.getReLda()<plane.getMinLandingDis()){
@@ -270,9 +280,9 @@ public class CalculationMainScreen {
 		calculationPanel.add(new JLabel(String.format("= %d meters",calc.getReTORA())));
 		
 		//Changing color of the panel according to the condition(If runway is sufficient)
-		if(calc.getReTORA()>plane.getMinTakeoffDis()+100 
-				&& calc.getReTODA()>plane.getMinTakeoffDis()+100 
-				&& calc.getReASDA()>plane.getMinTakeoffDis()+100 ){
+		if(calc.getReTORA()>plane.getMinTakeoffDis()+tol 
+				&& calc.getReTODA()>plane.getMinTakeoffDis()+tol 
+				&& calc.getReASDA()>plane.getMinTakeoffDis()+tol ){
 			   calculationPanel.setBackground(Color.GREEN);
 		   }
 		   else if(calc.getReTORA()<plane.getMinTakeoffDis()
@@ -329,9 +339,9 @@ public class CalculationMainScreen {
 		
 		
 		//Changing color of the panel according to the condition(If runway is sufficient)
-		if(calc.getReTORA()>plane.getMinTakeoffDis()+100 
-				&& calc.getReTODA()>plane.getMinTakeoffDis()+100 
-				&& calc.getReASDA()>plane.getMinTakeoffDis()+100 ){
+		if(calc.getReTORA()>plane.getMinTakeoffDis()+tol 
+				&& calc.getReTODA()>plane.getMinTakeoffDis()+tol 
+				&& calc.getReASDA()>plane.getMinTakeoffDis()+tol ){
 			   calculationPanel.setBackground(Color.GREEN);
 		   }
 		   else if(calc.getReTORA()<plane.getMinTakeoffDis()
@@ -351,6 +361,103 @@ public class CalculationMainScreen {
 		
 	}
 	
+	
+	public void setChangedResa(int changedResa) {
+		this.changedResa = changedResa;
+	}
+	
+	
+	public void setChangedEng(int changedEng) {
+		this.changedEng = changedEng;
+	}
+	
+	
+	public void setTol(int tol) {
+		this.tol = tol;
+	}
+	
+	
+	public int getChangedResa() {
+		return changedResa;
+	}
+	
+	public int getChangedEng() {
+		return changedEng;
+	}
+	
+	public int getTol() {
+		return tol;
+	}
+	
+	
+	class SettingsGUI{
+		Container panel;
+		JFrame window;
+		JPanel frame;
+		JPanel change;
+		JPanel text;
+		
+		public void init3(){
+			window = new JFrame("Change Preferences");
+			window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE) ;
+		    window.setSize(300,200);
+		    panel = window.getContentPane();
+		    panel.setLayout(new FlowLayout());
+		    frame = new JPanel();//main frame
+		    frame.setLayout(new FlowLayout());//layout of main frame
+		    panel.add(frame);
+		    text = new JPanel();
+		    text.setLayout(new GridLayout(3,2));
+		    text.add(new JLabel("RESA:"));
+		    JTextField resa = new JTextField(String.valueOf(getChangedResa()));
+		    text.add(resa);
+		    text.add(new JLabel("Engine Blast Allowence"));
+		    JTextField eng = new JTextField(String.valueOf(getChangedEng()));
+		    text.add(eng);
+		    text.add(new JLabel("Tolerance:"));
+		    JTextField tol = new JTextField(String.valueOf(getTol()));
+		    text.add(tol);
+		    panel.add(text);
+		    change = new JPanel();
+		    change.setLayout(new GridLayout(2,1));
+		    JButton submit = new JButton("Change");
+		    submit.addActionListener(new SubListener(Integer.parseInt(resa.getText()),Integer.parseInt(eng.getText()),Integer.parseInt(tol.getText()),window));
+		    change.add(submit);
+		    change.add(new JLabel("All values autotyped are default"));
+		    panel.add(change);
+		    window.setVisible(true);
+		}
+	}
+	class SubListener implements ActionListener{
+
+		int RESA;
+		int Eng;
+		int tol;
+		JFrame window2;
+		public SubListener(int resa,int eng,int Tol,JFrame window2){
+			this.RESA=resa;
+			this.Eng = eng;
+			this.tol=Tol;
+			this.window2=window2;
+		}
+		public void actionPerformed(ActionEvent e) {
+			setChangedEng(Eng);
+			setChangedResa(RESA);
+			setTol(tol);
+			window2.setVisible(false);
+		}
+		
+	}
+	class SettingsListener implements ActionListener{
+		
+		
+		public void actionPerformed(ActionEvent e) {
+			SettingsGUI temp = new SettingsGUI();
+			temp.init3();
+		}
+		
+	}
+	
 	//Listener for the calculate button
 	class CalculateListener implements ActionListener{
 
@@ -364,10 +471,11 @@ public class CalculationMainScreen {
 		Airport airport;
 		int obsLocCentreLine;
 		JTextField temp;
-		
+		int RESA;
+		int Eng;
 		
 		//Default constructions for initializations
-		public CalculateListener(JComboBox runwayDrop,JTextField objHeight,JTextField objLoc,JRadioButton landing,JRadioButton towards,Airport airport,JTextField obsLocCentreLine){	
+		public CalculateListener(JComboBox runwayDrop,JTextField objHeight,JTextField objLoc,JRadioButton landing,JRadioButton towards,Airport airport,JTextField obsLocCentreLine,int RESA,int Eng){	
 			this.runwayDrop=runwayDrop;
 			runwayDrop.setSelectedIndex(-1);
 			this.objHeight = objHeight;
@@ -376,6 +484,8 @@ public class CalculationMainScreen {
 			this.direction=towards;
 			this.airport=airport;
 			temp= obsLocCentreLine;
+			this.RESA=RESA;
+			this.Eng= Eng;
 			
 		}
 		
@@ -383,7 +493,7 @@ public class CalculationMainScreen {
 		public void actionPerformed(ActionEvent e) {
 			obsLocCentreLine = Integer.parseInt(temp.getText());
 			Runway runway = airport.getRunwayByDesignator((String) runwayDrop.getItemAt(runwayDrop.getSelectedIndex()));
-			calc = new Calculations(runway,Integer.parseInt(objHeight.getText()),Integer.parseInt(objLoc.getText()));
+			calc = new Calculations(runway,Integer.parseInt(objHeight.getText()),Integer.parseInt(objLoc.getText()),RESA,Eng);
 			if(obsLocCentreLine>75){
 				if (landing.isSelected())
 					printObsOutOfRunway(calc,"Landing");//Calling landing case

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<obstacles>
+<obstacle height="25" name="737 wreck" noOfSide="5" noOfTop="5">
+<topX>
+<topX0>0</topX0>
+<topX1>100</topX1>
+<topX2>100</topX2>
+<topX3>200</topX3>
+<topX4>0</topX4>
+</topX>
+<topY>
+<topY0>0</topY0>
+<topY1>0</topY1>
+<topY2>100</topY2>
+<topY3>200</topY3>
+<topY4>100</topY4>
+</topY>
+<sideX>
+<sideX0>0</sideX0>
+<sideX1>100</sideX1>
+<sideX2>100</sideX2>
+<sideX3>200</sideX3>
+<sideX4>0</sideX4>
+</sideX>
+<sideY>
+<sideY0>0</sideY0>
+<sideY1>0</sideY1>
+<sideY2>100</sideY2>
+<sideY3>200</sideY3>
+<sideY4>100</sideY4>
+</sideY>
+</obstacle>
+</obstacles>

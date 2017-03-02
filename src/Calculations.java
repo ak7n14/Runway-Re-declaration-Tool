@@ -21,7 +21,15 @@ public class Calculations {
 		RESA=240;
 		engineBlastAllowance=300;//For now later can be taken as input(Depends on flight)
 	}
-
+	
+	public Calculations(Runway runway, int obsheight,int loc,int RESA,int eng){
+		this.runway = runway;
+		this.obsHeight=obsheight;
+		obsLoc=loc;
+		ALS =0;
+		this.RESA=RESA;
+		engineBlastAllowance=eng;//For now later can be taken as input(Depends on flight)
+	}
 	
 	//Call the appropriate method according to condition
 	public void calculateLda(String direction){
@@ -104,6 +112,14 @@ public class Calculations {
 	}
 	public int getEngineBlastAllowance() {
 		return engineBlastAllowance;
+	}
+	
+	public void setEngineBlastAllowance(int engineBlastAllowance) {
+		this.engineBlastAllowance = engineBlastAllowance;
+	}
+	
+	public void setRESA(int rESA) {
+		RESA = rESA;
 	}
 
 }
