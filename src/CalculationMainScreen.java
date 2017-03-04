@@ -128,6 +128,19 @@ public class CalculationMainScreen {
 	   settings.addActionListener(new SettingsListener());
 	}
 	
+	public void printIncorrectValues(){
+		calculationPanel.removeAll();
+		calculationPanel.updateUI();
+		calculationPanel.setLayout(new GridLayout(2,1));
+		calculationPanel.setBackground(Color.ORANGE);
+		calculationPanel.setOpaque(true);
+		calculationPanel.add(new JLabel("Please Recheck Values"));
+		calculationPanel.add(new JLabel("Values of obsicle hight and locations cannot be negative"));
+		panel.add(calculationPanel);
+		calculationPanel.updateUI();
+		frame.updateUI();
+	}
+	
 	//Adding labels to the screen when object is too far from the center line
 	//Runway does not have to be re calculated
 	public void printObsOutOfRunway(Calculations calc,String Direction){
@@ -494,6 +507,18 @@ public class CalculationMainScreen {
 			obsLocCentreLine = Integer.parseInt(temp.getText());
 			Runway runway = airport.getRunwayByDesignator((String) runwayDrop.getItemAt(runwayDrop.getSelectedIndex()));
 			calc = new Calculations(runway,Integer.parseInt(objHeight.getText()),Integer.parseInt(objLoc.getText()),RESA,Eng);
+			if(Integer.parseInt(objHeight.getText())<0
+					|| Integer.parseInt(objLoc.getText())<0
+					|| obsLocCentreLine<0){
+				printIncorrectValues();
+			}
+			else{
+			
+			
+			
+			
+			
+			
 			if(obsLocCentreLine>75){
 				if (landing.isSelected())
 					printObsOutOfRunway(calc,"Landing");//Calling landing case
@@ -524,7 +549,7 @@ public class CalculationMainScreen {
 				}
 			
 			}
-	
+			}
 		}	
 	}
 }
