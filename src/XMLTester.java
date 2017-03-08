@@ -21,9 +21,6 @@ public class XMLTester
 
         System.out.println(obstacleArrayList.get(0).getName() + " " + obstacleArrayList.get(0).getHeight());
 
-        ObstacleBack o = new ObstacleBack("name", 12);
-
-        System.out.println(o.getName());
 
       //  ArrayList<Plane> planes = importer.importPlanes();
 

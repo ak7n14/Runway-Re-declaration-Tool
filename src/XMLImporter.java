@@ -88,46 +88,17 @@ public class XMLImporter
                 Node obstacleNode = obstacleList.item(i);
                 String obstacleName = obstacleNode.getAttributes().getNamedItem("name").getTextContent();
                 System.out.println(obstacleName);
-                int height = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("height").getTextContent());
-                int noOfTop = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("noOfTop").getTextContent());
-                int noOfSide = Integer.parseInt(obstacleNode.getAttributes().getNamedItem("noOfSide").getTextContent());
-
-                int[] topX = new int[noOfTop];
-                int[] topY = new int[noOfTop];
-                int[] sideX = new int[noOfSide];
-                int[] sideY = new int[noOfSide];
 
                 if(obstacleNode.getNodeType() == Node.ELEMENT_NODE)
                 {
-                    Element obstacleElement = (Element) obstacleNode;
+                    Element element = (Element) obstacleNode;
 
-                    Element topXElement = (Element) obstacleElement.getElementsByTagName("topX").item(0);
-                    Element topYElement = (Element) obstacleElement.getElementsByTagName("topY").item(0);
-                    Element sideXElement = (Element) obstacleElement.getElementsByTagName("sideX").item(0);
-                    Element sideYElement = (Element) obstacleElement.getElementsByTagName("sideY").item(0);
+                    int height = Integer.parseInt(element.getElementsByTagName("height").item(0).getTextContent());
+                    int length = Integer.parseInt(element.getElementsByTagName("length").item(0).getTextContent());
+                    int depth = Integer.parseInt(element.getElementsByTagName("depth").item(0).getTextContent());
 
-                    for(int j = 0; j < noOfTop; j++)
-                    {
-                        topX[j] = Integer.parseInt(topXElement.getElementsByTagName("topX"+j).item(0).getTextContent());
-                        topY[j] = Integer.parseInt(topYElement.getElementsByTagName("topY"+j).item(0).getTextContent());
-                    }
-
-                    for(int j = 0; j < noOfSide; j++)
-                    {
-                        sideX[j] = Integer.parseInt(sideXElement.getElementsByTagName("sideX"+j).item(0).getTextContent());
-                        sideY[j] = Integer.parseInt(sideYElement.getElementsByTagName("sideY"+j).item(0).getTextContent());
-                    }
-
-                    ObstacleBack obstacle = new ObstacleBack(obstacleName, height);
-                    obstacle.setSideX(sideX);
-                    obstacle.setSideY(sideY);
-                    obstacle.setTopX(topX);
-                    obstacle.setTopY(topY);
-
-                    obstacles.add(obstacle);
+                    obstacles.add(new ObstacleBack(obstacleName, height, length, depth));
                 }
-
-
             }
         } catch (Exception e)
         {

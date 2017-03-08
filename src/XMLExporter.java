@@ -151,47 +151,19 @@ public class XMLExporter
     {
         Element obstacleNode = document.createElement("obstacle");
 
-        Element topX = document.createElement("topX");
-        Element topY = document.createElement("topY");
-        Element sideX = document.createElement("sideX");
-        Element sideY = document.createElement("sideY");
-
-        int noOfTop = obstacle.topViewX.length;
-        int noOfSide = obstacle.sideViewX.length;
-
-        int height = obstacle.getHeight();
-
-        for(int i = 0; i < noOfTop; i++)
-        {
-            Element tempX = document.createElement("topX"+i);
-            tempX.appendChild(document.createTextNode(obstacle.topViewX[i]+""));
-            topX.appendChild(tempX);
-
-            Element tempY = document.createElement("topY"+i);
-            tempY.appendChild(document.createTextNode(obstacle.topViewY[i]+""));
-            topY.appendChild(tempY);
-        }
-
-        for(int i = 0; i < noOfSide; i++)
-        {
-            Element tempX = document.createElement("sideX"+i);
-            tempX.appendChild(document.createTextNode(obstacle.sideViewX[i]+""));
-            sideX.appendChild(tempX);
-
-            Element tempY = document.createElement("sideY"+i);
-            tempY.appendChild(document.createTextNode(obstacle.sideViewY[i]+""));
-            sideY.appendChild(tempY);
-        }
-
         obstacleNode.setAttribute("name", obstacle.getName());
-        obstacleNode.setAttribute("height", height+"");
-        obstacleNode.setAttribute("noOfTop", noOfTop+"");
-        obstacleNode.setAttribute("noOfSide", noOfSide+"");
 
-        obstacleNode.appendChild(topX);
-        obstacleNode.appendChild(topY);
-        obstacleNode.appendChild(sideX);
-        obstacleNode.appendChild(sideY);
+        Element height = document.createElement("height");
+        height.appendChild(document.createTextNode(obstacle.getHeight()+""));
+        obstacleNode.appendChild(height);
+
+        Element length = document.createElement("length");
+        length.appendChild(document.createTextNode(obstacle.getLength()+""));
+        obstacleNode.appendChild(length);
+
+        Element depth = document.createElement("depth");
+        depth.appendChild(document.createTextNode(obstacle.getDepth()+""));
+        obstacleNode.appendChild(depth);
 
         return obstacleNode;
     }
