@@ -29,8 +29,8 @@ public class RunwaySideView extends RunwayView{
 
     public int MeterY() {
         if(ov.getOb().getHeight() < 50)
-            return this.RUNWAY_Y() - ov.scalingSideHeight(10, 0);
-        return this.RUNWAY_Y() - ov.scalingSideHeight(50, 0);
+            return this.RUNWAY_Y() - ov.scalingSideHeight(10);
+        return this.RUNWAY_Y() - ov.scalingSideHeight(50);
     }
 
     //overides RunwayView so no scaling occurs

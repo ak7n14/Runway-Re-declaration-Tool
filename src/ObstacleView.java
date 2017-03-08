@@ -35,7 +35,7 @@ public class ObstacleView extends Obstacle{
         this.offsetZ = scalingHeight(offsetZ, 0);
 
         //subtracts runway to invert direction of axis (so it offsets upwards
-        this.offsetY = scalingSideHeight(offsetY, 0) - currentRunway.RUNWAY_Y();
+        this.offsetY = scalingSideHeight(offsetY) - currentRunway.RUNWAY_Y();
 
         //scales for runway
         setSideX(ob.sideViewX);
@@ -69,7 +69,7 @@ public class ObstacleView extends Obstacle{
     public void setSideY(int... ys){
         sideViewY = new int[ys.length];
         for(int i = 0; i < ys.length; i++){
-            sideViewY[i] = scalingSideHeight(ys[i], offsetY);
+            sideViewY[i] = scalingSideHeight(ys[i]);
         }
     }
 
@@ -84,7 +84,7 @@ public class ObstacleView extends Obstacle{
     public void setTopY(int... ys){
         topViewY = new int[ys.length];
         for(int i = 0; i < ys.length; i++){
-            topViewY[i] = scalingHeight(ys[i], offsetZ) + currentRunway.RUNWAY_Y();
+            topViewY[i] = scalingHeight(ys[i], offsetZ) + currentRunway.RUNWAY_Y() + scalingHeight(currentRunway.runwayHeight/2,0);
         }
     }
     public void setTopX(int... xs){
@@ -122,9 +122,9 @@ public class ObstacleView extends Obstacle{
 
     //scaling for obstacles based on runway and not whole JPanel
     //scales obstacles in Jpanel based on height of obstacle
-    int scalingSideHeight(int y, int offsetSideY){
+    int scalingSideHeight(int y){
         int bottomGap = currentRunway.jpanelHeight - currentRunway.RUNWAY_Y();
-        return (int)((double) currentRunway.RUNWAY_Y() - (double)y/((double)ob.getHeight()) * ((double)currentRunway.jpanelHeight - 2 * bottomGap)) + offsetSideY;
+        return (int)((double) currentRunway.RUNWAY_Y() - (double)y/((double)ob.getHeight()) * ((double)currentRunway.jpanelHeight - 2 * bottomGap));
     }
 
     //scales objects for JPanel in x direction proportional to runway length
@@ -134,7 +134,7 @@ public class ObstacleView extends Obstacle{
 
     //scales objects for JPanel in y direction proportional to height of runway
     int scalingHeight(int y, int offset){
-        return (int)((double)y/(double)currentRunway.runwayHeight * ((double)currentRunway.jpanelHeight - 2 * currentRunway.RUNWAY_Y())) + offset;
+        return (int)((double)y/(double)currentRunway.runwayHeight * ((double)currentRunway.jpanelHeight - 2 * currentRunway.RUNWAY_Y())) - offset;
     }
 
     //updates with new info
