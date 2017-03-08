@@ -41,7 +41,7 @@ public class ObstacleView extends Obstacle{
         setSideX(ob.sideViewX);
         setSideY(ob.sideViewY);
         setTopX(ob.topViewX);
-        setTopY(ob.topViewY);
+        setTopY(ob.topViewZ);
 
     }
 
@@ -82,9 +82,9 @@ public class ObstacleView extends Obstacle{
 
     //set coords with variable number of points for top view
     public void setTopY(int... ys){
-        topViewY = new int[ys.length];
+        topViewZ = new int[ys.length];
         for(int i = 0; i < ys.length; i++){
-            topViewY[i] = scalingHeight(ys[i], offsetZ) + currentRunway.RUNWAY_Y() + scalingHeight(currentRunway.runwayHeight/2,0);
+            topViewZ[i] = scalingHeight(ys[i], offsetZ) + currentRunway.RUNWAY_Y() + scalingHeight(currentRunway.runwayHeight/2,0);
         }
     }
     public void setTopX(int... xs){
@@ -107,7 +107,7 @@ public class ObstacleView extends Obstacle{
 
     //create top view of shape
     private void createTopPolygon(){
-        shapeTop = new Polygon(topViewX, topViewY, topViewX.length);
+        shapeTop = new Polygon(topViewX, topViewZ, topViewX.length);
     }
 
     //get shapes associated with obstacle
@@ -138,15 +138,15 @@ public class ObstacleView extends Obstacle{
     }
 
     //updates with new info
-    public void updateView(int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength){
+    public void updateView(int start, int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength){
         //updates runway info
-        currentRunway.updateView(LDAStart, TODALength, TORALength, ASDALength, LDALength);
+        currentRunway.updateView(start, LDAStart, TODALength, TORALength, ASDALength, LDALength);
 
         //scales for new runway
         setSideX(ob.sideViewX);
         setSideY(ob.sideViewY);
         setTopX(ob.topViewX);
-        setTopY(ob.topViewY);
+        setTopY(ob.topViewZ);
     }
 
     public ObstacleBack getOb() {
