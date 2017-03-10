@@ -1,6 +1,6 @@
 package View;
 import java.awt.*;
-import java.util.ArrayList;
+
 import Model.*;
 public class ObstacleView extends Obstacle{
 
@@ -123,25 +123,25 @@ public class ObstacleView extends Obstacle{
 
     //scaling for obstacles based on runway and not whole JPanel
     //scales obstacles in Jpanel based on height of obstacle
-    int scalingSideHeight(int y){
+    public int scalingSideHeight(int y){
         int bottomGap = currentRunway.jpanelHeight - currentRunway.RUNWAY_Y();
         return (int)((double) currentRunway.RUNWAY_Y() - (double)y/((double)ob.getHeight()) * ((double)currentRunway.jpanelHeight - 2 * bottomGap));
     }
 
     //scales objects for JPanel in x direction proportional to runway length
-    int scaling(int x, int offset){
+    public int scaling(int x, int offset){
         return (int)((double)x/(double)currentRunway.runwayLength * ((double)currentRunway.jpanelWidth - 2 * currentRunway.START)) + offset;
     }
 
     //scales objects for JPanel in y direction proportional to height of runway
-    int scalingHeight(int y, int offset){
+    public int scalingHeight(int y, int offset){
         return (int)((double)y/(double)currentRunway.runwayHeight * ((double)currentRunway.jpanelHeight - 2 * currentRunway.RUNWAY_Y())) - offset;
     }
 
     //updates with new info
-    public void updateView(int start, int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength){
+    public void updateView(int start, int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength, int RESALength){
         //updates runway info
-        currentRunway.updateView(start, LDAStart, TODALength, TORALength, ASDALength, LDALength);
+        currentRunway.updateView(start, LDAStart, TODALength, TORALength, ASDALength, LDALength, RESALength);
 
         //scales for new runway
         setSideX(ob.sideViewX);

@@ -3,7 +3,7 @@ import javax.swing.*;
 
 import Model.Calculations;
 import Model.Runway;
-import View.ObstacleBack;
+import Model.ObstacleBack;
 import View.ObstacleView;
 import View.RunwaySideView;
 import View.RunwayTopView;
@@ -25,7 +25,7 @@ public class PaintTester extends JPanel {
     ArrayList<JLabel> jLabels;
     ArrayList<JTextField> jTextFields;
 
-    public PaintTester(Runway runway,int RESA,int eng, int start, int LDAStart, String type) {
+    public PaintTester(Runway runway,int RESA,int eng, int start, int LDAStart, String type, String name, int obsHeight, int obsLength, int obsDepth, int offsetX, int offsetY, int offsetZ) {
 
         jLabels = new ArrayList<>();
         jTextFields = new ArrayList<>();
@@ -68,6 +68,11 @@ public class PaintTester extends JPanel {
 //            obsView = new ObstacleView(obs, rsw, type, offsetX, offsetY, offsetZ);
 //            obsView.createShapes();
 //        }
+
+        obs = new ObstacleBack(name, obsHeight, obsLength, obsDepth);
+        obsView = new ObstacleView(obs, rsw, type, offsetX, offsetY, offsetZ);
+
+        update(obsHeight, offsetX, RESA, eng, obsView);
     }
 
     //for testing only
@@ -86,7 +91,7 @@ public class PaintTester extends JPanel {
     public void update(int obsheight, int loc, int RESA, int eng, ObstacleView obsView){
         Calculations calc = new Calculations(rw,obsheight,loc,RESA,eng);
 
-        obsView.updateView(start, LDAStart, calc.getReTODA(), calc.getReTORA(), calc.getReASDA(), calc.getReLda());
+        obsView.updateView(start, LDAStart, calc.getReTODA(), calc.getReTORA(), calc.getReASDA(), calc.getReLda(), calc.getRESA());
         repaint();
     }
 

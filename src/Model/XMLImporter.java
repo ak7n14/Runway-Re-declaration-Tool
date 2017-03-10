@@ -1,8 +1,6 @@
 package Model;
 import org.w3c.dom.*;
 
-import View.ObstacleBack;
-
 import javax.xml.parsers.*;
 import java.io.*;
 import java.util.*;

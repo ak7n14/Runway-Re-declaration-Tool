@@ -32,40 +32,50 @@ public abstract class RunwayView {
     
     private final int SEPARATOR_HEIGHT = 10;
 
-    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int runwayLength, int jpanelWidth, int jpanelHeight, int runwayHeight) {
+    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength,  int RESALength, int runwayLength, int jpanelWidth, int jpanelHeight, int runwayHeight) {
         this.LDAStart = LDAStart;
         this.runwayLength = runwayLength;
-        this.start = start;
         this.jpanelWidth = jpanelWidth;
         this.jpanelHeight = jpanelHeight;
         this.runwayHeight = runwayHeight;
 
         //stores all ends in hashmap
         runwayEnds = new HashMap<>();
-        runwayEnds.put("TODA", TODALength);
-        runwayEnds.put("TORA", TORALength);
-        runwayEnds.put("ASDA", ASDALength);
-        runwayEnds.put("LDA", LDALength);
         this.runwayLength = runwayLength;
+
+        updateView(start, LDAStart, TODALength, TORALength,ASDALength,LDALength,RESALength);
     }
 
     //for updating parts of runway
     //must call drawAll after to display updates
-    public void updateView(int start, int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength){
+    public void updateView(int start, int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength, int RESALength){
         this.LDAStart = LDAStart;
         runwayEnds.put("TODA", TODALength);
         runwayEnds.put("TORA", TORALength);
         runwayEnds.put("ASDA", ASDALength);
         runwayEnds.put("LDA", LDALength);
+        runwayEnds.put("RESA", RESALength);
         this.start = start;
     }
 
     //draws runway, seperators and labels
     public void drawAll(Graphics g){
         this.drawRunway(g);
+        this.drawClearWay(g);
+        this.drawStopWay(g);
         //draws separator labels
         this.drawLabels(g);
         this.drawScaleX(g);
+    }
+
+    public void drawStopWay(Graphics g){
+        g.setColor(Color.RED);
+        g.drawRect(START + scaling(runwayLength), RUNWAY_Y(), runwayEnds.get("ASDA") - scaling(runwayLength), scalingHeight(runwayHeight));
+    }
+
+    public void drawClearWay(Graphics g){
+        g.setColor(Color.green);
+        g.drawRect(START + scaling(runwayLength), RUNWAY_Y(), runwayEnds.get("TODA") - scaling(runwayLength), scalingHeight(runwayHeight));
     }
 
     //draws runway
