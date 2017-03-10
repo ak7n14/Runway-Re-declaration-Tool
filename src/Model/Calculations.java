@@ -20,6 +20,11 @@ public class Calculations {
 		ALS =0;
 		RESA=240;
 		engineBlastAllowance=300;//For now later can be taken as input(Depends on flight)
+		//Setting Default values;
+		reASDA = runway.getASDA();
+		reTORA = runway.getTORA();
+		reTODA = runway.getTODA();
+		reLda = runway.getLDA();
 	}
 	
 	public Calculations(Runway runway, int obsheight,int loc,int RESA,int eng){
@@ -59,8 +64,26 @@ public class Calculations {
 		else if(direction=="After")
 			calculateTORAAfter();
 	}
-	//stop Asda-tora
-	// clear toda-tora
+	
+	public int getStartPoint(String action, String direction) throws Exception{
+		if(action == "Landing"){
+			if(direction == "Towards"){
+				return getSPLandindTowards();
+			}
+			else if(direction == "Over"){
+				return getSPLandindOver();
+			}
+		}
+		else if (action == "Taking off"){
+				if(direction == "Towards"){
+					getSPTakingOffTowards();
+				}
+				else if(direction == "After"){
+					getSPTakingoffAfter();
+				}
+		}
+		throw new Exception("Wrong input");
+	}
 	
 	//Calculate taking off distance towards obstacle
 	void calculateTORATowards(){
@@ -92,6 +115,15 @@ public class Calculations {
 		return reASDA;
 	}
 	
+
+	public int getStopWay(){
+		return reASDA-reTORA;
+	}
+	
+	public int getClearWay(){
+		return reTODA-reTORA;
+	}
+	
 	public int getRESA() {
 		return RESA;
 	}
@@ -121,6 +153,22 @@ public class Calculations {
 	
 	public void setRESA(int RESA) {
 		this.RESA = RESA;
+	}
+	//Start Point taking off towards
+	public int getSPTakingOffTowards(){
+		return 0;
+	}
+	//Start point landing over
+	public int getSPLandindOver(){
+		return reLda-runway.getLDA();
+	}
+	//Start point landing towards
+	public int getSPLandindTowards(){
+		return 0;
+	}
+	//start point taking off after
+	public int getSPTakingoffAfter(){
+		return runway.getTORA()-reTORA;
 	}
 
 }
