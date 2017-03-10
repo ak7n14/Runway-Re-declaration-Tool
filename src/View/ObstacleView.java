@@ -12,6 +12,7 @@ public class ObstacleView extends Obstacle{
 
     private ObstacleBack ob;
 
+    private int originalOffsetX;
     //for object positioning
     private int offsetX;
     private int offsetZ;
@@ -30,6 +31,9 @@ public class ObstacleView extends Obstacle{
 
         //associate an object
         currentRunway.setObstacle(this);
+
+        //used for RESA placement
+        originalOffsetX = offsetX;
 
         //scales offset so they relate to the runway in meters
         this.offsetX = scaling(offsetX, 0);
@@ -153,4 +157,9 @@ public class ObstacleView extends Obstacle{
     public ObstacleBack getOb() {
         return ob;
     }
+
+    public int getOriginalOffsetX() { return originalOffsetX; }
+
+
+
 }

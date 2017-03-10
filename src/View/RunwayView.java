@@ -21,6 +21,8 @@ public abstract class RunwayView {
     int jpanelWidth;
     int jpanelHeight;
 
+    private String direction;
+
     //start of parts of runway
     private int start;
 
@@ -32,7 +34,7 @@ public abstract class RunwayView {
     
     private final int SEPARATOR_HEIGHT = 10;
 
-    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength,  int RESALength, int runwayLength, int jpanelWidth, int jpanelHeight, int runwayHeight) {
+    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength,  int RESALength, int runwayLength, int jpanelWidth, int jpanelHeight, int runwayHeight, String direction) {
         this.LDAStart = LDAStart;
         this.runwayLength = runwayLength;
         this.jpanelWidth = jpanelWidth;
@@ -96,11 +98,22 @@ public abstract class RunwayView {
     public void drawAllSeparators(Graphics g){
         //draws end separators
         for(String key : runwayEnds.keySet()){
-            if(!key.equals("LDA")) {
-                this.drawSeparator(g, runwayEnds.get(key), start);
-            }
-            else {
-                this.drawSeparator(g, runwayEnds.get(key), LDAStart);
+            switch (key)
+            {
+                case "LDA":
+                    //displaced start
+                    this.drawSeparator(g, runwayEnds.get(key), LDAStart);
+                    break;
+                case "RESA":
+                    //if flying towards obstacle include resa
+                    //UNTESTED
+                    if(direction == "towards") {
+                        int RESAStart = ov.getOriginalOffsetX() + ov.getOb().getLength();
+                        this.drawSeparator(g, RESAStart, 0);
+                        this.drawSeparator(g, runwayEnds.get(key), RESAStart);
+                    }
+                default:
+                    this.drawSeparator(g, runwayEnds.get(key), start);
             }
         }
 
@@ -179,6 +192,9 @@ public abstract class RunwayView {
 
         stringData.put("Start", new Point(START + scaling(start), stringY));
         stringData.put("LDAStart", new Point(START + scaling(LDAStart), stringY));
+
+        //UNTESTED
+        stringData.put("RESAStart", new Point(START + scaling(ov.getOb().getLength() + ov.getOriginalOffsetX()), stringY));
         return stringData;
     }
 
