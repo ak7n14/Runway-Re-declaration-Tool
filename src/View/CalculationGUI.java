@@ -1,10 +1,11 @@
+package View;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.*;
-
-import Model.Airport;
+import Controller.*;
+import Model.*;
 
 import java.awt.event.*;
 
@@ -73,7 +74,7 @@ public class CalculationGUI{
 		public void actionPerformed(ActionEvent e) {
 			
 			initSecondFrame((String)dropdown.getSelectedItem(),(String)planeDrop.getSelectedItem());
-			CalculationMainScreen gui2 = new CalculationMainScreen(airport,plane);
+			//CalculationMainScreen gui2 = new CalculationMainScreen(airport,plane);
 			frame.setVisible(false);
 			
 		}

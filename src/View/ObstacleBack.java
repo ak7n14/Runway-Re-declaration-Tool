@@ -1,3 +1,7 @@
+package View;
+
+import Model.Obstacle;
+
 public class ObstacleBack extends Obstacle{
 
     //highest point of shape

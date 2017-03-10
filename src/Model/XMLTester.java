@@ -1,5 +1,8 @@
+package Model;
 import java.io.StringWriter;
 import java.util.*;
+
+import View.ObstacleBack;
 /**
  * Created by Mikolaj on 25/02/2017.
  */

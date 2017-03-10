@@ -1,7 +1,13 @@
+package Controller;
 import javax.swing.*;
 
 import Model.Calculations;
 import Model.Runway;
+import View.ObstacleBack;
+import View.ObstacleView;
+import View.RunwaySideView;
+import View.RunwayTopView;
+import View.RunwayView;
 
 import java.awt.*;
 import java.util.ArrayList;

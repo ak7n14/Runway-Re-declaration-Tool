@@ -1,6 +1,7 @@
+package View;
 import java.awt.*;
 import java.util.ArrayList;
-
+import Model.*;
 public class ObstacleView extends Obstacle{
 
     //stores current runway

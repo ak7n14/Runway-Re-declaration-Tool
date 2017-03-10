@@ -1,3 +1,4 @@
+package Model;
 
 //Set side objects and top objects x and y coordinates for each point of polygon
 //call createShapes to create side and top object
@@ -5,12 +6,12 @@
 public abstract class Obstacle {
 
     //x and y coordinates of points in polygon for side view
-    int[] sideViewX;
-    int[] sideViewY;
+    public int[] sideViewX;
+    public int[] sideViewY;
 
     //x and y coordinates of points in polygon for top view
-    int[] topViewX;
-    int[] topViewZ;
+    public int[] topViewX;
+    public int[] topViewZ;
 
 //    //set coords with variable number of points for side view
 //    //loops through coords and scales proportionally to runway (0,0) is top left of runway
