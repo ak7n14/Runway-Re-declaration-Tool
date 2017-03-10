@@ -12,8 +12,19 @@ public class RunwaySideView extends RunwayView{
     //initial y position and height are constants for
 
     //defines size of runway
-    public RunwaySideView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int RESALength, int runwayLength, String direction, int jpanelWidth, int jpanelHeight) {
-        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, RESALength, runwayLength, jpanelWidth, jpanelHeight, 10, direction);
+    public RunwaySideView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int RESALength, int runwayLength, String direction, String takeOfforLand, int jpanelWidth, int jpanelHeight) {
+        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, RESALength, runwayLength, jpanelWidth, jpanelHeight, 10, direction, takeOfforLand);
+    }
+
+    //draws runway, seperators and labels
+    public void drawAll(Graphics g){
+        this.drawRunway(g);
+        this.drawClearWay(g);
+        this.drawStopWay(g);
+        //draws separator labels
+        this.drawLabels(g);
+        this.drawScaleX(g);
+        drawALS(g);
     }
 
     //draws runway
@@ -34,6 +45,20 @@ public class RunwaySideView extends RunwayView{
         return this.RUNWAY_Y() - ov.scalingSideHeight(50);
     }
 
+    //draws als
+    //UNTESTED
+    public void drawALS(Graphics g){
+        g.setColor(new Color(0xC5461B));
+        int x = scaling(ov.getOb().getLength() + ov.getOriginalOffsetX());
+        int y = ov.scalingSideHeight(ov.getOb().getHeight());
+        int mody = y;
+
+        //accounts for direction
+        if (getTakeOffOrLand() == "Taking off"){
+            mody *= -1;
+        }
+        g.drawLine(x, y, x + mody * 50, RUNWAY_Y());
+    }
     //overides RunwayView so no scaling occurs
     public int scalingHeight(int y){
         return y;

@@ -22,6 +22,7 @@ public abstract class RunwayView {
     int jpanelHeight;
 
     private String direction;
+    private String takeOffOrLand;
 
     //start of parts of runway
     private int start;
@@ -34,7 +35,7 @@ public abstract class RunwayView {
     
     private final int SEPARATOR_HEIGHT = 10;
 
-    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength,  int RESALength, int runwayLength, int jpanelWidth, int jpanelHeight, int runwayHeight, String direction) {
+    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength,  int RESALength, int runwayLength, int jpanelWidth, int jpanelHeight, int runwayHeight, String direction, String takeOfforLand) {
         this.LDAStart = LDAStart;
         this.runwayLength = runwayLength;
         this.jpanelWidth = jpanelWidth;
@@ -46,6 +47,9 @@ public abstract class RunwayView {
         this.runwayLength = runwayLength;
 
         updateView(start, LDAStart, TODALength, TORALength,ASDALength,LDALength,RESALength);
+
+        this.direction = direction;
+        this.takeOffOrLand = takeOfforLand;
     }
 
     //for updating parts of runway
@@ -107,7 +111,7 @@ public abstract class RunwayView {
                 case "RESA":
                     //if flying towards obstacle include resa
                     //UNTESTED
-                    if(direction == "towards") {
+                    if(direction == "away") {
                         int RESAStart = ov.getOriginalOffsetX() + ov.getOb().getLength();
                         this.drawSeparator(g, RESAStart, 0);
                         this.drawSeparator(g, runwayEnds.get(key), RESAStart);
@@ -253,4 +257,12 @@ public abstract class RunwayView {
     //used for scale display
     public abstract int MeterX();
     public abstract int MeterY();
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public String getTakeOffOrLand() {
+        return takeOffOrLand;
+    }
 }

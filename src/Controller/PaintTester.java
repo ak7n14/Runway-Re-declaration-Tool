@@ -25,7 +25,7 @@ public class PaintTester extends JPanel {
     ArrayList<JLabel> jLabels;
     ArrayList<JTextField> jTextFields;
 
-    public PaintTester(Runway runway,int RESA,int eng, int start, int LDAStart, String type, String name, int obsHeight, int obsLength, int obsDepth, int offsetX, int offsetY, int offsetZ) {
+    public PaintTester(Runway runway,int RESA,int eng, int start, int LDAStart, String type, String name, int obsHeight, int obsLength, int obsDepth, int offsetX, int offsetY, int offsetZ, String direction, String  takeOffOrLand) {
 
         jLabels = new ArrayList<>();
         jTextFields = new ArrayList<>();
@@ -49,10 +49,10 @@ public class PaintTester extends JPanel {
 
         //creates runway
         if(type.equals("top")) {
-            rsw = new RunwayTopView(LDAStart, start, rw.getTODA(), rw.getTORA(), rw.getASDA(), rw.getLDA(), rw.getRunwayLenght(), rw.getRunwayWidth(), rw.getDesignator(), this.getWidth(), this.getHeight());
+            rsw = new RunwayTopView(LDAStart, start, rw.getTODA(), rw.getTORA(), rw.getASDA(), rw.getLDA(), 0, rw.getRunwayLenght(), rw.getRunwayWidth(), rw.getDesignator(), this.getWidth(), this.getHeight(), direction, takeOffOrLand);
         }
         else if(type.equals("side")){
-            rsw = new RunwaySideView(LDAStart, start, rw.getTODA(), rw.getTORA(), rw.getASDA(), rw.getLDA(), rw.getRunwayLenght(), this.getWidth(), this.getHeight());
+            rsw = new RunwaySideView(LDAStart, start, rw.getTODA(), rw.getTORA(), rw.getASDA(), rw.getLDA(), 0, rw.getRunwayLenght(), direction, takeOffOrLand, this.getWidth(), this.getHeight());
         }
 
 

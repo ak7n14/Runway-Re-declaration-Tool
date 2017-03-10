@@ -18,14 +18,16 @@ public class RunwayTopView extends RunwayView{
     protected int RUNWAY_Y() { return 100; }
     private final int DASHED_HEIGHT = RUNWAY_Y() + this.scalingHeight(runwayHeight/2);
 
-    public RunwayTopView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int RESALength, int runwayLength, int runwayHeight, String runwayNumber, int jpanelWidth, int jpanelHeight, String direction) {
-        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, RESALength, runwayLength, jpanelWidth, jpanelHeight, runwayHeight, direction);
+    public RunwayTopView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int RESALength, int runwayLength, int runwayHeight, String runwayNumber, int jpanelWidth, int jpanelHeight, String direction, String takeOffOrLand) {
+        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, RESALength, runwayLength, jpanelWidth, jpanelHeight, runwayHeight, direction, takeOffOrLand);
         this.runwayNumber = runwayNumber;
     }
 
     //draws runway, seperators and labels
     public void drawAll(Graphics g){
         this.drawRunway(g);
+        this.drawClearWay(g);
+        this.drawStopWay(g);
         this.drawAllSeparators(g);
         //draws separator labels
         this.drawLabels(g);
