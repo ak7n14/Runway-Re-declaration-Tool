@@ -1,5 +1,9 @@
 package View;
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -238,6 +242,21 @@ public abstract class RunwayView {
         else {
             g.drawString("50 meters", 25, 35);
         }
+
+        drawArrow(g);
+    }
+
+    //draws an arrow image
+    public void drawArrow(Graphics g){
+        BufferedImage img = null;
+
+        try {
+            img = ImageIO.read(new File("arrow.jpeg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        g.drawImage(img, 50, 50, null);
     }
 
     public void drawScaleY(Graphics g){
