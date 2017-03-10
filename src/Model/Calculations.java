@@ -1,4 +1,4 @@
-
+package Model;
 public class Calculations {
 	Runway runway;//Runway object containing details of the runway
 	int reLda;//Recalculated landing distance available
@@ -42,13 +42,13 @@ public class Calculations {
 	
 	//Calculate the landing distance over the obstacle
 	void calculateLdaOver(){
-		reLda=runway.getTORA()-obsLoc-getALS()-60;
+		reLda=runway.getLDA()-obsLoc-getALS()-60;
 	}
 	
 	
 	//Calculate the landing distance towards obstacle
 	void calculateLdaTowards(){
-		reLda= obsLoc-RESA-60;//Deduction from usable runway
+		reLda= obsLoc-RESA-60;//Deduction from usable runway Strip End
 	}
 	
 	
@@ -59,7 +59,8 @@ public class Calculations {
 		else if(direction=="After")
 			calculateTORAAfter();
 	}
-	
+	//stop Asda-tora
+	// clear toda-tora
 	
 	//Calculate taking off distance towards obstacle
 	void calculateTORATowards(){
@@ -118,8 +119,8 @@ public class Calculations {
 		this.engineBlastAllowance = engineBlastAllowance;
 	}
 	
-	public void setRESA(int rESA) {
-		RESA = rESA;
+	public void setRESA(int RESA) {
+		this.RESA = RESA;
 	}
 
 }

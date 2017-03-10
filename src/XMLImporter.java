@@ -1,4 +1,8 @@
 import org.w3c.dom.*;
+
+import Model.Airport;
+import Model.Runway;
+
 import javax.xml.parsers.*;
 import java.io.*;
 import java.util.*;

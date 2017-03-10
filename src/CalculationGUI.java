@@ -3,6 +3,9 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.*;
+
+import Model.Airport;
+
 import java.awt.event.*;
 
 public class CalculationGUI{

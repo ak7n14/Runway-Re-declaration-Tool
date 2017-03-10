@@ -16,6 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import Model.Airport;
+import Model.Calculations;
+import Model.Runway;
+
 //Second gui for calculations
 
 

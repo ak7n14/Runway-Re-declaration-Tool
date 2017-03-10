@@ -1,3 +1,5 @@
+package Model;
+
 //stub class
 public class Runway
 {
