@@ -179,4 +179,15 @@ public class XMLImporter
 
         return null;
     }
+    public ObstacleBack getObsticalByName(String name){
+    	ArrayList<ObstacleBack> obstacle = importObstacles();
+
+        for(ObstacleBack obs : obstacle)
+        {
+            if(obs.getName().equals(name))
+                return obs;
+        }
+
+        return null;
+    }
 }

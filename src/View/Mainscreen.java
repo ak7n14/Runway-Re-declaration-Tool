@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Model.Airport;
+import Model.Calculations;
 import Model.ObstacleBack;
 import Model.Plane;
 import Model.Runway;
@@ -31,12 +32,15 @@ public class Mainscreen {
 	private JFrame frame;
 	private JTextField obsDisCL;
 	private JTextField obsDistTh;
-
+	int RESA;//Runway End Safety Area (RESA)
+	int engineBlastAllowance;//blast allowance depends on the aircraft
 	/**
 	 * Create the application.
 	 */
 	public Mainscreen(Airport airport, Plane plane) {
 		initialize(airport,plane);
+		RESA=240;
+		engineBlastAllowance=300;//For now later can be taken as input(Depends on flight)
 	}
 
 	/**
@@ -180,7 +184,9 @@ public class Mainscreen {
 		gbc_lblSelectAction.gridy = 6;
 		inputPanel.add(lblSelectAction, gbc_lblSelectAction);
 		
-		JComboBox actionComboBox = new JComboBox();
+		JComboBox<String> actionComboBox = new JComboBox<String>();
+		actionComboBox.addItem("Land");
+		actionComboBox.addItem("Take off");
 		GridBagConstraints gbc_actionComboBox = new GridBagConstraints();
 		gbc_actionComboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_actionComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -196,7 +202,9 @@ public class Mainscreen {
 		gbc_lblSelectDirection.gridy = 7;
 		inputPanel.add(lblSelectDirection, gbc_lblSelectDirection);
 		
-		JComboBox leftRight = new JComboBox();
+		JComboBox<String> leftRight = new JComboBox<String>();
+		leftRight.addItem("Left");
+		leftRight.addItem("Right");
 		GridBagConstraints gbc_leftRight = new GridBagConstraints();
 		gbc_leftRight.insets = new Insets(0, 0, 5, 5);
 		gbc_leftRight.fill = GridBagConstraints.HORIZONTAL;
@@ -212,7 +220,9 @@ public class Mainscreen {
 		gbc_lblSelectDirectionOf.gridy = 8;
 		inputPanel.add(lblSelectDirectionOf, gbc_lblSelectDirectionOf);
 		
-		JComboBox towardsAway = new JComboBox();
+		JComboBox<String> towardsAway = new JComboBox<String>();
+		towardsAway.addItem("Towards");
+		towardsAway.addItem("Away");
 		GridBagConstraints gbc_towardsAway = new GridBagConstraints();
 		gbc_towardsAway.insets = new Insets(0, 0, 5, 5);
 		gbc_towardsAway.fill = GridBagConstraints.HORIZONTAL;
@@ -230,9 +240,11 @@ public class Mainscreen {
 		inputPanel.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(1,2));	
 		JButton btnSettings = new JButton("Settings");
+		btnSettings.addActionListener(new SettingsListener());
 		btnSettings.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 16));
 		panel.add(btnSettings);
 		JButton btnCalculate = new JButton("Calculate");
+		
 		btnCalculate.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 16));
 		panel.add(btnCalculate);
 		inputPanel.setBackground(Color.orange);
@@ -247,23 +259,45 @@ public class Mainscreen {
 		gbc_panel_1.gridy = 1;
 		frame.getContentPane().add(panel_1, gbc_panel_1);
 		frame.setVisible(true);
+//		btnCalculate.addActionListener(new CalculateListener(importer,airport,runWayComboBox,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,towardsAway));
 	}
-	
-	
-	class calculateListener implements ActionListener{
 
-		public calculateListener(){
-			
-			
-		}
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
+	public void setEngineBlastAllowance(int engineBlastAllowance) {
+		this.engineBlastAllowance = engineBlastAllowance;
 	}
 	
-	class settingsListener implements ActionListener{
+	public void setRESA(int rESA) {
+		RESA = rESA;
+	}
+	
+	class CalculateListener implements ActionListener{
+//		Runway runway;
+//		int obsHeight;
+//		int locTh;
+//		int locCL;
+//		int resa;
+//		int eng;
+//		String direction;
+//		public CalculateListener(XMLImporter imp,Airport airport,JComboBox<String> runWayComboBox, JComboBox<String> obsComboBox,JTextField locTh,JTextField locCL,int resa,int eng,JComboBox<String> direction){
+//			this.runway=airport.getRunwayByDesignator(runWayComboBox.getItemAt(runWayComboBox.getSelectedIndex()));
+//			this.obsHeight = imp.getObsticalByName(obsComboBox.getItemAt(obsComboBox.getSelectedIndex())).getHeight();
+//			this.locTh = Integer.parseInt(locTh.getText());
+//			this.locCL = Integer.parseInt(locCL.getText());
+//			this.resa = resa;
+//			this.eng = eng;
+//			this.direction=direction.getItemAt(direction.getSelectedIndex());
+//			
+//		}
+	public void actionPerformed(ActionEvent e) {
+//			// TODO Auto-generated method stub
+//			Calculations calc = new Calculations(runway, obsHeight, locTh, resa, eng);
+//			calc.calculateLda(direction);
+//			System.out.println(calc.getReLda());
+		}
+//		
+	}
+	
+	class SettingsListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

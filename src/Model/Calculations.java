@@ -40,7 +40,7 @@ public class Calculations {
 	public void calculateLda(String direction){
 		if (direction=="Towards")
 			calculateLdaTowards();
-		else if(direction=="Over")
+		else if(direction=="Away")
 			calculateLdaOver();
 	}
 
@@ -61,7 +61,7 @@ public class Calculations {
 	public void calculateTORA(String direction){
 		if (direction=="Towards")
 			calculateTORATowards();
-		else if(direction=="After")
+		else if(direction=="Away")
 			calculateTORAAfter();
 	}
 	
@@ -70,7 +70,7 @@ public class Calculations {
 			if(direction == "Towards"){
 				return getSPLandindTowards();
 			}
-			else if(direction == "Over"){
+			else if(direction == "Away"){
 				return getSPLandindOver();
 			}
 		}
@@ -78,7 +78,7 @@ public class Calculations {
 				if(direction == "Towards"){
 					getSPTakingOffTowards();
 				}
-				else if(direction == "After"){
+				else if(direction == "Away"){
 					getSPTakingoffAfter();
 				}
 		}

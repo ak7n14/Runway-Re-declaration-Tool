@@ -254,8 +254,8 @@ public class SettingsGUI extends JFrame{
 	}
 	
 	 //to test the gui
-    public static void main (String []args){
-       SettingsGUI tab = new SettingsGUI();
-   }
+//    public static void main (String []args){
+//       SettingsGUI tab = new SettingsGUI();
+//   }
 }
 
