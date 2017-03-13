@@ -52,7 +52,7 @@ public class Mainscreen {
 		ArrayList<ObstacleBack> obsList= importer.importObstacles();
 		ArrayList<Runway>runWayList = airport.getRunways();
 		frame = new JFrame(airport.getName());
-		frame.setBounds(1500, 1500, 1107, 837);
+		frame.setBounds(0, 0, 1107, 837);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
