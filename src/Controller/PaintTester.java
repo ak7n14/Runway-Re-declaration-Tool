@@ -22,17 +22,23 @@ public class PaintTester extends JPanel {
     private int start;
     private int LDAStart;
 
+    private String type;
+    //if update method called set to true
+    private boolean recalculated;
+
     ArrayList<JLabel> jLabels;
     ArrayList<JTextField> jTextFields;
 
-    public PaintTester(Runway runway,int RESA,int eng, int start, int LDAStart, String type, String name, int obsHeight, int obsLength, int obsDepth, int offsetX, int offsetY, int offsetZ, String direction, String  takeOffOrLand) {
+    public PaintTester(Runway runway, String type, String direction, String  takeOffOrLand, int jPanelWidth, int jPanelHeight) {
 
+        this.setSize(jPanelWidth, jPanelHeight);
         jLabels = new ArrayList<>();
         jTextFields = new ArrayList<>();
 
+        recalculated = false;
         rw = runway;
-        this.start = start;
-        this.LDAStart = LDAStart;
+        this.start = 0;
+        this.LDAStart = 0;
 //        int[] x = {0, 100, 300, 100, 0};
 //        int[] y = {0, 0, 100, 200, 200};
 //
@@ -47,12 +53,14 @@ public class PaintTester extends JPanel {
 //        obsView = new ObstacleView(obs, rsw, "top", 100, 0, 300);
 //        obsView.createShapes();
 
+        this.type = type;
+
         //creates runway
         if(type.equals("top")) {
-            rsw = new RunwayTopView(LDAStart, start, rw.getTODA(), rw.getTORA(), rw.getASDA(), rw.getLDA(), 0, rw.getRunwayLenght(), rw.getRunwayWidth(), rw.getDesignator(), this.getWidth(), this.getHeight(), direction, takeOffOrLand);
+            rsw = new RunwayTopView(rw, this.getWidth(), this.getHeight(), direction, takeOffOrLand);
         }
         else if(type.equals("side")){
-            rsw = new RunwaySideView(LDAStart, start, rw.getTODA(), rw.getTORA(), rw.getASDA(), rw.getLDA(), 0, rw.getRunwayLenght(), direction, takeOffOrLand, this.getWidth(), this.getHeight());
+            rsw = new RunwaySideView(rw, direction, takeOffOrLand, this.getWidth(), this.getHeight());
         }
 
 
@@ -68,11 +76,6 @@ public class PaintTester extends JPanel {
 //            obsView = new ObstacleView(obs, rsw, type, offsetX, offsetY, offsetZ);
 //            obsView.createShapes();
 //        }
-
-        obs = new ObstacleBack(name, obsHeight, obsLength, obsDepth);
-        obsView = new ObstacleView(obs, rsw, type, offsetX, offsetY, offsetZ);
-
-        update(obsHeight, offsetX, RESA, eng, obsView);
     }
 
     //for testing only
@@ -80,18 +83,31 @@ public class PaintTester extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(rsw != null) {
-            rsw.drawAll(g);
+
+        rsw.drawAll(g);
+
+        if(recalculated)
             obsView.drawShape(g);
-            rsw.drawAllSeparators(g);
-        }
+
+        rsw.drawAllSeparators(g);
     }
     //--------------------------
 
-    public void update(int obsheight, int loc, int RESA, int eng, ObstacleView obsView){
-        Calculations calc = new Calculations(rw,obsheight,loc,RESA,eng);
+    public static void main(String[] args) {
+        JFrame jFrame = new JFrame();
 
-        obsView.updateView(start, LDAStart, calc.getReTODA(), calc.getReTORA(), calc.getReASDA(), calc.getReLda(), calc.getRESA());
+        jFrame.setSize(1000, 500);
+        jFrame.add(new PaintTester(new Runway("20R", 300, 1700, 1500, 300, 0, 1000, 500, 2000, 4000), "side", "towards", "land", 1000, 500));
+        jFrame.setVisible(true);
+    }
+
+    public void update(int offsetX, int offsetZ, int RESA, int eng, ObstacleBack obs, String direction, String takeOffOrLand){
+
+        ObstacleView obsView = new ObstacleView(obs, rsw, type, offsetX, offsetZ);
+
+        Calculations calc = new Calculations(rw,obs.getHeight(),offsetX,RESA,eng);
+
+        obsView.updateView(start, LDAStart, calc, direction, takeOffOrLand);
         repaint();
     }
 

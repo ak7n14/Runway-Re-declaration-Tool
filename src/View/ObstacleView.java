@@ -16,11 +16,10 @@ public class ObstacleView extends Obstacle{
     //for object positioning
     private int offsetX;
     private int offsetZ;
-    private  int offsetY;
 
     private String runwayType;
 
-    public ObstacleView(ObstacleBack ob, RunwayView rv, String runwayType, int offsetX, int offsetY, int offsetZ) {
+    public ObstacleView(ObstacleBack ob, RunwayView rv, String runwayType, int offsetX, int offsetZ) {
         super();
 
         this.ob = ob;
@@ -38,9 +37,6 @@ public class ObstacleView extends Obstacle{
         //scales offset so they relate to the runway in meters
         this.offsetX = scaling(offsetX, 0);
         this.offsetZ = scalingHeight(offsetZ, 0);
-
-        //subtracts runway to invert direction of axis (so it offsets upwards
-        this.offsetY = scalingSideHeight(offsetY) - currentRunway.RUNWAY_Y();
 
         //scales for runway
         setSideX(ob.sideViewX);
@@ -143,9 +139,9 @@ public class ObstacleView extends Obstacle{
     }
 
     //updates with new info
-    public void updateView(int start, int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength, int RESALength){
+    public void updateView(int start, int LDAStart, Calculations calc, String direction, String takeOfforLand){
         //updates runway info
-        currentRunway.updateView(start, LDAStart, TODALength, TORALength, ASDALength, LDALength, RESALength);
+        currentRunway.updateView(start, LDAStart, calc, direction, takeOfforLand);
 
         //scales for new runway
         setSideX(ob.sideViewX);

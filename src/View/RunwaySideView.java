@@ -1,4 +1,6 @@
 package View;
+import Model.Runway;
+
 import java.awt.*;
 
 //Initiate with runway values
@@ -12,8 +14,8 @@ public class RunwaySideView extends RunwayView{
     //initial y position and height are constants for
 
     //defines size of runway
-    public RunwaySideView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength, int RESALength, int runwayLength, String direction, String takeOfforLand, int jpanelWidth, int jpanelHeight) {
-        super(LDAStart, start, TODALength, TORALength, ASDALength, LDALength, RESALength, runwayLength, jpanelWidth, jpanelHeight, 10, direction, takeOfforLand);
+    public RunwaySideView(Runway runway, String direction, String takeOfforLand, int jpanelWidth, int jpanelHeight) {
+        super(runway, jpanelWidth, jpanelHeight, 10, direction, takeOfforLand);
     }
 
     //draws runway, seperators and labels
@@ -24,13 +26,13 @@ public class RunwaySideView extends RunwayView{
         //draws separator labels
         this.drawLabels(g);
         this.drawScaleX(g);
-        drawALS(g);
+        //drawALS(g);
     }
 
     //draws runway
     public void drawRunway(Graphics g){
         g.setColor(Color.black);
-        g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), runwayHeight);
+        g.fillRect(100, RUNWAY_Y(), this.scaling(runwayLength), runwayHeight);
     }
 
     //draws rectangles to show scale 50 meter by 50 meter

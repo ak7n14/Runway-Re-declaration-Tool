@@ -74,8 +74,10 @@ public class CalculationGUI{
 		public void actionPerformed(ActionEvent e) {
 			
 			initSecondFrame((String)dropdown.getSelectedItem(),(String)planeDrop.getSelectedItem());
-			Mainscreen gui2 = new Mainscreen(airport,plane);
+			frame.setEnabled(false);
 			frame.setVisible(false);
+			Mainscreen gui2 = new Mainscreen(airport,plane);
+
 			
 		}
 		

@@ -4,16 +4,18 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
+
+import Model.Calculations;
+import Model.Runway;
 
 public abstract class RunwayView {
 
     //Stores different components of runway and where they end
     private HashMap<String, Integer> runwayEnds;
     int runwayLength;
+    Runway runway;
 
     //start of runway
     final int START = 100;
@@ -39,33 +41,40 @@ public abstract class RunwayView {
     
     private final int SEPARATOR_HEIGHT = 10;
 
-    RunwayView(int LDAStart, int start, int TODALength, int TORALength, int ASDALength, int LDALength,  int RESALength, int runwayLength, int jpanelWidth, int jpanelHeight, int runwayHeight, String direction, String takeOfforLand) {
-        this.LDAStart = LDAStart;
-        this.runwayLength = runwayLength;
+    RunwayView(Runway runway, int jpanelWidth, int jpanelHeight, int runwayHeight,  String direction, String takeOfforLand) {
+        this.runwayLength = runway.getRunwayLenght();
         this.jpanelWidth = jpanelWidth;
         this.jpanelHeight = jpanelHeight;
         this.runwayHeight = runwayHeight;
 
+        this.runway = runway;
         //stores all ends in hashmap
         runwayEnds = new HashMap<>();
-        this.runwayLength = runwayLength;
-
-        updateView(start, LDAStart, TODALength, TORALength,ASDALength,LDALength,RESALength);
 
         this.direction = direction;
         this.takeOffOrLand = takeOfforLand;
+
+        runwayEnds.put("TODA", runway.getTODA());
+        runwayEnds.put("TORA", runway.getTORA());
+        runwayEnds.put("ASDA", runway.getASDA());
+        runwayEnds.put("LDA", runway.getLDA());
+
+        this.LDAStart = runway.getThreasholdDisplacement();
+        this.start = 0;
     }
 
     //for updating parts of runway
     //must call drawAll after to display updates
-    public void updateView(int start, int LDAStart, int TODALength, int TORALength, int ASDALength, int LDALength, int RESALength){
+    public void updateView(int start, int LDAStart, Calculations calc, String direction, String takeOfforLand){
         this.LDAStart = LDAStart;
-        runwayEnds.put("TODA", TODALength);
-        runwayEnds.put("TORA", TORALength);
-        runwayEnds.put("ASDA", ASDALength);
-        runwayEnds.put("LDA", LDALength);
-        runwayEnds.put("RESA", RESALength);
+        runwayEnds.put("TODA", calc.getReTODA());
+        runwayEnds.put("TORA", calc.getReTORA());
+        runwayEnds.put("ASDA", calc.getReASDA());
+        runwayEnds.put("LDA", calc.getReLda());
+//        runwayEnds.put("RESA", RESALength);
         this.start = start;
+        this.direction = direction;
+        this.takeOffOrLand = takeOfforLand;
     }
 
     //draws runway, seperators and labels
@@ -78,14 +87,15 @@ public abstract class RunwayView {
         this.drawScaleX(g);
     }
 
+    //draw stop and clear way, stop in front of clear as clear is normally larger
     public void drawStopWay(Graphics g){
         g.setColor(Color.RED);
-        g.drawRect(START + scaling(runwayLength), RUNWAY_Y(), runwayEnds.get("ASDA") - scaling(runwayLength), scalingHeight(runwayHeight));
+        g.fillRect(START + scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("ASDA")) - scaling(runwayLength), scalingHeight(runwayHeight));
     }
 
     public void drawClearWay(Graphics g){
         g.setColor(Color.green);
-        g.drawRect(START + scaling(runwayLength), RUNWAY_Y(), runwayEnds.get("TODA") - scaling(runwayLength), scalingHeight(runwayHeight));
+        g.fillRect(START + this.scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("TODA")) - scaling(runwayLength), scalingHeight(runwayHeight));
     }
 
     //draws runway
@@ -112,14 +122,14 @@ public abstract class RunwayView {
                     //displaced start
                     this.drawSeparator(g, runwayEnds.get(key), LDAStart);
                     break;
-                case "RESA":
-                    //if flying towards obstacle include resa
-                    //UNTESTED
-                    if(direction == "away") {
-                        int RESAStart = ov.getOriginalOffsetX() + ov.getOb().getLength();
-                        this.drawSeparator(g, RESAStart, 0);
-                        this.drawSeparator(g, runwayEnds.get(key), RESAStart);
-                    }
+//                case "RESA":
+//                    //if flying towards obstacle include resa
+//                    //UNTESTED
+//                    if(direction == "away") {
+//                        int RESAStart = ov.getOriginalOffsetX() + ov.getOb().getLength();
+//                        this.drawSeparator(g, RESAStart, 0);
+//                        this.drawSeparator(g, runwayEnds.get(key), RESAStart);
+//                    }
                 default:
                     this.drawSeparator(g, runwayEnds.get(key), start);
             }
@@ -202,7 +212,7 @@ public abstract class RunwayView {
         stringData.put("LDAStart", new Point(START + scaling(LDAStart), stringY));
 
         //UNTESTED
-        stringData.put("RESAStart", new Point(START + scaling(ov.getOb().getLength() + ov.getOriginalOffsetX()), stringY));
+//        stringData.put("RESAStart", new Point(START + scaling(ov.getOb().getLength() + ov.getOriginalOffsetX()), stringY));
         return stringData;
     }
 
@@ -212,7 +222,7 @@ public abstract class RunwayView {
 
     //scales objects for JPanel in x direction proportional to runway length
     public int scaling(int x){
-        return (int)((double)x/(double)runwayLength * ((double)jpanelWidth - 2 * START));
+        return (int)((double)x/(double)runway.getStripLength() * ((double)jpanelWidth - 2 * START));
     }
 
     //scales objects for JPanel in y direction proportional to height of runway
@@ -234,17 +244,10 @@ public abstract class RunwayView {
         //add label to show what scale is in
         g.setFont(new Font("Arial", Font.BOLD, 11));
 
-        //meter labels change dynamically based on scale
-        if(ov.getOb().getHeight() < 50 && this instanceof RunwaySideView){
-            g.drawString("10 meters", 25, (45 + MeterY())/2);
-            g.drawString("50 meters", (35 + MeterX())/2, 35);
-        }
-        else {
-            g.drawString("50 meters", 25, 35);
-        }
-
-        drawArrow(g);
+        g.drawString("50 meters", 25, 35);
+        //drawArrow(g);
     }
+
 
     //draws an arrow image
     public void drawArrow(Graphics g){
@@ -267,6 +270,14 @@ public abstract class RunwayView {
         //make it pretty
         g.fillRect(15, 23, 5, 2);
         g.fillRect(15, 23 + MeterY(), 5, 2);
+
+        //meter labels change dynamically based on scale
+        if(this instanceof RunwaySideView){
+            if(ov.getOb().getHeight() < 50) {
+                g.drawString("10 meters", 25, (45 + MeterY()) / 2);
+                g.drawString("50 meters", (35 + MeterX()) / 2, 35);
+            }
+        }
     }
 
     public void setObstacle(ObstacleView ov){
@@ -284,4 +295,6 @@ public abstract class RunwayView {
     public String getTakeOffOrLand() {
         return takeOffOrLand;
     }
+
+
 }
