@@ -18,8 +18,8 @@ public class ObstacleBack extends Obstacle{
         this.depth = depth;
 
         sideViewX = new int[]{0,length,length};
-        sideViewY = new int[]{0,length,length,0};
-        topViewX = new int[]{0,0,height};
+        sideViewY = new int[]{0,0,height};
+        topViewX = new int[]{0,length,length,0};
         topViewZ = new int[]{0,0,depth,depth};
     }
 

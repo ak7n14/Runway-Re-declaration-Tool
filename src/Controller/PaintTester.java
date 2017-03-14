@@ -16,7 +16,6 @@ public class PaintTester extends JPanel {
 
     private RunwayView rsw;
     private Runway rw;
-    private ObstacleBack obs;
     private ObstacleView obsView;
 
     private int start;
@@ -78,9 +77,6 @@ public class PaintTester extends JPanel {
 //        }
     }
 
-    //for testing only
-    //----------------------
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -91,23 +87,32 @@ public class PaintTester extends JPanel {
 
         rsw.drawAllSeparators(g);
     }
+
+    //for testing only
+    //----------------------
+    public Calculations createCalculator(int offsetX, int RESA, int eng, ObstacleBack obs){
+        return new Calculations(rw,obs.getHeight(),offsetX,RESA,eng);
+    }
     //--------------------------
 
     public static void main(String[] args) {
         JFrame jFrame = new JFrame();
 
         jFrame.setSize(1000, 500);
-        jFrame.add(new PaintTester(new Runway("20R", 300, 1700, 1500, 300, 0, 1000, 500, 2000, 4000), "top", "towards", "land", 1000, 500));
+        PaintTester pt = new PaintTester(new Runway("20R", 300, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "side", "towards", "land", 1000, 500);
+        jFrame.add(pt);
         jFrame.setVisible(true);
+        pt.updatePaint(new Calculations(pt.getRw(), 40, 0), 0, new ObstacleBack("nuke", 40, 100, 100), "away", "takeOff");
     }
 
-    public void update(int offsetX, int offsetZ, int RESA, int eng, ObstacleBack obs, String direction, String takeOffOrLand){
 
-        ObstacleView obsView = new ObstacleView(obs, rsw, type, offsetX, offsetZ);
+    public void updatePaint(Calculations calc, int offsetZ, ObstacleBack obs, String direction, String takeOffOrLand){
 
-        Calculations calc = new Calculations(rw,obs.getHeight(),offsetX,RESA,eng);
+        obsView = new ObstacleView(obs, rsw, type, calc.getObsLoc(), offsetZ);
 
         obsView.updateView(start, LDAStart, calc, direction, takeOffOrLand);
+        recalculated = true;
+
         repaint();
     }
 
@@ -220,5 +225,9 @@ public class PaintTester extends JPanel {
         }
 
         return coords;
+    }
+
+    public Runway getRw() {
+        return rw;
     }
 }

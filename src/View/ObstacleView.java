@@ -125,17 +125,18 @@ public class ObstacleView extends Obstacle{
     //scales obstacles in Jpanel based on height of obstacle
     public int scalingSideHeight(int y){
         int bottomGap = currentRunway.jpanelHeight - currentRunway.RUNWAY_Y();
-        return (int)((double) currentRunway.RUNWAY_Y() - (double)y/((double)ob.getHeight()) * ((double)currentRunway.jpanelHeight - 2 * bottomGap));
+        return (int)((double) currentRunway.RUNWAY_Y() - (double)y/((double)ob.getHeight()) * ((double)currentRunway.jpanelHeight - (7.0/4.0 * (double)bottomGap)));
     }
 
     //scales objects for JPanel in x direction proportional to runway length
+    //scales objects for JPanel in x direction proportional to runway length
     public int scaling(int x, int offset){
-        return (int)((double)x/(double)currentRunway.runwayLength * ((double)currentRunway.jpanelWidth - 2 * currentRunway.START)) + offset;
+        return (int)((double)x/(double)currentRunway.getRunway().getStripLength()* ((double)currentRunway.jpanelWidth - 2 * currentRunway.START)) + offset;
     }
 
     //scales objects for JPanel in y direction proportional to height of runway
     public int scalingHeight(int y, int offset){
-        return (int)((double)y/(double)currentRunway.runwayHeight * ((double)currentRunway.jpanelHeight - 2 * currentRunway.RUNWAY_Y())) - offset;
+        return (int)((double)y/(double)currentRunway.getRunway().getStripWidth() * ((double)currentRunway.jpanelHeight - 2 * currentRunway.RUNWAY_Y())) - offset;
     }
 
     //updates with new info
@@ -148,6 +149,8 @@ public class ObstacleView extends Obstacle{
         setSideY(ob.sideViewY);
         setTopX(ob.topViewX);
         setTopY(ob.topViewZ);
+
+        createShapes();
     }
 
     public ObstacleBack getOb() {
