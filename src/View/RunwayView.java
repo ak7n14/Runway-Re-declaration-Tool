@@ -174,6 +174,8 @@ public abstract class RunwayView {
             int currentY = currentPoint.y;
             int currentX = currentPoint.x;
 
+            int currentStringWidth = g.getFontMetrics().stringWidth(currentKey);
+
             //loop through all strings
             for(int i = 0; i < stringData.size(); i++) {
 
@@ -185,8 +187,13 @@ public abstract class RunwayView {
                     int stringWidth = g.getFontMetrics().stringWidth(key); //get width of string
                     Point otherPoint = stringData.get(key);
 
-                    //changes y position if overlap in x direction and only changes if they are both on the same y level
+                    //if tail overlaps then move other object (makes it look nicer)
+                    if(currentX + currentStringWidth >= otherPoint.x && currentX + currentStringWidth <= otherPoint.x + stringWidth && currentY == otherPoint.y){
+                        stringData.put(key, new Point(otherPoint.x, otherPoint.y += 10));
+                        i = -1;
+                    }
 
+                    //changes y position if overlap in x direction and only changes if they are both on the same y level
                     if (currentX >= otherPoint.x && currentX <= otherPoint.x + stringWidth && currentY == otherPoint.y) {
                         stringData.put(currentKey, new Point(currentX, currentY += 10)); //move item down
                         //reset and check all again

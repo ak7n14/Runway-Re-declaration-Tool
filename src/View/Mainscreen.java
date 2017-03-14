@@ -62,6 +62,7 @@ public class Mainscreen {
 		frame.getContentPane().setLayout(gridBagLayout);
 		
 		JPanel graphicsPanel = new JPanel();
+		graphicsPanel.setLayout(new GridLayout(2,1));
 		graphicsPanel.setBackground(Color.GREEN);
 		GridBagConstraints gbc_graphicsPanel = new GridBagConstraints();
 		gbc_graphicsPanel.gridheight = 2;
