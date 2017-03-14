@@ -34,7 +34,11 @@ public abstract class RunwayView {
     //start of parts of runway
     private int start;
 
-    ObstacleView ov;
+    private ObstacleView ov;
+    private Calculations calc;
+
+    private boolean updated;
+
 
     //initial y position and height of runway
     protected abstract int RUNWAY_Y();
@@ -47,6 +51,8 @@ public abstract class RunwayView {
         this.jpanelWidth = jpanelWidth;
         this.jpanelHeight = jpanelHeight;
         this.runwayHeight = runwayHeight;
+
+        updated = false;
 
         this.runway = runway;
         //stores all ends in hashmap
@@ -69,6 +75,10 @@ public abstract class RunwayView {
     public void updateView(int start, int LDAStart, Calculations calc, String direction, String takeOfforLand){
         this.LDAStart = LDAStart;
         this.RESAStart = ov.getOriginalOffsetX() + ov.getOb().getLength();
+
+        this.calc = calc;
+        //so calc doesnt get used before updated
+        updated = true;
 
         runwayEnds.put("TODA", calc.getReTODA());
         runwayEnds.put("TORA", calc.getReTORA());
@@ -113,10 +123,10 @@ public abstract class RunwayView {
     }
 
     //draws a seperator to see ends of different strip components
-    private void drawSeparator(Graphics g, int x, int start){
+    public void drawSeparator(Graphics g, int x, int start){
         //x is where the runway component ends
         //height is altered so separator is visible
-        g.setColor(Color.CYAN);
+        g.setColor(Color.BLUE);
         g.fillRect(this.scaling(x) + START + this.scaling(start), RUNWAY_Y(), 2, this.scalingHeight(runwayHeight) + SEPARATOR_HEIGHT);
     }
 
@@ -319,5 +329,17 @@ public abstract class RunwayView {
 
     public Runway getRunway() {
         return runway;
+    }
+
+    public boolean isUpdated() {
+        return updated;
+    }
+
+    public ObstacleView getOv() {
+        return ov;
+    }
+
+    public Calculations getCalc() {
+        return calc;
     }
 }

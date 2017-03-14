@@ -23,10 +23,11 @@ public class RunwaySideView extends RunwayView{
         this.drawRunway(g);
         this.drawClearWay(g);
         this.drawStopWay(g);
+
         //draws separator labels
         this.drawLabels(g);
         this.drawScaleX(g);
-        //drawALS(g);
+        drawALS(g);
     }
 
     //draws runway
@@ -42,24 +43,48 @@ public class RunwaySideView extends RunwayView{
     }
 
     public int MeterY() {
-        if(ov.getOb().getHeight() < 50)
-            return this.RUNWAY_Y() - ov.scalingSideHeight(10);
-        return this.RUNWAY_Y() - ov.scalingSideHeight(50);
+        if(getOv().getOb().getHeight() < 50)
+            return this.RUNWAY_Y() - getOv().scalingSideHeight(10);
+        return this.RUNWAY_Y() - getOv().scalingSideHeight(50);
     }
 
     //draws als
     //UNTESTED
     public void drawALS(Graphics g){
-        g.setColor(new Color(0xC5461B));
-        int x = scaling(ov.getOb().getLength() + ov.getOriginalOffsetX());
-        int y = ov.scalingSideHeight(ov.getOb().getHeight());
-        int mody = y;
+        g.setColor(Color.RED);
+
+        //front of object
+        int x1 = getOv().getOb().getLength() + getOv().getOriginalOffsetX();
+        int x = scaling(x1) + START;
+        //top of object
+        int y = getOv().scalingSideHeight(getOv().getOb().getHeight());
+
+        //height x 50
+        int mody1 = getCalc().getALS();
+        int mody = scaling(mody1);
+
+        boolean takeOff = getTakeOffOrLand() == "take off";
+        boolean towards = getDirection() == "towards";
 
         //accounts for direction
-        if (getTakeOffOrLand() == "Taking off"){
+        if (takeOff && towards){
+            int width = g.getFontMetrics().stringWidth("TOCS");
             mody *= -1;
+            mody1 *= -1;
+            g.drawString("TOCS", x + mody/2 - width, (3 * y)/2);
         }
-        g.drawLine(x, y, x + mody * 50, RUNWAY_Y());
+
+        if(!takeOff && !towards){
+            g.drawString("ALS", x + mody/2, (3 * y)/2);
+        }
+
+        //if both false or both true
+        if(!(takeOff ^ towards)){
+            g.setColor(Color.BLUE);
+            g.drawLine(x, y, x + mody, RUNWAY_Y());
+            drawSeparator(g,  x1 + mody1, 0);
+        }
+
     }
     //overides RunwayView so no scaling occurs
     public int scalingHeight(int y){

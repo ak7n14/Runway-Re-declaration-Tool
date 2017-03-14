@@ -102,7 +102,7 @@ public class PaintTester extends JPanel {
         PaintTester pt = new PaintTester(new Runway("20R", 300, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "side", "towards", "land", 1000, 500);
         jFrame.add(pt);
         jFrame.setVisible(true);
-        pt.updatePaint(new Calculations(pt.getRw(), 40, 0), 0, new ObstacleBack("nuke", 40, 100, 100), "away", "takeOff");
+        pt.updatePaint(new Calculations(pt.getRw(), 20, 1000), 0, new ObstacleBack("nuke", 20, 100, 100), "towards", "landing");
     }
 
 
