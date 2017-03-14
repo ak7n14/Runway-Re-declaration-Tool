@@ -97,7 +97,7 @@ public class PaintTester extends JPanel {
         JFrame jFrame = new JFrame();
 
         jFrame.setSize(1000, 500);
-        jFrame.add(new PaintTester(new Runway("20R", 300, 1700, 1500, 300, 0, 1000, 500, 2000, 4000), "side", "towards", "land", 1000, 500));
+        jFrame.add(new PaintTester(new Runway("20R", 300, 1700, 1500, 300, 0, 1000, 500, 2000, 4000), "top", "towards", "land", 1000, 500));
         jFrame.setVisible(true);
     }
 

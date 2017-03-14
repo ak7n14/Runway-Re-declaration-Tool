@@ -227,7 +227,7 @@ public abstract class RunwayView {
 
     //scales objects for JPanel in y direction proportional to height of runway
     public int scalingHeight(int y){
-        return (int)((double)y/(double)runwayHeight * ((double)jpanelHeight - 2 * RUNWAY_Y()));
+        return (int)((double)y/(double)runway.getStripWidth() * ((double)jpanelHeight - 2 * RUNWAY_Y()));
     }
 
     //draw scales so user can get a feel of how big the runway and obstacles are
@@ -245,7 +245,7 @@ public abstract class RunwayView {
         g.setFont(new Font("Arial", Font.BOLD, 11));
 
         g.drawString("50 meters", 25, 35);
-        //drawArrow(g);
+        drawArrow(g);
     }
 
 
@@ -254,12 +254,12 @@ public abstract class RunwayView {
         BufferedImage img = null;
 
         try {
-            img = ImageIO.read(new File("arrow.jpeg"));
+            img = ImageIO.read(this.getClass().getResource("arrow.jpeg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        g.drawImage(img, 50, 50, null);
+        g.drawImage(img, 50, 45, null);
     }
 
     public void drawScaleY(Graphics g){
