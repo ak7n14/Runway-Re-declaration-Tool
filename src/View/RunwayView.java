@@ -186,6 +186,7 @@ public abstract class RunwayView {
                     Point otherPoint = stringData.get(key);
 
                     //changes y position if overlap in x direction and only changes if they are both on the same y level
+
                     if (currentX >= otherPoint.x && currentX <= otherPoint.x + stringWidth && currentY == otherPoint.y) {
                         stringData.put(currentKey, new Point(currentX, currentY += 10)); //move item down
                         //reset and check all again
