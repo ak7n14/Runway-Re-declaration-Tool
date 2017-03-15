@@ -79,6 +79,7 @@ public class RunwayTopView extends RunwayView{
         int runwayNum = Integer.parseInt(runwayNumber.substring(0,2));
 
         int reverseIntNumber = 0;
+
         if(runwayNum > 18)
             reverseIntNumber = runwayNum - 18;
         else

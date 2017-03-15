@@ -139,8 +139,7 @@ public abstract class RunwayView {
                     this.drawSeparator(g, runwayEnds.get(key), LDAStart);
                     break;
                 case "RESA":
-                    //if flying towards obstacle include resa
-                    //UNTESTED
+                    //if flying away from obstacle include resa
                     if(direction == "Away") {
                         this.drawSeparator(g, RESAStart, 0);
                         this.drawSeparator(g, runwayEnds.get(key), RESAStart);
@@ -239,6 +238,7 @@ public abstract class RunwayView {
         stringData.put("Start", new Point(START + scaling(start), stringY));
         stringData.put("LDAStart", new Point(START + scaling(LDAStart), stringY));
 
+        //only draws resa when traveling away
         if(direction == "Away") {
             stringData.put("RESAStart", new Point(START + scaling(ov.getOb().getLength() + ov.getOriginalOffsetX()), stringY));
         }

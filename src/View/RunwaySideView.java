@@ -48,7 +48,6 @@ public class RunwaySideView extends RunwayView{
     }
 
     //draws als
-    //UNTESTED
     public void drawALS(Graphics g){
         g.setColor(Color.RED);
 

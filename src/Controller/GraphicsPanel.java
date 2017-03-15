@@ -34,23 +34,11 @@ public class GraphicsPanel extends JPanel {
         jLabels = new ArrayList<>();
         jTextFields = new ArrayList<>();
 
+        //initalise not an update
         recalculated = false;
         rw = runway;
         this.start = 0;
         this.LDAStart = 0;
-//        int[] x = {0, 100, 300, 100, 0};
-//        int[] y = {0, 0, 100, 200, 200};
-//
-//        rsw = new RunwayTopView(100, 0, 900, 300, 400, 300, 1000,500, "10R", 1000, 400);
-//        obs = new ObstacleBack("nuclear bomb mk2 v1.2.3 heavy armory edition", 200);
-//
-//        obs.setSideX(x);
-//        obs.setSideY(y);
-//        obs.setTopX(x);
-//        obs.setTopY(y);
-//
-//        obsView = new ObstacleView(obs, rsw, "top", 100, 0, 300);
-//        obsView.createShapes();
 
         this.type = type;
 
@@ -61,20 +49,6 @@ public class GraphicsPanel extends JPanel {
         else if(type.equals("side")){
             rsw = new RunwaySideView(rw,  this.getWidth(), this.getHeight());
         }
-
-
-//        //creates obstacle
-//        if(type.equals("side")||type.equals("top")){
-//            obs = new ObstacleBack("nuclear bomb", obstacleHeight);
-//
-//            obs.setSideX(obSideX);
-//            obs.setSideY(obSideY);
-//            obs.setTopX(obX);
-//            obs.setTopY(obY);
-//
-//            obsView = new ObstacleView(obs, rsw, type, offsetX, offsetY, offsetZ);
-//            obsView.createShapes();
-//        }
     }
 
     public void paintComponent(Graphics g) {
@@ -82,21 +56,16 @@ public class GraphicsPanel extends JPanel {
 
         rsw.drawAll(g);
 
+        //only if update
         if(recalculated)
             obsView.drawShape(g);
 
+        //only draw ALS/TOCS if it is a side view and this is an update
         if(recalculated && rsw instanceof RunwaySideView)
             ((RunwaySideView) rsw).drawALS(g);
 
         rsw.drawAllSeparators(g);
     }
-
-    //for testing only
-    //----------------------
-    public Calculations createCalculator(int offsetX, int RESA, int eng, ObstacleBack obs){
-        return new Calculations(rw,obs.getHeight(),offsetX,RESA,eng);
-    }
-    //--------------------------
 
     public static void main(String[] args) {
         JFrame jFrame = new JFrame();
@@ -111,7 +80,7 @@ public class GraphicsPanel extends JPanel {
 
     public void updatePaint(Calculations calc, int offsetZ, ObstacleBack obs, String direction, String takeOffOrLand){
 
-
+        //recalc start points
         try {
             start = calc.getStartPoint(takeOffOrLand, direction);
             LDAStart = start;
@@ -121,39 +90,11 @@ public class GraphicsPanel extends JPanel {
 
         obsView = new ObstacleView(obs, rsw, type, calc.getObsLoc(), offsetZ);
 
+        //update objects and signal update as true
         obsView.updateView(start, LDAStart, calc, direction, takeOffOrLand);
         recalculated = true;
 
         repaint();
-    }
-
-    //get text from textbox
-    public String getField(int loc){
-        return jTextFields.get(loc).getText();
-    }
-
-    //get int value of field
-    public int getIntField(int loc){
-        return Integer.parseInt(getField(loc));
-    }
-
-    //get coords
-    public int[] getCoord(int loc, String xOrY){
-        //loops through all coords
-        String[] split = getField(loc).split(";");
-        int[] coords = new int[split.length];
-        for(int i = 0; i < split.length; i++) {
-            //gets x and y
-            String[] xy = split[i].split(",");
-
-            if (xOrY.equals("x")) {
-                coords[i] = Integer.parseInt(xy[0]);
-            } else {
-                coords[i] = Integer.parseInt(xy[1]);
-            }
-        }
-
-        return coords;
     }
 
     public Runway getRw() {
