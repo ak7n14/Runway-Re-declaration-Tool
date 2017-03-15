@@ -37,8 +37,8 @@ public class SettingsGUI extends JFrame{
 		JLabel lblBlast = new JLabel("Default engine blast");
 		JLabel lblColour = new JLabel("Colour scheme");
 		JTextField txtRecents = new JTextField("");
-		JTextField txtRESA = new JTextField(ms.RESA);
-		JTextField txtBlast = new JTextField(ms.engineBlastAllowance);
+		JTextField txtRESA = new JTextField(ms.RESA+"");
+		JTextField txtBlast = new JTextField(ms.engineBlastAllowance+"");
 		JComboBox cmbColours = new JComboBox();
 		JButton btnSave = new JButton("Save");
 
