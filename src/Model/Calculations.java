@@ -76,10 +76,10 @@ public class Calculations {
 		}
 		else if (action == "Taking off"){
 				if(direction == "Towards"){
-					getSPTakingOffTowards();
+					return getSPTakingOffTowards();
 				}
 				else if(direction == "Away"){
-					getSPTakingoffAfter();
+					return getSPTakingoffAfter();
 				}
 		}
 		throw new Exception("Wrong input");
@@ -160,7 +160,7 @@ public class Calculations {
 	}
 	//Start point landing over
 	public int getSPLandindOver(){
-		return reLda-runway.getLDA();
+		return runway.getLDA()-reLda;
 	}
 	//Start point landing towards
 	public int getSPLandindTowards(){

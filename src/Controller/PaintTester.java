@@ -99,14 +99,22 @@ public class PaintTester extends JPanel {
         JFrame jFrame = new JFrame();
 
         jFrame.setSize(1000, 500);
-        PaintTester pt = new PaintTester(new Runway("20R", 300, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "side", "towards", "land", 1000, 500);
+        PaintTester pt = new PaintTester(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "side", "sfsd", "adad", 1000, 500);
         jFrame.add(pt);
         jFrame.setVisible(true);
-        pt.updatePaint(new Calculations(pt.getRw(), 20, 1000), 0, new ObstacleBack("nuke", 20, 100, 100), "towards", "landing");
+        pt.updatePaint(new Calculations(pt.getRw(), 20, 500), 0, new ObstacleBack("nuke", 20, 100, 100), "Away", "Taking off");
     }
 
 
     public void updatePaint(Calculations calc, int offsetZ, ObstacleBack obs, String direction, String takeOffOrLand){
+
+
+        try {
+            start = calc.getStartPoint(takeOffOrLand, direction);
+            LDAStart = start;
+        } catch (Exception e) {
+            System.out.println("invalid input");
+        }
 
         obsView = new ObstacleView(obs, rsw, type, calc.getObsLoc(), offsetZ);
 

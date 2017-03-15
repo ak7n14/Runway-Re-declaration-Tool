@@ -63,8 +63,8 @@ public class RunwaySideView extends RunwayView{
         int mody1 = getCalc().getALS();
         int mody = scaling(mody1);
 
-        boolean takeOff = getTakeOffOrLand() == "take off";
-        boolean towards = getDirection() == "towards";
+        boolean takeOff = getTakeOffOrLand() == "Taking off";
+        boolean towards = getDirection() == "Towards";
 
         //accounts for direction
         if (takeOff && towards){

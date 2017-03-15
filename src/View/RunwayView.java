@@ -86,7 +86,7 @@ public abstract class RunwayView {
         runwayEnds.put("LDA", calc.getReLda());
 
         //only add resa if traveling away
-        if(direction == "away") {
+        if(direction == "Away") {
             runwayEnds.put("RESA", calc.getRESA());
         }
 
@@ -107,13 +107,13 @@ public abstract class RunwayView {
 
     //draw stop and clear way, stop in front of clear as clear is normally larger
     public void drawStopWay(Graphics g){
-        g.setColor(Color.RED);
-        g.fillRect(START + scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("ASDA")) - scaling(runwayLength), scalingHeight(runwayHeight));
+        g.setColor(Color.MAGENTA);
+        g.fillRect(START + scaling(runwayLength), RUNWAY_Y(), scaling(calc.getStopWay()) /*scaling(runwayEnds.get("ASDA")) - scaling(runwayLength)*/, scalingHeight(runwayHeight));
     }
 
     public void drawClearWay(Graphics g){
         g.setColor(Color.green);
-        g.fillRect(START + this.scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("TODA")) - scaling(runwayLength), scalingHeight(runwayHeight));
+        g.fillRect(START + this.scaling(runwayLength), RUNWAY_Y(), scaling(calc.getClearWay())/*scaling(runwayEnds.get("TODA")) - scaling(runwayLength)*/, scalingHeight(runwayHeight));
     }
 
     //draws runway
@@ -143,7 +143,7 @@ public abstract class RunwayView {
                 case "RESA":
                     //if flying towards obstacle include resa
                     //UNTESTED
-                    if(direction == "away") {
+                    if(direction == "Away") {
                         this.drawSeparator(g, RESAStart, 0);
                         this.drawSeparator(g, runwayEnds.get(key), RESAStart);
                     }
@@ -241,7 +241,7 @@ public abstract class RunwayView {
         stringData.put("Start", new Point(START + scaling(start), stringY));
         stringData.put("LDAStart", new Point(START + scaling(LDAStart), stringY));
 
-        if(direction == "away") {
+        if(direction == "Away") {
             stringData.put("RESAStart", new Point(START + scaling(ov.getOb().getLength() + ov.getOriginalOffsetX()), stringY));
         }
         return stringData;
@@ -286,12 +286,13 @@ public abstract class RunwayView {
         BufferedImage img = null;
 
         try {
-            img = ImageIO.read(this.getClass().getResource("arrow.jpeg"));
+            img = ImageIO.read(this.getClass().getResource("arrow.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        g.drawImage(img, 50, 45, null);
+        int stringWidth = g.getFontMetrics().stringWidth("00 meters");
+        g.drawImage(img, 20 + stringWidth, 45, null);
     }
 
     public void drawScaleY(Graphics g){
