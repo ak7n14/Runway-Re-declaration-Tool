@@ -14,7 +14,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 public class SettingsGUI extends JFrame{
-	public SettingsGUI(){
+	public SettingsGUI(Mainscreen ms){
 		setTitle("Settings");
 		JTabbedPane jtp = new JTabbedPane();
 		
@@ -37,10 +37,20 @@ public class SettingsGUI extends JFrame{
 		JLabel lblBlast = new JLabel("Default engine blast");
 		JLabel lblColour = new JLabel("Colour scheme");
 		JTextField txtRecents = new JTextField("");
-		JTextField txtRESA = new JTextField("");
-		JTextField txtBlast = new JTextField("");
+		JTextField txtRESA = new JTextField(ms.RESA);
+		JTextField txtBlast = new JTextField(ms.engineBlastAllowance);
 		JComboBox cmbColours = new JComboBox();
 		JButton btnSave = new JButton("Save");
+
+		btnSave.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				ms.setRESA(Integer.parseInt(txtRESA.getText()));
+				ms.setEngineBlastAllowance(Integer.parseInt(txtBlast.getText()));
+			}
+		});
 		
 		general.add(lblRecents);
 		general.add(txtRecents);

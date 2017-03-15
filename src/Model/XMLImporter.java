@@ -89,7 +89,6 @@ public class XMLImporter
             {
                 Node obstacleNode = obstacleList.item(i);
                 String obstacleName = obstacleNode.getAttributes().getNamedItem("name").getTextContent();
-                System.out.println(obstacleName);
 
                 if(obstacleNode.getNodeType() == Node.ELEMENT_NODE)
                 {

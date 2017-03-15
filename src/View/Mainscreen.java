@@ -315,7 +315,7 @@ public class Mainscreen {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			SettingsGUI setGui = new SettingsGUI();
+			SettingsGUI setGui = new SettingsGUI(Mainscreen.this);
 			
 		}
 		
