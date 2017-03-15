@@ -190,13 +190,15 @@ public class SettingsGUI extends JFrame{
 		oExp.add(btnoExp);
 		
 		JPanel oAdd = new JPanel();
-		oAdd.setLayout(new GridLayout(4,2));
+		oAdd.setLayout(new GridLayout(5,2));
 		JLabel lbloName = new JLabel("Name");
 		JTextField txtoName = new JTextField();
 		JLabel lbloHeight = new JLabel("Height");
 		JTextField txtoHeight = new JTextField();
 		JLabel lbloWidth = new JLabel("Width");
 		JTextField txtoWidth = new JTextField();
+		JLabel lbloDepth = new JLabel("Depth");
+		JTextField txtoDepth = new JTextField();
 		JButton btnoSave = new JButton("Save");
 		oAdd.add(lbloName);
 		oAdd.add(txtoName);
@@ -204,6 +206,8 @@ public class SettingsGUI extends JFrame{
 		oAdd.add(txtoHeight);
 		oAdd.add(lbloWidth);
 		oAdd.add(txtoWidth);
+		oAdd.add(lbloDepth);
+		oAdd.add(txtoDepth);
 		oAdd.add(btnoSave);
 		
 		ojtp.addTab("Import", oImp);
