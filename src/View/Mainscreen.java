@@ -105,7 +105,7 @@ public class Mainscreen {
 		for (Runway runways : runWayList){
 			runWayComboBox.addItem(runways.getDesignator());
 		}
-		
+		runWayComboBox.setSelectedIndex(-1);
 		JLabel lblChooseRunway = new JLabel("Choose Runway");
 		lblChooseRunway.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		GridBagConstraints gbc_lblChooseRunway = new GridBagConstraints();
@@ -125,7 +125,7 @@ public class Mainscreen {
 		for(ObstacleBack obs: obsList){
 			obsComboBox.addItem(obs.getName());
 		}
-		
+		obsComboBox.setSelectedIndex(-1);
 		JLabel lblChooseObsticle = new JLabel("Choose Obsticle");
 		lblChooseObsticle.setHorizontalAlignment(SwingConstants.LEFT);
 		lblChooseObsticle.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
@@ -186,6 +186,7 @@ public class Mainscreen {
 		JComboBox<String> actionComboBox = new JComboBox<String>();
 		actionComboBox.addItem("Land");
 		actionComboBox.addItem("Take off");
+		actionComboBox.setSelectedIndex(-1);
 		GridBagConstraints gbc_actionComboBox = new GridBagConstraints();
 		gbc_actionComboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_actionComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -204,6 +205,7 @@ public class Mainscreen {
 		JComboBox<String> leftRight = new JComboBox<String>();
 		leftRight.addItem("Left");
 		leftRight.addItem("Right");
+		leftRight.setSelectedIndex(-1);
 		GridBagConstraints gbc_leftRight = new GridBagConstraints();
 		gbc_leftRight.insets = new Insets(0, 0, 5, 5);
 		gbc_leftRight.fill = GridBagConstraints.HORIZONTAL;
@@ -222,6 +224,7 @@ public class Mainscreen {
 		JComboBox<String> towardsAway = new JComboBox<String>();
 		towardsAway.addItem("Towards");
 		towardsAway.addItem("Away");
+		towardsAway.setSelectedIndex(-1);
 		GridBagConstraints gbc_towardsAway = new GridBagConstraints();
 		gbc_towardsAway.insets = new Insets(0, 0, 5, 5);
 		gbc_towardsAway.fill = GridBagConstraints.HORIZONTAL;
@@ -259,7 +262,7 @@ public class Mainscreen {
 		frame.getContentPane().add(panel_1, gbc_panel_1);
 		frame.setVisible(true);
 //		btnCalculate.addActionListener(new CalculateListener(importer,airport,runWayComboBox,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,towardsAway));
-
+		btnCalculate.addActionListener(new CalculateListener());
         //NEED RUNWAY
         GraphicsPanel side = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "side", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
         GraphicsPanel top = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "top", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
@@ -303,6 +306,7 @@ public class Mainscreen {
 //			System.out.println(calc.getReLda());
 //          top.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
 //          side.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
+			NotificationWindow notification = new NotificationWindow();
 		}
 //		
 	}
