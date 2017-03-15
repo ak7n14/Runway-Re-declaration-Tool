@@ -36,10 +36,11 @@ public class Mainscreen {
 	 * Create the application.
 	 */
 	public Mainscreen(Airport airport, Plane plane) {
-		initialize(airport,plane);
+
+	    initialize(airport,plane);
 		RESA=240;
 		engineBlastAllowance=300;//For now later can be taken as input(Depends on flight)
-        importer = new XMLImporter();
+
 
 	}
 
@@ -47,7 +48,7 @@ public class Mainscreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(Airport airport ,Plane plane) {
-
+        importer = new XMLImporter();
         obsList= importer.importObstacles();
         runWayList = airport.getRunways();
 		frame = new JFrame(airport.getName());
