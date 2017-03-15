@@ -32,7 +32,7 @@ public class RunwaySideView extends RunwayView{
     //draws runway
     public void drawRunway(Graphics g){
         g.setColor(Color.black);
-        g.fillRect(100, RUNWAY_Y(), this.scaling(runwayLength), runwayHeight);
+        g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), runwayHeight);
     }
 
     //draws rectangles to show scale 50 meter by 50 meter

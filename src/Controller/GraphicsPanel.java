@@ -105,7 +105,7 @@ public class GraphicsPanel extends JPanel {
         GraphicsPanel pt = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "side", 1000, 500);
         jFrame.add(pt);
         jFrame.setVisible(true);
-        pt.updatePaint(new Calculations(pt.getRw(), 20, 500), 0, new ObstacleBack("nuke", 20, 100, 100), "Towards", "Taking off");
+        pt.updatePaint(new Calculations(pt.getRw(), 20, 1000), 0, new ObstacleBack("nuke", 20, 100, 100), "Towards", "Taking off");
     }
 
 

@@ -18,7 +18,7 @@ public abstract class RunwayView {
     Runway runway;
 
     //start of runway
-    final int START = 100;
+    final int START = 10;
 
     //start of displace LDA
     private int LDAStart;
@@ -252,7 +252,7 @@ public abstract class RunwayView {
 
     //scales objects for JPanel in x direction proportional to runway length
     public int scaling(int x){
-        return (int)((double)x/(double)runway.getStripLength() * ((double)jpanelWidth - 2 * START));
+        return (int)((double)x/(double)runway.getStripLength() * ((double)(jpanelWidth - 2 * START)));
     }
 
     //scales objects for JPanel in y direction proportional to height of runway
