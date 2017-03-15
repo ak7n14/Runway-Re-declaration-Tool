@@ -1,5 +1,9 @@
 package View;
 
+import Model.ObstacleBack;
+import Model.XMLExporter;
+import Model.XMLImporter;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
@@ -14,6 +18,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 public class SettingsGUI extends JFrame{
+
+	XMLImporter importer = new XMLImporter();
+	XMLExporter exporter = new XMLExporter();
+
 	public SettingsGUI(Mainscreen ms){
 		setTitle("Settings");
 		JTabbedPane jtp = new JTabbedPane();
@@ -65,16 +73,18 @@ public class SettingsGUI extends JFrame{
 		
 		JPanel apImp = new JPanel();
 		apImp.setLayout(new GridLayout(2,2));
-		JLabel lblapImp = new JLabel("Path of aiport XML file:");
+		JLabel lblapImp = new JLabel("Name of aiport XML file:");
 		JTextField txtapImp = new JTextField();
 		JButton btnapImp = new JButton("Load File");
+
+
 		apImp.add(lblapImp);
 		apImp.add(txtapImp);
 		apImp.add(btnapImp);
 	
 		JPanel apExp = new JPanel();
 		apExp.setLayout(new GridLayout(2,2));
-		JLabel lblapExp = new JLabel("Path of aiport XML file:");
+		JLabel lblapExp = new JLabel("Name of aiport XML file:");
 		JTextField txtapExp = new JTextField();
 		JButton btnapExp = new JButton("Save File");
 		apExp.add(lblapExp);
@@ -173,18 +183,30 @@ public class SettingsGUI extends JFrame{
 		
 		JPanel oImp = new JPanel();
 		oImp.setLayout(new GridLayout(2,2));
-		JLabel lbloImp = new JLabel("Path of obstacle XML file:");
+		JLabel lbloImp = new JLabel("Name of obstacle XML file:");
 		JTextField txtoImp = new JTextField();
 		JButton btnoImp = new JButton("Load File");
+
+		btnoImp.addActionListener(e ->
+		{
+			ms.obsList.addAll(importer.importCustomObstacles(txtoImp.getText()));
+		});
+
 		oImp.add(lbloImp);
 		oImp.add(txtoImp);
 		oImp.add(btnoImp);
 	
 		JPanel oExp = new JPanel();
 		oExp.setLayout(new GridLayout(2,2));
-		JLabel lbloExp = new JLabel("Path of obstacle XML file:");
+		JLabel lbloExp = new JLabel("Name of obstacle XML file:");
 		JTextField txtoExp = new JTextField();
 		JButton btnoExp = new JButton("Save File");
+
+		btnoExp.addActionListener(e ->
+		{
+			exporter.exportObstacles(txtoExp.getText(), ms.obsList);
+		});
+
 		oExp.add(lbloExp);
 		oExp.add(txtoExp);
 		oExp.add(btnoExp);
@@ -195,17 +217,27 @@ public class SettingsGUI extends JFrame{
 		JTextField txtoName = new JTextField();
 		JLabel lbloHeight = new JLabel("Height");
 		JTextField txtoHeight = new JTextField();
-		JLabel lbloWidth = new JLabel("Width");
-		JTextField txtoWidth = new JTextField();
+		JLabel lbloLength = new JLabel("Length");
+		JTextField txtoLength = new JTextField();
 		JLabel lbloDepth = new JLabel("Depth");
 		JTextField txtoDepth = new JTextField();
 		JButton btnoSave = new JButton("Save");
+
+		btnoSave.addActionListener(e ->
+		{
+			ms.obsList.add(new ObstacleBack(txtoName.getText(),
+					Integer.parseInt(txtoHeight.getText()),
+					Integer.parseInt(txtoLength.getText()),
+					Integer.parseInt(txtoDepth.getText())));
+			System.out.println("Adding new obs");
+		});
+
 		oAdd.add(lbloName);
 		oAdd.add(txtoName);
 		oAdd.add(lbloHeight);
 		oAdd.add(txtoHeight);
-		oAdd.add(lbloWidth);
-		oAdd.add(txtoWidth);
+		oAdd.add(lbloLength);
+		oAdd.add(txtoLength);
 		oAdd.add(lbloDepth);
 		oAdd.add(txtoDepth);
 		oAdd.add(btnoSave);
@@ -219,7 +251,7 @@ public class SettingsGUI extends JFrame{
 		aircraft.setLayout(new GridLayout(1,1));
 		JPanel acImp = new JPanel();
 		acImp.setLayout(new GridLayout(2,2));
-		JLabel lblacImp = new JLabel("Path of aircaft XML file:");
+		JLabel lblacImp = new JLabel("Name of aircaft XML file:");
 		JTextField txtacImp = new JTextField();
 		JButton btnacImp = new JButton("Load File");
 		acImp.add(lblacImp);
@@ -228,7 +260,7 @@ public class SettingsGUI extends JFrame{
 	
 		JPanel acExp = new JPanel();
 		acExp.setLayout(new GridLayout(2,2));
-		JLabel lblacExp = new JLabel("Path of aircraft XML file:");
+		JLabel lblacExp = new JLabel("Name of aircraft XML file:");
 		JTextField txtacExp = new JTextField();
 		JButton btnacExp = new JButton("Save File");
 		acExp.add(lblacExp);
@@ -259,6 +291,7 @@ public class SettingsGUI extends JFrame{
 		aircraft.add(acjtp);
 		
 		setSize(400,200);
+		setLocationRelativeTo(null);
 		setVisible(true);
 		
 	}

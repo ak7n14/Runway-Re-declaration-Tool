@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <obstacles>
-    <obstacle name="737 wreck">
+    <obstacle name="737 Wreck">
         <height>5</height>
         <length>17</length>
         <depth>10</depth>
+    </obstacle>
+    <obstacle name="Oil Spill">
+        <height>0</height>
+        <length>5</length>
+        <depth>8</depth>
+    </obstacle>
+    <obstacle name="Cessna 152 Wreck">
+        <height>2</height>
+        <length>10</length>
+        <depth>12</depth>
     </obstacle>
 </obstacles>

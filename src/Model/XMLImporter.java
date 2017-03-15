@@ -8,16 +8,20 @@ import java.util.*;
 public class XMLImporter
 {
 
-
-
     // method reads a default XML file containing airport data
     // returns an ArrayList of Airport type
     public ArrayList<Airport> importAirports()
     {
+        return importCustomAirports("Airports");
+    }
+
+
+    public ArrayList<Airport> importCustomAirports(String filename)
+    {
         ArrayList<Airport> airports = new ArrayList<Airport>();
         try
         {
-            File airportFile = new File("Data/Airports.xml");
+            File airportFile = new File("Data/"+filename+".xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -71,12 +75,18 @@ public class XMLImporter
 
     // method reads a default XML file containing obstacle data
     // returns an ArrayList of ObstacleBack type
+
     public ArrayList<ObstacleBack> importObstacles()
+    {
+        return importCustomObstacles("Obstacles");
+    }
+
+    public ArrayList<ObstacleBack> importCustomObstacles(String filename)
     {
         ArrayList<ObstacleBack> obstacles = new ArrayList<ObstacleBack>();
         try
         {
-            File obstacleFile = new File("Data/Obstacles.xml");
+            File obstacleFile = new File("Data/"+filename+".xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -114,11 +124,16 @@ public class XMLImporter
     // returns an ArrayList of Plane type
     public ArrayList<Plane> importPlanes()
     {
+        return importCustomPlanes("Planes");
+    }
+
+    public ArrayList<Plane> importCustomPlanes(String filename)
+    {
         ArrayList<Plane> planes = new ArrayList<>();
 
         try
         {
-            File planeFile = new File("Data/Planes.xml");
+            File planeFile = new File("Data/"+filename+".xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
