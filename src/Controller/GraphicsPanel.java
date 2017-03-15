@@ -85,6 +85,9 @@ public class GraphicsPanel extends JPanel {
         if(recalculated)
             obsView.drawShape(g);
 
+        if(recalculated && rsw instanceof RunwaySideView)
+            ((RunwaySideView) rsw).drawALS(g);
+
         rsw.drawAllSeparators(g);
     }
 
@@ -123,88 +126,6 @@ public class GraphicsPanel extends JPanel {
 
         repaint();
     }
-
-//    public void GUI(){
-//        JFrame jFrame = new JFrame();
-//
-//        //create labels
-//        jLabels.add(new JLabel("LDAStart"));
-//        jLabels.add(new JLabel("Start"));
-//        jLabels.add(new JLabel("TODA Length"));
-//        jLabels.add(new JLabel("TORA Length"));
-//        jLabels.add(new JLabel("ASDA Length"));
-//        jLabels.add(new JLabel("LDA Length"));
-//        jLabels.add(new JLabel("Runway Length"));
-//        jLabels.add(new JLabel("Runway Height"));
-//        jLabels.add(new JLabel("Runway Number"));
-//        jLabels.add(new JLabel("Offset X"));
-//        jLabels.add(new JLabel("Offset Y"));
-//        jLabels.add(new JLabel("Offset Z"));
-//        jLabels.add(new JLabel("Coord top x,z;x2,z2;...;xn,zn"));
-//        jLabels.add(new JLabel("Coord side x,y;x2,y2;...;xn,yn"));
-//        jLabels.add(new JLabel("Obstacle Height"));
-//
-//        JButton jButton = new JButton("OK");
-//
-//        //create input boxes
-//        for (int i = 0; i < jLabels.size(); i++){
-//            jFrame.add(jLabels.get(i));
-//
-//            jTextFields.add(new JTextField(5));
-//
-//            jFrame.add(jTextFields.get(i));
-//            jFrame.add(jButton);
-//        }
-//
-//        //set data on submit
-//        jButton.addActionListener(e -> {
-//            //on button click
-//            JFrame jFrame2 = new JFrame();
-//            jFrame2.setLayout(new GridLayout(1,2));
-//
-//            int LDAStart = getIntField(0);
-//            int start = getIntField(1);
-//            int TODALength = getIntField(2);
-//            int TORALength = getIntField(3);
-//            int ASDALength = getIntField(4);
-//            int LDALength = getIntField(5);
-//            int runwayLength = getIntField(6);
-//            int runwayHeight = getIntField(7);
-//            String runwayNumber = getField(8);
-//
-//            int offsetX = getIntField(9);
-//            int offsetY = getIntField(10);
-//            int offsetZ = getIntField(11);
-//
-//            int[] obX;
-//            int[] obY;
-//            int[] obSideX;
-//            int[] obSideY;
-//
-//
-//            obX = getCoord(12, "x");
-//
-//            obY = getCoord(12, "y");
-//
-//
-//            obSideX = getCoord(13, "x");
-//
-//            obSideY = getCoord(13, "y");
-//
-//            int obstacleHeight = getIntField(14);
-//
-//            //add visuals to frame
-//            jFrame2.setSize(2000, 400);
-////            jFrame2.add(new PaintTester("side", LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, runwayHeight, runwayNumber, offsetX, offsetY, offsetZ, obX, obY, obSideX, obSideY, obstacleHeight));
-////            jFrame2.add(new PaintTester("top", LDAStart, start, TODALength, TORALength, ASDALength, LDALength, runwayLength, runwayHeight, runwayNumber, offsetX, offsetY, offsetZ, obX, obY, obSideX, obSideY, obstacleHeight));
-//            jFrame2.setVisible(true);
-//        });
-//
-//        jFrame.setLocation(0,500); //position on screen
-//        jFrame.setSize(1000, 400);
-//        jFrame.setLayout(new FlowLayout());
-//        jFrame.setVisible(true);
-//    }
 
     //get text from textbox
     public String getField(int loc){

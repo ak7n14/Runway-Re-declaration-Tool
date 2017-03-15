@@ -27,7 +27,6 @@ public class RunwaySideView extends RunwayView{
         //draws separator labels
         this.drawLabels(g);
         this.drawScaleX(g);
-        drawALS(g);
     }
 
     //draws runway

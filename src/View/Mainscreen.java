@@ -1,13 +1,12 @@
 package View;
 
-import java.awt.Color;
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Controller.GraphicsPanel;
 import Model.Airport;
 import Model.Calculations;
 import Model.ObstacleBack;
@@ -15,15 +14,10 @@ import Model.Plane;
 import Model.Runway;
 import Model.XMLImporter;
 
-import java.awt.GridBagConstraints;
-import java.awt.FlowLayout;
 import javax.swing.JLabel;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -60,7 +54,9 @@ public class Mainscreen {
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
-		
+
+		frame.setPreferredSize(new Dimension(1107,837));
+
 		JPanel graphicsPanel = new JPanel();
 		graphicsPanel.setLayout(new GridLayout(2,1));
 		graphicsPanel.setBackground(Color.GREEN);
@@ -72,7 +68,9 @@ public class Mainscreen {
 		gbc_graphicsPanel.gridx = 0;
 		gbc_graphicsPanel.gridy = 0;
 		frame.getContentPane().add(graphicsPanel, gbc_graphicsPanel);
-		
+
+        System.out.println(graphicsPanel.getSize() + " " + graphicsPanel.getHeight());
+
 		JPanel inputPanel = new JPanel();
 		GridBagConstraints gbc_inputPanel = new GridBagConstraints();
 		gbc_inputPanel.insets = new Insets(0, 0, 5, 0);
@@ -261,6 +259,12 @@ public class Mainscreen {
 		frame.getContentPane().add(panel_1, gbc_panel_1);
 		frame.setVisible(true);
 //		btnCalculate.addActionListener(new CalculateListener(importer,airport,runWayComboBox,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,towardsAway));
+
+        //NEED RUNWAY
+        GraphicsPanel side = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "side", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
+        GraphicsPanel top = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "top", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
+        graphicsPanel.add(side);
+        graphicsPanel.add(top);
 	}
 
 	public void setEngineBlastAllowance(int engineBlastAllowance) {
@@ -279,7 +283,9 @@ public class Mainscreen {
 //		int resa;
 //		int eng;
 //		String direction;
-//		public CalculateListener(XMLImporter imp,Airport airport,JComboBox<String> runWayComboBox, JComboBox<String> obsComboBox,JTextField locTh,JTextField locCL,int resa,int eng,JComboBox<String> direction){
+//      GraphicsPanel top; //ted
+//      GraphicsPanel side; //ted
+//		public CalculateListener(XMLImporter imp,Airport airport,JComboBox<String> runWayComboBox, JComboBox<String> obsComboBox,JTextField locTh,JTextField locCL,int resa,int eng,JComboBox<String> direction, /*ted*/ GraphicsPanel top, GraphicsPanel side /*ted*/){
 //			this.runway=airport.getRunwayByDesignator(runWayComboBox.getItemAt(runWayComboBox.getSelectedIndex()));
 //			this.obsHeight = imp.getObsticalByName(obsComboBox.getItemAt(obsComboBox.getSelectedIndex())).getHeight();
 //			this.locTh = Integer.parseInt(locTh.getText());
@@ -287,13 +293,16 @@ public class Mainscreen {
 //			this.resa = resa;
 //			this.eng = eng;
 //			this.direction=direction.getItemAt(direction.getSelectedIndex());
-//			
+//			this.top = top; /*ted*/
+//          this.side = side /*ted*/
 //		}
 	public void actionPerformed(ActionEvent e) {
 //			// TODO Auto-generated method stub
 //			Calculations calc = new Calculations(runway, obsHeight, locTh, resa, eng);
 //			calc.calculateLda(direction);
 //			System.out.println(calc.getReLda());
+//          top.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
+//          side.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
 		}
 //		
 	}

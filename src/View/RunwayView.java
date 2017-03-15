@@ -106,12 +106,12 @@ public abstract class RunwayView {
     //draw stop and clear way, stop in front of clear as clear is normally larger
     public void drawStopWay(Graphics g){
         g.setColor(Color.MAGENTA);
-        g.fillRect(START + scaling(runwayLength), RUNWAY_Y(), scaling(calc.getStopWay()) /*scaling(runwayEnds.get("ASDA")) - scaling(runwayLength)*/, scalingHeight(runwayHeight));
+        g.fillRect(START + scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("ASDA")) - scaling(runwayLength), scalingHeight(runwayHeight));
     }
 
     public void drawClearWay(Graphics g){
         g.setColor(Color.green);
-        g.fillRect(START + this.scaling(runwayLength), RUNWAY_Y(), scaling(calc.getClearWay())/*scaling(runwayEnds.get("TODA")) - scaling(runwayLength)*/, scalingHeight(runwayHeight));
+        g.fillRect(START + this.scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("TODA")) - scaling(runwayLength), scalingHeight(runwayHeight));
     }
 
     //draws runway
