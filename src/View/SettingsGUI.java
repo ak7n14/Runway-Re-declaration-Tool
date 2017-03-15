@@ -42,15 +42,11 @@ public class SettingsGUI extends JFrame{
 		JComboBox cmbColours = new JComboBox();
 		JButton btnSave = new JButton("Save");
 
-		btnSave.addActionListener(new ActionListener()
+		btnSave.addActionListener(e ->
 		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				ms.setRESA(Integer.parseInt(txtRESA.getText()));
-				ms.setEngineBlastAllowance(Integer.parseInt(txtBlast.getText()));
-			}
-		});
+            ms.setRESA(Integer.parseInt(txtRESA.getText()));
+            ms.setEngineBlastAllowance(Integer.parseInt(txtBlast.getText()));
+        });
 		
 		general.add(lblRecents);
 		general.add(txtRecents);
