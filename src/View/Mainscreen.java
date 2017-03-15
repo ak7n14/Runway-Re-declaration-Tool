@@ -23,28 +23,33 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 public class Mainscreen {
+    //TODO: Make action Listener for runway
 	private JFrame frame;
 	private JTextField obsDisCL;
 	private JTextField obsDistTh;
 	int RESA;//Runway End Safety Area (RESA)
 	int engineBlastAllowance;//blast allowance depends on the aircraft
-	/**
+    XMLImporter importer;
+    ArrayList<ObstacleBack> obsList;
+    ArrayList<Runway>runWayList;
+    /**
 	 * Create the application.
 	 */
 	public Mainscreen(Airport airport, Plane plane) {
 		initialize(airport,plane);
 		RESA=240;
 		engineBlastAllowance=300;//For now later can be taken as input(Depends on flight)
+        importer = new XMLImporter();
+
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(Airport airport ,Plane plane) {
-		
-		XMLImporter importer = new XMLImporter();
-		ArrayList<ObstacleBack> obsList= importer.importObstacles();
-		ArrayList<Runway>runWayList = airport.getRunways();
+
+        obsList= importer.importObstacles();
+        runWayList = airport.getRunways();
 		frame = new JFrame(airport.getName());
 		frame.setBounds(0, 0, 1307, 837);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,7 +64,6 @@ public class Mainscreen {
 
 		JPanel graphicsPanel = new JPanel();
 		graphicsPanel.setLayout(new GridLayout(2,1));
-		graphicsPanel.setBackground(Color.GREEN);
 		GridBagConstraints gbc_graphicsPanel = new GridBagConstraints();
 		gbc_graphicsPanel.gridheight = 2;
 		gbc_graphicsPanel.gridwidth = 30;
@@ -249,17 +253,14 @@ public class Mainscreen {
 		
 		btnCalculate.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 16));
 		panel.add(btnCalculate);
-		inputPanel.setBackground(Color.orange);
-		inputPanel.setOpaque(true);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.CYAN);
+		JPanel calculationPanel = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 30;
 		gbc_panel_1.gridy = 1;
-		frame.getContentPane().add(panel_1, gbc_panel_1);
+		frame.getContentPane().add(calculationPanel, gbc_panel_1);
 		frame.setVisible(true);
 //		btnCalculate.addActionListener(new CalculateListener(importer,airport,runWayComboBox,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,towardsAway));
 		btnCalculate.addActionListener(new CalculateListener());
