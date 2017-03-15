@@ -14,8 +14,8 @@ public class RunwaySideView extends RunwayView{
     //initial y position and height are constants for
 
     //defines size of runway
-    public RunwaySideView(Runway runway, String direction, String takeOfforLand, int jpanelWidth, int jpanelHeight) {
-        super(runway, jpanelWidth, jpanelHeight, 10, direction, takeOfforLand);
+    public RunwaySideView(Runway runway, int jpanelWidth, int jpanelHeight) {
+        super(runway, jpanelWidth, jpanelHeight, 10);
     }
 
     //draws runway, seperators and labels

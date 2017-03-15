@@ -46,7 +46,7 @@ public abstract class RunwayView {
     
     private final int SEPARATOR_HEIGHT = 10;
 
-    RunwayView(Runway runway, int jpanelWidth, int jpanelHeight, int runwayHeight,  String direction, String takeOfforLand) {
+    RunwayView(Runway runway, int jpanelWidth, int jpanelHeight, int runwayHeight) {
         this.runwayLength = runway.getRunwayLenght();
         this.jpanelWidth = jpanelWidth;
         this.jpanelHeight = jpanelHeight;
@@ -58,8 +58,6 @@ public abstract class RunwayView {
         //stores all ends in hashmap
         runwayEnds = new HashMap<>();
 
-        this.direction = direction;
-        this.takeOffOrLand = takeOfforLand;
 
         runwayEnds.put("TODA", runway.getTODA());
         runwayEnds.put("TORA", runway.getTORA());

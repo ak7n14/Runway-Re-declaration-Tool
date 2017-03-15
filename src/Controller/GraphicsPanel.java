@@ -12,7 +12,7 @@ import View.RunwayView;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class PaintTester extends JPanel {
+public class GraphicsPanel extends JPanel {
 
     private RunwayView rsw;
     private Runway rw;
@@ -28,7 +28,7 @@ public class PaintTester extends JPanel {
     ArrayList<JLabel> jLabels;
     ArrayList<JTextField> jTextFields;
 
-    public PaintTester(Runway runway, String type, String direction, String  takeOffOrLand, int jPanelWidth, int jPanelHeight) {
+    public GraphicsPanel(Runway runway, String type, int jPanelWidth, int jPanelHeight) {
 
         this.setSize(jPanelWidth, jPanelHeight);
         jLabels = new ArrayList<>();
@@ -56,10 +56,10 @@ public class PaintTester extends JPanel {
 
         //creates runway
         if(type.equals("top")) {
-            rsw = new RunwayTopView(rw, this.getWidth(), this.getHeight(), direction, takeOffOrLand);
+            rsw = new RunwayTopView(rw, this.getWidth(), this.getHeight());
         }
         else if(type.equals("side")){
-            rsw = new RunwaySideView(rw, direction, takeOffOrLand, this.getWidth(), this.getHeight());
+            rsw = new RunwaySideView(rw,  this.getWidth(), this.getHeight());
         }
 
 
@@ -99,10 +99,10 @@ public class PaintTester extends JPanel {
         JFrame jFrame = new JFrame();
 
         jFrame.setSize(1000, 500);
-        PaintTester pt = new PaintTester(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "side", "sfsd", "adad", 1000, 500);
+        GraphicsPanel pt = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "side", 1000, 500);
         jFrame.add(pt);
         jFrame.setVisible(true);
-        pt.updatePaint(new Calculations(pt.getRw(), 20, 500), 0, new ObstacleBack("nuke", 20, 100, 100), "Away", "Taking off");
+        pt.updatePaint(new Calculations(pt.getRw(), 20, 500), 0, new ObstacleBack("nuke", 20, 100, 100), "Towards", "Taking off");
     }
 
 

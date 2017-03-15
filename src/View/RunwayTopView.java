@@ -20,8 +20,8 @@ public class RunwayTopView extends RunwayView{
     protected int RUNWAY_Y() { return 100; }
     private final int DASHED_HEIGHT = RUNWAY_Y() + this.scalingHeight(runwayHeight/2);
 
-    public RunwayTopView(Runway runway, int jpanelWidth, int jpanelHeight, String direction, String takeOffOrLand) {
-        super(runway, jpanelWidth, jpanelHeight, runway.getRunwayWidth(), direction, takeOffOrLand);
+    public RunwayTopView(Runway runway, int jpanelWidth, int jpanelHeight) {
+        super(runway, jpanelWidth, jpanelHeight, runway.getRunwayWidth());
         this.runwayNumber = runway.getDesignator();
     }
 
