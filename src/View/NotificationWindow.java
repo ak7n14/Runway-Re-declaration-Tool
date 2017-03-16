@@ -25,7 +25,7 @@ public class NotificationWindow {
             panel.add(new JLabel("Values Updated!"));
             JPanel panel2 = new JPanel();
             panel2.setLayout(new GridLayout(5,1));
-            panel2.add(new JLabel("Key"));
+            panel2.add(new JLabel("Key:"));
             panel2.add(new JLabel(""));
             panel2.add(new JLabel("OLT = Obsticle location from threshold"));
             panel2.add(new JLabel(""));
