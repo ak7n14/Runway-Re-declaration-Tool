@@ -74,6 +74,7 @@ public abstract class RunwayView {
         this.LDAStart = LDAStart;
         this.RESAStart = ov.getOriginalOffsetX() + ov.getOb().getLength();
 
+        runwayLength = calc.getReTORA();
         this.calc = calc;
         //so calc doesnt get used before updated
         updated = true;

@@ -588,7 +588,16 @@ public class Mainscreen {
 								printCalcLandOver(calc);
 							}
 							if(calc.getReLda()>=plane.getMinLandingDis()){
+								//change direction left or right of center line
+								int offsetZ = obsLocCenteLine;
+								if (Side == "Left") {
+									offsetZ *= 1;
+								}
 
+								top.setRunway(runway);
+								side.setRunway(runway);
+								top.updatePaint(calc, offsetZ, obs, Direction, Action);
+								side.updatePaint(calc, offsetZ, obs, Direction, Action);
 							}
 
 						}
@@ -603,22 +612,21 @@ public class Mainscreen {
 							}
 
 							if(calc.getReTORA()>=plane.getMinTakeoffDis()){
+								//change direction left or right of center line
+								int offsetZ = obsLocCenteLine;
+								if (Side == "Left") {
+									offsetZ *= 1;
+								}
 
+								top.setRunway(runway);
+								side.setRunway(runway);
+								top.updatePaint(calc, offsetZ, obs, Direction, Action);
+								side.updatePaint(calc, offsetZ, obs, Direction, Action);
 							}
 						}
 
 					}
 					NotificationWindow notification = new NotificationWindow("Valid");
-						//change direction left or right of center line
-						int offsetZ = obsLocCenteLine;
-						if (Side == "Left") {
-							offsetZ *= 1;
-						}
-
-						top.setRunway(runway);
-						side.setRunway(runway);
-						top.updatePaint(calc, offsetZ, obs, Direction, Action);
-						side.updatePaint(calc, offsetZ, obs, Direction, Action);
 
 
 					}
