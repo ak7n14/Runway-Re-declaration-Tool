@@ -28,7 +28,8 @@ public class RunwayTopView extends RunwayView{
     //draws runway, seperators and labels
     public void drawAll(Graphics g){
         this.drawRunway(g);
-        this.drawClearWay(g);
+        if(getTakeOffOrLand() == "Taking off")
+            this.drawClearWay(g);
         this.drawStopWay(g);
         this.drawAllSeparators(g);
         //draws separator labels

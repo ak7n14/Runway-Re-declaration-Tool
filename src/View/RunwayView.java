@@ -78,6 +78,7 @@ public abstract class RunwayView {
         //so calc doesnt get used before updated
         updated = true;
 
+        runwayEnds = new HashMap<>();
         if(takeOfforLand == "Taking off") {
             runwayEnds.put("TODA", calc.getReTODA());
             runwayEnds.put("TORA", calc.getReTORA());
@@ -85,6 +86,7 @@ public abstract class RunwayView {
         }
         else {
             runwayEnds.put("LDA", calc.getReLda());
+            runwayEnds.put("ASDA", calc.getReASDA() - start);
         }
 
 
@@ -101,7 +103,8 @@ public abstract class RunwayView {
     //draws runway, seperators and labels
     public void drawAll(Graphics g){
         this.drawRunway(g);
-        this.drawClearWay(g);
+        if(takeOffOrLand == "Taking off")
+            this.drawClearWay(g);
         this.drawStopWay(g);
         //draws separator labels
         this.drawLabels(g);
@@ -310,7 +313,7 @@ public abstract class RunwayView {
         //meter labels change dynamically based on scale
         if(this instanceof RunwaySideView){
             if (ov.getOb().getHeight() < 5) {
-                g.drawString("2 meters", 25, (50 + MeterY()) / 2);
+                g.drawString("1 meters", 25, (50 + MeterY()) / 2);
             }
             else if(ov.getOb().getHeight() < 10) {
                 g.drawString("5 meters", 25, (50 + MeterY()) / 2);
@@ -357,4 +360,6 @@ public abstract class RunwayView {
         this.runway = runway;
         runwayLength = runway.getRunwayLenght();
     }
+
+
 }

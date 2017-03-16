@@ -21,7 +21,8 @@ public class RunwaySideView extends RunwayView{
     //draws runway, seperators and labels
     public void drawAll(Graphics g){
         this.drawRunway(g);
-        this.drawClearWay(g);
+        if(getTakeOffOrLand() == "Taking off")
+            this.drawClearWay(g);
         this.drawStopWay(g);
 
         //draws separator labels
@@ -43,7 +44,7 @@ public class RunwaySideView extends RunwayView{
 
     public int MeterY() {
         if(getOv().getOb().getHeight() < 5)
-            return this.RUNWAY_Y() - getOv().scalingSideHeight(2);
+            return this.RUNWAY_Y() - getOv().scalingSideHeight(1);
         if(getOv().getOb().getHeight() < 10)
             return this.RUNWAY_Y() - getOv().scalingSideHeight(5);
         else if(getOv().getOb().getHeight() < 50)
@@ -57,9 +58,10 @@ public class RunwaySideView extends RunwayView{
 
         //front of object
         int x1 = getOv().getOb().getLength() + getOv().getOriginalOffsetX();
-        int x = scaling(x1) + START;
+        int x = scaling(x1);
         //top of object
         int y = getOv().scalingSideHeight(getOv().getOb().getHeight());
+        int y1 = getOv().scalingSideHeight(getOv().getOb().getHeight()/2);
 
         //height x 50
         int mody1 = getCalc().getALS();
@@ -72,19 +74,18 @@ public class RunwaySideView extends RunwayView{
         if (takeOff && towards){
             int width = g.getFontMetrics().stringWidth("TOCS");
             mody *= -1;
-            mody1 *= -1;
-            g.drawString("TOCS", x + mody/2 - width, (3 * y)/2);
+            g.drawString("TOCS", x + mody/2 - width - 5, y1);
         }
 
         if(!takeOff && !towards){
-            g.drawString("ALS", x + mody/2, (3 * y)/2);
+            x += START;
+            g.drawString("ALS", x + mody/2 + 5, y1);
         }
 
         //if both false or both true
         if(!(takeOff ^ towards)){
             g.setColor(Color.BLUE);
             g.drawLine(x, y, x + mody, RUNWAY_Y());
-            drawSeparator(g,  x1 + mody1, 0);
         }
 
     }

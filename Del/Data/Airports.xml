@@ -115,7 +115,7 @@
 
 	<airport name="SOUTHAMPTON">
 		<runway>
-			<designator>02</designator>
+			<designator>02L</designator>
 			<TORA>1723</TORA>
 			<TODA>1831</TODA>
 			<ASDA>1723</ASDA>
@@ -127,7 +127,7 @@
 			<stripWidth>300</stripWidth>
 		</runway>
 		<runway>
-			<designator>20</designator>
+			<designator>20R</designator>
 			<TORA>1650</TORA>
 			<TODA>1805</TODA>
 			<ASDA>1650</ASDA>
