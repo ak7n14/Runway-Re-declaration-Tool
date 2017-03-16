@@ -40,6 +40,8 @@ public class Mainscreen {
 	JComboBox<String> runWayComboBox;
 	JComboBox<String> obsComboBox;
 	JPanel inputPanel;
+	Font font;
+	Font Bold;
 	/**
 	 * Create the application.
 	 */
@@ -193,13 +195,15 @@ public class Mainscreen {
 		obsDistTh.setColumns(10);
 		
 		JLabel lblSelectAction = new JLabel("Select Action");
+		font = lblSelectAction.getFont();
 		lblSelectAction.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		GridBagConstraints gbc_lblSelectAction = new GridBagConstraints();
 		gbc_lblSelectAction.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSelectAction.gridx = 1;
 		gbc_lblSelectAction.gridy = 6;
 		inputPanel.add(lblSelectAction, gbc_lblSelectAction);
-		
+		Bold = new Font(font.getName(),Font.BOLD, font.getSize());
+
 		JComboBox<String> actionComboBox = new JComboBox<String>();
 		actionComboBox.addItem("Landing");
 		actionComboBox.addItem("Taking off");
@@ -328,9 +332,11 @@ public class Mainscreen {
 			JLabel label1= new JLabel("LDA");
 			label1.setOpaque(true);
 			label1.setBackground(Color.GREEN);
+			label1.setFont(Bold);
 			JLabel label2= new JLabel(String.format("= %d meters",calc.getRunway().getLDA()));
 			label2.setBackground(Color.GREEN);
 			label2.setOpaque(true);
+			label2.setFont(Bold);
 			calculationPanel.add(label1);
 			calculationPanel.add(label2);
 		}
@@ -339,16 +345,19 @@ public class Mainscreen {
 		else {
 			calculationPanel.setLayout(new GridLayout(3, 1));
 			JLabel label2 = new JLabel(String.format("TORA = %d meters", calc.getRunway().getTORA()));
+			label2.setFont(Bold);
 			label2.setBackground(Color.GREEN);
 			label2.setOpaque(true);
 			calculationPanel.add(label2);
 			JLabel label3 = new JLabel(String.format("TODA = %d meters", calc.getRunway().getTODA()));
 			label3.setBackground(Color.GREEN);
 			label3.setOpaque(true);
+			label3.setFont(Bold);
 			calculationPanel.add(label3);
 			JLabel label4 = new JLabel(String.format("ASDA = %d meters", calc.getRunway().getASDA()));
 			label4.setBackground(Color.GREEN);
 			label4.setOpaque(true);
+			label4.setFont(Bold);
 			JLabel l2 = new JLabel("");
 			l2.setBackground(Color.GREEN);
 			l2.setOpaque(true);
@@ -370,13 +379,17 @@ public class Mainscreen {
 		calculationPanel.add(new JLabel(String.format("%d meters", calc.getObsLoc())));
 		calculationPanel.add(new JLabel("ALS = "));
 		calculationPanel.add(new JLabel(String.format("%d meters", calc.getALS())));
-		calculationPanel.add(new JLabel("Re-LDA = "));
+		JLabel la1=new JLabel("Re-LDA = ");
+		la1.setFont(Bold);
+		calculationPanel.add(la1);
 		calculationPanel.add(new JLabel("TORA - OLTH - ALS -60"));
 		calculationPanel.add(new JLabel(""));
 		String equation = String.format("=%d - %d - %d - %d",calc.getRunway().getTORA(),calc.getObsLoc(),calc.getALS(),60);
 		calculationPanel.add(new JLabel (equation));
 		calculationPanel.add(new JLabel(""));
-		calculationPanel.add(new JLabel(String.format("= %d meters",calc.getReLda())));
+		JLabel la2=new JLabel(String.format("= %d meters",calc.getReLda()));
+		la2.setFont(Bold);
+		calculationPanel.add(la2);
 
 		//Updating color of the panel depending on if the runway distance is sufficient or not
 		if(calc.getReLda()>plane.getMinLandingDis()+tol){
@@ -384,7 +397,9 @@ public class Mainscreen {
 		}
 		else if(calc.getReLda()<plane.getMinLandingDis()){
 			calculationPanel.setBackground(Color.RED);
-			calculationPanel.add(new JLabel("Min Dist req"));
+			JLabel la3 =new JLabel("Min Dist req");
+			la3.setFont(Bold);
+			calculationPanel.add(la3);
 			calculationPanel.add(new JLabel(String.format("= %d meters", plane.getMinLandingDis())));
 		}
 		else{
@@ -403,20 +418,26 @@ public class Mainscreen {
 		calculationPanel.add(new JLabel(String.format("%d meters", calc.getObsLoc())));
 		calculationPanel.add(new JLabel("RESA = "));
 		calculationPanel.add(new JLabel(String.format("%d meters", calc.getRESA())));
-		calculationPanel.add(new JLabel("Re-LDA = "));
+		JLabel la4 =new JLabel("Re-LDA = ");
+		la4.setFont(Bold);
+		calculationPanel.add(la4);
 		calculationPanel.add(new JLabel("OLTH - RESA - 60"));
 		calculationPanel.add(new JLabel(""));
 		String equation = String.format("=%d - %d - %d", calc.getObsLoc(), calc.getRESA(), 60);
 		calculationPanel.add(new JLabel(equation));
 		calculationPanel.add(new JLabel(""));
-		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReLda())));
+		JLabel la5 = new JLabel(String.format("= %d meters", calc.getReLda()));
+		la5.setFont(Bold);
+		calculationPanel.add(la5);
 
 		//Changing color of the panel according to the condition(If runway is sufficient)
 		if (calc.getReLda() > plane.getMinLandingDis() + tol) {
 			calculationPanel.setBackground(Color.GREEN);
 		} else if (calc.getReLda() < plane.getMinLandingDis()) {
 			calculationPanel.setBackground(Color.RED);
-			calculationPanel.add(new JLabel("Min Dist req "));
+			JLabel la6= new JLabel("Min Dist req ");
+			la6.setFont(Bold);
+			calculationPanel.add(la6);
 			calculationPanel.add(new JLabel(String.format("= %d meters", plane.getMinLandingDis())));
 		} else {
 			calculationPanel.setBackground(Color.YELLOW);
@@ -435,17 +456,29 @@ public class Mainscreen {
 		calculationPanel.add(new JLabel(String.format("%d meters", calc.getRunway().getThreasholdDisplacement())));
 		calculationPanel.add(new JLabel("ALS = "));
 		calculationPanel.add(new JLabel(String.format("%d meters", calc.getALS())));
-		calculationPanel.add(new JLabel("Re-TORA = "));
+		JLabel la7 = new JLabel("Re-TORA = ");
+		la7.setFont(Bold);
+		calculationPanel.add(la7);
 		calculationPanel.add(new JLabel("OLTH + THD - ALS - 60"));
 		calculationPanel.add(new JLabel(""));
 		String equation = String.format("=%d + %d - %d -%d", calc.getObsLoc(), calc.getRunway().getThreasholdDisplacement(), calc.getALS(), 60);
 		calculationPanel.add(new JLabel(equation));
 		calculationPanel.add(new JLabel(""));
-		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReTORA())));
-		calculationPanel.add(new JLabel("Re-TODA = Re-TORA"));
-		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReTORA())));
-		calculationPanel.add(new JLabel("Re-ASDA = Re-ORA"));
-		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReTORA())));
+		JLabel la8 = new JLabel(String.format("= %d meters", calc.getReTORA()));
+		la8.setFont(Bold);
+		calculationPanel.add(la8);
+		JLabel la9=new JLabel("Re-TODA = Re-TORA");
+		la9.setFont(Bold);
+		calculationPanel.add(la9);
+		JLabel la10 = new JLabel(String.format("= %d meters", calc.getReTORA()));
+		la10.setFont(Bold);
+		calculationPanel.add(la10);
+		JLabel la11=new JLabel("Re-ASDA = Re-ORA");
+		la11.setFont(Bold);
+		calculationPanel.add(la11);
+		JLabel la12 =new JLabel(String.format("= %d meters", calc.getReTORA()));
+		la12.setFont(Bold);
+		calculationPanel.add(la12);
 
 		//Changing color of the panel according to the condition(If runway is sufficient)
 		if (calc.getReTORA() > plane.getMinTakeoffDis() + tol
@@ -456,8 +489,12 @@ public class Mainscreen {
 				&& calc.getReTODA() < plane.getMinTakeoffDis()
 				&& calc.getReASDA() < plane.getMinTakeoffDis()) {
 			calculationPanel.setBackground(Color.RED);
-			calculationPanel.add(new JLabel("Min Dist req"));
-			calculationPanel.add(new JLabel(String.format("= %d meters", plane.getMinTakeoffDis())));
+			JLabel la13=new JLabel("Min Dist req");
+			la13.setFont(Bold);
+			calculationPanel.add(la13);
+			JLabel la14 = new JLabel(String.format("= %d meters", plane.getMinTakeoffDis()));
+			la14.setFont(Bold);
+			calculationPanel.add(la14);
 		} else {
 			calculationPanel.setBackground(Color.YELLOW);
 		}
@@ -480,27 +517,39 @@ public class Mainscreen {
 		calculationPanel.add(new JLabel(String.format("%d meters", calc.getObsLoc())));
 		calculationPanel.add(new JLabel("EBA"));
 		calculationPanel.add(new JLabel(String.format("%d meters", calc.getEngineBlastAllowance())));
-		calculationPanel.add(new JLabel("Re-TORA = "));
+		JLabel la15 = new JLabel("Re-TORA = ");
+		la15.setFont(Bold);
+		calculationPanel.add(la15);
 		calculationPanel.add(new JLabel("TORA - OLTH - EBA"));
 		calculationPanel.add(new JLabel(""));
 		String equation = String.format("=%d - %d - %d", calc.getRunway().getTORA(), calc.getObsLoc(), calc.getEngineBlastAllowance());
 		calculationPanel.add(new JLabel(equation));
 		calculationPanel.add(new JLabel(""));
-		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReTORA())));
-		calculationPanel.add(new JLabel("Re-TODA = "));
+		JLabel la16 = new JLabel(String.format("= %d meters", calc.getReTORA()));
+		la16.setFont(Bold);
+		calculationPanel.add(la16);
+		JLabel la17= new JLabel("Re-TODA = ");
+		la17.setFont(Bold);
+		calculationPanel.add(la17);
 		calculationPanel.add(new JLabel("TODA - OBTH - EBA"));
 		calculationPanel.add(new JLabel(""));
 		String equation1 = String.format("=%d - %d - %d", calc.getRunway().getTODA(), calc.getObsLoc(), calc.getEngineBlastAllowance());
 		calculationPanel.add(new JLabel(equation1));
 		calculationPanel.add(new JLabel(""));
-		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReTODA())));
-		calculationPanel.add(new JLabel("Re-ASDA = "));
+		JLabel la18 = new JLabel(String.format("= %d meters", calc.getReTODA()));
+		la18.setFont(Bold);
+		calculationPanel.add(la18);
+		JLabel la19 = new JLabel("Re-ASDA = ");
+		la19.setFont(Bold);
+		calculationPanel.add(la19);
 		calculationPanel.add(new JLabel("ASDA - OLTH - EBA"));
 		calculationPanel.add(new JLabel(""));
 		String equation2 = String.format("=%d - %d - %d", calc.getRunway().getASDA(), calc.getObsLoc(), calc.getEngineBlastAllowance());
 		calculationPanel.add(new JLabel(equation2));
 		calculationPanel.add(new JLabel(""));
-		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReASDA())));
+		JLabel la20 =new JLabel(String.format("= %d meters", calc.getReASDA()));
+		la20.setFont(Bold);
+		calculationPanel.add(la20);
 
 
 		//Changing color of the panel according to the condition(If runway is sufficient)
@@ -512,8 +561,10 @@ public class Mainscreen {
 				&& calc.getReTODA() < plane.getMinTakeoffDis()
 				&& calc.getReASDA() < plane.getMinTakeoffDis()) {
 			calculationPanel.setBackground(Color.RED);
-			calculationPanel.add(new JLabel("Min Dist req"));
-			calculationPanel.add(new JLabel(String.format("= %d meters", plane.getMinTakeoffDis())));
+			JLabel la21 = new JLabel("Min Dist req");
+			calculationPanel.add(la21);
+			JLabel la22 = new JLabel(String.format("= %d meters", plane.getMinTakeoffDis()));
+			calculationPanel.add(la22);
 		} else {
 			calculationPanel.setBackground(Color.YELLOW);
 		}
@@ -594,7 +645,7 @@ public class Mainscreen {
 					obsHeight=obs.getHeight();
 
 					Calculations calc = new Calculations(runway, obs.getHeight(), obsLocThreshold);
-					if(obsLocCenteLine>runway.getRunwayWidth()/4){
+					if(obsLocCenteLine>runway.getRunwayWidth()/2){
 						top.setRunway(runway);
 						side.setRunway(runway);
 						top.repaint();
