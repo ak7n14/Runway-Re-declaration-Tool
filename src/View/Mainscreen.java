@@ -337,12 +337,12 @@ public class Mainscreen {
 				Obsticle = ob.getItemAt(ob.getSelectedIndex());
 				runway=airport.getRunwayByDesignator(rw.getItemAt(rw.getSelectedIndex()));
 				obs=importer.getObsticalByName(Obsticle);
-				obsHeight=obs.getHeight();
-				if(sd!=null&&obsLocCenteLine>=0&&obsLocThreshold>=0&&Action!=null&&Direction!=null&&Obsticle!=null&&runway!=null){
-					Calculations calc = new Calculations(runway,obsHeight,obsLocThreshold,RESA,eng);
+
+				if(sd!=null&&obsLocCenteLine>=0&&Obsticle!=null&&obsLocThreshold>=0&&Action!=null&&Direction!=null&&Obsticle!=null&&runway!=null){
+					obsHeight=obs.getHeight();
 //          		top.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
 //          		side.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
-					NotificationWindow notification = new NotificationWindow("Valid");
+
 				}
 				else{
 					NotificationWindow notification = new NotificationWindow("Invalid");
