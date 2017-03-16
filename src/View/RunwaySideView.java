@@ -42,7 +42,11 @@ public class RunwaySideView extends RunwayView{
     }
 
     public int MeterY() {
-        if(getOv().getOb().getHeight() < 50)
+        if(getOv().getOb().getHeight() < 5)
+            return this.RUNWAY_Y() - getOv().scalingSideHeight(2);
+        if(getOv().getOb().getHeight() < 10)
+            return this.RUNWAY_Y() - getOv().scalingSideHeight(5);
+        else if(getOv().getOb().getHeight() < 50)
             return this.RUNWAY_Y() - getOv().scalingSideHeight(10);
         return this.RUNWAY_Y() - getOv().scalingSideHeight(50);
     }

@@ -18,7 +18,7 @@ public abstract class RunwayView {
     Runway runway;
 
     //start of runway
-    final int START = 10;
+    final int START = 60;
 
     //start of displace LDA
     private int LDAStart;
@@ -252,12 +252,12 @@ public abstract class RunwayView {
 
     //scales objects for JPanel in x direction proportional to runway length
     public int scaling(int x){
-        return (int)((double)x/(double)runway.getStripLength() * ((double)(jpanelWidth - 2 * START)));
+        return (int)((double)x/(double)runwayLength * ((double)(jpanelWidth - 2 * START)));
     }
 
     //scales objects for JPanel in y direction proportional to height of runway
     public int scalingHeight(int y){
-        return (int)((double)y/(double)runway.getStripWidth() * ((double)jpanelHeight - 2 * RUNWAY_Y()));
+        return (int)((double)y/(double)runwayHeight * ((double)jpanelHeight - 2 * RUNWAY_Y()));
     }
 
     //draw scales so user can get a feel of how big the runway and obstacles are
@@ -304,7 +304,13 @@ public abstract class RunwayView {
 
         //meter labels change dynamically based on scale
         if(this instanceof RunwaySideView){
-            if(ov.getOb().getHeight() < 50) {
+            if (ov.getOb().getHeight() < 5) {
+                g.drawString("2 meters", 25, (50 + MeterY()) / 2);
+            }
+            else if(ov.getOb().getHeight() < 10) {
+                g.drawString("5 meters", 25, (50 + MeterY()) / 2);
+            }
+            else if(ov.getOb().getHeight() < 50) {
                 g.drawString("10 meters", 25, (50 + MeterY()) / 2);
             }
         }

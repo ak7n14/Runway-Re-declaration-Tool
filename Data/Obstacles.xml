@@ -7,7 +7,7 @@
         <depth>10</depth>
     </obstacle>
     <obstacle name="Oil Spill">
-        <height>0</height>
+        <height>1</height>
         <length>5</length>
         <depth>8</depth>
     </obstacle>

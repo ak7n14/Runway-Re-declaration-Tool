@@ -1,6 +1,7 @@
 package View;
 import java.awt.*;
 
+import Controller.Main;
 import Model.*;
 public class ObstacleView extends Obstacle{
 
@@ -131,7 +132,7 @@ public class ObstacleView extends Obstacle{
     //scales objects for JPanel in x direction proportional to runway length
     //scales objects for JPanel in x direction proportional to runway length
     public int scaling(int x, int offset){
-        return (int)((double)x/(double)currentRunway.getRunway().getStripLength()* ((double)currentRunway.jpanelWidth - 2 * currentRunway.START)) + offset;
+        return (int) Math.ceil(((double)x/(double)currentRunway.getRunway().getStripLength()* ((double)currentRunway.jpanelWidth - 2 * currentRunway.START))) + offset;
     }
 
     //scales objects for JPanel in y direction proportional to height of runway
