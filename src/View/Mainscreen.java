@@ -34,6 +34,9 @@ public class Mainscreen {
     ArrayList<Runway>runWayList;
     GraphicsPanel side;
     GraphicsPanel top;
+	JPanel calculationPanel;
+	Plane plane;
+	int tol;
     /**
 	 * Create the application.
 	 */
@@ -42,8 +45,8 @@ public class Mainscreen {
 	    initialize(airport,plane);
 		RESA=240;
 		engineBlastAllowance=300;//For now later can be taken as input(Depends on flight)
-
-
+		this.plane=plane;
+		tol=100;
 	}
 
 	/**
@@ -257,7 +260,8 @@ public class Mainscreen {
 		btnCalculate.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 16));
 		panel.add(btnCalculate);
 		
-		JPanel calculationPanel = new JPanel();
+		calculationPanel = new JPanel();
+		calculationPanel.setSize(300,300);
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
@@ -265,13 +269,221 @@ public class Mainscreen {
 		gbc_panel_1.gridy = 1;
 		frame.getContentPane().add(calculationPanel, gbc_panel_1);
 		frame.setVisible(true);
-//		btnCalculate.addActionListener(new CalculateListener(importer,airport,runWayComboBox,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,towardsAway));
 		btnCalculate.addActionListener(new CalculateListener(airport,runWayComboBox,importer,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,leftRight,actionComboBox,towardsAway));
-
-        side = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 500, 1750, 1000), "side", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
+		side = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 500, 1750, 1000), "side", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
         top = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 500, 1750, 1000), "top", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
         graphicsPanel.add(side);
         graphicsPanel.add(top);
+	}
+	//Adding labels to the screen when object is too far from the center line
+	//Runway does not have to be re calculated
+	public void printObsOutOfRunway(Calculations calc,String Direction){
+		calculationPanel.removeAll();
+		calculationPanel.updateUI();
+		calculationPanel.setBackground(Color.GREEN);
+		calculationPanel.setOpaque(true);
+		JLabel label = new JLabel("Object out of graded Area");
+
+		label.setBackground(Color.GREEN);
+		label.setOpaque(true);
+		calculationPanel.add(label);
+		JLabel l = new JLabel();
+		l.setBackground(Color.green);
+		l.setOpaque(true);
+		calculationPanel.add(l);
+
+		//Checking if plane is landin
+		if(Direction =="Landing"){
+			calculationPanel.setLayout(new GridLayout(2,2));
+			JLabel label1= new JLabel("LDA");
+			label1.setOpaque(true);
+			label1.setBackground(Color.GREEN);
+			JLabel label2= new JLabel(String.format("= %d meters",calc.getRunway().getLDA()));
+			label2.setBackground(Color.GREEN);
+			label2.setOpaque(true);
+			calculationPanel.add(label1);
+			calculationPanel.add(label2);
+		}
+
+		//If plane is taking off
+		else {
+			calculationPanel.setLayout(new GridLayout(3, 2));
+			JLabel label2 = new JLabel(String.format("TORA = %d meters", calc.getRunway().getTORA()));
+			label2.setBackground(Color.GREEN);
+			label2.setOpaque(true);
+			calculationPanel.add(label2);
+			JLabel label3 = new JLabel(String.format("TODA = %d meters", calc.getRunway().getTODA()));
+			label3.setBackground(Color.GREEN);
+			label3.setOpaque(true);
+			calculationPanel.add(label3);
+			JLabel label4 = new JLabel(String.format("ASDA = %d meters", calc.getRunway().getASDA()));
+			label4.setBackground(Color.GREEN);
+			label4.setOpaque(true);
+			JLabel l2 = new JLabel("");
+			l2.setBackground(Color.GREEN);
+			l2.setOpaque(true);
+			calculationPanel.add(label4);
+			calculationPanel.add(l2);
+		}
+		calculationPanel.setSize(300,300);
+		calculationPanel.updateUI();
+	}
+	//prints labels with details to screen when plane is landing over the object
+	public void printCalcLandOver(Calculations calc){
+		calculationPanel.removeAll();
+		calculationPanel.updateUI();
+		calculationPanel.setLayout(new GridLayout(7,2));
+		calculationPanel.add(new JLabel("TORA = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getRunway().getTORA())));
+		calculationPanel.add(new JLabel("Obstacle Location from threshold = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getObsLoc())));
+		calculationPanel.add(new JLabel("ALS = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getALS())));
+		calculationPanel.add(new JLabel("Re- calculated LDA = "));
+		calculationPanel.add(new JLabel("TORA - Obstacle Location From Threshold - ALS -60"));
+		calculationPanel.add(new JLabel(""));
+		String equation = String.format("=%d - %d - %d - %d",calc.getRunway().getTORA(),calc.getObsLoc(),calc.getALS(),60);
+		calculationPanel.add(new JLabel (equation));
+		calculationPanel.add(new JLabel(""));
+		calculationPanel.add(new JLabel(String.format("= %d meters",calc.getReLda())));
+
+		//Updating color of the panel depending on if the runway distance is sufficient or not
+		if(calc.getReLda()>plane.getMinLandingDis()+tol){
+			calculationPanel.setBackground(Color.GREEN);
+		}
+		else if(calc.getReLda()<plane.getMinLandingDis()){
+			calculationPanel.setBackground(Color.RED);
+			calculationPanel.add(new JLabel("Minimum Distance required to land"));
+			calculationPanel.add(new JLabel(String.format("= %d meters", plane.getMinLandingDis())));
+		}
+		else{
+			calculationPanel.setBackground(Color.YELLOW);
+		}
+		calculationPanel.setOpaque(true);
+	}
+	//prints details to screen when plane is landing to the object
+	public void printCalcLandTowards(Calculations calc) {
+
+		calculationPanel.removeAll();
+		calculationPanel.updateUI();
+		calculationPanel.setLayout(new GridLayout(6, 2));
+		calculationPanel.add(new JLabel("Obstacle Location from threshold = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getObsLoc())));
+		calculationPanel.add(new JLabel("RESA = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getRESA())));
+		calculationPanel.add(new JLabel("Re- calculated LDA = "));
+		calculationPanel.add(new JLabel("Obstacle Location From Threshold - RESA - 60"));
+		calculationPanel.add(new JLabel(""));
+		String equation = String.format("=%d - %d - %d", calc.getObsLoc(), calc.getRESA(), 60);
+		calculationPanel.add(new JLabel(equation));
+		calculationPanel.add(new JLabel(""));
+		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReLda())));
+
+		//Changing color of the panel according to the condition(If runway is sufficient)
+		if (calc.getReLda() > plane.getMinLandingDis() + tol) {
+			calculationPanel.setBackground(Color.GREEN);
+		} else if (calc.getReLda() < plane.getMinLandingDis()) {
+			calculationPanel.setBackground(Color.RED);
+			calculationPanel.add(new JLabel("Minimum Distance required to land"));
+			calculationPanel.add(new JLabel(String.format("= %d meters", plane.getMinLandingDis())));
+		} else {
+			calculationPanel.setBackground(Color.YELLOW);
+		}
+		calculationPanel.setOpaque(true);
+	}
+	//prints details to screen when plane is taking off towards the object
+	public void printCalcTakeOffTowards(Calculations calc) {
+		calculationPanel.removeAll();
+		calculationPanel.updateUI();
+		calculationPanel.setLayout(new GridLayout(10, 2));
+		calculationPanel.add(new JLabel("TORA = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getRunway().getTORA())));
+		calculationPanel.add(new JLabel("Threshold Displacement = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getRunway().getThreasholdDisplacement())));
+		calculationPanel.add(new JLabel("ALS = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getALS())));
+		calculationPanel.add(new JLabel("Re- calculated TORA = "));
+		calculationPanel.add(new JLabel("Obstacle Location + Threshold Displacement - ALS - 60"));
+		calculationPanel.add(new JLabel(""));
+		String equation = String.format("=%d + %d - %d -%d", calc.getObsLoc(), calc.getRunway().getThreasholdDisplacement(), calc.getALS(), 60);
+		calculationPanel.add(new JLabel(equation));
+		calculationPanel.add(new JLabel(""));
+		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReTORA())));
+		calculationPanel.add(new JLabel("Re- calculated TODA = Re- calculated TORA"));
+		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReTORA())));
+		calculationPanel.add(new JLabel("Re- calculated ASDA = Re- calculated TORA"));
+		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReTORA())));
+
+		//Changing color of the panel according to the condition(If runway is sufficient)
+		if (calc.getReTORA() > plane.getMinTakeoffDis() + tol
+				&& calc.getReTODA() > plane.getMinTakeoffDis() + tol
+				&& calc.getReASDA() > plane.getMinTakeoffDis() + tol) {
+			calculationPanel.setBackground(Color.GREEN);
+		} else if (calc.getReTORA() < plane.getMinTakeoffDis()
+				&& calc.getReTODA() < plane.getMinTakeoffDis()
+				&& calc.getReASDA() < plane.getMinTakeoffDis()) {
+			calculationPanel.setBackground(Color.RED);
+			calculationPanel.add(new JLabel("Minimum Distance required to take off"));
+			calculationPanel.add(new JLabel(String.format("= %d meters", plane.getMinTakeoffDis())));
+		} else {
+			calculationPanel.setBackground(Color.YELLOW);
+		}
+		calculationPanel.setOpaque(true);
+	}
+	//Prints details to screen
+	public void printTakeOffAfter(Calculations calc) {
+
+		calculationPanel.removeAll();
+		calculationPanel.updateUI();
+		calculationPanel.setLayout(new GridLayout(15, 2));
+		calculationPanel.add(new JLabel("TORA = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getRunway().getTORA())));
+		calculationPanel.add(new JLabel("TODA = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getRunway().getTODA())));
+		calculationPanel.add(new JLabel("ASDA = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getRunway().getASDA())));
+		calculationPanel.add(new JLabel("Obstacle Location From Threshold = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getObsLoc())));
+		calculationPanel.add(new JLabel("Obstacle Location From Threshold = "));
+		calculationPanel.add(new JLabel(String.format("%d meters", calc.getEngineBlastAllowance())));
+		calculationPanel.add(new JLabel("Re- calculated TORA = "));
+		calculationPanel.add(new JLabel("TORA - Obtacle Location - Engine Blast Allowence"));
+		calculationPanel.add(new JLabel(""));
+		String equation = String.format("=%d - %d - %d", calc.getRunway().getTORA(), calc.getObsLoc(), calc.getEngineBlastAllowance());
+		calculationPanel.add(new JLabel(equation));
+		calculationPanel.add(new JLabel(""));
+		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReTORA())));
+		calculationPanel.add(new JLabel("Re- calculated TODA = "));
+		calculationPanel.add(new JLabel("TODA - Obtacle Location From Threshold - Engine Blast Allowence"));
+		calculationPanel.add(new JLabel(""));
+		String equation1 = String.format("=%d - %d - %d", calc.getRunway().getTODA(), calc.getObsLoc(), calc.getEngineBlastAllowance());
+		calculationPanel.add(new JLabel(equation1));
+		calculationPanel.add(new JLabel(""));
+		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReTODA())));
+		calculationPanel.add(new JLabel("Re- calculated ASDA = "));
+		calculationPanel.add(new JLabel("ASDA - Obtacle Location - Engine Blast Allowence"));
+		calculationPanel.add(new JLabel(""));
+		String equation2 = String.format("=%d - %d - %d", calc.getRunway().getASDA(), calc.getObsLoc(), calc.getEngineBlastAllowance());
+		calculationPanel.add(new JLabel(equation2));
+		calculationPanel.add(new JLabel(""));
+		calculationPanel.add(new JLabel(String.format("= %d meters", calc.getReASDA())));
+
+
+		//Changing color of the panel according to the condition(If runway is sufficient)
+		if (calc.getReTORA() > plane.getMinTakeoffDis() + tol
+				&& calc.getReTODA() > plane.getMinTakeoffDis() + tol
+				&& calc.getReASDA() > plane.getMinTakeoffDis() + tol) {
+			calculationPanel.setBackground(Color.GREEN);
+		} else if (calc.getReTORA() < plane.getMinTakeoffDis()
+				&& calc.getReTODA() < plane.getMinTakeoffDis()
+				&& calc.getReASDA() < plane.getMinTakeoffDis()) {
+			calculationPanel.setBackground(Color.RED);
+			calculationPanel.add(new JLabel("Minimum Distance required to take off"));
+			calculationPanel.add(new JLabel(String.format("= %d meters", plane.getMinTakeoffDis())));
+		} else {
+			calculationPanel.setBackground(Color.YELLOW);
+		}
+		calculationPanel.setOpaque(true);
 	}
 
 	public void setEngineBlastAllowance(int engineBlastAllowance) {
@@ -332,35 +544,63 @@ public class Mainscreen {
 //				// TODO Auto-generated method stub
 				Side=sd.getItemAt(sd.getSelectedIndex());
 
-
+				runway=airport.getRunwayByDesignator(rw.getItemAt(rw.getSelectedIndex()));
 				Action=ac.getItemAt(ac.getSelectedIndex());
 				Direction=dr.getItemAt(dr.getSelectedIndex());
 				Obsticle = ob.getItemAt(ob.getSelectedIndex());
-
+				obsLocCenteLine=Integer.parseInt(obsLocCL.getText());
+				obsLocThreshold = Integer.parseInt(obsLocTH.getText());
 				obs=importer.getObsticalByName(Obsticle);
 
-				if(sd!=null&&obsLocTH.getText()!=null&&Obsticle!=null&&obsLocCL.getText()!=null&&Action!=null&&Direction!=null&&Obsticle!=null&&runway!=null){
-					runway=airport.getRunwayByDesignator(rw.getItemAt(rw.getSelectedIndex()));
-					obsLocCenteLine=Integer.parseInt(obsLocCL.getText());
-					obsLocThreshold = Integer.parseInt(obsLocTH.getText());
+				if(sd!=null&&obsLocCenteLine>=0 &&obsLocThreshold>=0&&Obsticle!=null&&Action!=null&&Direction!=null&&Obsticle!=null&&runway!=null){
+
+
 					obsHeight=obs.getHeight();
-					if(obsLocCenteLine>=0 &&obsLocThreshold>=0) {
-						Calculations calc = new Calculations(runway, obs.getHeight(), obsLocThreshold);
 
+					Calculations calc = new Calculations(runway, obs.getHeight(), obsLocThreshold);
+					if(obsLocCenteLine>runway.getRunwayWidth()/4){
+						if (Action=="Landing")
+							printObsOutOfRunway(calc,"Landing");//Calling landing case
+						else
+							printObsOutOfRunway(calc,"Taking");//Calling taking off case
+					}
+					else{
+						if(Action=="Landing"){//Cases of landing
+							if(Direction=="Towards"){
+								calc.calculateLda("Towards");//When landing towards
+								printCalcLandTowards(calc);
 
-						//change direction left or right of center line
-						int offsetZ = obsLocCenteLine;
-						if (Side == "Left") {
-							offsetZ *= 1;
+							}else{
+								calc.calculateLda("Away");	//When landing over
+								printCalcLandOver(calc);
+							}
+
+						}
+						else{//Cases of taking off
+							if(Direction=="Towards"){
+								calc.calculateTORA("Towards");//When taking off towards the object
+								printCalcTakeOffTowards(calc);
+							}
+							else{
+								calc.calculateTORA("Away");//When taking off after the object
+								printTakeOffAfter(calc);
+							}
 						}
 
-						top.setRunway(runway);
-						side.setRunway(runway);
-						top.updatePaint(calc, offsetZ, obs, Direction, Action);
-						side.updatePaint(calc, offsetZ, obs, Direction, Action);
 					}
+						//change direction left or right of center line
+//						int offsetZ = obsLocCenteLine;
+//						if (Side == "Left") {
+//							offsetZ *= 1;
+//						}
+//
+//						top.setRunway(runway);
+//						side.setRunway(runway);
+//						top.updatePaint(calc, offsetZ, obs, Direction, Action);
+//						side.updatePaint(calc, offsetZ, obs, Direction, Action);
 
-				}
+
+					}
 				else{
 					NotificationWindow notification = new NotificationWindow("Invalid");
 				}
