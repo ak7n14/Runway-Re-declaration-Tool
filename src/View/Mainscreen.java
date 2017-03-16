@@ -53,9 +53,12 @@ public class Mainscreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(Airport airport ,Plane plane) {
+       //Initializing variables
         importer = new XMLImporter();
         obsList= importer.importObstacles();
         runWayList = airport.getRunways();
+
+        //Initializing GUI
 		frame = new JFrame(airport.getName());
 		frame.setBounds(0, 0, 1307, 837);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,7 +83,7 @@ public class Mainscreen {
 		frame.getContentPane().add(graphicsPanel, gbc_graphicsPanel);
 
         System.out.println(graphicsPanel.getSize() + " " + graphicsPanel.getHeight());
-
+		//Panel to put in inputs
 		JPanel inputPanel = new JPanel();
 		GridBagConstraints gbc_inputPanel = new GridBagConstraints();
 		gbc_inputPanel.insets = new Insets(0, 0, 5, 0);
@@ -110,7 +113,7 @@ public class Mainscreen {
 		gbc_lblAllDistancesIn.gridy = 1;
 		inputPanel.add(lblAllDistancesIn, gbc_lblAllDistancesIn);
 		
-		
+		//Adding items to the runway combobox
 		JComboBox<String> runWayComboBox = new JComboBox<String>();
 		for (Runway runways : runWayList){
 			runWayComboBox.addItem(runways.getDesignator());
@@ -130,7 +133,7 @@ public class Mainscreen {
 		gbc_runWayComboBox.gridy = 2;
 		inputPanel.add(runWayComboBox, gbc_runWayComboBox);
 	
-		
+		//Adding obsticles to the obsticle combobox
 		JComboBox<String> obsComboBox = new JComboBox<String>();
 		for(ObstacleBack obs: obsList){
 			obsComboBox.addItem(obs.getName());
@@ -158,7 +161,7 @@ public class Mainscreen {
 		gbc_lblEnterObsticleLocation.gridx = 1;
 		gbc_lblEnterObsticleLocation.gridy = 4;
 		inputPanel.add(lblEnterObsticleLocation, gbc_lblEnterObsticleLocation);
-		
+		//Declaring text fields
 		obsDisCL = new JTextField("0");
 		GridBagConstraints gbc_obsDisCL = new GridBagConstraints();
 		gbc_obsDisCL.insets = new Insets(0, 0, 5, 5);
@@ -211,7 +214,7 @@ public class Mainscreen {
 		gbc_lblSelectDirection.gridx = 1;
 		gbc_lblSelectDirection.gridy = 7;
 		inputPanel.add(lblSelectDirection, gbc_lblSelectDirection);
-		
+		//Adding stuff ti the direction combobox
 		JComboBox<String> leftRight = new JComboBox<String>();
 		leftRight.addItem("Left");
 		leftRight.addItem("Right");
@@ -230,7 +233,7 @@ public class Mainscreen {
 		gbc_lblSelectDirectionOf.gridx = 1;
 		gbc_lblSelectDirectionOf.gridy = 8;
 		inputPanel.add(lblSelectDirectionOf, gbc_lblSelectDirectionOf);
-		
+		//Adding directions
 		JComboBox<String> towardsAway = new JComboBox<String>();
 		towardsAway.addItem("Towards");
 		towardsAway.addItem("Away");
@@ -256,7 +259,7 @@ public class Mainscreen {
 		btnSettings.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 16));
 		panel.add(btnSettings);
 		JButton btnCalculate = new JButton("Calculate");
-		
+		//Listener for calculate button
 		btnCalculate.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 16));
 		panel.add(btnCalculate);
 		
