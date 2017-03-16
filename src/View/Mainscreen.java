@@ -37,7 +37,10 @@ public class Mainscreen {
 	JPanel calculationPanel;
 	Plane plane;
 	int tol;
-    /**
+	JComboBox<String> runWayComboBox;
+	JComboBox<String> obsComboBox;
+	JPanel inputPanel;
+	/**
 	 * Create the application.
 	 */
 	public Mainscreen(Airport airport, Plane plane) {
@@ -85,7 +88,7 @@ public class Mainscreen {
 
         System.out.println(graphicsPanel.getSize() + " " + graphicsPanel.getHeight());
 		//Panel to put in inputs
-		JPanel inputPanel = new JPanel();
+		inputPanel = new JPanel();
 		GridBagConstraints gbc_inputPanel = new GridBagConstraints();
 		gbc_inputPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_inputPanel.fill = GridBagConstraints.BOTH;
@@ -115,7 +118,7 @@ public class Mainscreen {
 		inputPanel.add(lblAllDistancesIn, gbc_lblAllDistancesIn);
 		
 		//Adding items to the runway combobox
-		JComboBox<String> runWayComboBox = new JComboBox<String>();
+		runWayComboBox = new JComboBox<String>();
 		for (Runway runways : runWayList){
 			runWayComboBox.addItem(runways.getDesignator());
 		}
@@ -135,7 +138,7 @@ public class Mainscreen {
 		inputPanel.add(runWayComboBox, gbc_runWayComboBox);
 	
 		//Adding obsticles to the obsticle combobox
-		JComboBox<String> obsComboBox = new JComboBox<String>();
+		obsComboBox = new JComboBox<String>();
 		for(ObstacleBack obs: obsList){
 			obsComboBox.addItem(obs.getName());
 		}
@@ -281,6 +284,26 @@ public class Mainscreen {
         top = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 500, 1750, 1000), "top", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
         graphicsPanel.add(side);
         graphicsPanel.add(top);
+	}
+	//Updating obs list
+	public void updateObsList(){
+		obsComboBox.removeAllItems();
+		for(ObstacleBack obs : obsList){
+			obsComboBox.addItem(obs.getName());
+		}
+		obsComboBox.setSelectedIndex(-1);
+		obsComboBox.updateUI();
+		inputPanel.updateUI();
+	}
+	//Update runway list
+	public void updateRunwayList(){
+		runWayComboBox.removeAllItems();
+		for(Runway runway : runWayList){
+			runWayComboBox.addItem(runway.getDesignator());
+		}
+		runWayComboBox.setSelectedIndex(-1);
+		runWayComboBox.updateUI();
+		inputPanel.updateUI();
 	}
 	//Adding labels to the screen when object is too far from the center line
 	//Runway does not have to be re calculated
