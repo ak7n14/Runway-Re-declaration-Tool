@@ -103,5 +103,5 @@ public class GraphicsPanel extends JPanel {
         return rw;
     }
 
-    public void setRunway(Runway runway) { rsw.setRunway(runway); }
+    public void setRunway(Runway runway) { rsw.setRunway(runway); rw = runway; }
 }

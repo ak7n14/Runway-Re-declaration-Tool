@@ -75,8 +75,7 @@ public class RunwayTopView extends RunwayView{
         //LEFT NUMBER
         //makes text vertical facing towards left edge of runway
         g2.rotate(-Math.PI);
-
-        int runwayNum = Integer.parseInt(runwayNumber.substring(0,2));
+        System.out.println(runwayNumber);        int runwayNum = Integer.parseInt(runwayNumber.substring(0,2));
 
         int reverseIntNumber = 0;
 
@@ -125,5 +124,13 @@ public class RunwayTopView extends RunwayView{
     @Override
     public int MeterY() {
         return this.scalingHeight(50);
+    }
+
+    @Override
+    public void setRunway(Runway runway) {
+        super.setRunway(runway);
+
+        runwayHeight = runway.getRunwayWidth();
+        runwayNumber = runway.getDesignator();
     }
 }
