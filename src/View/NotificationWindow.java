@@ -5,21 +5,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static java.awt.SystemColor.ACTIVE_CAPTION;
 import static java.awt.SystemColor.window;
 
 public class NotificationWindow {
-
-    public NotificationWindow(){
-        init();
+    String Action;
+    public NotificationWindow(String st){
+        init(st);
     }
-    public void init(){
+    public void init(String st){
         JFrame window = new JFrame("Notification");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container cont = window.getContentPane();
         window.setSize(200,100);
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
-        panel.add(new JLabel("Values Updated!"));
+        if(st=="Valid") {
+            panel.add(new JLabel("Values Updated!"));
+        }
+        else{
+            panel.add(new JLabel("Invalid inputs!"));
+        }
         JButton close = new JButton("Close");
         close.addActionListener(new CloseListsner(window));
         panel.add(close);

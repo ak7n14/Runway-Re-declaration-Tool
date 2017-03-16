@@ -13,6 +13,7 @@ import Model.ObstacleBack;
 import Model.Plane;
 import Model.Runway;
 import Model.XMLImporter;
+import com.sun.tools.corba.se.idl.EnumGen;
 
 import javax.swing.JLabel;
 import java.awt.event.ActionEvent;
@@ -264,7 +265,7 @@ public class Mainscreen {
 		frame.getContentPane().add(calculationPanel, gbc_panel_1);
 		frame.setVisible(true);
 //		btnCalculate.addActionListener(new CalculateListener(importer,airport,runWayComboBox,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,towardsAway));
-		btnCalculate.addActionListener(new CalculateListener());
+		btnCalculate.addActionListener(new CalculateListener(airport,runWayComboBox,importer,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,leftRight,actionComboBox,towardsAway));
         //NEED RUNWAY
         GraphicsPanel side = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 1750, 1000), "side", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
         GraphicsPanel top = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 1750, 1000), "top", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
@@ -281,34 +282,71 @@ public class Mainscreen {
 	}
 	
 	class CalculateListener implements ActionListener{
-//		Runway runway;
-//		int obsHeight;
-//		int locTh;
-//		int locCL;
-//		int resa;
-//		int eng;
-//		String direction;
+		Runway runway;
+		Airport airport;
+		XMLImporter importer;
+		ObstacleBack obs;
+		int obsHeight;
+		int obsLocThreshold;
+		int obsLocCenteLine;
+		int RESA;
+		int eng;
+		String Side;
+		String Action;
+		JTextField obsLocCL;
+		JTextField obsLocTH;
+		String Direction;
+		String Obsticle;
+		JComboBox<String> rw;
+		JComboBox<String>sd;
+		JComboBox<String>ac;
+		JComboBox<String>dr;
+		JComboBox<String>ob;
+
 //      GraphicsPanel top; //ted
 //      GraphicsPanel side; //ted
-//		public CalculateListener(XMLImporter imp,Airport airport,JComboBox<String> runWayComboBox, JComboBox<String> obsComboBox,JTextField locTh,JTextField locCL,int resa,int eng,JComboBox<String> direction, /*ted*/ GraphicsPanel top, GraphicsPanel side /*ted*/){
-//			this.runway=airport.getRunwayByDesignator(runWayComboBox.getItemAt(runWayComboBox.getSelectedIndex()));
-//			this.obsHeight = imp.getObsticalByName(obsComboBox.getItemAt(obsComboBox.getSelectedIndex())).getHeight();
-//			this.locTh = Integer.parseInt(locTh.getText());
-//			this.locCL = Integer.parseInt(locCL.getText());
-//			this.resa = resa;
-//			this.eng = eng;
-//			this.direction=direction.getItemAt(direction.getSelectedIndex());
+//		public CalculateListener(, /*ted*/ GraphicsPanel top, GraphicsPanel side /*ted*/){
+
+
 //			this.top = top; /*ted*/
 //          this.side = side /*ted*/
 //		}
-	public void actionPerformed(ActionEvent e) {
-//			// TODO Auto-generated method stub
-//			Calculations calc = new Calculations(runway, obsHeight, locTh, resa, eng);
-//			calc.calculateLda(direction);
-//			System.out.println(calc.getReLda());
-//          top.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
-//          side.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
-			NotificationWindow notification = new NotificationWindow();
+
+		public CalculateListener(Airport airport,JComboBox<String>runway,XMLImporter importer,JComboBox<String>obs,JTextField obsLocTH,
+								 JTextField obsLocCL,int RESA,int Eng,JComboBox<String> Side,JComboBox<String>  Action,JComboBox<String>  Direction){
+			this.airport=airport;
+			this.rw = runway;
+			this.importer = importer;
+			this.obsLocTH=obsLocTH;
+			this.obsLocCL=obsDisCL;
+			this.RESA=RESA;
+			this.eng= Eng;
+			this.sd=Side;
+			this.ac= Action;
+			this.dr=Direction;
+			ob = obs;
+
+		}
+		public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+				Side=sd.getItemAt(sd.getSelectedIndex());
+				obsLocCenteLine=Integer.parseInt(obsLocCL.getText());
+				obsLocThreshold = Integer.parseInt(obsLocTH.getText());
+				Action=ac.getItemAt(ac.getSelectedIndex());
+				Direction=dr.getItemAt(dr.getSelectedIndex());
+				Obsticle = ob.getItemAt(ob.getSelectedIndex());
+				runway=airport.getRunwayByDesignator(rw.getItemAt(rw.getSelectedIndex()));
+				obs=importer.getObsticalByName(Obsticle);
+				obsHeight=obs.getHeight();
+				if(sd!=null&&obsLocCenteLine>=0&&obsLocThreshold>=0&&Action!=null&&Direction!=null&&Obsticle!=null&&runway!=null){
+					Calculations calc = new Calculations(runway,obsHeight,obsLocThreshold,RESA,eng);
+//          		top.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
+//          		side.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
+					NotificationWindow notification = new NotificationWindow("Valid");
+				}
+				else{
+					NotificationWindow notification = new NotificationWindow("Invalid");
+				}
 		}
 //		
 	}
