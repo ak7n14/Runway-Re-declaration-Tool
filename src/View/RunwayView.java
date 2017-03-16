@@ -74,15 +74,19 @@ public abstract class RunwayView {
         this.LDAStart = LDAStart;
         this.RESAStart = ov.getOriginalOffsetX() + ov.getOb().getLength();
 
-        runwayLength = calc.getReTORA();
         this.calc = calc;
         //so calc doesnt get used before updated
         updated = true;
 
-        runwayEnds.put("TODA", calc.getReTODA());
-        runwayEnds.put("TORA", calc.getReTORA());
-        runwayEnds.put("ASDA", calc.getReASDA());
-        runwayEnds.put("LDA", calc.getReLda());
+        if(takeOfforLand == "Taking off") {
+            runwayEnds.put("TODA", calc.getReTODA());
+            runwayEnds.put("TORA", calc.getReTORA());
+            runwayEnds.put("ASDA", calc.getReASDA());
+        }
+        else {
+            runwayEnds.put("LDA", calc.getReLda());
+        }
+
 
         //only add resa if traveling away
         if(direction == "Away") {
@@ -112,7 +116,7 @@ public abstract class RunwayView {
 
     public void drawClearWay(Graphics g){
         g.setColor(Color.green);
-        g.fillRect(START + this.scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("TODA")) - scaling(runwayLength), scalingHeight(runwayHeight));
+        g.fillRect(START + this.scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("TODA")-runwayLength), scalingHeight(runwayHeight));
     }
 
     //draws runway

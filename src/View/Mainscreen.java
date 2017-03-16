@@ -572,6 +572,11 @@ public class Mainscreen {
 
 					Calculations calc = new Calculations(runway, obs.getHeight(), obsLocThreshold);
 					if(obsLocCenteLine>runway.getRunwayWidth()/4){
+						top.setRunway(runway);
+						side.setRunway(runway);
+						top.repaint();
+						side.repaint();
+
 						if (Action=="Landing")
 							printObsOutOfRunway(calc,"Landing");//Calling landing case
 						else
