@@ -155,7 +155,7 @@ public class Mainscreen {
 		gbc_lblEnterObsticleLocation.gridy = 4;
 		inputPanel.add(lblEnterObsticleLocation, gbc_lblEnterObsticleLocation);
 		
-		obsDisCL = new JTextField();
+		obsDisCL = new JTextField("0");
 		GridBagConstraints gbc_obsDisCL = new GridBagConstraints();
 		gbc_obsDisCL.insets = new Insets(0, 0, 5, 5);
 		gbc_obsDisCL.fill = GridBagConstraints.HORIZONTAL;
@@ -172,7 +172,7 @@ public class Mainscreen {
 		gbc_lblDistanceFromThreshold.gridy = 5;
 		inputPanel.add(lblDistanceFromThreshold, gbc_lblDistanceFromThreshold);
 		
-		obsDistTh = new JTextField();
+		obsDistTh = new JTextField("0");
 		GridBagConstraints gbc_obsDistTh = new GridBagConstraints();
 		gbc_obsDistTh.insets = new Insets(0, 0, 5, 5);
 		gbc_obsDistTh.fill = GridBagConstraints.HORIZONTAL;
