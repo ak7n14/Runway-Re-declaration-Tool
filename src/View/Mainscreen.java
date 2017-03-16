@@ -331,28 +331,34 @@ public class Mainscreen {
 		public void actionPerformed(ActionEvent e) {
 //				// TODO Auto-generated method stub
 				Side=sd.getItemAt(sd.getSelectedIndex());
-				obsLocCenteLine=Integer.parseInt(obsLocCL.getText());
-				obsLocThreshold = Integer.parseInt(obsLocTH.getText());
+
+
 				Action=ac.getItemAt(ac.getSelectedIndex());
 				Direction=dr.getItemAt(dr.getSelectedIndex());
 				Obsticle = ob.getItemAt(ob.getSelectedIndex());
-				runway=airport.getRunwayByDesignator(rw.getItemAt(rw.getSelectedIndex()));
+
 				obs=importer.getObsticalByName(Obsticle);
 
-				if(sd!=null&&obsLocCenteLine>=0&&Obsticle!=null&&obsLocThreshold>=0&&Action!=null&&Direction!=null&&Obsticle!=null&&runway!=null){
+				if(sd!=null&&obsLocTH.getText()!=null&&Obsticle!=null&&obsLocCL.getText()!=null&&Action!=null&&Direction!=null&&Obsticle!=null&&runway!=null){
+					runway=airport.getRunwayByDesignator(rw.getItemAt(rw.getSelectedIndex()));
+					obsLocCenteLine=Integer.parseInt(obsLocCL.getText());
+					obsLocThreshold = Integer.parseInt(obsLocTH.getText());
 					obsHeight=obs.getHeight();
-					Calculations calc = new Calculations(runway,obs.getHeight(), obsLocThreshold);
+					if(obsLocCenteLine>=0 &&obsLocThreshold>=0) {
+						Calculations calc = new Calculations(runway, obs.getHeight(), obsLocThreshold);
 
-					//change direction left or right of center line
-					int offsetZ = obsLocCenteLine;
-					if(Side == "Left"){
-						offsetZ *= 1;
+
+						//change direction left or right of center line
+						int offsetZ = obsLocCenteLine;
+						if (Side == "Left") {
+							offsetZ *= 1;
+						}
+
+						top.setRunway(runway);
+						side.setRunway(runway);
+						top.updatePaint(calc, offsetZ, obs, Direction, Action);
+						side.updatePaint(calc, offsetZ, obs, Direction, Action);
 					}
-
-					top.setRunway(runway);
-					side.setRunway(runway);
-          			top.updatePaint(calc, offsetZ, obs, Direction, Action);
-					side.updatePaint(calc, offsetZ, obs, Direction, Action);
 
 				}
 				else{
