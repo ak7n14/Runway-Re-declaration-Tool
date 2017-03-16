@@ -54,17 +54,19 @@ public class GraphicsPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        rsw.drawAll(g);
+        if(!(rsw.getRunway().getDesignator() == "X")) {
+            rsw.drawAll(g);
 
-        //only if update
-        if(recalculated)
-            obsView.drawShape(g);
+            //only if update
+            if (recalculated)
+                obsView.drawShape(g);
 
-        //only draw ALS/TOCS if it is a side view and this is an update
-        if(recalculated && rsw instanceof RunwaySideView)
-            ((RunwaySideView) rsw).drawALS(g);
+            //only draw ALS/TOCS if it is a side view and this is an update
+            if (recalculated && rsw instanceof RunwaySideView)
+                ((RunwaySideView) rsw).drawALS(g);
 
-        rsw.drawAllSeparators(g);
+            rsw.drawAllSeparators(g);
+        }
     }
 
     public static void main(String[] args) {
@@ -100,4 +102,6 @@ public class GraphicsPanel extends JPanel {
     public Runway getRw() {
         return rw;
     }
+
+    public void setRunway(Runway runway) { rsw.setRunway(runway); }
 }

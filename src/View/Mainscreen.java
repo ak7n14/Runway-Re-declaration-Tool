@@ -13,7 +13,6 @@ import Model.ObstacleBack;
 import Model.Plane;
 import Model.Runway;
 import Model.XMLImporter;
-import com.sun.tools.corba.se.idl.EnumGen;
 
 import javax.swing.JLabel;
 import java.awt.event.ActionEvent;
@@ -33,6 +32,8 @@ public class Mainscreen {
     XMLImporter importer;
     ArrayList<ObstacleBack> obsList;
     ArrayList<Runway>runWayList;
+    GraphicsPanel side;
+    GraphicsPanel top;
     /**
 	 * Create the application.
 	 */
@@ -190,8 +191,8 @@ public class Mainscreen {
 		inputPanel.add(lblSelectAction, gbc_lblSelectAction);
 		
 		JComboBox<String> actionComboBox = new JComboBox<String>();
-		actionComboBox.addItem("Land");
-		actionComboBox.addItem("Take off");
+		actionComboBox.addItem("Landing");
+		actionComboBox.addItem("Taking off");
 		actionComboBox.setSelectedIndex(-1);
 		GridBagConstraints gbc_actionComboBox = new GridBagConstraints();
 		gbc_actionComboBox.insets = new Insets(0, 0, 5, 5);
@@ -266,9 +267,9 @@ public class Mainscreen {
 		frame.setVisible(true);
 //		btnCalculate.addActionListener(new CalculateListener(importer,airport,runWayComboBox,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,towardsAway));
 		btnCalculate.addActionListener(new CalculateListener(airport,runWayComboBox,importer,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,leftRight,actionComboBox,towardsAway));
-        //NEED RUNWAY
-        GraphicsPanel side = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 1750, 1000), "side", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
-        GraphicsPanel top = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 1750, 1000), "top", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
+
+        side = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 500, 1750, 1000), "side", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
+        top = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 500, 1750, 1000), "top", graphicsPanel.getWidth(), graphicsPanel.getHeight()/2);
         graphicsPanel.add(side);
         graphicsPanel.add(top);
 	}
@@ -340,8 +341,18 @@ public class Mainscreen {
 
 				if(sd!=null&&obsLocCenteLine>=0&&Obsticle!=null&&obsLocThreshold>=0&&Action!=null&&Direction!=null&&Obsticle!=null&&runway!=null){
 					obsHeight=obs.getHeight();
-//          		top.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
-//          		side.updatePaint(calc, int offsetZ, ObstacleBack obs, direction, String takeOffOrLand) /*ted*/
+					Calculations calc = new Calculations(runway,obs.getHeight(), obsLocThreshold);
+
+					//change direction left or right of center line
+					int offsetZ = obsLocCenteLine;
+					if(Side == "Left"){
+						offsetZ *= 1;
+					}
+
+					top.setRunway(runway);
+					side.setRunway(runway);
+          			top.updatePaint(calc, offsetZ, obs, Direction, Action);
+					side.updatePaint(calc, offsetZ, obs, Direction, Action);
 
 				}
 				else{

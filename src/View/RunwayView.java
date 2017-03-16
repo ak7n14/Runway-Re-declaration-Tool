@@ -341,4 +341,9 @@ public abstract class RunwayView {
     public Calculations getCalc() {
         return calc;
     }
+
+    public void setRunway(Runway runway) {
+        this.runway = runway;
+        runwayLength = runway.getRunwayLenght();
+    }
 }
