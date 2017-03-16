@@ -42,7 +42,7 @@ public class NotificationWindow {
         close.addActionListener(new CloseListsner(window));
         panel.add(close);
         cont.add(panel);
-        window.setVisible(true);
+        window.dispose();
     }
 
     class CloseListsner implements ActionListener{

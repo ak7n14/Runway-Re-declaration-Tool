@@ -191,6 +191,7 @@ public class SettingsGUI extends JFrame{
 		{
 			ms.obsList.addAll(importer.importCustomObstacles(txtoImp.getText()));
 			ms.updateObsList();
+			this.dispose();
 		});
 
 		oImp.add(lbloImp);
@@ -207,6 +208,7 @@ public class SettingsGUI extends JFrame{
 		{
 			exporter.exportObstacles(txtoExp.getText(), ms.obsList);
 			ms.updateObsList();
+			this.dispose();
 		});
 
 		oExp.add(lbloExp);
@@ -233,6 +235,7 @@ public class SettingsGUI extends JFrame{
 					Integer.parseInt(txtoDepth.getText())));
 					ms.updateObsList();
 			System.out.println("Adding new obs");
+			this.dispose();
 		});
 
 		oAdd.add(lbloName);
