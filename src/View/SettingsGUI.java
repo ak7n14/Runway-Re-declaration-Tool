@@ -22,7 +22,7 @@ public class SettingsGUI extends JFrame{
 	XMLImporter importer = new XMLImporter();
 	XMLExporter exporter = new XMLExporter();
 
-	public SettingsGUI(Mainscreen ms){
+	public SettingsGUI(MainFrame ms){
 		setTitle("Settings");
 		JTabbedPane jtp = new JTabbedPane();
 		
@@ -50,11 +50,11 @@ public class SettingsGUI extends JFrame{
 		JComboBox cmbColours = new JComboBox();
 		JButton btnSave = new JButton("Save");
 
-		btnSave.addActionListener(e ->
-		{
-            ms.setRESA(Integer.parseInt(txtRESA.getText()));
-            ms.setEngineBlastAllowance(Integer.parseInt(txtBlast.getText()));
-        });
+//		btnSave.addActionListener(e ->
+//		{
+//            ms.setRESA(Integer.parseInt(txtRESA.getText()));
+//            ms.setEngineBlastAllowance(Integer.parseInt(txtBlast.getText()));
+//        });
 		
 		general.add(lblRecents);
 		general.add(txtRecents);
@@ -187,12 +187,12 @@ public class SettingsGUI extends JFrame{
 		JTextField txtoImp = new JTextField();
 		JButton btnoImp = new JButton("Load File");
 
-		btnoImp.addActionListener(e ->
-		{
-			ms.obsList.addAll(importer.importCustomObstacles(txtoImp.getText()));
-			ms.updateObsList();
-			this.dispose();
-		});
+//		btnoImp.addActionListener(e ->
+//		{
+//			ms.obsList.addAll(importer.importCustomObstacles(txtoImp.getText()));
+//			ms.updateObsList();
+//			this.dispose();
+//		});
 
 		oImp.add(lbloImp);
 		oImp.add(txtoImp);
@@ -204,12 +204,12 @@ public class SettingsGUI extends JFrame{
 		JTextField txtoExp = new JTextField();
 		JButton btnoExp = new JButton("Save File");
 
-		btnoExp.addActionListener(e ->
-		{
-			exporter.exportObstacles(txtoExp.getText(), ms.obsList);
-			ms.updateObsList();
-			this.dispose();
-		});
+//		btnoExp.addActionListener(e ->
+//		{
+//			exporter.exportObstacles(txtoExp.getText(), ms.obsList);
+//			ms.updateObsList();
+//			this.dispose();
+//		});
 
 		oExp.add(lbloExp);
 		oExp.add(txtoExp);
@@ -227,16 +227,16 @@ public class SettingsGUI extends JFrame{
 		JTextField txtoDepth = new JTextField();
 		JButton btnoSave = new JButton("Save");
 
-		btnoSave.addActionListener(e ->
-		{
-			ms.obsList.add(new ObstacleBack(txtoName.getText(),
-					Integer.parseInt(txtoHeight.getText()),
-					Integer.parseInt(txtoLength.getText()),
-					Integer.parseInt(txtoDepth.getText())));
-					ms.updateObsList();
-			System.out.println("Adding new obs");
-			this.dispose();
-		});
+//		btnoSave.addActionListener(e ->
+//		{
+//			ms.obsList.add(new ObstacleBack(txtoName.getText(),
+//					Integer.parseInt(txtoHeight.getText()),
+//					Integer.parseInt(txtoLength.getText()),
+//					Integer.parseInt(txtoDepth.getText())));
+//					ms.updateObsList();
+//			System.out.println("Adding new obs");
+//			this.dispose();
+//		});
 
 		oAdd.add(lbloName);
 		oAdd.add(txtoName);

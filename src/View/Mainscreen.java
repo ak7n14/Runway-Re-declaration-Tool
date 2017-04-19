@@ -263,7 +263,7 @@ public class Mainscreen {
 		inputPanel.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(1,2));	
 		JButton btnSettings = new JButton("Settings");
-		btnSettings.addActionListener(new SettingsListener());
+//		btnSettings.addActionListener(new SettingsListener());
 		btnSettings.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 16));
 		panel.add(btnSettings);
 		JButton btnCalculate = new JButton("Calculate");
@@ -716,15 +716,15 @@ public class Mainscreen {
 //		
 	}
 	
-	class SettingsListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			SettingsGUI setGui = new SettingsGUI(Mainscreen.this);
-			
-		}
-		
-	}
+//	class SettingsListener implements ActionListener{
+//
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			SettingsGUI setGui = new SettingsGUI(new MainFrame());
+//
+//		}
+//
+//	}
 	
 	
 
