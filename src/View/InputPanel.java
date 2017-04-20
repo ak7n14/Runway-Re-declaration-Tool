@@ -277,6 +277,11 @@ public class InputPanel extends JPanel {
 
         }
         public void actionPerformed(ActionEvent e) {
+            outputPanel.removeAll();
+            outputPanel.setBackground(UIManager.getColor("Panel.background"));
+            outputPanel.updateUI();
+            notificationPanel.removeAll();
+            notificationPanel.updateUI();
 //				// TODO Auto-generated method stub
             Side=sd.getItemAt(sd.getSelectedIndex());
 
@@ -284,8 +289,18 @@ public class InputPanel extends JPanel {
             Action=ac.getItemAt(ac.getSelectedIndex());
             Direction=dr.getItemAt(dr.getSelectedIndex());
             Obsticle = ob.getItemAt(ob.getSelectedIndex());
-            obsLocCenteLine=Integer.parseInt(obsLocCL.getText());
-            obsLocThreshold = Integer.parseInt(obsLocTH.getText());
+            try{
+                obsLocCenteLine=Integer.parseInt(obsLocCL.getText());
+            }catch (NumberFormatException er){
+                notificationPanel.initialize("Invalid");
+                return;
+            }
+            try{
+                obsLocThreshold = Integer.parseInt(obsLocTH.getText());
+            }catch (NumberFormatException er) {
+                notificationPanel.initialize("Invalid");
+                return;
+            }
             obs=importer.getObsticalByName(Obsticle);
 
             if(sd!=null&&obsLocCenteLine>=0 &&obsLocThreshold>=0&&Obsticle!=null&&Action!=null&&Direction!=null&&Obsticle!=null&&runway!=null){
@@ -325,6 +340,7 @@ public class InputPanel extends JPanel {
 
                 }
                  notificationPanel.initialize("Valid");
+
 
                 return;
             }

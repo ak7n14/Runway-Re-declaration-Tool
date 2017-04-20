@@ -40,8 +40,8 @@ public class NotificationPanel extends JPanel {
         else{
             JPanel panel = new JPanel();
             panel.add(new JLabel("Invalid inputs!"));
-            this.updateUI();
             this.add(panel);
+            this.updateUI();
         }
     }
 }

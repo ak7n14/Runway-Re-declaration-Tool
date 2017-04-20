@@ -288,4 +288,5 @@ public class OutputPanel extends JPanel {
         this.setOpaque(true);
         frame.validate();
     }
+
 }
