@@ -21,7 +21,7 @@ public class NotificationWindow {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         if(st=="Valid") {
-            window.setSize(500,200);
+           
             panel.add(new JLabel("Values Updated!"));
             JPanel panel2 = new JPanel();
             panel2.setLayout(new GridLayout(5,1));

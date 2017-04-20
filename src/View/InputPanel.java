@@ -326,11 +326,9 @@ public class InputPanel extends JPanel {
                 }
                  notificationPanel.initialize("Valid");
 
-
+                return;
             }
-            else{
-                notificationPanel.initialize("Invalid");
-            }
+            notificationPanel.initialize("Invalid");
         }
 //
     }

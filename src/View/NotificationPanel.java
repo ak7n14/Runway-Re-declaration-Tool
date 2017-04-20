@@ -11,7 +11,7 @@ public class NotificationPanel extends JPanel {
     public NotificationPanel(){
         this.setLocation(0,350);
         this.setBorder(BorderFactory.createTitledBorder("Notification Panel"));
-        this.setPreferredSize(new Dimension(390,110));
+        this.setPreferredSize(new Dimension(390,120));
 
 
     }
@@ -19,11 +19,12 @@ public class NotificationPanel extends JPanel {
         if(st=="Valid") {
 
             JPanel panel = new JPanel();
-            JScrollPane scroll = new JScrollPane(panel);
-            this.add(scroll);
+
+
            // panel.setLayout();
-            panel.setPreferredSize(new Dimension(360,105));
-            this.add(new JLabel ("Values Updated"));
+            panel.setPreferredSize(new Dimension(360,110));
+            JScrollPane scrollFrame = new JScrollPane(panel);
+            this.add(new JLabel ("Values Updated!"));
             panel.add(new JLabel("Key:"));
             panel.add(new JLabel(""));
             panel.add(new JLabel("OLT = Obsticle location from threshold"));
@@ -31,9 +32,16 @@ public class NotificationPanel extends JPanel {
             panel.add(new JLabel("THD = Threshold Displacement"));
             panel.add(new JLabel("EBA = Engine Blast Allowence"));
             panel.add(new JLabel("ALS = Approach Landing Surface"));
+            panel.setAutoscrolls(true);
+            scrollFrame.setPreferredSize(new Dimension( 360,70));
+            this.add(scrollFrame);
+            this.updateUI();
         }
         else{
-            this.add(new JLabel("Invalid inputs!"));
+            JPanel panel = new JPanel();
+            panel.add(new JLabel("Invalid inputs!"));
+            this.updateUI();
+            this.add(panel);
         }
     }
 }

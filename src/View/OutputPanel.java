@@ -16,10 +16,10 @@ public class OutputPanel extends JPanel {
     Plane plane;
     int tol;
     public OutputPanel(JFrame frame,Plane plane,int tol){
-        this.setPreferredSize(new Dimension(390,280));
+        this.setPreferredSize(new Dimension(380,270));
         this.setBorder(BorderFactory.createTitledBorder("Output Panel"));
         this.setLocation(0,0);
-        this.setLocation(0,487);
+        this.setLocation(0,500);
         this.frame=frame;
         JLabel label = new JLabel("HI");
         font = label.getFont();

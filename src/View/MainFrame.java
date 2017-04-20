@@ -28,7 +28,7 @@ public class MainFrame {
     public void initialize(Airport airport,Plane plane){
         frame = new JFrame(airport.getName());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setBounds(0, 0, 1307, 837);
+        frame.setBounds(0, 0, 1307, 937);
         mainContainer = frame.getContentPane();
         JPanel mainPanel = new JPanel();
         JPanel rightPanel = new JPanel();
@@ -41,7 +41,10 @@ public class MainFrame {
         rightPanel.setBorder(BorderFactory.createTitledBorder(""));
         rightPanel.add(inputPanel);
         rightPanel.add(notificationPanel);
-        rightPanel.add(outputPanel);
+        JScrollPane scrollFrame = new JScrollPane(outputPanel);
+        outputPanel.setAutoscrolls(true);
+        scrollFrame.setPreferredSize(new Dimension(390,270));
+        rightPanel.add(scrollFrame);
 
         JPanel nedsPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
