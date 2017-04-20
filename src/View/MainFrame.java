@@ -32,24 +32,17 @@ public class MainFrame {
         mainContainer = frame.getContentPane();
         JPanel mainPanel = new JPanel();
         JPanel rightPanel = new JPanel();
-        JPanel inputPanel = new JPanel();
-        JPanel notificationPanel = new JPanel();
-        JPanel outputPanel = new JPanel();
-        notificationPanel.setPreferredSize(new Dimension(390,107));
-        inputPanel.setPreferredSize(new Dimension(390,300));
-        outputPanel.setPreferredSize(new Dimension(390,285));
-        inputPanel.setBorder(BorderFactory.createTitledBorder("Input Panel"));
-        notificationPanel.setBorder(BorderFactory.createTitledBorder("Notification Panel"));
-        outputPanel.setBorder(BorderFactory.createTitledBorder("Output Panel"));
+
+        NotificationPanel notificationPanel = new NotificationPanel();
+        OutputPanel outputPanel = new OutputPanel(frame,plane,tol);
+        InputPanel inputPanel = new InputPanel(airport,outputPanel,notificationPanel,RESA,engineBlastAllowance);
 //        rightPanel.setLayout(null);
         rightPanel.setPreferredSize(new Dimension(400,837));
         rightPanel.setBorder(BorderFactory.createTitledBorder(""));
         rightPanel.add(inputPanel);
         rightPanel.add(notificationPanel);
         rightPanel.add(outputPanel);
-        inputPanel.setLocation(0,0);
-        notificationPanel.setLocation(0,350);
-        outputPanel.setLocation(0,487);
+
         JPanel nedsPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         TopPanel topPanel = new TopPanel(MainFrame.this);
@@ -59,8 +52,8 @@ public class MainFrame {
 
         mainContainer.add(mainPanel);
         frame.setVisible(true);
-//        frame.pack();
-//        frame.setLocationRelativeTo(null);
     }
+
+
 
 }
