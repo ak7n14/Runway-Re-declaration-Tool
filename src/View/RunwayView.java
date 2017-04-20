@@ -260,12 +260,12 @@ public abstract class RunwayView {
 
     //scales objects for JPanel in x direction proportional to runway length
     public int scaling(int x){
-        return (int)((double)x/(double)runwayLength * ((double)(jpanelWidth - 2 * START)));
+        return (int)((double)x/(double)runway.getStripLength() * ((double)(jpanelWidth - 2 * START)));
     }
 
     //scales objects for JPanel in y direction proportional to height of runway
     public int scalingHeight(int y){
-        return (int)((double)y/(double)runwayHeight * ((double)jpanelHeight - 2 * RUNWAY_Y()));
+        return (int)((double)y/(double)runway.getStripWidth() * ((double)jpanelHeight - 2 * RUNWAY_Y()));
     }
 
     //draw scales so user can get a feel of how big the runway and obstacles are

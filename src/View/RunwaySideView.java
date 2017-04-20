@@ -74,6 +74,7 @@ public class RunwaySideView extends RunwayView{
         if (takeOff && towards){
             int width = g.getFontMetrics().stringWidth("TOCS");
             mody *= -1;
+            x += START;
             g.drawString("TOCS", x + mody/2 - width - 5, RUNWAY_Y()/2);
         }
 
@@ -93,4 +94,5 @@ public class RunwaySideView extends RunwayView{
     public int scalingHeight(int y){
         return y;
     }
+
 }

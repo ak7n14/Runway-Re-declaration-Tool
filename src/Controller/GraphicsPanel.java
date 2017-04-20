@@ -72,11 +72,16 @@ public class GraphicsPanel extends JPanel {
     public static void main(String[] args) {
         JFrame jFrame = new JFrame();
 
-        jFrame.setSize(1000, 500);
-        GraphicsPanel pt = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 500, 2000, 1000), "side", 1000, 500);
-        jFrame.add(pt);
+        jFrame.setSize(2000, 1000);
+        jFrame.setLayout(new GridLayout(2,1));
+        GraphicsPanel ptSide = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 1000), "side", 1000, 500);
+        GraphicsPanel ptTop = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 1000), "top", 1000, 500);
+        jFrame.add(ptSide);
+        jFrame.add(ptTop);
         jFrame.setVisible(true);
-        pt.updatePaint(new Calculations(pt.getRw(), 20, 1000), 0, new ObstacleBack("nuke", 20, 100, 100), "Towards", "Taking off");
+        ptSide.updatePaint(new Calculations(ptSide.getRw(), 20, 1000), 0, new ObstacleBack("nuke", 20, 100, 100), "Towards", "Taking off");
+        ptTop.updatePaint(new Calculations(ptTop.getRw(), 20, 1000), 0, new ObstacleBack("nuke", 20, 100, 100), "Towards", "Taking off");
+
     }
 
 

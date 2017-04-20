@@ -27,6 +27,7 @@ public class RunwayTopView extends RunwayView{
 
     //draws runway, seperators and labels
     public void drawAll(Graphics g){
+        drawClearedAndGraded(g);
         this.drawRunway(g);
         if(getTakeOffOrLand() == "Taking off")
             this.drawClearWay(g);
@@ -43,6 +44,27 @@ public class RunwayTopView extends RunwayView{
         this.drawScaleY(g);
     }
 
+    public void drawClearedAndGraded(Graphics g){
+        int x4 = scaling(runway.getStripLength() -360);
+        int x5 = scaling(runway.getStripLength() -210);
+        int x6 = scaling(runway.getStripLength());
+        int x2 = scaling(210);
+        int x3 = scaling(360);
+
+        int[] x = {0,x2,x3,x4,x5,x6,x6,x5,x4,x3,x2,0};
+
+        int y1 = scalingHeight(75 + runwayHeight/2) + RUNWAY_Y();
+        int y2 = scalingHeight(105 + runwayHeight/2) + RUNWAY_Y();
+        int y3 = scalingHeight(-75 + runwayHeight/2) + RUNWAY_Y();
+        int y4 = scalingHeight(-105 + runwayHeight/2) + RUNWAY_Y();
+        int[] y = {y1,y1,y2,y2,y1,y1,y3,y3,y4,y4,y3,y3};
+
+        Polygon polygon = new Polygon(x,y,x.length);
+        g.setColor(Color.cyan);
+        g.fillPolygon(polygon);
+
+    }
+
     //draws a white dashed line in middle of runway
     private void drawCenterLine(Graphics2D g2){
 
@@ -52,7 +74,7 @@ public class RunwayTopView extends RunwayView{
         //set format of line and draw it
         g2.setStroke(dashed);
         g2.setColor(Color.WHITE);
-        g2.drawLine(START + 50, DASHED_HEIGHT, START + this.scaling(this.getRunwayLength()) - 50, DASHED_HEIGHT);
+        g2.drawLine(START + 50, DASHED_HEIGHT, START + this.scaling(this.getRunwayLength()), DASHED_HEIGHT);
     }
 
     //draws left and right runway numbers
