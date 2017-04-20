@@ -18,7 +18,7 @@ public abstract class RunwayView {
     Runway runway;
 
     //start of runway
-    final int START = 60;
+    int START = 0;
 
     //start of displace LDA
     private int LDAStart;
@@ -66,6 +66,7 @@ public abstract class RunwayView {
 
         this.LDAStart = runway.getThreasholdDisplacement();
         this.start = 0;
+        START =  scaling((runway.getStripLength() - runwayLength)/2);
     }
 
     //for updating parts of runway
@@ -165,7 +166,7 @@ public abstract class RunwayView {
 
     //draws labels and handles overlapping
     public void drawLabels(Graphics g){
-        g.setColor(Color.RED);
+        g.setColor(Color.BLUE);
         //string data of runwayEnd labels
         HashMap<String, Point> stringData = this.calculateStringDimensions(runwayEnds.keySet());
 
@@ -260,7 +261,7 @@ public abstract class RunwayView {
 
     //scales objects for JPanel in x direction proportional to runway length
     public int scaling(int x){
-        return (int)((double)x/(double)runway.getStripLength() * ((double)(jpanelWidth - 2 * START)));
+        return (int)((double)x/(double)runway.getStripLength() * ((double)(jpanelWidth)));
     }
 
     //scales objects for JPanel in y direction proportional to height of runway
