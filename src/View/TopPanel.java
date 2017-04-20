@@ -41,7 +41,7 @@ public class TopPanel extends JPanel{
         zoomout.setIcon(new ImageIcon(zoomoutimg));
         zoomout.setSize(zoomout.getPreferredSize());
         JButton refresh = new JButton();
-        URL settingsURL = Class.class.getResource("/View/settingsicon.png");
+        URL settingsURL = Class.class.getResource("/View/settingsIcon.png");
         BufferedImage settingsimg = ImageIO.read(settingsURL);
         URL RefreshUrl = Class.class.getResource("/View/refreshicon.png");
         BufferedImage refreshimg = ImageIO.read(RefreshUrl);
