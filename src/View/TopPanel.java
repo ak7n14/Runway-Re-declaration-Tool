@@ -54,6 +54,9 @@ public class TopPanel extends JPanel{
         JButton rotateRight = new JButton();
         rotateRight.setIcon(new ImageIcon(RotateRightimg));
         JButton rotateLeft = new JButton();
+        JComboBox<String> logs = new JComboBox<String>();
+        logs.addItem("Logs shall be placed inside this combobox ");
+        JButton open = new JButton("Open");
         rotateLeft.setIcon(new ImageIcon(RotateLeftimg));
         JButton settings = new JButton();
         settings.setIcon(new ImageIcon(settingsimg));
@@ -66,6 +69,9 @@ public class TopPanel extends JPanel{
         panel1.add(settings);
         this.setBorder(BorderFactory.createTitledBorder(""));
         this.add(panel1);
+        panel2.add(new JLabel("Logs:"));
+        panel2.add(logs);
+        panel2.add(open);
         this.add(panel2);
 
     }
