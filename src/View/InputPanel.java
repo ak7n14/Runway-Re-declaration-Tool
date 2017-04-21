@@ -32,7 +32,7 @@ public class InputPanel extends JPanel {
     NotificationPanel notificationPanel;
     int RESA;
     int engineBlastAllowance;
-    public InputPanel(Airport airport,OutputPanel outputPanel,NotificationPanel notificationPanel,int RESA,int engineBlastAllowance){
+    public InputPanel(Airport airport,OutputPanel outputPanel,NotificationPanel notificationPanel){
         this.airport=airport;
         this.setPreferredSize(new Dimension(390,300));
         this.setBorder(BorderFactory.createTitledBorder("Input Panel"));
@@ -40,11 +40,11 @@ public class InputPanel extends JPanel {
         this.setLayout(new GridBagLayout());
         this.initialize();
         this.outputPanel=outputPanel;
-        this.RESA=RESA;
-        this.engineBlastAllowance=engineBlastAllowance;
         this.notificationPanel=notificationPanel;
     }
     public void initialize(){
+        RESA = 240;
+        engineBlastAllowance=300;
         JLabel label = new JLabel("HI");
         font = label.getFont();
         Bold = new Font(font.getName(),Font.BOLD, font.getSize());
@@ -206,7 +206,23 @@ public class InputPanel extends JPanel {
         //Listener for calculate button
         btnCalculate.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 16));
         panel.add(btnCalculate);
-        btnCalculate.addActionListener(new CalculateListener(airport,runWayComboBox,importer,obsComboBox,obsDistTh,obsDisCL,RESA,engineBlastAllowance,leftRight,actionComboBox,towardsAway,plane));
+        btnCalculate.addActionListener(new CalculateListener(airport,runWayComboBox,importer,obsComboBox,obsDistTh,obsDisCL,leftRight,actionComboBox,towardsAway,plane));
+    }
+
+    public void setRESA(int RESA) {
+        this.RESA = RESA;
+    }
+
+    public int getRESA() {
+        return RESA;
+    }
+
+    public void setEngineBlastAllowance(int engineBlastAllowance) {
+        this.engineBlastAllowance = engineBlastAllowance;
+    }
+
+    public int getEngineBlastAllowance() {
+        return engineBlastAllowance;
     }
 
     public void updateObsList(){
@@ -237,8 +253,6 @@ public class InputPanel extends JPanel {
         int obsHeight;
         int obsLocThreshold;
         int obsLocCenteLine;
-        int RESA;
-        int eng;
         String Side;
         String Action;
         JTextField obsLocCL;
@@ -261,14 +275,12 @@ public class InputPanel extends JPanel {
 //		}
 
         public CalculateListener(Airport airport,JComboBox<String>runway,XMLImporter importer,JComboBox<String>obs,JTextField obsLocTH,
-                                 JTextField obsLocCL,int RESA,int Eng,JComboBox<String> Side,JComboBox<String>  Action,JComboBox<String>  Direction,Plane plane){
+                                 JTextField obsLocCL,JComboBox<String> Side,JComboBox<String>  Action,JComboBox<String>  Direction,Plane plane){
             this.airport=airport;
             this.rw = runway;
             this.importer = importer;
             this.obsLocTH=obsLocTH;
             this.obsLocCL=obsDisCL;
-            this.RESA=RESA;
-            this.eng= Eng;
             this.sd=Side;
             this.ac= Action;
             this.dr=Direction;
@@ -282,7 +294,7 @@ public class InputPanel extends JPanel {
             outputPanel.updateUI();
             notificationPanel.removeAll();
             notificationPanel.updateUI();
-//				// TODO Auto-generated method stub
+//		    TODO Auto-generated method stub
             Side=sd.getItemAt(sd.getSelectedIndex());
 
             runway=airport.getRunwayByDesignator(rw.getItemAt(rw.getSelectedIndex()));
@@ -308,7 +320,7 @@ public class InputPanel extends JPanel {
 
                 obsHeight=obs.getHeight();
 
-                Calculations calc = new Calculations(runway, obs.getHeight(), obsLocThreshold);
+                Calculations calc = new Calculations(runway, obs.getHeight(), obsLocThreshold,RESA,engineBlastAllowance);
                 if(obsLocCenteLine>runway.getRunwayWidth()/2){
 
                     if (Action=="Landing")

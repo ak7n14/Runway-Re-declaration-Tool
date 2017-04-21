@@ -16,11 +16,10 @@ public class MainFrame {
     int tol;
     private JFrame frame;
     private Container mainContainer;
+    InputPanel inputPanel;
     public MainFrame(Airport airport, Plane plane) {
 
         initialize(airport,plane);
-        RESA=240;
-        engineBlastAllowance=300;//For now later can be taken as input(Depends on flight)
         this.plane=plane;
         tol=100;
     }
@@ -35,7 +34,7 @@ public class MainFrame {
 
         NotificationPanel notificationPanel = new NotificationPanel();
         OutputPanel outputPanel = new OutputPanel(frame,plane,tol);
-        InputPanel inputPanel = new InputPanel(airport,outputPanel,notificationPanel,RESA,engineBlastAllowance);
+        inputPanel = new InputPanel(airport,outputPanel,notificationPanel);
 //        rightPanel.setLayout(null);
         rightPanel.setPreferredSize(new Dimension(400,837));
         rightPanel.setBorder(BorderFactory.createTitledBorder(""));
@@ -57,6 +56,7 @@ public class MainFrame {
         frame.setVisible(true);
     }
 
-
-
+    public InputPanel getInputPanel() {
+        return inputPanel;
+    }
 }

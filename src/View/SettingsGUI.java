@@ -45,16 +45,17 @@ public class SettingsGUI extends JFrame{
 		JLabel lblBlast = new JLabel("Default engine blast");
 		JLabel lblColour = new JLabel("Colour scheme");
 		JTextField txtRecents = new JTextField("");
-		JTextField txtRESA = new JTextField(ms.RESA+"");
-		JTextField txtBlast = new JTextField(ms.engineBlastAllowance+"");
+		JTextField txtRESA = new JTextField(ms.getInputPanel().getRESA()+"");
+		JTextField txtBlast = new JTextField(ms.getInputPanel().getEngineBlastAllowance()+"");
 		JComboBox cmbColours = new JComboBox();
 		JButton btnSave = new JButton("Save");
 
-//		btnSave.addActionListener(e ->
-//		{
-//            ms.setRESA(Integer.parseInt(txtRESA.getText()));
-//            ms.setEngineBlastAllowance(Integer.parseInt(txtBlast.getText()));
-//        });
+		btnSave.addActionListener(e ->
+		{
+            ms.getInputPanel().setRESA(Integer.parseInt(txtRESA.getText()));
+            ms.getInputPanel().setEngineBlastAllowance(Integer.parseInt(txtBlast.getText()));
+            this.dispose();
+        });
 		
 		general.add(lblRecents);
 		general.add(txtRecents);
