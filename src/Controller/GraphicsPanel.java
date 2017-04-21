@@ -74,8 +74,8 @@ public class GraphicsPanel extends JPanel {
 
         jFrame.setSize(2000, 1000);
         jFrame.setLayout(new GridLayout(2,1));
-        GraphicsPanel ptSide = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 1000), "side", 1000, 500);
-        GraphicsPanel ptTop = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 1000), "top", 1000, 500);
+        GraphicsPanel ptSide = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "side", 1000, 500);
+        GraphicsPanel ptTop = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "top", 1000, 500);
         jFrame.add(ptSide);
         jFrame.add(ptTop);
         jFrame.setVisible(true);

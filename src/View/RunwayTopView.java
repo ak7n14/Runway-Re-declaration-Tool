@@ -44,20 +44,30 @@ public class RunwayTopView extends RunwayView{
         this.drawScaleY(g);
     }
 
+    //draws a polygon
     public void drawClearedAndGraded(Graphics g){
-        int x4 = scaling(runway.getStripLength() -360);
-        int x5 = scaling(runway.getStripLength() -210);
-        int x6 = scaling(runway.getStripLength());
-        int x2 = scaling(210);
-        int x3 = scaling(360);
+        //polygon thing
+        int x4 = scaling(runwayLength -300) +START;
+        int x5 = scaling(runwayLength -150) +START;
+        int x6 = scaling(60 + runwayLength)+START;
+        int x2 = scaling(210-60)+START;
+        int x3 = scaling(360-60)+START;
 
-        int[] x = {0,x2,x3,x4,x5,x6,x6,x5,x4,x3,x2,0};
+        int[] x = {0+START-scaling(60),x2,x3,x4,x5,x6,x6,x5,x4,x3,x2,0+START-scaling(60)};
 
         int y1 = scalingHeight(75 + runwayHeight/2) + RUNWAY_Y();
         int y2 = scalingHeight(105 + runwayHeight/2) + RUNWAY_Y();
         int y3 = scalingHeight(-75 + runwayHeight/2) + RUNWAY_Y();
         int y4 = scalingHeight(-105 + runwayHeight/2) + RUNWAY_Y();
         int[] y = {y1,y1,y2,y2,y1,y1,y3,y3,y4,y4,y3,y3};
+
+        int xBlock[] = {START -scaling(60),x6,x6,START -scaling(60)};
+        int yBlock[] = {scalingHeight(150 + runwayHeight/2)+RUNWAY_Y(),scalingHeight(150 + runwayHeight/2) +RUNWAY_Y(),scalingHeight(-150 + runwayHeight/2)+RUNWAY_Y(),scalingHeight(-150 + runwayHeight/2)+RUNWAY_Y()};
+
+        //big rectangle thing around polygon
+        Polygon polygon2 = new Polygon(xBlock,yBlock,xBlock.length);
+        g.setColor(Color.magenta);
+        g.fillPolygon(polygon2);
 
         Polygon polygon = new Polygon(x,y,x.length);
         g.setColor(Color.cyan);
@@ -74,14 +84,14 @@ public class RunwayTopView extends RunwayView{
         //set format of line and draw it
         g2.setStroke(dashed);
         g2.setColor(Color.WHITE);
-        g2.drawLine(START + 50, DASHED_HEIGHT, START + this.scaling(this.getRunwayLength()), DASHED_HEIGHT);
+        g2.drawLine(START + 50, DASHED_HEIGHT, START + this.scaling(this.getRunwayLength() - 50), DASHED_HEIGHT);
     }
 
     //draws left and right runway numbers
     private void drawRunwayNumbers(Graphics2D g2){
         g2.setColor(Color.WHITE);
         //increase size of font
-        g2.setFont(new Font("Arial", Font.PLAIN, 20));
+        g2.setFont(new Font("Arial", Font.PLAIN, 10));
         //used to get string length so it can be centred
         FontMetrics metrics = g2.getFontMetrics();
 
