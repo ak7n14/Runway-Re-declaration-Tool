@@ -7,15 +7,10 @@ import Model.XMLImporter;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
+import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class SettingsGUI extends JFrame{
 
@@ -52,9 +47,11 @@ public class SettingsGUI extends JFrame{
 
 		btnSave.addActionListener(e ->
 		{
+
             ms.getInputPanel().setRESA(Integer.parseInt(txtRESA.getText()));
             ms.getInputPanel().setEngineBlastAllowance(Integer.parseInt(txtBlast.getText()));
             this.dispose();
+
         });
 		
 		general.add(lblRecents);
@@ -77,20 +74,35 @@ public class SettingsGUI extends JFrame{
 		JLabel lblapImp = new JLabel("Name of aiport XML file:");
 		JTextField txtapImp = new JTextField();
 		JButton btnapImp = new JButton("Load File");
-
-
+		btnapImp.addActionListener(new FileChooser(SettingsGUI.this,"Open",txtapImp));
+		JButton btnapImpSub = new JButton("Submit");
+		btnapImpSub.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SettingsGUI.this.dispose();
+			}
+		});
 		apImp.add(lblapImp);
 		apImp.add(txtapImp);
 		apImp.add(btnapImp);
-	
+		apImp.add(btnapImpSub);
 		JPanel apExp = new JPanel();
 		apExp.setLayout(new GridLayout(2,2));
 		JLabel lblapExp = new JLabel("Name of aiport XML file:");
 		JTextField txtapExp = new JTextField();
-		JButton btnapExp = new JButton("Save File");
+		JButton btnapExp = new JButton("Choose File");
+		btnapExp.addActionListener(new FileChooser(SettingsGUI.this,"Save",txtapExp));
+		JButton btnapSub = new JButton("Save File");
+		btnapSub.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SettingsGUI.this.dispose();
+			}
+		});
 		apExp.add(lblapExp);
 		apExp.add(txtapExp);
 		apExp.add(btnapExp);
+		apExp.add(btnapSub);
 		
 		JPanel apAdd = new JPanel();
 		apAdd.setLayout(new GridLayout(3,2));
@@ -187,23 +199,32 @@ public class SettingsGUI extends JFrame{
 		JLabel lbloImp = new JLabel("Name of obstacle XML file:");
 		JTextField txtoImp = new JTextField();
 		JButton btnoImp = new JButton("Load File");
-
-//		btnoImp.addActionListener(e ->
-//		{
-//			ms.obsList.addAll(importer.importCustomObstacles(txtoImp.getText()));
-//			ms.updateObsList();
-//			this.dispose();
-//		});
+		btnoImp.addActionListener(new FileChooser(SettingsGUI.this,"Open",txtoImp));
+		JButton btoImpSub = new JButton("Submit");
+		btoImpSub.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SettingsGUI.this.dispose();
+			}
+		});
 
 		oImp.add(lbloImp);
 		oImp.add(txtoImp);
 		oImp.add(btnoImp);
-	
+		oImp.add(btoImpSub);
 		JPanel oExp = new JPanel();
 		oExp.setLayout(new GridLayout(2,2));
 		JLabel lbloExp = new JLabel("Name of obstacle XML file:");
 		JTextField txtoExp = new JTextField();
-		JButton btnoExp = new JButton("Save File");
+		JButton btnoExp = new JButton("Choose File");
+		btnoExp.addActionListener(new FileChooser(SettingsGUI.this,"Save",txtoExp));
+		JButton btnoExpSub = new JButton("Save File");
+		btnoExpSub.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SettingsGUI.this.dispose();
+			}
+		});
 
 //		btnoExp.addActionListener(e ->
 //		{
@@ -215,7 +236,7 @@ public class SettingsGUI extends JFrame{
 		oExp.add(lbloExp);
 		oExp.add(txtoExp);
 		oExp.add(btnoExp);
-		
+		oExp.add(btnoExpSub);
 		JPanel oAdd = new JPanel();
 		oAdd.setLayout(new GridLayout(5,2));
 		JLabel lbloName = new JLabel("Name");
@@ -261,18 +282,35 @@ public class SettingsGUI extends JFrame{
 		JLabel lblacImp = new JLabel("Name of aircaft XML file:");
 		JTextField txtacImp = new JTextField();
 		JButton btnacImp = new JButton("Load File");
+		btnacImp.addActionListener(new FileChooser(SettingsGUI.this,"Open",txtacImp));
+		JButton btnacImpSub = new JButton("Submit");
+		btnacImpSub.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SettingsGUI.this.dispose();
+			}
+		});
 		acImp.add(lblacImp);
 		acImp.add(txtacImp);
 		acImp.add(btnacImp);
-	
+		acImp.add(btnacImpSub);
 		JPanel acExp = new JPanel();
 		acExp.setLayout(new GridLayout(2,2));
 		JLabel lblacExp = new JLabel("Name of aircraft XML file:");
 		JTextField txtacExp = new JTextField();
-		JButton btnacExp = new JButton("Save File");
+		JButton btnacExp = new JButton("Open File");
+		btnacExp.addActionListener(new FileChooser(SettingsGUI.this,"Save",txtacExp));
+		JButton btnacExpSub = new JButton("Save File");
+		btnacExpSub.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SettingsGUI.this.dispose();
+			}
+		});
 		acExp.add(lblacExp);
 		acExp.add(txtacExp);
 		acExp.add(btnacExp);
+		acExp.add(btnacExpSub);
 		
 		JPanel acAdd = new JPanel();
 		acAdd.setLayout(new GridLayout(4,2));
@@ -302,10 +340,6 @@ public class SettingsGUI extends JFrame{
 		setVisible(true);
 		
 	}
-	
-	 //to test the gui
-//    public static void main (String []args){
-//       SettingsGUI tab = new SettingsGUI();
-//   }
+
 }
 
