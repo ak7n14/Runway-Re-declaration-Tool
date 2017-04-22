@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.*;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FileChooser implements ActionListener {
     static private final String newline = "\n";
@@ -22,6 +24,10 @@ public class FileChooser implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        FileFilter filter = new FileNameExtensionFilter("XML file", new String[] {"xml"});
+        fc.removeChoosableFileFilter(fc.getFileFilter());
+        fc.addChoosableFileFilter(filter);
+        fc.setFileFilter(filter);
         if (st =="Open") {
             int returnVal = fc.showOpenDialog(frame);
 
