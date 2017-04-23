@@ -2,11 +2,13 @@ package View;
 
 import Controller.GraphicsPanel;
 import Model.*;
+import com.sun.org.apache.regexp.internal.RE;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +25,6 @@ public class InputPanel extends JPanel {
     GraphicsPanel side;
     GraphicsPanel top;
     JPanel calculationPanel;
-    Plane plane;
     int tol;
     JComboBox<String> runWayComboBox;
     JComboBox<String> obsComboBox;
@@ -34,17 +35,21 @@ public class InputPanel extends JPanel {
     NotificationPanel notificationPanel;
     int RESA;
     int engineBlastAllowance;
-    public InputPanel(Airport airport,OutputPanel outputPanel,NotificationPanel notificationPanel){
-        this.airport=airport;
+    Plane plane;
+    public InputPanel(Airport airport,OutputPanel outputPanel,NotificationPanel notificationPanel,Plane plane){
+
         this.setPreferredSize(new Dimension(390,300));
         this.setBorder(BorderFactory.createTitledBorder("Input Panel"));
         this.setLocation(0,0);
         this.setLayout(new GridBagLayout());
-        this.initialize();
+        this.initialize(plane,airport);
         this.outputPanel=outputPanel;
         this.notificationPanel=notificationPanel;
+
     }
-    public void initialize(){
+    public void initialize(Plane plane,Airport airport){
+        this.airport=airport;
+        this.plane=plane;
         RESA = 240;
         engineBlastAllowance=300;
         JLabel label = new JLabel("HI");
@@ -251,6 +256,7 @@ public class InputPanel extends JPanel {
         Runway runway;
         Airport airport;
         XMLImporter importer;
+        XMLExporter exporter;
         ObstacleBack obs;
         int obsHeight;
         int obsLocThreshold;
@@ -281,6 +287,7 @@ public class InputPanel extends JPanel {
             this.airport=airport;
             this.rw = runway;
             this.importer = importer;
+            this.exporter = new XMLExporter();
             this.obsLocTH=obsLocTH;
             this.obsLocCL=obsDisCL;
             this.sd=Side;
@@ -329,13 +336,15 @@ public class InputPanel extends JPanel {
                 obsHeight=obs.getHeight();
 
                 Calculations calc = new Calculations(runway, obs.getHeight(), obsLocThreshold,RESA,engineBlastAllowance);
-            //    Log lg = new Log(this.getCurrentTimeStamp(),runway,obs,obsLocCenteLine,obsLocThreshold,Action,side.getName(),Direction,RESA,engineBlastAllowance);
+                Log lg = new Log(this.getCurrentTimeStamp(),airport,runway,obs,obsLocCenteLine,obsLocThreshold,Action,Side,Direction, RESA,engineBlastAllowance,plane);
+
                 if(obsLocCenteLine>runway.getRunwayWidth()/2){
 
-                    if (Action=="Landing")
-                        outputPanel.printObsOutOfRunway(calc,"Landing");//Calling landing case
-                    else
-                        outputPanel.printObsOutOfRunway(calc,"Taking");//Calling taking off case
+                    if (Action=="Landing") {
+
+                        outputPanel.printObsOutOfRunway(calc, "Landing");//Calling landing case
+                    }else
+                    outputPanel.printObsOutOfRunway(calc,"Taking");//Calling taking off case
                 }
                 else{
                     if(Action=="Landing"){//Cases of landing
@@ -352,6 +361,7 @@ public class InputPanel extends JPanel {
                         if(Direction=="Towards"){
                             calc.calculateTORA("Towards");//When taking off towards the object
                             outputPanel.printCalcTakeOffTowards(calc);
+
                         }
                         else{
                             calc.calculateTORA("Away");//When taking off after the object
@@ -361,7 +371,11 @@ public class InputPanel extends JPanel {
 
                 }
                  notificationPanel.initialize("Valid");
-
+                try {
+                    exporter.exportLog(lg);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
 
                 return;
             }

@@ -6,7 +6,7 @@ package Model;
 public class Log {
     String name;
     Runway runway;
-    Obstacle obsticle;
+    ObstacleBack obsticle;
     int DistCL;
     int DistTH;
     String action;
@@ -14,8 +14,9 @@ public class Log {
     String DirectionAc;
     int RESA;
     int engineBlastAllowence;
-
-    public Log(String name,Runway runway,Obstacle obsticle,int DistCL, int DistTH,String action, String DirectionCL, String DirectionAc,int RESA,int eng){
+    Plane plane;
+    Airport airport;
+    public Log(String name,Airport airport,Runway runway,ObstacleBack obsticle,int DistCL, int DistTH,String action, String DirectionCL, String DirectionAc,int RESA,int eng,Plane plane){
         this.name=name;
         this.runway=runway;
         this.obsticle=obsticle;
@@ -25,7 +26,8 @@ public class Log {
         this.DirectionAc=DirectionAc;
         this.RESA=RESA;
         this.engineBlastAllowence=eng;
-
+        this.plane = plane;
+        this.airport=airport;
     }
 
     public int getDistCL() {
@@ -36,7 +38,7 @@ public class Log {
         return DistTH;
     }
 
-    public Obstacle getObsticle() {
+    public ObstacleBack getObsticle() {
         return obsticle;
     }
 
@@ -66,5 +68,13 @@ public class Log {
 
     public int getEngineBlastAllowence() {
         return engineBlastAllowence;
+    }
+
+    public Plane getPlane() {
+        return plane;
+    }
+
+    public Airport getAirport() {
+        return airport;
     }
 }

@@ -4,7 +4,7 @@ import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.*;
 import java.util.*;
-
+import java.io.BufferedReader;
 public class XMLImporter
 {
 
@@ -203,5 +203,33 @@ public class XMLImporter
         }
 
         return null;
+    }
+
+    public ArrayList<Log> importLogs()throws IOException{
+        ArrayList<Log> Logs = new ArrayList();
+        BufferedReader br;
+        String line;
+
+        br = new BufferedReader(new FileReader("/Data/log.csv"));
+        while ((line = br.readLine()) != null) {
+            String[] log = line.split(",");
+            String name = log[0];
+            Airport airport = this.getAirportByName(log[1]);
+            Runway runway = airport.getRunwayByDesignator(log[2]);
+            ObstacleBack obs = this.getObsticalByName(log[3]);
+            int DistLocCL = Integer.parseInt(log[4]);
+            int DistLocTh = Integer.parseInt(log[5]);
+            String action = log[6];
+            String DirectionCL = log[7];
+            String DirectionAC = log[8];
+            int RESA = Integer.parseInt(log[9]);
+            int eng = Integer.parseInt(log[10]);
+            Plane plane = this.getPlaneByName(log[11]);
+            if (br != null) {
+                br.close();
+            }
+            Logs.add(new Log(name,airport,runway,obs,DistLocCL,DistLocTh,action,DirectionCL,DirectionAC,RESA,eng,plane));
+        }
+        return Logs;
     }
 }

@@ -34,7 +34,7 @@ public class MainFrame {
 
         NotificationPanel notificationPanel = new NotificationPanel();
         OutputPanel outputPanel = new OutputPanel(frame,plane,tol);
-        inputPanel = new InputPanel(airport,outputPanel,notificationPanel);
+        inputPanel = new InputPanel(airport,outputPanel,notificationPanel,plane);
 //        rightPanel.setLayout(null);
         rightPanel.setPreferredSize(new Dimension(400,837));
         rightPanel.setBorder(BorderFactory.createTitledBorder(""));

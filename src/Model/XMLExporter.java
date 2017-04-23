@@ -7,6 +7,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class XMLExporter
 {
@@ -248,6 +251,41 @@ public class XMLExporter
         {
             e.printStackTrace();
         }
+
+    }
+
+    public void exportLog(Log log) throws IOException {
+
+
+        FileWriter pw = new FileWriter("Data/log.csv",true);
+        pw.append(log.getName());
+        pw.append(",");
+        pw.append(log.getAirport().getName());
+        pw.append(",");
+        pw.append(log.getRunway().getDesignator());
+        pw.append(",");
+        pw.append(log.getObsticle().getName());
+        pw.append(",");
+        pw.append(String.valueOf(log.getDistCL()));
+        pw.append(",");
+        pw.append(String.valueOf(log.getDistTH()));
+        pw.append(",");
+        pw.append(log.getAction());
+        pw.append(",");
+        pw.append(log.getDirectionCL());
+        pw.append(",");
+        pw.append(log.getDirectionAc());
+        pw.append(",");
+        pw.append(String.valueOf(log.getRESA()));
+        pw.append(",");
+        pw.append(String.valueOf(log.getEngineBlastAllowence()));
+        pw.append(",");
+        pw.append(log.getPlane().getName());
+        pw.append("\n");
+        pw.flush();
+        pw.close();
+
+
 
     }
 
