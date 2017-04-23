@@ -19,7 +19,7 @@ public class RunwaySideView extends RunwayView{
     }
 
     //draws runway, seperators and labels
-    public void drawAll(Graphics g){
+    public void drawAll(Graphics2D g){
         this.drawRunway(g);
         if(getTakeOffOrLand() == "Taking off")
             this.drawClearWay(g);
@@ -31,7 +31,7 @@ public class RunwaySideView extends RunwayView{
     }
 
     //draws runway
-    public void drawRunway(Graphics g){
+    public void drawRunway(Graphics2D g){
         g.setColor(Color.black);
         g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), runwayHeight);
     }
@@ -53,7 +53,7 @@ public class RunwaySideView extends RunwayView{
     }
 
     //draws als
-    public void drawALS(Graphics g){
+    public void drawALS(Graphics2D g){
         g.setColor(Color.RED);
 
         //front of object

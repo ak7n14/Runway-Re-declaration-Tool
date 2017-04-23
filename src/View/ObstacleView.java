@@ -54,7 +54,7 @@ public class ObstacleView extends Obstacle{
         if(runwayType.equals("side")) {
             //scales image based on object before displaying
             RunwaySideView rsw = (RunwaySideView) currentRunway;
-            rsw.drawScaleY(g);
+            rsw.drawScaleY(g2);
 
             g2.setColor(Color.RED);
             g2.fill(shapeSide);

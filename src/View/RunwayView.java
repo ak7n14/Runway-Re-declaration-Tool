@@ -43,8 +43,9 @@ public abstract class RunwayView {
     //initial y position and height of runway
     protected abstract int RUNWAY_Y();
     protected int runwayHeight;
-    
     private final int SEPARATOR_HEIGHT = 10;
+
+    private boolean isRotating;
 
     RunwayView(Runway runway, int jpanelWidth, int jpanelHeight, int runwayHeight) {
         this.runwayLength = runway.getRunwayLenght();
@@ -53,6 +54,7 @@ public abstract class RunwayView {
         this.runwayHeight = runwayHeight;
 
         updated = false;
+        isRotating = false;
 
         this.runway = runway;
         //stores all ends in hashmap
@@ -102,7 +104,7 @@ public abstract class RunwayView {
     }
 
     //draws runway, seperators and labels
-    public void drawAll(Graphics g){
+    public void drawAll(Graphics2D g){
         this.drawRunway(g);
         if(takeOffOrLand == "Taking off")
             this.drawClearWay(g);
@@ -112,25 +114,28 @@ public abstract class RunwayView {
         this.drawScaleX(g);
     }
 
+    public void drawRotationRectangle(Graphics2D g, Rectangle rect, int centerX, int centerY){
+    }
+
     //draw stop and clear way, stop in front of clear as clear is normally larger
-    public void drawStopWay(Graphics g){
+    public void drawStopWay(Graphics2D g){
         g.setColor(Color.MAGENTA);
         g.fillRect(START + scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("ASDA")) - scaling(runwayLength), scalingHeight(runwayHeight));
     }
 
-    public void drawClearWay(Graphics g){
+    public void drawClearWay(Graphics2D g){
         g.setColor(Color.green);
         g.fillRect(START + this.scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("TODA")-runwayLength), scalingHeight(runwayHeight));
     }
 
     //draws runway
-    public void drawRunway(Graphics g){
+    public void drawRunway(Graphics2D g){
         g.setColor(Color.black);
         g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), this.scalingHeight(runwayHeight));
     }
 
     //draws a seperator to see ends of different strip components
-    public void drawSeparator(Graphics g, int x, int start){
+    public void drawSeparator(Graphics2D g, int x, int start){
         //x is where the runway component ends
         //height is altered so separator is visible
         g.setColor(Color.BLUE);
@@ -138,7 +143,7 @@ public abstract class RunwayView {
     }
 
     //loops through hashmap and displays seperators
-    public void drawAllSeparators(Graphics g){
+    public void drawAllSeparators(Graphics2D g){
         //draws end separators
         for(String key : runwayEnds.keySet()){
             switch (key)
@@ -165,7 +170,7 @@ public abstract class RunwayView {
     }
 
     //draws labels and handles overlapping
-    public void drawLabels(Graphics g){
+    public void drawLabels(Graphics2D g){
         g.setColor(Color.BLUE);
         //string data of runwayEnd labels
         HashMap<String, Point> stringData = this.calculateStringDimensions(runwayEnds.keySet());
@@ -181,7 +186,7 @@ public abstract class RunwayView {
     }
 
     //stops labels overlapping
-    private void removeOverlap(HashMap<String, Point> stringData, Graphics g){
+    private void removeOverlap(HashMap<String, Point> stringData, Graphics2D g){
 
         for(String currentKey : stringData.keySet()){
 
@@ -270,7 +275,7 @@ public abstract class RunwayView {
     }
 
     //draw scales so user can get a feel of how big the runway and obstacles are
-    public void drawScaleX(Graphics g){
+    public void drawScaleX(Graphics2D g){
 
         //distance of 50 meters
         g.setColor(Color.BLACK);
@@ -289,7 +294,7 @@ public abstract class RunwayView {
 
 
     //draws an arrow image
-    public void drawArrow(Graphics g){
+    public void drawArrow(Graphics2D g){
         BufferedImage img = null;
 
         try {
@@ -302,7 +307,7 @@ public abstract class RunwayView {
         g.drawImage(img, 20 + stringWidth, 45, null);
     }
 
-    public void drawScaleY(Graphics g){
+    public void drawScaleY(Graphics2D g){
         //distance of 50 meters
         g.setColor(Color.BLACK);
         g.fillRect(20, 23, 2, MeterY());
@@ -362,5 +367,15 @@ public abstract class RunwayView {
         runwayLength = runway.getRunwayLenght();
     }
 
+    public HashMap<String, Integer> getRunwayEnds() {
+        return runwayEnds;
+    }
 
+    public void toggleRotating() {
+        isRotating = !isRotating;
+    }
+
+    public boolean isRotating() {
+        return isRotating;
+    }
 }

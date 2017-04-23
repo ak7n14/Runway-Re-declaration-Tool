@@ -10,6 +10,7 @@ import View.RunwayTopView;
 import View.RunwayView;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 public class GraphicsPanel extends JPanel {
@@ -24,6 +25,7 @@ public class GraphicsPanel extends JPanel {
     private String type;
     //if update method called set to true
     private boolean recalculated;
+    private boolean turnToCompassHeading;
 
     ArrayList<JLabel> jLabels;
     ArrayList<JTextField> jTextFields;
@@ -36,6 +38,7 @@ public class GraphicsPanel extends JPanel {
 
         //initalise not an update
         recalculated = false;
+        turnToCompassHeading = false;
         rw = runway;
         this.start = 0;
         this.LDAStart = 0;
@@ -54,19 +57,31 @@ public class GraphicsPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if(!(rsw.getRunway().getDesignator() == "X")) {
-            rsw.drawAll(g);
+        Graphics2D g2 = (Graphics2D) g;
+        //for resetting rotation after
+        AffineTransform old = g2.getTransform();
 
+        //rotates to compass heading
+        //-90 to start at 0 degrees then use runway * 10 to get degree position
+        if(turnToCompassHeading && rsw instanceof  RunwayTopView){
+            //rotates by designator around center of JPanel
+            g2.rotate(Math.toRadians((((RunwayTopView) rsw).getRunwayNum() * 10) - 90),this.getWidth()/2,this.getHeight()/2);
+        }
+
+        if(!(rsw.getRunway().getDesignator() == "X")) {
+            rsw.drawAll(g2);
             //only if update
             if (recalculated)
-                obsView.drawShape(g);
+                obsView.drawShape(g2);
 
             //only draw ALS/TOCS if it is a side view and this is an update
             if (recalculated && rsw instanceof RunwaySideView)
-                ((RunwaySideView) rsw).drawALS(g);
+                ((RunwaySideView) rsw).drawALS(g2);
 
-            rsw.drawAllSeparators(g);
+            rsw.drawAllSeparators(g2);
         }
+
+        g2.setTransform(old);
     }
 
     public static void main(String[] args) {
@@ -78,12 +93,17 @@ public class GraphicsPanel extends JPanel {
         GraphicsPanel ptTop = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "top", 1000, 500);
         jFrame.add(ptSide);
         jFrame.add(ptTop);
+        ptSide.toggleTurnToCompassHeading();
+        ptTop.toggleTurnToCompassHeading();
         jFrame.setVisible(true);
         ptSide.updatePaint(new Calculations(ptSide.getRw(), 20, 1000), 0, new ObstacleBack("nuke", 20, 100, 100), "Towards", "Taking off");
         ptTop.updatePaint(new Calculations(ptTop.getRw(), 20, 1000), 0, new ObstacleBack("nuke", 20, 100, 100), "Towards", "Taking off");
 
     }
 
+    public void toggleTurnToCompassHeading() {
+        turnToCompassHeading = !turnToCompassHeading;
+    }
 
     public void updatePaint(Calculations calc, int offsetZ, ObstacleBack obs, String direction, String takeOffOrLand){
 

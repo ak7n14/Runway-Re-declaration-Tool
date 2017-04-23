@@ -15,6 +15,7 @@ public class RunwayTopView extends RunwayView{
 
     //stores number and letter
     private String runwayNumber;
+    private int runwayNum;
 
     @Override
     protected int RUNWAY_Y() { return 100; }
@@ -26,30 +27,42 @@ public class RunwayTopView extends RunwayView{
     }
 
     //draws runway, seperators and labels
-    public void drawAll(Graphics g){
-        drawClearedAndGraded(g);
-        this.drawRunway(g);
+    public void drawAll(Graphics2D g2){
+        drawClearedAndGraded(g2);
+        this.drawRunway(g2);
         if(getTakeOffOrLand() == "Taking off")
-            this.drawClearWay(g);
-        this.drawStopWay(g);
-        this.drawAllSeparators(g);
+            this.drawClearWay(g2);
+        this.drawStopWay(g2);
+        this.drawAllSeparators(g2);
         //draws separator labels
-        this.drawLabels(g);
+        this.drawLabels(g2);
 
         //draw centre line in middle of runway
-        Graphics2D g2 = (Graphics2D) g;
         this.drawCenterLine(g2);
         this.drawRunwayNumbers(g2);
-        this.drawScaleX(g);
-        this.drawScaleY(g);
+        this.drawScaleX(g2);
+        this.drawScaleY(g2);
     }
 
     //draws a polygon
-    public void drawClearedAndGraded(Graphics g){
+    public void drawClearedAndGraded(Graphics2D g){
         //polygon thing
-        int x4 = scaling(runwayLength -300) +START;
-        int x5 = scaling(runwayLength -150) +START;
-        int x6 = scaling(60 + runwayLength)+START;
+        int x4 = 0;
+        int x5 = 0;
+        int x6 = 0;
+        int ASDA = getRunwayEnds().get("ASDA");
+        int TODA = getRunwayEnds().get("TODA");
+        if(ASDA > TODA) {
+            x4 = scaling(ASDA -300) +START;
+            x5 = scaling(ASDA - 150) + START;
+            x6 = scaling(60 + ASDA)+START;
+        }
+        else{
+            x4 = scaling(TODA -300) +START;
+            x5 = scaling(TODA - 150) + START;
+            x6 = scaling(60 + TODA)+START;
+        }
+
         int x2 = scaling(210-60)+START;
         int x3 = scaling(360-60)+START;
 
@@ -108,7 +121,7 @@ public class RunwayTopView extends RunwayView{
         //LEFT NUMBER
         //makes text vertical facing towards left edge of runway
         g2.rotate(-Math.PI);
-        int runwayNum = Integer.parseInt(runwayNumber.substring(0,2));
+        runwayNum = Integer.parseInt(runwayNumber.substring(0,2));
 
         int reverseIntNumber = 0;
 
@@ -165,5 +178,9 @@ public class RunwayTopView extends RunwayView{
 
         runwayHeight = runway.getRunwayWidth();
         runwayNumber = runway.getDesignator();
+    }
+
+    public int getRunwayNum() {
+        return runwayNum;
     }
 }
