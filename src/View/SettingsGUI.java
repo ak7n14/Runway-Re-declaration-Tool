@@ -249,17 +249,6 @@ public class SettingsGUI extends JFrame{
 		JTextField txtoDepth = new JTextField();
 		JButton btnoSave = new JButton("Save");
 
-//		btnoSave.addActionListener(e ->
-//		{
-//			ms.obsList.add(new ObstacleBack(txtoName.getText(),
-//					Integer.parseInt(txtoHeight.getText()),
-//					Integer.parseInt(txtoLength.getText()),
-//					Integer.parseInt(txtoDepth.getText())));
-//					ms.updateObsList();
-//			System.out.println("Adding new obs");
-//			this.dispose();
-//		});
-
 		oAdd.add(lbloName);
 		oAdd.add(txtoName);
 		oAdd.add(lbloHeight);

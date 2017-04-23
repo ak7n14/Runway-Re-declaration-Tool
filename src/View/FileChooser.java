@@ -9,7 +9,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FileChooser implements ActionListener {
-    static private final String newline = "\n";
     JFileChooser fc;
     String fileName;
     JFrame frame;
@@ -24,7 +23,7 @@ public class FileChooser implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        FileFilter filter = new FileNameExtensionFilter("XML file", new String[] {"xml"});
+        FileFilter filter = new FileNameExtensionFilter("XML file", new String[] {"xml"});//Only be able to choose xml files
         fc.removeChoosableFileFilter(fc.getFileFilter());
         fc.addChoosableFileFilter(filter);
         fc.setFileFilter(filter);
@@ -39,6 +38,7 @@ public class FileChooser implements ActionListener {
             }
             //Handle save button action.
         } else if (st == "Save") {
+
             int returnVal = fc.showSaveDialog(frame);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();

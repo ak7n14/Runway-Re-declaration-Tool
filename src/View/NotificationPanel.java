@@ -27,10 +27,10 @@ public class NotificationPanel extends JPanel {
             this.add(new JLabel ("Values Updated!"));
             panel.add(new JLabel("Key:"));
             panel.add(new JLabel(""));
-            panel.add(new JLabel("OLT = Obsticle location from threshold"));
+            panel.add(new JLabel("OLT = Obstacle location from threshold"));
             panel.add(new JLabel(""));
             panel.add(new JLabel("THD = Threshold Displacement"));
-            panel.add(new JLabel("EBA = Engine Blast Allowence"));
+            panel.add(new JLabel("EBA = Engine Blast Allowance"));
             panel.add(new JLabel("ALS = Approach Landing Surface"));
             panel.setAutoscrolls(true);
             scrollFrame.setPreferredSize(new Dimension( 360,70));

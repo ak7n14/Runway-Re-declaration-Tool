@@ -148,6 +148,8 @@ public class XMLExporter
         }
     }
 
+
+
     // This method creates a node for Obstacle containing details of the given ObstacleBack
     private Node getObstacle(Document document, ObstacleBack obstacle)
     {

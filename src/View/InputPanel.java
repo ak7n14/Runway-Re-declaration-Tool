@@ -7,7 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Anish on 4/20/17.
@@ -288,6 +290,12 @@ public class InputPanel extends JPanel {
             this.plane=plane;
 
         }
+        public String getCurrentTimeStamp() {
+            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");//dd/MM/yyyy
+            Date now = new Date();
+            String strDate = sdfDate.format(now);
+            return strDate;
+        }
         public void actionPerformed(ActionEvent e) {
             outputPanel.removeAll();
             outputPanel.setBackground(UIManager.getColor("Panel.background"));
@@ -321,6 +329,7 @@ public class InputPanel extends JPanel {
                 obsHeight=obs.getHeight();
 
                 Calculations calc = new Calculations(runway, obs.getHeight(), obsLocThreshold,RESA,engineBlastAllowance);
+            //    Log lg = new Log(this.getCurrentTimeStamp(),runway,obs,obsLocCenteLine,obsLocThreshold,Action,side.getName(),Direction,RESA,engineBlastAllowance);
                 if(obsLocCenteLine>runway.getRunwayWidth()/2){
 
                     if (Action=="Landing")
