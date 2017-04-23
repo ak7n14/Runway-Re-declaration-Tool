@@ -1,10 +1,13 @@
 package View;
 
 import Model.Airport;
+import Model.Log;
 import Model.Plane;
+import Model.XMLImporter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by Anish on 4/19/17.
@@ -31,7 +34,6 @@ public class MainFrame {
         mainContainer = frame.getContentPane();
         JPanel mainPanel = new JPanel();
         JPanel rightPanel = new JPanel();
-
         NotificationPanel notificationPanel = new NotificationPanel();
         OutputPanel outputPanel = new OutputPanel(frame,plane,tol);
         inputPanel = new InputPanel(airport,outputPanel,notificationPanel,plane);
@@ -47,7 +49,7 @@ public class MainFrame {
 
         JPanel nedsPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        TopPanel topPanel = new TopPanel(MainFrame.this);
+        TopPanel topPanel = new TopPanel(MainFrame.this,airport);
         mainPanel.add(topPanel,BorderLayout.NORTH);
         mainPanel.add(rightPanel,BorderLayout.EAST);
         mainPanel.add(nedsPanel,BorderLayout.CENTER);
@@ -59,4 +61,5 @@ public class MainFrame {
     public InputPanel getInputPanel() {
         return inputPanel;
     }
+
 }

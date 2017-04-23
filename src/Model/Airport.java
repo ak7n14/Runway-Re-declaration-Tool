@@ -50,7 +50,7 @@ public class Airport
     
     public Runway getRunwayByDesignator(String desig){
     	for(int i=0;i<runways.size();i++){
-    		if(runways.get(i).getDesignator()==desig){
+    		if(runways.get(i).getDesignator().equals(desig)){
     			return runways.get(i);
     		}
     	}

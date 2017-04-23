@@ -1,5 +1,9 @@
 package View;
 
+import Model.Airport;
+import Model.Log;
+import Model.XMLImporter;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,24 +14,27 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by Anish on 4/19/17.
  */
 public class TopPanel extends JPanel{
     MainFrame frame;
-    public TopPanel(MainFrame frame){
+    public TopPanel(MainFrame frame,Airport airport){
         this.frame=frame;
         this.setLayout(new GridLayout(1,2));
         try {
-            this.initialize();
+            this.initialize(airport);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void initialize() throws IOException {
+    public void initialize(Airport airport) throws IOException {
+        XMLImporter importer= new XMLImporter();
+        ArrayList<Log> logsList = importer.importLogs(airport);
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
         URL zoominURL = Class.class.getResource("/View/zoominicon.png");
@@ -55,7 +62,9 @@ public class TopPanel extends JPanel{
         rotateRight.setIcon(new ImageIcon(RotateRightimg));
         JButton rotateLeft = new JButton();
         JComboBox<String> logs = new JComboBox<String>();
-        logs.addItem("Logs shall be placed inside this combobox ");
+        for(Log lg: logsList){
+            logs.addItem(lg.getName());
+        }
         JButton open = new JButton("Open");
         rotateLeft.setIcon(new ImageIcon(RotateLeftimg));
         JButton settings = new JButton();
