@@ -99,7 +99,7 @@ public class InputPanel extends JPanel {
             obsComboBox.addItem(obs.getName());
         }
         obsComboBox.setSelectedIndex(-1);
-        JLabel lblChooseObsticle = new JLabel("Choose Obsticle");
+        JLabel lblChooseObsticle = new JLabel("Choose Obstacle");
         lblChooseObsticle.setHorizontalAlignment(SwingConstants.LEFT);
         lblChooseObsticle.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         GridBagConstraints gbc_lblChooseObsticle = new GridBagConstraints();

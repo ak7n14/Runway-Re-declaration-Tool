@@ -1,9 +1,6 @@
 package View;
 
-import Model.Airport;
-import Model.Log;
-import Model.Runway;
-import Model.XMLImporter;
+import Model.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -73,6 +70,7 @@ public class TopPanel extends JPanel{
             logs.addItem(lg.getName());
         }
         JButton open = new JButton("Open");
+        open.addActionListener(new logOpenListener(logsList,logs));
         rotateLeft.setIcon(new ImageIcon(RotateLeftimg));
         JButton settings = new JButton();
         settings.setIcon(new ImageIcon(settingsimg));
@@ -110,20 +108,23 @@ public class TopPanel extends JPanel{
     }
 
     class logOpenListener implements ActionListener{
-
-        InputPanel inputPanel;
-        OutputPanel outputPanel;
-        ArrayList<Log> logs;
+        ArrayList<Log>logs;
         String selectedLog;
-
-        public logOpenListener(InputPanel inputPanel,OutputPanel outputPanel,ArrayList<Log>Logs,JComboBox<String> selectedLog){
-            this.inputPanel = inputPanel;
-            this.outputPanel = outputPanel;
-            this.logs = logs;
-            this.selectedLog = selectedLog.getItemAt(selectedLog.getSelectedIndex());
+        JComboBox<String>logComboBox;
+        public logOpenListener(ArrayList<Log>logs,JComboBox<String>selectedLog){
+            this.logs =logs;
+            logComboBox = selectedLog;
         }
         public void actionPerformed(ActionEvent e) {
-
+            selectedLog = logComboBox.getItemAt(logComboBox.getSelectedIndex());
+            Log log = null;
+            for(Log lg:logs){
+                if(lg.getName().equals(selectedLog)){
+                  log = lg;
+                  break;
+                }
+            }
+            LogWindow window = new LogWindow(log);
         }
     }
 }

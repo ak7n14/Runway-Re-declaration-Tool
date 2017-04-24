@@ -56,6 +56,7 @@ public class MainFrame {
 
         mainContainer.add(mainPanel);
         frame.setVisible(true);
+
     }
 
     public InputPanel getInputPanel() {
