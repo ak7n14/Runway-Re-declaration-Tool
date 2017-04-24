@@ -66,5 +66,10 @@ public class MainFrame {
     public TopPanel getTopPanel() {
         return topPanel;
     }
-
+    public void updateLogsList(int max){
+        topPanel.updateLogsList(max);
+    }
+    public int getMaxLogDisplay(){
+        return topPanel.getMaxLogDisplay();
+    }
 }

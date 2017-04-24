@@ -24,6 +24,7 @@ public class TopPanel extends JPanel{
     Airport airport;
     JComboBox<String> logs;
     ArrayList<Log> logsList;
+    int maxLogDisplay;
     public TopPanel(MainFrame frame,Airport airport,InputPanel inputPanel,OutputPanel outputPanel){
         this.frame=frame;
         this.setLayout(new GridLayout(1,2));
@@ -37,6 +38,7 @@ public class TopPanel extends JPanel{
 
     public void initialize(Airport airport) throws IOException {
         this.airport=airport;
+        maxLogDisplay=10;
         XMLImporter importer= new XMLImporter();
         logsList = importer.importLogs(airport);
         JPanel panel1 = new JPanel();
@@ -51,35 +53,31 @@ public class TopPanel extends JPanel{
         JButton zoomout = new JButton();
         zoomout.setIcon(new ImageIcon(zoomoutimg));
         zoomout.setSize(zoomout.getPreferredSize());
-        JButton refresh = new JButton();
         URL settingsURL = Class.class.getResource("/View/settingsIcon.png");
         BufferedImage settingsimg = ImageIO.read(settingsURL);
-        URL RefreshUrl = Class.class.getResource("/View/refreshicon.png");
-        BufferedImage refreshimg = ImageIO.read(RefreshUrl);
-        URL RotateLeftUrl = Class.class.getResource("/View/Rotate_left.png");
-        BufferedImage RotateLeftimg = ImageIO.read(RotateLeftUrl);
         URL RotateRightUrl = Class.class.getResource("/View/rotate_right.png");
         BufferedImage RotateRightimg = ImageIO.read(RotateRightUrl);
-        ImageIcon refreshIcon = new ImageIcon(refreshimg);
-        refresh.setIcon(refreshIcon);
         JButton rotateRight = new JButton();
         rotateRight.setIcon(new ImageIcon(RotateRightimg));
-        JButton rotateLeft = new JButton();
         logs = new JComboBox<String>();
-        for(Log lg: logsList){
-            logs.addItem(lg.getName());
+        if(logsList.size()<=maxLogDisplay){
+            for(Log lg: logsList){
+                logs.addItem(lg.getName());
+            }
+        }else{
+            for(int i=0;i<maxLogDisplay;i++){
+                logs.addItem(logsList.get(logsList.size()-1-i).getName());
+            }
         }
+
         JButton open = new JButton("Open");
         open.addActionListener(new logOpenListener(logsList,logs));
-        rotateLeft.setIcon(new ImageIcon(RotateLeftimg));
         JButton settings = new JButton();
         settings.setIcon(new ImageIcon(settingsimg));
         settings.addActionListener(new SettingsListener());
         panel1.add(zoomin);
         panel1.add(zoomout);
-        panel1.add(refresh);
         panel1.add(rotateRight);
-        panel1.add(rotateLeft);
         panel1.add(settings);
         this.setBorder(BorderFactory.createTitledBorder(""));
         this.add(panel1);
@@ -89,10 +87,25 @@ public class TopPanel extends JPanel{
         this.add(panel2);
 
     }
+    public void updateLogsList(int MaxSize){
+        maxLogDisplay=MaxSize;
+        logs.removeAllItems();
+        if(logsList.size()<=maxLogDisplay){
+            for(Log lg: logsList){
+                logs.addItem(lg.getName());
+            }
+        }else{
+            for(int i=0;i<maxLogDisplay;i++){
+                logs.addItem(logsList.get(logsList.size()-1-i).getName());
+            }
+        }
+        logs.updateUI();
+        TopPanel.this.updateUI();
+    }
 
     public void update(Log log) throws IOException{
-        logs.addItem(log.getName());
         logsList.add(log);
+        updateLogsList(maxLogDisplay);
         logs.updateUI();
         TopPanel.this.updateUI();
     }
@@ -105,6 +118,10 @@ public class TopPanel extends JPanel{
 
         }
 
+    }
+
+    public int getMaxLogDisplay() {
+        return maxLogDisplay;
     }
 
     class logOpenListener implements ActionListener{
