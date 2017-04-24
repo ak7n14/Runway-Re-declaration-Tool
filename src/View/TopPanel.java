@@ -2,6 +2,7 @@ package View;
 
 import Model.Airport;
 import Model.Log;
+import Model.Runway;
 import Model.XMLImporter;
 
 import javax.imageio.ImageIO;
@@ -21,7 +22,12 @@ import java.util.ArrayList;
  */
 public class TopPanel extends JPanel{
     MainFrame frame;
-    public TopPanel(MainFrame frame,Airport airport){
+    InputPanel inputPanel;
+    OutputPanel outputPanel;
+    Airport airport;
+    JComboBox<String> logs;
+    ArrayList<Log> logsList;
+    public TopPanel(MainFrame frame,Airport airport,InputPanel inputPanel,OutputPanel outputPanel){
         this.frame=frame;
         this.setLayout(new GridLayout(1,2));
         try {
@@ -33,8 +39,9 @@ public class TopPanel extends JPanel{
     }
 
     public void initialize(Airport airport) throws IOException {
+        this.airport=airport;
         XMLImporter importer= new XMLImporter();
-        ArrayList<Log> logsList = importer.importLogs(airport);
+        logsList = importer.importLogs(airport);
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
         URL zoominURL = Class.class.getResource("/View/zoominicon.png");
@@ -61,7 +68,7 @@ public class TopPanel extends JPanel{
         JButton rotateRight = new JButton();
         rotateRight.setIcon(new ImageIcon(RotateRightimg));
         JButton rotateLeft = new JButton();
-        JComboBox<String> logs = new JComboBox<String>();
+        logs = new JComboBox<String>();
         for(Log lg: logsList){
             logs.addItem(lg.getName());
         }
@@ -84,13 +91,39 @@ public class TopPanel extends JPanel{
         this.add(panel2);
 
     }
+
+    public void update(Log log) throws IOException{
+        logs.addItem(log.getName());
+        logsList.add(log);
+        logs.updateUI();
+        TopPanel.this.updateUI();
+    }
     class SettingsListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             SettingsGUI setGui = new SettingsGUI(frame);
 
+
         }
 
+    }
+
+    class logOpenListener implements ActionListener{
+
+        InputPanel inputPanel;
+        OutputPanel outputPanel;
+        ArrayList<Log> logs;
+        String selectedLog;
+
+        public logOpenListener(InputPanel inputPanel,OutputPanel outputPanel,ArrayList<Log>Logs,JComboBox<String> selectedLog){
+            this.inputPanel = inputPanel;
+            this.outputPanel = outputPanel;
+            this.logs = logs;
+            this.selectedLog = selectedLog.getItemAt(selectedLog.getSelectedIndex());
+        }
+        public void actionPerformed(ActionEvent e) {
+
+        }
     }
 }

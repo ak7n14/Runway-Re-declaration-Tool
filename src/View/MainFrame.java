@@ -20,6 +20,7 @@ public class MainFrame {
     private JFrame frame;
     private Container mainContainer;
     InputPanel inputPanel;
+    TopPanel topPanel;
     public MainFrame(Airport airport, Plane plane) {
 
         initialize(airport,plane);
@@ -36,8 +37,7 @@ public class MainFrame {
         JPanel rightPanel = new JPanel();
         NotificationPanel notificationPanel = new NotificationPanel();
         OutputPanel outputPanel = new OutputPanel(frame,plane,tol);
-        inputPanel = new InputPanel(airport,outputPanel,notificationPanel,plane);
-//        rightPanel.setLayout(null);
+        inputPanel = new InputPanel(airport,outputPanel,notificationPanel,plane,MainFrame.this);
         rightPanel.setPreferredSize(new Dimension(400,837));
         rightPanel.setBorder(BorderFactory.createTitledBorder(""));
         rightPanel.add(inputPanel);
@@ -49,7 +49,7 @@ public class MainFrame {
 
         JPanel nedsPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        TopPanel topPanel = new TopPanel(MainFrame.this,airport);
+        topPanel = new TopPanel(MainFrame.this,airport,inputPanel,outputPanel);
         mainPanel.add(topPanel,BorderLayout.NORTH);
         mainPanel.add(rightPanel,BorderLayout.EAST);
         mainPanel.add(nedsPanel,BorderLayout.CENTER);
@@ -60,6 +60,10 @@ public class MainFrame {
 
     public InputPanel getInputPanel() {
         return inputPanel;
+    }
+
+    public TopPanel getTopPanel() {
+        return topPanel;
     }
 
 }

@@ -216,7 +216,6 @@ public class XMLImporter
             String name = log[0];
             Airport airport = this.getAirportByName(log[1]);
             Runway runway = airport.getRunwayByDesignator(log[2]);
-            System.out.println(log[2]);
             ObstacleBack obs = this.getObsticalByName(log[3]);
             int DistLocCL = Integer.parseInt(log[4]);
             int DistLocTh = Integer.parseInt(log[5]);
