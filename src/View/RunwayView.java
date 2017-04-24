@@ -45,7 +45,6 @@ public abstract class RunwayView {
     protected int runwayHeight;
     private final int SEPARATOR_HEIGHT = 10;
 
-    private boolean isRotating;
 
     RunwayView(Runway runway, int jpanelWidth, int jpanelHeight, int runwayHeight) {
         this.runwayLength = runway.getRunwayLenght();
@@ -54,12 +53,10 @@ public abstract class RunwayView {
         this.runwayHeight = runwayHeight;
 
         updated = false;
-        isRotating = false;
 
         this.runway = runway;
         //stores all ends in hashmap
         runwayEnds = new HashMap<>();
-
 
         runwayEnds.put("TODA", runway.getTODA());
         runwayEnds.put("TORA", runway.getTORA());
@@ -92,7 +89,6 @@ public abstract class RunwayView {
             runwayEnds.put("ASDA", calc.getReASDA() - start);
         }
 
-
         //only add resa if traveling away
         if(direction == "Away") {
             runwayEnds.put("RESA", calc.getRESA());
@@ -112,9 +108,6 @@ public abstract class RunwayView {
         //draws separator labels
         this.drawLabels(g);
         this.drawScaleX(g);
-    }
-
-    public void drawRotationRectangle(Graphics2D g, Rectangle rect, int centerX, int centerY){
     }
 
     //draw stop and clear way, stop in front of clear as clear is normally larger
@@ -367,15 +360,11 @@ public abstract class RunwayView {
         runwayLength = runway.getRunwayLenght();
     }
 
+    public int getSTART() {
+        return START;
+    }
+
     public HashMap<String, Integer> getRunwayEnds() {
         return runwayEnds;
-    }
-
-    public void toggleRotating() {
-        isRotating = !isRotating;
-    }
-
-    public boolean isRotating() {
-        return isRotating;
     }
 }

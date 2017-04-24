@@ -160,6 +160,7 @@ public class ObstacleView extends Obstacle{
 
     public int getOriginalOffsetX() { return originalOffsetX; }
 
-
-
+    public int getOffsetX() {
+        return offsetX;
+    }
 }
