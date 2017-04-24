@@ -78,17 +78,25 @@ public class GraphicsPanel extends JPanel {
         }
         if (zoom) {
             if(rsw instanceof RunwaySideView) {
+                //y axis stays the same, x axis is zoomed and jpanel is increased in size to allow for this and allow scrollinf
                 g2.scale(zoomNum,1);
                 setPreferredSize(new Dimension(jPanelWidth * 2 * zoomNum, jPanelHeight));
             }
             else{
+                //same as above but y-axis is zoomed as well.
                 g2.scale(zoomNum,zoomNum);
-                setPreferredSize(new Dimension(jPanelWidth * 2 * zoomNum, jPanelHeight * 2 * zoomNum));
+                setPreferredSize(new Dimension(jPanelWidth * 2 * zoomNum, jPanelHeight * zoomNum));
             }
         }
 
         if(!(rsw.getRunway().getDesignator() == "X")) {
             rsw.drawAll(g2);
+
+            //shifts runway under arrow
+            if(rsw instanceof RunwayTopView) {
+                g2.translate(1, 100);
+            }
+
             //only if update
             if (recalculated)
                 obsView.drawShape(g2);
@@ -100,6 +108,7 @@ public class GraphicsPanel extends JPanel {
             rsw.drawAllSeparators(g2);
         }
 
+        //resets transformations for when paint method is rerun so changes don't stack
         g2.setTransform(old);
     }
 
@@ -118,7 +127,7 @@ public class GraphicsPanel extends JPanel {
         jFrame.add(scrollPane);
         jFrame.add(scrollPane2);
         ptSide.setZoomNum(1);
-        ptTop.setZoomNum(2);
+        ptTop.setZoomNum(1);
         ptSide.toggleZoom();
         ptTop.toggleZoom();
 //        ptSide.toggleTurnToCompassHeading();

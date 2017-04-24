@@ -28,6 +28,11 @@ public class RunwayTopView extends RunwayView{
 
     //draws runway, seperators and labels
     public void drawAll(Graphics2D g2){
+        AffineTransform old = g2.getTransform();
+        //moves shapes under arrow and scales
+        g2.translate(1,100);
+
+        //draw components
         drawClearedAndGraded(g2);
         this.drawRunway(g2);
         if(getTakeOffOrLand() == "Taking off")
@@ -40,6 +45,9 @@ public class RunwayTopView extends RunwayView{
         //draw centre line in middle of runway
         this.drawCenterLine(g2);
         this.drawRunwayNumbers(g2);
+
+        //reset transformation, arrows and scales should stay at top
+        g2.setTransform(old);
         this.drawScaleX(g2);
         this.drawScaleY(g2);
     }
