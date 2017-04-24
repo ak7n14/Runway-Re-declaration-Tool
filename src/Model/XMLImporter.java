@@ -12,7 +12,7 @@ public class XMLImporter
     // returns an ArrayList of Airport type
     public ArrayList<Airport> importAirports()
     {
-        return importCustomAirports("Airports");
+        return importCustomAirports("Data/Airports.xml");
     }
 
 
@@ -21,7 +21,7 @@ public class XMLImporter
         ArrayList<Airport> airports = new ArrayList<Airport>();
         try
         {
-            File airportFile = new File("Data/"+filename+".xml");
+            File airportFile = new File(filename);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -78,7 +78,7 @@ public class XMLImporter
 
     public ArrayList<ObstacleBack> importObstacles()
     {
-        return importCustomObstacles("Obstacles");
+        return importCustomObstacles("Data/Obstacles.xml");
     }
 
     public ArrayList<ObstacleBack> importCustomObstacles(String filename)
@@ -86,7 +86,7 @@ public class XMLImporter
         ArrayList<ObstacleBack> obstacles = new ArrayList<ObstacleBack>();
         try
         {
-            File obstacleFile = new File("Data/"+filename+".xml");
+            File obstacleFile = new File(filename);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -124,7 +124,7 @@ public class XMLImporter
     // returns an ArrayList of Plane type
     public ArrayList<Plane> importPlanes()
     {
-        return importCustomPlanes("Planes");
+        return importCustomPlanes("Data/Planes.xml");
     }
 
     public ArrayList<Plane> importCustomPlanes(String filename)
@@ -133,7 +133,7 @@ public class XMLImporter
 
         try
         {
-            File planeFile = new File("Data/"+filename+".xml");
+            File planeFile = new File(filename);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
