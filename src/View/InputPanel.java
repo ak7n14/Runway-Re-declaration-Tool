@@ -346,7 +346,6 @@ public class InputPanel extends JPanel {
             ob = obs;
             this.plane=plane;
             this.frame=frame;
-
         }
         public String getCurrentTimeStamp() {
             SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");//dd/MM/yyyy
@@ -355,6 +354,7 @@ public class InputPanel extends JPanel {
             return strDate;
         }
         public void actionPerformed(ActionEvent e) {
+            boolean activate;//For NED
             outputPanel.removeAll();
             outputPanel.setBackground(UIManager.getColor("Panel.background"));
             outputPanel.updateUI();
@@ -392,30 +392,58 @@ public class InputPanel extends JPanel {
                 if(obsLocCenteLine>runway.getRunwayWidth()/2){
 
                     if (Action=="Landing") {
-
+                            activate=true;
                         outputPanel.printObsOutOfRunway(calc, "Landing");//Calling landing case
+
+
                     }else
+                        activate=true;
                     outputPanel.printObsOutOfRunway(calc,"Taking");//Calling taking off case
                 }
                 else{
                     if(Action=="Landing"){//Cases of landing
                         if(Direction=="Towards"){
                             calc.calculateLda("Towards");//When landing towards
+                            if(calc.getReLda()<plane.getMinLandingDis()) {
+                                activate = false;
+                            }else{
+                                activate =true;
+                            }
                             outputPanel.printCalcLandTowards(calc);
 
                         }else{
                             calc.calculateLda("Away");	//When landing over
+                            if(calc.getReLda()<plane.getMinLandingDis()) {
+                                activate = false;
+                            }else{
+                                activate =true;
+                            }
+                            outputPanel.printCalcLandTowards(calc);
                             outputPanel.printCalcLandOver(calc);
                         }
                     }
                     else{//Cases of taking off
                         if(Direction=="Towards"){
                             calc.calculateTORA("Towards");//When taking off towards the object
+                            if(calc.getReTORA()<plane.getMinLandingDis() || calc.getReTODA()<plane.getMinLandingDis()
+                                    ||calc.getReASDA()<plane.getMinLandingDis()){
+                                activate=false;
+                            }
+                            else{
+                                activate=true;
+                            }
                             outputPanel.printCalcTakeOffTowards(calc);
 
                         }
                         else{
                             calc.calculateTORA("Away");//When taking off after the object
+                            if(calc.getReTORA()<plane.getMinLandingDis() || calc.getReTODA()<plane.getMinLandingDis()
+                                    ||calc.getReASDA()<plane.getMinLandingDis()){
+                                activate=false;
+                            }
+                            else{
+                                activate=true;
+                            }
                             outputPanel.printTakeOffAfter(calc);
                         }
                     }
