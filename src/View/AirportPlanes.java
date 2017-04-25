@@ -1,23 +1,27 @@
 package View;
 
-import Model.Airport;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Created by Anish on 4/24/17.
  */
 public class AirportPlanes extends JFrame {
-    public AirportPlanes(){
+    XMLExporter exp;
+    public AirportPlanes(CalculationGUI calcuGUI){
+        exp=new XMLExporter();
         setTitle("Aiport/Aircraft");
         JTabbedPane jtp = new JTabbedPane();
         getContentPane().add(jtp);
         JPanel airport = new JPanel();
         JPanel aircraft = new JPanel();
+        CalculationGUI cal = calcuGUI;
         jtp.addTab("Airport", airport);
         jtp.addTab("Aircraft", aircraft);
         JTabbedPane apjtp = new JTabbedPane();
@@ -35,6 +39,20 @@ public class AirportPlanes extends JFrame {
         btnapImpSub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                XMLImporter imp = new XMLImporter();
+                ArrayList<Airport> temp,airports;
+                airports=calcuGUI.getAirports();
+                temp= calcuGUI.getImporter().importCustomAirports(txtapImp.getText());
+                for(int i=0;i<temp.size();i++){
+                    for(int j=0;j<airports.size();j++){
+                        if(airports.get(j).getName().equals(temp.get(i).getName())){
+                            temp.remove(i);
+                        }
+                    }
+                }
+                airports.addAll(temp);
+                exp.exportAiports("Airports",airports);
+                cal.updateAirportsList();
                 AirportPlanes.this.dispose();
             }
         });
@@ -50,20 +68,24 @@ public class AirportPlanes extends JFrame {
         JTextField txtapNoRW = new JTextField("0");
         txtapNoRW.setEditable(false);
         JButton btnAddRW = new JButton("Add a runway");
+
         JButton btnapSave = new JButton("Save");
+        ArrayList<Runway> runways= new ArrayList<Runway>();
 
         //window to add details of a new runway
         class AddRunwayGUI extends JFrame{
-            public AddRunwayGUI(ArrayList runways){
+            public AddRunwayGUI(ArrayList runways,JTextField noRunways){
                 setTitle("Add Runway");
-                setSize(200,220);
+                setSize(350,320);
 
                 JPanel panel = new JPanel();
                 getContentPane().add(panel);
-                panel.setLayout(new GridLayout(10,2));
+                panel.setLayout(new GridLayout(12,2));
 
                 JLabel lblDesignator = new JLabel("Designator");
                 JTextField txtDesignator = new JTextField();
+                JLabel lblThreshold = new JLabel("Threshold Displacement");
+                JTextField txtThreshold= new JTextField();
                 JLabel lblLDA = new JLabel("LDA");
                 JTextField txtLDA = new JTextField();
                 JLabel lblASDA = new JLabel("ASDA");
@@ -81,9 +103,12 @@ public class AirportPlanes extends JFrame {
                 JLabel lblStripWidth = new JLabel("StripWidth");
                 JTextField txtStripWidth = new JTextField();
                 JButton btnSave = new JButton("Add runway");
-
+                panel.add(new JLabel(""));
+                panel.add(new JLabel("All distances in meters"));
                 panel.add(lblDesignator);
                 panel.add(txtDesignator);
+                panel.add(lblThreshold);
+                panel.add(txtThreshold);
                 panel.add(lblLDA);
                 panel.add(txtLDA);
                 panel.add(lblASDA);
@@ -101,19 +126,58 @@ public class AirportPlanes extends JFrame {
                 panel.add(lblStripWidth);
                 panel.add(txtStripWidth);
                 panel.add(btnSave);
+                btnSave.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int LDA=0,threshold=0,ASDA=0,TORA=0,TODA=0,Length=0,Width=0,StripLength=0,StripWidth=0;
+                        try{
+                            LDA = Integer.parseInt(txtLDA.getText());
+                            threshold = Integer.parseInt(txtThreshold.getText());
+                            ASDA = Integer.parseInt(txtASDA.getText());
+                            TORA = Integer.parseInt(txtTORA.getText());
+                            Length=Integer.parseInt(txtLength.getText());
+                            Width=Integer.parseInt(txtWidth.getText());
+                            StripLength=Integer.parseInt(txtStripLength.getText());
+                            StripWidth= Integer.parseInt(txtStripLength.getText());
+                        }catch (NumberFormatException er){
+                            JFrame frame = new JFrame("INVALID");
+                            frame.getContentPane().add(new JLabel("Invalid inputs!"));
+                            frame.setSize(300,100);
+                            frame.setVisible(true);
+                            return;
+                        }
+
+                        runways.add(new Runway(txtDesignator.getText(),TORA,TODA,ASDA,LDA,threshold,Length,Width,StripLength,StripWidth));
+                        noRunways.setText(String.valueOf(runways.size()));
+                        noRunways.updateUI();
+                        AddRunwayGUI.this.dispose();
+                    }
+
+                });
 
 
                 setVisible(true);
             }
         }
-
-        //runway GUI takes in an arraylist to add new runways to
-        ArrayList dummyTestArrayList = new ArrayList<String>();
-        btnAddRW.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                AddRunwayGUI addRWGUI = new AddRunwayGUI(dummyTestArrayList);
+        btnAddRW.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddRunwayGUI gui = new AddRunwayGUI(runways,txtapNoRW);
             }
         });
+        btnapSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Airport ap = new Airport(txtapName.getText(),runways);
+                ArrayList<Airport> airports=calcuGUI.getAirports();
+                airports.add(ap);
+                exp.exportAiports("Airports",airports);
+                cal.updateAirportsList();
+                AirportPlanes.this.dispose();
+            }
+        });
+        //runway GUI takes in an arraylist to add new runways to
+        ArrayList dummyTestArrayList = new ArrayList<String>();
 
         apAdd.add(lblapName);
         apAdd.add(txtapName);
@@ -138,6 +202,20 @@ public class AirportPlanes extends JFrame {
         btnacImpSub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                XMLImporter imp = new XMLImporter();
+                ArrayList<Plane> temp,planes;
+                planes=calcuGUI.getPlanesList();
+                temp= calcuGUI.getImporter().importCustomPlanes(txtacImp.getText());
+                for(int i=0;i<temp.size();i++){
+                    for(int j=0;j<planes.size();j++){
+                        if(planes.get(j).getName().equals(temp.get(i).getName())){
+                            temp.remove(i);
+                        }
+                    }
+                }
+                planes.addAll(temp);
+                exp.exportPlanes("Planes",planes);
+                cal.updatePlanesList();
                 AirportPlanes.this.dispose();
             }
         });
@@ -155,6 +233,34 @@ public class AirportPlanes extends JFrame {
         JLabel lblacLand = new JLabel("Min landing length (m)");
         JTextField txtacLand = new JTextField();
         JButton btnacSave = new JButton("Save");
+        btnacSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int minTFLen=0,minLanLen = 0;
+                try{
+                    minTFLen=Integer.parseInt(txtacLand.getText());
+                    minLanLen = Integer.parseInt(txtacLand.getText());
+                }catch (NumberFormatException er){
+                    JFrame frame = new JFrame("INVALID");
+                    frame.getContentPane().add(new JLabel("Invalid inputs!"));
+                    frame.setSize(300,100);
+                    frame.setVisible(true);
+                    return;
+                }
+                if(minLanLen<0||minTFLen<0){
+                    JFrame frame = new JFrame("INVALID");
+                    frame.getContentPane().add(new JLabel("Invalid inputs!"));
+                    frame.setSize(300,100);
+                    frame.setVisible(true);
+                    return;
+                }
+                Plane plane = new Plane(txtacName.getText(),minLanLen,minTFLen);
+                calcuGUI.getPlanesList().add(plane);
+                exp.exportPlanes("Planes",calcuGUI.getPlanesList());
+                calcuGUI.updatePlanesList();
+                AirportPlanes.this.dispose();
+            }
+        });
         acAdd.add(lblacName);
         acAdd.add(txtacName);
         acAdd.add(lblacTake);

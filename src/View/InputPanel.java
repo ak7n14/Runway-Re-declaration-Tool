@@ -300,6 +300,9 @@ public class InputPanel extends JPanel {
         this.plane = plane;
     }
 
+    public ArrayList<ObstacleBack> getObsList() {
+        return obsList;
+    }
 
     class CalculateListener implements ActionListener {
         Runway runway;

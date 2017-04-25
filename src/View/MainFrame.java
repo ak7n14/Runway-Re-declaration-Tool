@@ -74,7 +74,6 @@ public class MainFrame {
         frame.setVisible(true);
 
     }
-
     public InputPanel getInputPanel() {
         return inputPanel;
     }
@@ -95,5 +94,8 @@ public class MainFrame {
     }
     public int getMaxLogDisplay(){
         return topPanel.getMaxLogDisplay();
+    }
+    public ArrayList<ObstacleBack> getObsList(){
+        return inputPanel.getObsList();
     }
 }
