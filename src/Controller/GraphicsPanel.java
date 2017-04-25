@@ -73,9 +73,10 @@ public class GraphicsPanel extends JPanel {
         //rotates to compass heading
         //-90 to start at 0 degrees then use runway * 10 to get degree position
         if(turnToCompassHeading && rsw instanceof  RunwayTopView){
+
             //rotates by designator around center of JPanel
             Rectangle runway = rsw.getRunwayRect();
-            g2.rotate(Math.toRadians((((RunwayTopView) rsw).getRunwayNum() * 10) - 90), runway.getCenterX(),runway.getCenterY());
+            g2.rotate(Math.toRadians((((RunwayTopView) rsw).getRunwayNum() * 10) - 90), runway.getCenterX(),runway.getCenterY() + 200);
         }
         if (zoom) {
             if(rsw instanceof RunwaySideView) {

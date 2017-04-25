@@ -167,7 +167,7 @@ public class XMLImporter
                     Element element = (Element) planeNode;
 
                     planes.add(new Plane(planeName, Integer.parseInt(element.getElementsByTagName("landingLength").item(0).getTextContent()),
-                                Integer.parseInt(element.getElementsByTagName("takeoffLength").item(0).getTextContent())));
+                            Integer.parseInt(element.getElementsByTagName("takeoffLength").item(0).getTextContent())));
 
                 }
             }
@@ -190,16 +190,16 @@ public class XMLImporter
 
         for(Airport airport : airports)
         {
-            if(airport.getName().equals(name.toUpperCase()))
+            if(airport.getName().equals(name))
                 return airport;
         }
 
         return null;
     }
 
-    
+
     public Plane getPlaneByName(String name){
-    	ArrayList<Plane> planes = importPlanes();
+        ArrayList<Plane> planes = importPlanes();
 
         for(Plane plane : planes)
         {
@@ -210,7 +210,7 @@ public class XMLImporter
         return null;
     }
     public ObstacleBack getObsticalByName(String name){
-    	ArrayList<ObstacleBack> obstacle = importObstacles();
+        ArrayList<ObstacleBack> obstacle = importObstacles();
 
         for(ObstacleBack obs : obstacle)
         {
@@ -274,4 +274,5 @@ public class XMLImporter
             System.err.println(e);
         }
     }
+
 }
