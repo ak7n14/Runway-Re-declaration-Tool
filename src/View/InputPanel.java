@@ -19,7 +19,7 @@ import java.util.Date;
 public class InputPanel extends JPanel {
     XMLImporter importer;
     private JTextField obsDisCL;
-    private JTextField obsDistTh;
+    public JTextField obsDistTh;
     ArrayList<ObstacleBack> obsList;
     ArrayList<Runway>runWayList;
     GraphicsPanel side;
@@ -36,19 +36,27 @@ public class InputPanel extends JPanel {
     int RESA;
     int engineBlastAllowance;
     Plane plane;
-    public InputPanel(Airport airport,OutputPanel outputPanel,NotificationPanel notificationPanel,Plane plane){
+    MainFrame frame;
+    GridBagConstraints gbc_runWayComboBox;
+    GridBagConstraints gbc_obsComboBox;
+    JComboBox<String> actionComboBox;
+    JComboBox<String> leftRight;
+    JComboBox<String> towardsAway;
+    JButton btnCalculate;
+    public InputPanel(Airport airport,OutputPanel outputPanel,NotificationPanel notificationPanel,Plane plane,MainFrame frame){
 
         this.setPreferredSize(new Dimension(390,300));
         this.setBorder(BorderFactory.createTitledBorder("Input Panel"));
         this.setLocation(0,0);
         this.setLayout(new GridBagLayout());
-        this.initialize(plane,airport);
+        this.initialize(plane,airport,frame);
         this.outputPanel=outputPanel;
         this.notificationPanel=notificationPanel;
 
     }
-    public void initialize(Plane plane,Airport airport){
+    public void initialize(Plane plane,Airport airport,MainFrame frame){
         this.airport=airport;
+        this.frame=frame;
         this.plane=plane;
         RESA = 240;
         engineBlastAllowance=300;
@@ -78,7 +86,7 @@ public class InputPanel extends JPanel {
         gbc_lblChooseRunway.gridx = 1;
         gbc_lblChooseRunway.gridy = 2;
         this.add(lblChooseRunway, gbc_lblChooseRunway);
-        GridBagConstraints gbc_runWayComboBox = new GridBagConstraints();
+        gbc_runWayComboBox = new GridBagConstraints();
         gbc_runWayComboBox.insets = new Insets(0, 0, 5, 5);
         gbc_runWayComboBox.fill = GridBagConstraints.HORIZONTAL;
         gbc_runWayComboBox.gridx = 2;
@@ -91,7 +99,7 @@ public class InputPanel extends JPanel {
             obsComboBox.addItem(obs.getName());
         }
         obsComboBox.setSelectedIndex(-1);
-        JLabel lblChooseObsticle = new JLabel("Choose Obsticle");
+        JLabel lblChooseObsticle = new JLabel("Choose Obstacle");
         lblChooseObsticle.setHorizontalAlignment(SwingConstants.LEFT);
         lblChooseObsticle.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         GridBagConstraints gbc_lblChooseObsticle = new GridBagConstraints();
@@ -99,7 +107,7 @@ public class InputPanel extends JPanel {
         gbc_lblChooseObsticle.gridx = 1;
         gbc_lblChooseObsticle.gridy = 3;
         this.add(lblChooseObsticle, gbc_lblChooseObsticle);
-        GridBagConstraints gbc_obsComboBox = new GridBagConstraints();
+        gbc_obsComboBox = new GridBagConstraints();
         gbc_obsComboBox.insets = new Insets(0, 0, 5, 5);
         gbc_obsComboBox.fill = GridBagConstraints.HORIZONTAL;
         gbc_obsComboBox.gridx = 2;
@@ -150,7 +158,7 @@ public class InputPanel extends JPanel {
         this.add(lblSelectAction, gbc_lblSelectAction);
         Bold = new Font(font.getName(),Font.BOLD, font.getSize());
 
-        JComboBox<String> actionComboBox = new JComboBox<String>();
+        actionComboBox = new JComboBox<String>();
         actionComboBox.addItem("Landing");
         actionComboBox.addItem("Taking off");
         actionComboBox.setSelectedIndex(-1);
@@ -169,7 +177,7 @@ public class InputPanel extends JPanel {
         selectDirection.gridy = 7;
         this.add(lblSelectDirection, selectDirection);
         //Adding stuff ti the direction combobox
-        JComboBox<String> leftRight = new JComboBox<String>();
+        leftRight = new JComboBox<String>();
         leftRight.addItem("Left");
         leftRight.addItem("Right");
         leftRight.setSelectedIndex(-1);
@@ -188,7 +196,7 @@ public class InputPanel extends JPanel {
         gbc_lblSelectDirectionOf.gridy = 8;
         this.add(lblSelectDirectionOf, gbc_lblSelectDirectionOf);
         //Adding directions
-        JComboBox<String> towardsAway = new JComboBox<String>();
+        towardsAway = new JComboBox<String>();
         towardsAway.addItem("Towards");
         towardsAway.addItem("Away");
         towardsAway.setSelectedIndex(-1);
@@ -209,11 +217,11 @@ public class InputPanel extends JPanel {
         this.add(panel, gbc_panel);
         panel.setLayout(new GridLayout(1,2));
         panel.add(new JLabel());
-        JButton btnCalculate = new JButton("Calculate");
+        btnCalculate = new JButton("Calculate");
         //Listener for calculate button
         btnCalculate.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 16));
         panel.add(btnCalculate);
-        btnCalculate.addActionListener(new CalculateListener(airport,runWayComboBox,importer,obsComboBox,obsDistTh,obsDisCL,leftRight,actionComboBox,towardsAway,plane));
+        btnCalculate.addActionListener(new CalculateListener(airport,runWayComboBox,importer,obsComboBox,obsDistTh,obsDisCL,leftRight,actionComboBox,towardsAway,plane,frame));
     }
 
     public void setRESA(int RESA) {
@@ -252,6 +260,47 @@ public class InputPanel extends JPanel {
         this.updateUI();
     }
 
+    public JComboBox<String> getObsComboBox() {
+        return obsComboBox;
+    }
+
+    public JComboBox<String> getRunWayComboBox() {
+        return runWayComboBox;
+    }
+
+    public JTextField getObsDisCL() {
+        return obsDisCL;
+    }
+
+    public JTextField getObsDistTh() {
+        return obsDistTh;
+    }
+
+    public JComboBox<String> getActionComboBox() {
+        return actionComboBox;
+    }
+
+    public JComboBox<String> getLeftRight() {
+        return leftRight;
+    }
+
+    public JComboBox<String> getTowardsAway() {
+        return towardsAway;
+    }
+
+    public Plane getPlane() {
+        return plane;
+    }
+
+    public JButton getBtnCalculate() {
+        return btnCalculate;
+    }
+
+    public void setPlane(Plane plane) {
+        this.plane = plane;
+    }
+
+
     class CalculateListener implements ActionListener {
         Runway runway;
         Airport airport;
@@ -273,6 +322,7 @@ public class InputPanel extends JPanel {
         JComboBox<String>dr;
         JComboBox<String>ob;
         Plane plane;
+        MainFrame frame;
 //      GraphicsPanel top; //ted
 //      GraphicsPanel side; //ted
 //		public CalculateListener(, /*ted*/ GraphicsPanel top, GraphicsPanel side /*ted*/){
@@ -283,7 +333,7 @@ public class InputPanel extends JPanel {
 //		}
 
         public CalculateListener(Airport airport,JComboBox<String>runway,XMLImporter importer,JComboBox<String>obs,JTextField obsLocTH,
-                                 JTextField obsLocCL,JComboBox<String> Side,JComboBox<String>  Action,JComboBox<String>  Direction,Plane plane){
+                                 JTextField obsLocCL,JComboBox<String> Side,JComboBox<String>  Action,JComboBox<String>  Direction,Plane plane,MainFrame frame){
             this.airport=airport;
             this.rw = runway;
             this.importer = importer;
@@ -295,6 +345,7 @@ public class InputPanel extends JPanel {
             this.dr=Direction;
             ob = obs;
             this.plane=plane;
+            this.frame=frame;
 
         }
         public String getCurrentTimeStamp() {
@@ -373,6 +424,7 @@ public class InputPanel extends JPanel {
                  notificationPanel.initialize("Valid");
                 try {
                     exporter.exportLog(lg);
+                    frame.getTopPanel().update(lg);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }

@@ -1,7 +1,9 @@
 package View;
 
-import Controller.GraphicsPanel;
-import Model.*;
+import Model.Airport;
+import Model.Log;
+import Model.Plane;
+import Model.XMLImporter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +20,7 @@ public class MainFrame {
     private JFrame frame;
     private Container mainContainer;
     InputPanel inputPanel;
+    TopPanel topPanel;
     public MainFrame(Airport airport, Plane plane) {
 
         initialize(airport,plane);
@@ -34,8 +37,7 @@ public class MainFrame {
         JPanel rightPanel = new JPanel();
         NotificationPanel notificationPanel = new NotificationPanel();
         OutputPanel outputPanel = new OutputPanel(frame,plane,tol);
-        inputPanel = new InputPanel(airport,outputPanel,notificationPanel,plane);
-//        rightPanel.setLayout(null);
+        inputPanel = new InputPanel(airport,outputPanel,notificationPanel,plane,MainFrame.this);
         rightPanel.setPreferredSize(new Dimension(400,837));
         rightPanel.setBorder(BorderFactory.createTitledBorder(""));
         rightPanel.add(inputPanel);
@@ -46,33 +48,28 @@ public class MainFrame {
         rightPanel.add(scrollFrame);
 
         JPanel nedsPanel = new JPanel();
-        nedsPanel.setLayout(new BorderLayout());
         mainPanel.setLayout(new BorderLayout());
-
-        JTabbedPane jtp = new JTabbedPane();
-        GraphicsPanel ptSide = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "side", 1000, 500);
-        GraphicsPanel ptTop = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "top", 1000, 500);
-
-        ptSide.setPreferredSize(new Dimension(2000, 1000));
-        ptTop.setPreferredSize(new Dimension(2000, 1000));
-
-        JScrollPane sidePane = new JScrollPane(ptSide);
-        JScrollPane topPane = new JScrollPane(ptTop);
-        jtp.addTab("Side", sidePane);
-        jtp.addTab("Top", topPane);
-        nedsPanel.add(jtp);
-
-        TopPanel topPanel = new TopPanel(MainFrame.this,airport);
+        topPanel = new TopPanel(MainFrame.this,airport,inputPanel,outputPanel);
         mainPanel.add(topPanel,BorderLayout.NORTH);
         mainPanel.add(rightPanel,BorderLayout.EAST);
         mainPanel.add(nedsPanel,BorderLayout.CENTER);
 
         mainContainer.add(mainPanel);
         frame.setVisible(true);
+
     }
 
     public InputPanel getInputPanel() {
         return inputPanel;
     }
 
+    public TopPanel getTopPanel() {
+        return topPanel;
+    }
+    public void updateLogsList(int max){
+        topPanel.updateLogsList(max);
+    }
+    public int getMaxLogDisplay(){
+        return topPanel.getMaxLogDisplay();
+    }
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import Controller.*;
 import Model.*;
+import oracle.jvm.hotspot.jfr.JFR;
 
 import java.awt.event.*;
 
@@ -19,6 +20,7 @@ public class CalculationGUI{
 	JPanel frame;
 	Plane plane;
 	Airport airport;
+
 	public CalculationGUI(){
 		airports = importer.importAirports();
 		planesList = importer.importPlanes();
@@ -35,10 +37,13 @@ public class CalculationGUI{
 	    frame=new JPanel();
 	    frame.setLayout(new FlowLayout());
 	    JButton submit = new JButton("Submit");
+	    JButton Add=new JButton("Add more");
+
 	    JComboBox dropDown = new JComboBox();
 	    JComboBox planes = new JComboBox();
 	    dropDown.setSelectedIndex(-1);
 	    planes.setSelectedIndex(-1);
+		Add.addActionListener(new AddButtonListener(dropDown,planes,airports,planesList));
 	    for(Airport airport : airports){
 	    	dropDown.addItem(airport.getName());
 	    	
@@ -49,7 +54,11 @@ public class CalculationGUI{
 	    }
 	    frame.add(dropDown);
 	    frame.add(planes);
-	    frame.add(submit);
+	    JPanel buttonPanel =new JPanel();
+	    buttonPanel.setLayout(new GridLayout(2,1));
+	    buttonPanel.add(submit);
+	    buttonPanel.add(Add);
+	    frame.add(buttonPanel);
 	    panel.add(frame);
 	    window.setVisible(true);
 	    submit.addActionListener(new SubmitActionListener(window,dropDown,planes));
@@ -82,7 +91,18 @@ public class CalculationGUI{
 		}
 		
 	}
-		
+	class AddButtonListener extends JFrame implements ActionListener{
+		JComboBox airport;
+		JComboBox plane;
+		ArrayList<Airport> airports;
+		ArrayList<Plane>planes;
+		public AddButtonListener(JComboBox dropDown,JComboBox planes,ArrayList<Airport> airports,ArrayList<Plane> planesList){
+
+		}
+		public void actionPerformed(ActionEvent e) {
+				AirportPlanes ap = new AirportPlanes();
+		}
+	}
 }
 
 
