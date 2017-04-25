@@ -1,9 +1,7 @@
 package View;
 
-import Model.Airport;
-import Model.Log;
-import Model.Plane;
-import Model.XMLImporter;
+import Controller.GraphicsPanel;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +46,22 @@ public class MainFrame {
         rightPanel.add(scrollFrame);
 
         JPanel nedsPanel = new JPanel();
+        nedsPanel.setLayout(new BorderLayout());
         mainPanel.setLayout(new BorderLayout());
+
+        JTabbedPane jtp = new JTabbedPane();
+        GraphicsPanel ptSide = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "side", 1000, 500);
+        GraphicsPanel ptTop = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "top", 1000, 500);
+
+        ptSide.setPreferredSize(new Dimension(2000, 1000));
+        ptTop.setPreferredSize(new Dimension(2000, 1000));
+
+        JScrollPane sidePane = new JScrollPane(ptSide);
+        JScrollPane topPane = new JScrollPane(ptTop);
+        jtp.addTab("Side", sidePane);
+        jtp.addTab("Top", topPane);
+        nedsPanel.add(jtp);
+
         TopPanel topPanel = new TopPanel(MainFrame.this,airport);
         mainPanel.add(topPanel,BorderLayout.NORTH);
         mainPanel.add(rightPanel,BorderLayout.EAST);

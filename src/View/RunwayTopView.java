@@ -30,7 +30,7 @@ public class RunwayTopView extends RunwayView{
     public void drawAll(Graphics2D g2){
         AffineTransform old = g2.getTransform();
         //moves shapes under arrow and scales
-        g2.translate(1,100);
+        g2.translate(1,200);
 
         //draw components
         drawClearedAndGraded(g2);

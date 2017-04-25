@@ -94,7 +94,7 @@ public class GraphicsPanel extends JPanel {
 
             //shifts runway under arrow
             if(rsw instanceof RunwayTopView) {
-                g2.translate(1, 100);
+                g2.translate(1, 200);
             }
 
             //only if update
