@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 public class XMLExporter
 {
 
+    XMLImporter importer = new XMLImporter();
+
     // save methods allow the user to save the data about Airports, Obstacles and Planes
     // files are always backed up before being overwritten
     public void saveAirportData(ArrayList<Airport> airports)
@@ -287,6 +289,28 @@ public class XMLExporter
 
 
 
+    }
+
+
+    public void addAirport(String filename, Airport airport)
+    {
+        ArrayList<Airport> airports = importer.importCustomAirports(filename);
+        airports.add(airport);
+        exportAiports(filename, airports);
+    }
+
+    public void addPlane(String filename, Plane plane)
+    {
+        ArrayList<Plane> planes = importer.importCustomPlanes(filename);
+        planes.add(plane);
+        exportPlanes(filename, planes);
+    }
+
+    public void addObstacle(String filename, ObstacleBack obstacle)
+    {
+        ArrayList<ObstacleBack> obstacles = importer.importCustomObstacles(filename);
+        obstacles.add(obstacle);
+        exportObstacles(filename, obstacles);
     }
 
 }
