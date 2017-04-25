@@ -12,12 +12,4 @@
 <takeoffLength>1900</takeoffLength>
 <landingLength>1200</landingLength>
 </plane>
-<plane name="Anish's private jet">
-<takeoffLength>2700</takeoffLength>
-<landingLength>1400</landingLength>
-</plane>
-<plane name="N">
-<takeoffLength>200</takeoffLength>
-<landingLength>200</landingLength>
-</plane>
 </planes>

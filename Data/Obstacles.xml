@@ -25,4 +25,9 @@
 <length>5</length>
 <depth>8</depth>
 </obstacle>
+<obstacle name="Miki">
+<height>1</height>
+<length>1</length>
+<depth>1</depth>
+</obstacle>
 </obstacles>

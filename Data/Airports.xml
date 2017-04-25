@@ -616,32 +616,4 @@
 <stripWidth>300</stripWidth>
 </runway>
 </airport>
-<airport name="Anish's House">
-<runway>
-<designator>08L</designator>
-<TORA>2565</TORA>
-<TODA>3040</TODA>
-<ASDA>2565</ASDA>
-<LDA>2243</LDA>
-<displacement>0</displacement>
-<runwayLength>2565</runwayLength>
-<runwayWidth>45</runwayWidth>
-<stripLength>2685</stripLength>
-<stripWidth>150</stripWidth>
-</runway>
-</airport>
-<airport name="Anish's House">
-<runway>
-<designator>2A</designator>
-<TORA>2002</TORA>
-<TODA>0</TODA>
-<ASDA>200</ASDA>
-<LDA>200</LDA>
-<displacement>10</displacement>
-<runwayLength>2002</runwayLength>
-<runwayWidth>2002</runwayWidth>
-<stripLength>200</stripLength>
-<stripWidth>200</stripWidth>
-</runway>
-</airport>
 </airports>
