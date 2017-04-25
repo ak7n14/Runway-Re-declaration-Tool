@@ -109,7 +109,8 @@ public class RunwayTopView extends RunwayView{
         //set format of line and draw it
         g2.setStroke(dashed);
         g2.setColor(Color.WHITE);
-        g2.drawLine(START + 50, DASHED_HEIGHT, START + this.scaling(this.getRunwayLength() - 50), DASHED_HEIGHT);
+
+        g2.drawLine(START + 50, DASHED_HEIGHT, 2*START + this.scaling(getRunwaydraw()) - 50, DASHED_HEIGHT);
     }
 
     //draws left and right runway numbers

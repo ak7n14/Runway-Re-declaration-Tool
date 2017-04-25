@@ -15,6 +15,7 @@ public abstract class RunwayView {
     //Stores different components of runway and where they end
     private HashMap<String, Integer> runwayEnds;
     int runwayLength;
+    private int runwaydraw = 0;
     Runway runway;
 
     //start of runway
@@ -127,7 +128,6 @@ public abstract class RunwayView {
     //draws runway
     public void drawRunway(Graphics2D g){
         g.setColor(Color.black);
-        int runwaydraw = 0;
         if(takeOffOrLand == "Taking off"){
             runwaydraw = runwayEnds.get("TORA");
         }
@@ -376,5 +376,9 @@ public abstract class RunwayView {
 
     public HashMap<String, Integer> getRunwayEnds() {
         return runwayEnds;
+    }
+
+    public int getRunwaydraw() {
+        return runwaydraw;
     }
 }
