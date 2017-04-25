@@ -40,6 +40,7 @@ public abstract class RunwayView {
 
     private boolean updated;
 
+    Rectangle runwayRect;
 
     //initial y position and height of runway
     protected abstract int RUNWAY_Y();
@@ -67,6 +68,7 @@ public abstract class RunwayView {
         this.LDAStart = runway.getThreasholdDisplacement();
         this.start = 0;
         START = 0;
+
     }
 
     //for updating parts of runway
@@ -134,7 +136,9 @@ public abstract class RunwayView {
         else {
             runwaydraw = runwayEnds.get("LDA");
         }
-        g.fillRect(START, RUNWAY_Y(), this.scaling(runwaydraw) + START, this.scalingHeight(runwayHeight));
+        runwayRect = new Rectangle(START, RUNWAY_Y(), this.scaling(runwaydraw) + START, this.scalingHeight(runwayHeight));
+        g.fill(runwayRect);
+
     }
 
     //draws a seperator to see ends of different strip components
@@ -380,5 +384,9 @@ public abstract class RunwayView {
 
     public int getRunwaydraw() {
         return runwaydraw;
+    }
+
+    public Rectangle getRunwayRect() {
+        return runwayRect;
     }
 }
