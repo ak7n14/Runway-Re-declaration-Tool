@@ -13,11 +13,12 @@ import java.awt.event.ActionListener;
  */
 public class LogWindow extends JFrame{
     public LogWindow(Log log){
-        super(log.getName());
+        super("Log:"+log.getName());
         initialize(log);
     }
 
     public void initialize(Log log) {
+        Boolean activate;
         Container container = this.getContentPane();
         JPanel panel = new JPanel();
         container.add(panel);
@@ -69,28 +70,53 @@ public class LogWindow extends JFrame{
         rightPanel.add(scrollFrameInput);
         Calculations calc = new Calculations(log.getRunway(), log.getObsticle().getHeight(), log.getDistTH(), log.getRESA(), log.getEngineBlastAllowence());
         if (log.getDistCL() > log.getRunway().getRunwayWidth() / 2) {
-
+            activate=true;
             if (log.getAction().equals("Landing")) {
 
                 outputPanel.printObsOutOfRunway(calc, "Landing");//Calling landing case
+
             } else outputPanel.printObsOutOfRunway(calc, "Taking");//Calling taking off case
         } else {
             if (log.getAction().equals("Landing")) {//Cases of landing
                 if (log.getDirectionAc().equals("Towards")) {
                     calc.calculateLda("Towards");//When landing towards
+                    if(log.getPlane().getMinLandingDis()>calc.getReLda()) {
+                        activate = false;
+                    }else{
+                        activate=true;
+                    }
                     outputPanel.printCalcLandTowards(calc);
 
                 } else {
                     calc.calculateLda("Away");    //When landing over
+                    if(log.getPlane().getMinLandingDis()>calc.getReLda()) {
+                        activate = false;
+                    }else{
+                        activate=true;
+                    }
                     outputPanel.printCalcLandOver(calc);
                 }
             } else {//Cases of taking off
                 if (log.getDirectionAc().equals("Towards")) {
                     calc.calculateTORA("Towards");//When taking off towards the object
+                    if(calc.getReTORA()<log.getPlane().getMinLandingDis() || calc.getReTODA()<log.getPlane().getMinLandingDis()
+                            ||calc.getReASDA()<log.getPlane().getMinLandingDis()){
+                        activate=false;
+                    }
+                    else{
+                        activate=true;
+                    }
                     outputPanel.printCalcTakeOffTowards(calc);
 
                 } else {
                     calc.calculateTORA("Away");//When taking off after the object
+                    if(calc.getReTORA()<log.getPlane().getMinLandingDis() || calc.getReTODA()<log.getPlane().getMinLandingDis()
+                            ||calc.getReASDA()<log.getPlane().getMinLandingDis()){
+                        activate=false;
+                    }
+                    else{
+                        activate=true;
+                    }
                     outputPanel.printTakeOffAfter(calc);
                 }
             }
