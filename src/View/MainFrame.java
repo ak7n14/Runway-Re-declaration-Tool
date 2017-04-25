@@ -1,9 +1,7 @@
 package View;
 
-import Model.Airport;
-import Model.Log;
-import Model.Plane;
-import Model.XMLImporter;
+import Controller.GraphicsPanel;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +19,9 @@ public class MainFrame {
     private Container mainContainer;
     InputPanel inputPanel;
     TopPanel topPanel;
+
+    private GraphicsPanel ptSide;
+    private GraphicsPanel ptTop;
     public MainFrame(Airport airport, Plane plane) {
 
         initialize(airport,plane);
@@ -48,6 +49,21 @@ public class MainFrame {
         rightPanel.add(scrollFrame);
 
         JPanel nedsPanel = new JPanel();
+        nedsPanel.setLayout(new BorderLayout());
+        JTabbedPane jtp = new JTabbedPane();
+        ptSide = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "side", 1000, 500);
+        ptTop = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "top", 1000, 500);
+        ptSide.setPreferredSize(new Dimension(2000,1000));
+        ptTop.setPreferredSize(new Dimension(2000,1000));
+
+
+        JScrollPane side = new JScrollPane(ptSide);
+        JScrollPane top = new JScrollPane(ptTop);
+        jtp.addTab("Side", side);
+        jtp.addTab("Top", top);
+
+        nedsPanel.add(jtp);
+
         mainPanel.setLayout(new BorderLayout());
         topPanel = new TopPanel(MainFrame.this,airport,inputPanel,outputPanel);
         mainPanel.add(topPanel,BorderLayout.NORTH);
@@ -61,6 +77,14 @@ public class MainFrame {
 
     public InputPanel getInputPanel() {
         return inputPanel;
+    }
+
+    public GraphicsPanel getPtSide() {
+        return ptSide;
+    }
+
+    public GraphicsPanel getPtTop() {
+        return ptTop;
     }
 
     public TopPanel getTopPanel() {

@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.GraphicsPanel;
 import View.OutputPanel;
 
 import javax.swing.*;
@@ -120,6 +121,19 @@ public class LogWindow extends JFrame{
                     outputPanel.printTakeOffAfter(calc);
                 }
             }
+
+        }
+
+        GraphicsPanel ptSide = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "side", 1000, 500);
+        GraphicsPanel ptTop = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "top", 1000, 500);
+
+        if(activate) {
+            int offsetX = log.getDistCL();
+            if(log.getDirectionCL() == "left"){
+                offsetX *= -1;
+            }
+            ptSide.updatePaint(calc, offsetX, log.getObsticle(), log.getDirectionAc(),log.getAction());
+            ptTop.updatePaint(calc, offsetX, log.getObsticle(), log.getDirectionAc(),log.getAction());
 
         }
         JScrollPane scrollFrameOutput = new JScrollPane(outputPanel);

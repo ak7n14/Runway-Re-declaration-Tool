@@ -1,5 +1,6 @@
 package View;
 
+import Controller.GraphicsPanel;
 import Model.*;
 
 import javax.imageio.ImageIO;
@@ -24,6 +25,9 @@ public class TopPanel extends JPanel{
     Airport airport;
     JComboBox<String> logs;
     ArrayList<Log> logsList;
+    GraphicsPanel ptTop;
+    GraphicsPanel ptSide;
+
     int maxLogDisplay;
     public TopPanel(MainFrame frame,Airport airport,InputPanel inputPanel,OutputPanel outputPanel){
         this.frame=frame;
@@ -37,6 +41,9 @@ public class TopPanel extends JPanel{
     }
 
     public void initialize(Airport airport) throws IOException {
+        ptTop = frame.getPtTop();
+        ptSide = frame.getPtSide();
+
         this.airport=airport;
         maxLogDisplay=10;
         XMLImporter importer= new XMLImporter();
@@ -50,7 +57,30 @@ public class TopPanel extends JPanel{
         JButton zoomin = new JButton();
         zoomin.setIcon(new ImageIcon(zoominimg));
         zoomin.setSize(zoomin.getPreferredSize());
+        zoomin.addActionListener(actionEvent -> {
+            if(!ptTop.isZoom()) {
+                ptTop.setZoom(true);
+            }
+            if(!ptSide.isZoom()) {
+                ptTop.setZoom(true);
+            }
+            //zoom in
+            ptTop.incrementZoom();
+            ptSide.incrementZoom();
+            ptTop.repaint();
+            ptSide.repaint();
+        });
+
         JButton zoomout = new JButton();
+        zoomout.addActionListener(actionEvent -> {
+            if(ptTop.getZoomNum() > 1){
+                ptTop.decrementZoom();
+                ptSide.decrementZoom();
+                ptTop.repaint();
+                ptSide.repaint();
+            }
+        });
+
         zoomout.setIcon(new ImageIcon(zoomoutimg));
         zoomout.setSize(zoomout.getPreferredSize());
         URL settingsURL = Class.class.getResource("/View/settingsIcon.png");
@@ -58,6 +88,10 @@ public class TopPanel extends JPanel{
         URL RotateRightUrl = Class.class.getResource("/View/rotate_right.png");
         BufferedImage RotateRightimg = ImageIO.read(RotateRightUrl);
         JButton rotateRight = new JButton();
+        rotateRight.addActionListener(actionEvent -> {
+            ptTop.toggleTurnToCompassHeading();
+            ptTop.repaint();
+        });
         rotateRight.setIcon(new ImageIcon(RotateRightimg));
         logs = new JComboBox<String>();
         if(logsList.size()<=maxLogDisplay){

@@ -59,7 +59,11 @@ public class RunwayTopView extends RunwayView{
         int x5 = 0;
         int x6 = 0;
         int ASDA = getRunwayEnds().get("ASDA");
-        int TODA = getRunwayEnds().get("TODA");
+        System.out.println(ASDA);
+        int TODA = 0;
+        if(!(getRunwayEnds().get("TODA") == null)){
+            TODA = getRunwayEnds().get("TODA");
+        }
         if(ASDA > TODA) {
             x4 = scaling(ASDA -300) +START;
             x5 = scaling(ASDA - 150) + START;

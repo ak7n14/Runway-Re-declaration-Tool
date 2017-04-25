@@ -74,7 +74,7 @@ public class GraphicsPanel extends JPanel {
         //-90 to start at 0 degrees then use runway * 10 to get degree position
         if(turnToCompassHeading && rsw instanceof  RunwayTopView){
             //rotates by designator around center of JPanel
-            g2.rotate(Math.toRadians((((RunwayTopView) rsw).getRunwayNum() * 10) - 90),jPanelWidth/2,jPanelHeight/2);
+            g2.rotate(Math.toRadians((((RunwayTopView) rsw).getRunwayNum() * 10) - 90),1000,500);
         }
         if (zoom) {
             if(rsw instanceof RunwaySideView) {
@@ -128,8 +128,6 @@ public class GraphicsPanel extends JPanel {
         jFrame.add(scrollPane2);
         ptSide.setZoomNum(1);
         ptTop.setZoomNum(1);
-        ptSide.toggleZoom();
-        ptTop.toggleZoom();
 //        ptSide.toggleTurnToCompassHeading();
 //        ptTop.toggleTurnToCompassHeading();
         jFrame.setVisible(true);
@@ -167,7 +165,24 @@ public class GraphicsPanel extends JPanel {
 
     public void setRunway(Runway runway) { rsw.setRunway(runway); rw = runway; }
 
-    public void toggleZoom(){
-        zoom = !zoom;
+    public void setZoom(boolean zoom){
+        this.zoom = zoom;
     }
+
+    public boolean isZoom() {
+        return zoom;
+    }
+
+    public int getZoomNum() {
+        return zoomNum;
+    }
+
+    public void incrementZoom(){
+        zoomNum++;
+    }
+
+    public void decrementZoom(){
+        zoomNum--;
+    }
+
 }

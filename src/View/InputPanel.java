@@ -450,6 +450,18 @@ public class InputPanel extends JPanel {
 
                 }
                  notificationPanel.initialize("Valid");
+
+                if(activate) {
+                    int offsetX = obsLocCenteLine;
+                    if(sd.getSelectedItem() == "left"){
+                        offsetX *= -1;
+                    }
+                    frame.getPtSide().setRunway(runway);
+                    frame.getPtTop().setRunway(runway);
+                    frame.getPtSide().updatePaint(calc, offsetX, obs, Direction, Action);
+                    frame.getPtTop().updatePaint(calc, offsetX, obs, Direction, Action);
+                }
+
                 try {
                     exporter.exportLog(lg);
                     frame.getTopPanel().update(lg);

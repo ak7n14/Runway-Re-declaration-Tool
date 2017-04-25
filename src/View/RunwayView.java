@@ -65,7 +65,7 @@ public abstract class RunwayView {
 
         this.LDAStart = runway.getThreasholdDisplacement();
         this.start = 0;
-        START =  scaling((runway.getStripLength() - runwayLength)/2);
+        START = 0;
     }
 
     //for updating parts of runway
@@ -83,10 +83,13 @@ public abstract class RunwayView {
             runwayEnds.put("TODA", calc.getReTODA());
             runwayEnds.put("TORA", calc.getReTORA());
             runwayEnds.put("ASDA", calc.getReASDA());
+
+            START =  scaling((runway.getStripLength() - calc.getReTORA())/2);
         }
         else {
             runwayEnds.put("LDA", calc.getReLda());
             runwayEnds.put("ASDA", calc.getReASDA() - start);
+            START =  scaling((runway.getStripLength() - calc.getReLda())/2);
         }
 
         //only add resa if traveling away
@@ -124,7 +127,14 @@ public abstract class RunwayView {
     //draws runway
     public void drawRunway(Graphics2D g){
         g.setColor(Color.black);
-        g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), this.scalingHeight(runwayHeight));
+        int runwaydraw = 0;
+        if(takeOffOrLand == "Taking off"){
+            runwaydraw = runwayEnds.get("TORA");
+        }
+        else {
+            runwaydraw = runwayEnds.get("LDA");
+        }
+        g.fillRect(START, RUNWAY_Y(), this.scaling(runwaydraw) + START, this.scalingHeight(runwayHeight));
     }
 
     //draws a seperator to see ends of different strip components
