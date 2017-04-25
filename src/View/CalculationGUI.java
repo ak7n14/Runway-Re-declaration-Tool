@@ -91,7 +91,7 @@ public class CalculationGUI{
 		}
 		
 	}
-	class AddButtonListener extends JFrame implements ActionListener{
+	class AddButtonListener implements ActionListener{
 		JComboBox airport;
 		JComboBox plane;
 		ArrayList<Airport> airports;

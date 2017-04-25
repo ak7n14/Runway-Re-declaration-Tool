@@ -79,6 +79,7 @@ public class SettingsGUI extends JFrame{
 		oImp.setLayout(new GridLayout(2,2));
 		JLabel lbloImp = new JLabel("Name of obstacle XML file:");
 		JTextField txtoImp = new JTextField();
+		txtoImp.setEditable(false);
 		JButton btnoImp = new JButton("Load File");
 		btnoImp.addActionListener(new FileChooser(SettingsGUI.this,"Open",txtoImp));
 		JButton btoImpSub = new JButton("Submit");

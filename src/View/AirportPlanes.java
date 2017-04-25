@@ -28,6 +28,7 @@ public class AirportPlanes extends JFrame {
         apImp.setLayout(new GridLayout(2,2));
         JLabel lblapImp = new JLabel("Name of aiport XML file:");
         JTextField txtapImp = new JTextField();
+        txtapImp.setEditable(false);
         JButton btnapImp = new JButton("Load File");
         btnapImp.addActionListener(new FileChooser(AirportPlanes.this,"Open",txtapImp));
         JButton btnapImpSub = new JButton("Submit");
@@ -46,7 +47,8 @@ public class AirportPlanes extends JFrame {
         JLabel lblapName = new JLabel("Name");
         JTextField txtapName = new JTextField();
         JLabel lblapNoRW = new JLabel("Number of runways");
-        JTextField txtapNoRW = new JTextField();
+        JTextField txtapNoRW = new JTextField("0");
+        txtapNoRW.setEditable(false);
         JButton btnAddRW = new JButton("Add a runway");
         JButton btnapSave = new JButton("Save");
 
@@ -130,6 +132,7 @@ public class AirportPlanes extends JFrame {
         JLabel lblacImp = new JLabel("Name of aircaft XML file:");
         JTextField txtacImp = new JTextField();
         JButton btnacImp = new JButton("Load File");
+        txtacImp.setEditable(false);
         btnacImp.addActionListener(new FileChooser(AirportPlanes.this,"Open",txtacImp));
         JButton btnacImpSub = new JButton("Submit");
         btnacImpSub.addActionListener(new ActionListener() {
