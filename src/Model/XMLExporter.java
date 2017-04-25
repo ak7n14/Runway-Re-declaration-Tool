@@ -1,11 +1,14 @@
 package Model;
 import org.w3c.dom.*;
 
+import javax.crypto.*;
+import javax.crypto.spec.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.security.*;
 import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -312,5 +315,32 @@ public class XMLExporter
         obstacles.add(obstacle);
         exportObstacles(filename, obstacles);
     }
+
+    public void encrypt (File input, File output)
+    {
+        try
+        {
+            Key key = new SecretKeySpec("agile12345678910".getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+
+            FileInputStream inputStream = new FileInputStream(input);
+            byte[] inputBytes = new byte[(int) input.length()];
+            inputStream.read(inputBytes);
+
+            byte[] outputBytes = cipher.doFinal(inputBytes);
+
+            FileOutputStream outputStream = new FileOutputStream(output);
+            outputStream.write(outputBytes);
+
+            inputStream.close();
+            outputStream.close();
+        } catch (Exception e){
+            System.err.println(e);
+        }
+    }
+
+
+
 
 }

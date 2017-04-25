@@ -1,8 +1,11 @@
 package Model;
 import org.w3c.dom.*;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.xml.parsers.*;
 import java.io.*;
+import java.security.Key;
 import java.util.*;
 import java.io.BufferedReader;
 public class XMLImporter
@@ -233,5 +236,29 @@ public class XMLImporter
             br.close();
         }
         return Logs;
+    }
+
+    public void decrypt(File input, File output)
+    {
+        try
+        {
+            Key key = new SecretKeySpec("agile12345678910".getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.DECRYPT_MODE, key);
+
+            FileInputStream inputStream = new FileInputStream(input);
+            byte[] inputBytes = new byte[(int) input.length()];
+            inputStream.read(inputBytes);
+
+            byte[] outputBytes = cipher.doFinal(inputBytes);
+
+            FileOutputStream outputStream = new FileOutputStream(output);
+            outputStream.write(outputBytes);
+
+            inputStream.close();
+            outputStream.close();
+        } catch (Exception e){
+            System.err.println(e);
+        }
     }
 }

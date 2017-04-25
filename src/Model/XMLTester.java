@@ -1,5 +1,6 @@
 package Model;
 import java.util.*;
+import java.io.*;
 
 /**
  * Created by Mikolaj on 25/02/2017.
@@ -18,9 +19,9 @@ public class XMLTester
 
        // System.out.print(importer.getAirportByName("LONDON GATWICK").toString());
 
-        ArrayList<ObstacleBack> obstacleArrayList = importer.importObstacles();
+      //  ArrayList<ObstacleBack> obstacleArrayList = importer.importObstacles();
 
-        System.out.println(obstacleArrayList.get(0).getName() + " " + obstacleArrayList.get(0).getHeight());
+       // System.out.println(obstacleArrayList.get(0).getName() + " " + obstacleArrayList.get(0).getHeight());
 
 
       //  ArrayList<Plane> planes = importer.importPlanes();
@@ -29,16 +30,19 @@ public class XMLTester
 
 
 
-        XMLExporter exporter = new XMLExporter();
+       XMLExporter exporter = new XMLExporter();
 
        // exporter.exportAiports("outputTest", airportArrayList);
 
        // exporter.backupFile("outputTest");
 
-        exporter.exportObstacles("outputTest", obstacleArrayList);
+     //   exporter.exportObstacles("outputTest", obstacleArrayList);
 
         //System.out.println(importer.importPlanes().size());
 
+        exporter.encrypt(new File("Data/Airports.xml"), new File("Data/test2.xml"));
+
+        importer.decrypt(new File("Data/test2.xml"), new File("Data/test3.xml"));
     }
 
 }
