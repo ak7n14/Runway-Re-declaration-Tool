@@ -70,6 +70,8 @@ public class XMLExporter
 
             transformer.transform(source, file);
 
+            encrypt(new File("Data/"+filename+".xml"), new File("Data/"+filename+".xml"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -151,6 +153,7 @@ public class XMLExporter
 
             transformer.transform(source, file);
 
+            encrypt(new File("Data/"+filename+".xml"), new File("Data/"+filename+".xml"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -210,6 +213,8 @@ public class XMLExporter
             StreamResult file = new StreamResult(new File("Data/"+filename+".xml"));
 
             transformer.transform(source, file);
+
+            encrypt(new File("Data/"+filename+".xml"), new File("Data/"+filename+".xml"));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -5,6 +5,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.parsers.*;
 import java.io.*;
+import java.nio.file.Files;
 import java.security.Key;
 import java.util.*;
 import java.io.BufferedReader;
@@ -25,11 +26,15 @@ public class XMLImporter
         try
         {
             File airportFile = new File(filename);
+            File temp = new File("Data/temp.xml");
+            decrypt(airportFile, temp);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            Document document = builder.parse(airportFile);
+            Document document = builder.parse(temp);
             document.getDocumentElement().normalize();
+
+            Files.delete(temp.toPath());
 
             NodeList airportList = document.getElementsByTagName("airport");
 
@@ -90,11 +95,15 @@ public class XMLImporter
         try
         {
             File obstacleFile = new File(filename);
+            File temp = new File("Data/temp.xml");
+            decrypt(obstacleFile, temp);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            Document document = builder.parse(obstacleFile);
+            Document document = builder.parse(temp);
             document.getDocumentElement().normalize();
+
+            Files.delete(temp.toPath());
 
             NodeList obstacleList = document.getElementsByTagName("obstacle");
 
@@ -137,10 +146,13 @@ public class XMLImporter
         try
         {
             File planeFile = new File(filename);
+            File temp = new File("Data/temp.xml");
+            decrypt(planeFile, temp);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            Document document = builder.parse(planeFile);
+            Document document = builder.parse(temp);
+            Files.delete(temp.toPath());
             document.getDocumentElement().normalize();
 
             NodeList planeList = document.getElementsByTagName("plane");
@@ -164,6 +176,7 @@ public class XMLImporter
         {
             e.printStackTrace();
         }
+
 
         return planes;
     }
