@@ -1,19 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <obstacles>
-    <obstacle name="737 Wreck">
-        <height>5</height>
-        <length>17</length>
-        <depth>10</depth>
-    </obstacle>
-    <obstacle name="Oil Spill">
-        <height>1</height>
-        <length>5</length>
-        <depth>8</depth>
-    </obstacle>
-    <obstacle name="Cessna 152 Wreck">
-        <height>2</height>
-        <length>10</length>
-        <depth>12</depth>
-    </obstacle>
+<obstacle name="737 Wreck">
+<height>5</height>
+<length>17</length>
+<depth>10</depth>
+</obstacle>
+<obstacle name="Oil Spill">
+<height>1</height>
+<length>5</length>
+<depth>8</depth>
+</obstacle>
+<obstacle name="Cessna 152 Wreck">
+<height>2</height>
+<length>10</length>
+<depth>12</depth>
+</obstacle>
+<obstacle name="NED">
+<height>5</height>
+<length>17</length>
+<depth>10</depth>
+</obstacle>
+<obstacle name="Anish">
+<height>1</height>
+<length>5</length>
+<depth>8</depth>
+</obstacle>
 </obstacles>
