@@ -130,10 +130,8 @@ public class SettingsGUI extends JFrame{
 					length=Integer.parseInt(txtoLength.getText());
 					depth=Integer.parseInt(txtoDepth.getText());
 				}catch (NumberFormatException er){
-					JFrame frame = new JFrame("INVALID");
-					frame.getContentPane().add(new JLabel("Invalid inputs!"));
-					frame.setSize(300,100);
-					frame.setVisible(true);
+					oAdd.add(new JLabel("Invalid inputs plase check!"));
+					oAdd.updateUI();
 					return;
 				}
 				ObstacleBack obs = new ObstacleBack(txtoName.getText(),height,length,depth);

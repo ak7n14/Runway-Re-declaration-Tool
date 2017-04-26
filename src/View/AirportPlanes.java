@@ -76,7 +76,7 @@ public class AirportPlanes extends JFrame {
         class AddRunwayGUI extends JFrame{
             public AddRunwayGUI(ArrayList runways,JTextField noRunways){
                 setTitle("Add Runway");
-                setSize(350,320);
+                setSize(355,320);
 
                 JPanel panel = new JPanel();
                 getContentPane().add(panel);
@@ -140,10 +140,8 @@ public class AirportPlanes extends JFrame {
                             StripLength=Integer.parseInt(txtStripLength.getText());
                             StripWidth= Integer.parseInt(txtStripLength.getText());
                         }catch (NumberFormatException er){
-                            JFrame frame = new JFrame("INVALID");
-                            frame.getContentPane().add(new JLabel("Invalid inputs!"));
-                            frame.setSize(300,100);
-                            frame.setVisible(true);
+                            panel.add(new JLabel("Invalid Inputs Please Check"));
+                            panel.updateUI();
                             return;
                         }
 
@@ -241,10 +239,8 @@ public class AirportPlanes extends JFrame {
                     minTFLen=Integer.parseInt(txtacLand.getText());
                     minLanLen = Integer.parseInt(txtacLand.getText());
                 }catch (NumberFormatException er){
-                    JFrame frame = new JFrame("INVALID");
-                    frame.getContentPane().add(new JLabel("Invalid inputs!"));
-                    frame.setSize(300,100);
-                    frame.setVisible(true);
+                    acAdd.add(new JLabel("Invalid inputs please check!"));
+                    acAdd.updateUI();
                     return;
                 }
                 if(minLanLen<0||minTFLen<0){
