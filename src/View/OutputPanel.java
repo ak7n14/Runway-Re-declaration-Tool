@@ -2,7 +2,8 @@ package View;
 
 import Model.Calculations;
 import Model.Plane;
-
+import com.sun.javafx.scene.control.skin.ColorPalette;
+import Model.ColourPalette;
 import javax.swing.*;
 import java.awt.*;
 
@@ -72,11 +73,11 @@ public class OutputPanel extends JPanel {
             label3.setFont(Bold);
             this.add(label3);
             JLabel label4 = new JLabel(String.format("ASDA = %d meters", calc.getRunway().getASDA()));
-            label4.setBackground(Color.GREEN);
+            label4.setBackground(ColourPalette.green);
             label4.setOpaque(true);
             label4.setFont(Bold);
             JLabel l2 = new JLabel("");
-            l2.setBackground(Color.GREEN);
+            l2.setBackground(ColourPalette.green);
             l2.setOpaque(true);
             this.add(label4);
             this.add(l2);
@@ -110,17 +111,17 @@ public class OutputPanel extends JPanel {
 
         //Updating color of the panel depending on if the runway distance is sufficient or not
         if(calc.getReLda()>plane.getMinLandingDis()+tol){
-            this.setBackground(Color.GREEN);
+            this.setBackground(ColourPalette.green);
         }
         else if(calc.getReLda()<plane.getMinLandingDis()){
-            this.setBackground(Color.RED);
+            this.setBackground(ColourPalette.red.brighter().brighter());
             JLabel la3 =new JLabel("Min Dist req");
             la3.setFont(Bold);
             this.add(la3);
             this.add(new JLabel(String.format("= %d meters", plane.getMinLandingDis())));
         }
         else{
-            this.setBackground(Color.YELLOW);
+            this.setBackground(ColourPalette.yellow);
         }
         this.setOpaque(true);
         frame.validate();
@@ -149,15 +150,15 @@ public class OutputPanel extends JPanel {
 
         //Changing color of the panel according to the condition(If runway is sufficient)
         if (calc.getReLda() > plane.getMinLandingDis() + tol) {
-            this.setBackground(Color.GREEN);
+            this.setBackground(ColourPalette.green);
         } else if (calc.getReLda() < plane.getMinLandingDis()) {
-            this.setBackground(Color.RED);
+            this.setBackground(ColourPalette.red.brighter().brighter());
             JLabel la6= new JLabel("Min Dist req ");
             la6.setFont(Bold);
             this.add(la6);
             this.add(new JLabel(String.format("= %d meters", plane.getMinLandingDis())));
         } else {
-            this.setBackground(Color.YELLOW);
+            this.setBackground(ColourPalette.yellow);
         }
         this.setOpaque(true);
         frame.validate();
@@ -201,11 +202,11 @@ public class OutputPanel extends JPanel {
         if (calc.getReTORA() > plane.getMinTakeoffDis() + tol
                 && calc.getReTODA() > plane.getMinTakeoffDis() + tol
                 && calc.getReASDA() > plane.getMinTakeoffDis() + tol) {
-            this.setBackground(Color.GREEN);
+            this.setBackground(ColourPalette.green);
         } else if (calc.getReTORA() < plane.getMinTakeoffDis()
                 && calc.getReTODA() < plane.getMinTakeoffDis()
                 && calc.getReASDA() < plane.getMinTakeoffDis()) {
-            this.setBackground(Color.RED);
+            this.setBackground(ColourPalette.red.brighter().brighter());
             JLabel la13=new JLabel("Min Dist req");
             la13.setFont(Bold);
             this.add(la13);
@@ -213,7 +214,7 @@ public class OutputPanel extends JPanel {
             la14.setFont(Bold);
             this.add(la14);
         } else {
-            this.setBackground(Color.YELLOW);
+            this.setBackground(ColourPalette.yellow);
         }
         this.setOpaque(true);
         frame.validate();
@@ -273,17 +274,17 @@ public class OutputPanel extends JPanel {
         if (calc.getReTORA() > plane.getMinTakeoffDis() + tol
                 && calc.getReTODA() > plane.getMinTakeoffDis() + tol
                 && calc.getReASDA() > plane.getMinTakeoffDis() + tol) {
-            this.setBackground(Color.GREEN);
+            this.setBackground(ColourPalette.green);
         } else if (calc.getReTORA() < plane.getMinTakeoffDis()
                 && calc.getReTODA() < plane.getMinTakeoffDis()
                 && calc.getReASDA() < plane.getMinTakeoffDis()) {
-            this.setBackground(Color.RED);
+            this.setBackground(ColourPalette.red.brighter().brighter());
             JLabel la21 = new JLabel("Min Dist req");
             this.add(la21);
             JLabel la22 = new JLabel(String.format("= %d meters", plane.getMinTakeoffDis()));
             this.add(la22);
         } else {
-            this.setBackground(Color.YELLOW);
+            this.setBackground(ColourPalette.yellow);
         }
         this.setOpaque(true);
         frame.validate();
