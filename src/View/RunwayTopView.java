@@ -65,6 +65,7 @@ public class RunwayTopView extends RunwayView{
         int TODA = 0;
         int LDA = 0;
 
+        //gets vals after check if not null
         if(!(getRunwayEnds().get("LDA") == null)) {
             LDA = getRunwayEnds().get("LDA");
         }
@@ -74,6 +75,8 @@ public class RunwayTopView extends RunwayView{
         if(!(getRunwayEnds().get("TODA") == null)){
             TODA = getRunwayEnds().get("TODA");
         }
+        //get coords
+        //if landing use lda
         if(getTakeOffOrLand().equals("Landing")){
             System.out.println(START + getStart() + LDA);
             x4 = scaling(LDA - 300) + START + scaling(getStart());
@@ -81,6 +84,7 @@ public class RunwayTopView extends RunwayView{
             x6 = scaling(60 + LDA) + scaling(getStart()) + START;
         }
         else {
+            //use biggest section
             if (ASDA > TODA) {
                 x4 = scaling(ASDA - 300) + START + scaling(getStart());
                 x5 = scaling(ASDA - 150) + START + scaling(getStart());
@@ -95,6 +99,7 @@ public class RunwayTopView extends RunwayView{
         int x2 = scaling(210-60)+START;
         int x3 = scaling(360-60)+START;
 
+        //cleared area
         int[] x = {0+START-scaling(60),x2,x3,x4,x5,x6,x6,x5,x4,x3,x2,0+START-scaling(60)};
 
         int y1 = scalingHeight(75 + runwayHeight/2) + RUNWAY_Y();
@@ -103,9 +108,11 @@ public class RunwayTopView extends RunwayView{
         int y4 = scalingHeight(-105 + runwayHeight/2) + RUNWAY_Y();
         int[] y = {y1,y1,y2,y2,y1,y1,y3,y3,y4,y4,y3,y3};
 
+        //graded
         int xBlock[] = {START -scaling(60),x6,x6,START -scaling(60)};
         int yBlock[] = {scalingHeight(150 + runwayHeight/2)+RUNWAY_Y(),scalingHeight(150 + runwayHeight/2) +RUNWAY_Y(),scalingHeight(-150 + runwayHeight/2)+RUNWAY_Y(),scalingHeight(-150 + runwayHeight/2)+RUNWAY_Y()};
 
+        //draw shapes
         //big rectangle thing around polygon
         Polygon polygon2 = new Polygon(xBlock,yBlock,xBlock.length);
         g.setColor(ColourPalette.lightPurple);
