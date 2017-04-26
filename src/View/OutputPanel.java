@@ -2,7 +2,6 @@ package View;
 
 import Model.Calculations;
 import Model.Plane;
-import com.sun.javafx.scene.control.skin.ColorPalette;
 import Model.ColourPalette;
 import javax.swing.*;
 import java.awt.*;

@@ -76,7 +76,7 @@ public class GraphicsPanel extends JPanel {
 
             //rotates by designator around center of JPanel
             Rectangle runway = rsw.getRunwayRect();
-            g2.rotate(Math.toRadians((((RunwayTopView) rsw).getRunwayNum() * 10) - 90), runway.getCenterX(),runway.getCenterY() + 200);
+            g2.rotate(Math.toRadians((((RunwayTopView) rsw).getRunwayNum() * 10) - 90), runway.getCenterX(),runway.getCenterY() + 300);
         }
         if (zoom) {
             if(rsw instanceof RunwaySideView) {
@@ -96,7 +96,7 @@ public class GraphicsPanel extends JPanel {
 
             //shifts runway under arrow
             if(rsw instanceof RunwayTopView) {
-                g2.translate(1, 200);
+                g2.translate(1, 300);
             }
 
             //only if update
