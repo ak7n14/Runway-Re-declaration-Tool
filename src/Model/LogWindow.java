@@ -124,18 +124,33 @@ public class LogWindow extends JFrame{
 
         }
 
+        nedsPanel.setLayout(new BorderLayout());
+
         GraphicsPanel ptSide = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "side", 1000, 500);
         GraphicsPanel ptTop = new GraphicsPanel(new Runway("X", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "top", 1000, 500);
+        ptSide.setPreferredSize(new Dimension(2000,1000));
+        ptTop.setPreferredSize(new Dimension(2000,1000));
+
+        JTabbedPane jtp = new JTabbedPane();
+        JScrollPane side = new JScrollPane(ptSide);
+        JScrollPane top = new JScrollPane(ptTop);
+        jtp.addTab("Side", side);
+        jtp.addTab("Top", top);
+
+        nedsPanel.add(jtp);
 
         if(activate) {
             int offsetX = log.getDistCL();
             if(log.getDirectionCL() == "left"){
                 offsetX *= -1;
             }
+            ptSide.setRunway(log.getRunway());
+            ptTop.setRunway(log.getRunway());
             ptSide.updatePaint(calc, offsetX, log.getObsticle(), log.getDirectionAc(),log.getAction());
             ptTop.updatePaint(calc, offsetX, log.getObsticle(), log.getDirectionAc(),log.getAction());
 
         }
+
         JScrollPane scrollFrameOutput = new JScrollPane(outputPanel);
         outputPanel.setAutoscrolls(true);
         scrollFrameOutput.setPreferredSize(new Dimension(390, 270));

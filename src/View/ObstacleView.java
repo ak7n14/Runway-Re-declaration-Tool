@@ -56,11 +56,11 @@ public class ObstacleView extends Obstacle{
             RunwaySideView rsw = (RunwaySideView) currentRunway;
             rsw.drawScaleY(g2);
 
-            g2.setColor(Color.RED);
+            g2.setColor(ColourPalette.red);
             g2.fill(shapeSide);
         }
         else {
-            g2.setColor(Color.RED);
+            g2.setColor(ColourPalette.red);
             g2.fill(shapeTop);
         }
 

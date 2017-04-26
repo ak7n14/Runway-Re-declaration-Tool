@@ -62,7 +62,7 @@ public class TopPanel extends JPanel{
                 ptTop.setZoom(true);
             }
             if(!ptSide.isZoom()) {
-                ptTop.setZoom(true);
+                ptSide.setZoom(true);
             }
             //zoom in
             ptTop.incrementZoom();

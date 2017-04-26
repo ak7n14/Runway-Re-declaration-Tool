@@ -1,4 +1,5 @@
 package View;
+import Model.ColourPalette;
 import Model.Runway;
 
 import javax.swing.*;
@@ -59,20 +60,20 @@ public class RunwayTopView extends RunwayView{
         int x5 = 0;
         int x6 = 0;
         int ASDA = getRunwayEnds().get("ASDA");
-        System.out.println(ASDA);
+        //System.out.println(ASDA);
         int TODA = 0;
         if(!(getRunwayEnds().get("TODA") == null)){
             TODA = getRunwayEnds().get("TODA");
         }
         if(ASDA > TODA) {
-            x4 = scaling(ASDA -300) +START;
-            x5 = scaling(ASDA - 150) + START;
-            x6 = scaling(60 + ASDA)+START;
+            x4 = scaling(ASDA -300) +START + getStart();
+            x5 = scaling(ASDA - 150) + START  + getStart();
+            x6 = scaling(60 + ASDA)+START  + getStart();
         }
         else{
-            x4 = scaling(TODA -300) +START;
-            x5 = scaling(TODA - 150) + START;
-            x6 = scaling(60 + TODA)+START;
+            x4 = scaling(TODA -300) +START  + scaling(getStart());
+            x5 = scaling(TODA - 150) + START  + scaling(getStart());
+            x6 = scaling(60 + TODA)+START  + scaling(getStart());
         }
 
         int x2 = scaling(210-60)+START;
@@ -91,11 +92,11 @@ public class RunwayTopView extends RunwayView{
 
         //big rectangle thing around polygon
         Polygon polygon2 = new Polygon(xBlock,yBlock,xBlock.length);
-        g.setColor(Color.magenta);
+        g.setColor(ColourPalette.lightPurple);
         g.fillPolygon(polygon2);
 
         Polygon polygon = new Polygon(x,y,x.length);
-        g.setColor(Color.cyan);
+        g.setColor(ColourPalette.darkCyan);
         g.fillPolygon(polygon);
 
     }
@@ -108,14 +109,14 @@ public class RunwayTopView extends RunwayView{
 
         //set format of line and draw it
         g2.setStroke(dashed);
-        g2.setColor(Color.WHITE);
+        g2.setColor(ColourPalette.white);
 
-        g2.drawLine(START + 50, DASHED_HEIGHT, 2*START + this.scaling(getRunwaydraw()) - 50, DASHED_HEIGHT);
+        g2.drawLine(START + 50, DASHED_HEIGHT, scaling(getStart()) + START + this.scaling(getRunwaydraw()) - 50, DASHED_HEIGHT);
     }
 
     //draws left and right runway numbers
     private void drawRunwayNumbers(Graphics2D g2){
-        g2.setColor(Color.WHITE);
+        g2.setColor(ColourPalette.white);
         //increase size of font
         g2.setFont(new Font("Arial", Font.PLAIN, 10));
         //used to get string length so it can be centred

@@ -1,4 +1,5 @@
 package View;
+import Model.ColourPalette;
 import Model.Runway;
 
 import java.awt.*;
@@ -32,8 +33,16 @@ public class RunwaySideView extends RunwayView{
 
     //draws runway
     public void drawRunway(Graphics2D g){
-        g.setColor(Color.black);
-        g.fillRect(START, RUNWAY_Y(), this.scaling(runwayLength), runwayHeight);
+        g.setColor(ColourPalette.black);
+        int runwayDraw;
+        if(getTakeOffOrLand().equals("Taking off")){
+            runwayDraw = getRunwayEnds().get("TORA");
+        }
+        else {
+            runwayDraw = getRunwayEnds().get("LDA");
+        }
+        runwayRect = new Rectangle(START, RUNWAY_Y(), this.scaling(runwayDraw) + this.scaling(getStart()), this.scalingHeight(runwayHeight));
+        g.fill(runwayRect);
     }
 
     //draws rectangles to show scale 50 meter by 50 meter
@@ -54,7 +63,7 @@ public class RunwaySideView extends RunwayView{
 
     //draws als
     public void drawALS(Graphics2D g){
-        g.setColor(Color.RED);
+        g.setColor(ColourPalette.red);
 
         //front of object
         int x1 = getOv().getOb().getLength() + getOv().getOriginalOffsetX();
@@ -67,8 +76,8 @@ public class RunwaySideView extends RunwayView{
         int mody1 = getCalc().getALS();
         int mody = scaling(mody1);
 
-        boolean takeOff = getTakeOffOrLand() == "Taking off";
-        boolean towards = getDirection() == "Towards";
+        boolean takeOff = getTakeOffOrLand().equals("Taking off");
+        boolean towards = getDirection().equals("Towards");
 
         //accounts for direction
         if (takeOff && towards){
@@ -85,7 +94,7 @@ public class RunwaySideView extends RunwayView{
 
         //if both false or both true
         if(!(takeOff ^ towards)){
-            g.setColor(Color.BLUE);
+            g.setColor(ColourPalette.blue);
             g.drawLine(x, y, x + mody, RUNWAY_Y());
         }
 

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import Model.Calculations;
+import Model.ColourPalette;
 import Model.Runway;
 
 public abstract class RunwayView {
@@ -82,10 +83,13 @@ public abstract class RunwayView {
         updated = true;
 
         runwayEnds = new HashMap<>();
-        if(takeOfforLand == "Taking off") {
+        if(takeOfforLand.equals("Taking off")) {
             runwayEnds.put("TODA", calc.getReTODA());
             runwayEnds.put("TORA", calc.getReTORA());
             runwayEnds.put("ASDA", calc.getReASDA());
+
+            if(direction.equals("Away"))
+                runwayEnds.put("Blast Allowance", calc.getEngineBlastAllowance());
 
             START =  scaling((runway.getStripLength() - calc.getReTORA())/2);
         }
@@ -118,25 +122,25 @@ public abstract class RunwayView {
 
     //draw stop and clear way, stop in front of clear as clear is normally larger
     public void drawStopWay(Graphics2D g){
-        g.setColor(Color.MAGENTA);
+        g.setColor(ColourPalette.darkPuple);
         g.fillRect(START + scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("ASDA")) - scaling(runwayLength), scalingHeight(runwayHeight));
     }
 
     public void drawClearWay(Graphics2D g){
-        g.setColor(Color.green);
+        g.setColor(ColourPalette.green);
         g.fillRect(START + this.scaling(runwayLength), RUNWAY_Y(), scaling(runwayEnds.get("TODA")-runwayLength), scalingHeight(runwayHeight));
     }
 
     //draws runway
     public void drawRunway(Graphics2D g){
-        g.setColor(Color.black);
-        if(takeOffOrLand == "Taking off"){
+        g.setColor(ColourPalette.black);
+        if(takeOffOrLand.equals("Taking off")){
             runwaydraw = runwayEnds.get("TORA");
         }
         else {
             runwaydraw = runwayEnds.get("LDA");
         }
-        runwayRect = new Rectangle(START, RUNWAY_Y(), this.scaling(runwaydraw) + START, this.scalingHeight(runwayHeight));
+        runwayRect = new Rectangle(START, RUNWAY_Y(), this.scaling(runwaydraw) + this.scaling(start), this.scalingHeight(runwayHeight));
         g.fill(runwayRect);
 
     }
@@ -145,7 +149,7 @@ public abstract class RunwayView {
     public void drawSeparator(Graphics2D g, int x, int start){
         //x is where the runway component ends
         //height is altered so separator is visible
-        g.setColor(Color.BLUE);
+        g.setColor(ColourPalette.darkPink);
         g.fillRect(this.scaling(x) + START + this.scaling(start), RUNWAY_Y(), 2, this.scalingHeight(runwayHeight) + SEPARATOR_HEIGHT);
     }
 
@@ -164,6 +168,12 @@ public abstract class RunwayView {
                     if(direction == "Away") {
                         this.drawSeparator(g, RESAStart, 0);
                         this.drawSeparator(g, runwayEnds.get(key), RESAStart);
+                        System.out.println(runwayEnds.get(key));
+                    }
+                    break;
+                case "Blast Allowance":
+                    if (direction.equals("Away") && takeOffOrLand.equals("Taking off")) {
+                        this.drawSeparator(g, runwayEnds.get(key), RESAStart);
                     }
                     break;
                 default:
@@ -178,7 +188,7 @@ public abstract class RunwayView {
 
     //draws labels and handles overlapping
     public void drawLabels(Graphics2D g){
-        g.setColor(Color.BLUE);
+        g.setColor(ColourPalette.darkPink);
         //string data of runwayEnd labels
         HashMap<String, Point> stringData = this.calculateStringDimensions(runwayEnds.keySet());
 
@@ -249,6 +259,9 @@ public abstract class RunwayView {
                 case "RESA":
                     stringX = this.scaling(runwayEnds.get(key)) + START + this.scaling(RESAStart); //START of string (x)
                     break;
+                case "Blast Allowance":
+                    stringX = this.scaling(runwayEnds.get(key)) + START + this.scaling(RESAStart); //START of string (x)
+                    break;
                 default:
                     stringX = this.scaling(runwayEnds.get(key)) + START + this.scaling(start); //START of string (x)
             }
@@ -285,7 +298,7 @@ public abstract class RunwayView {
     public void drawScaleX(Graphics2D g){
 
         //distance of 50 meters
-        g.setColor(Color.BLACK);
+        g.setColor(ColourPalette.black);
         g.fillRect(23,20, MeterX(), 2);
 
         //make it pretty
@@ -316,7 +329,7 @@ public abstract class RunwayView {
 
     public void drawScaleY(Graphics2D g){
         //distance of 50 meters
-        g.setColor(Color.BLACK);
+        g.setColor(ColourPalette.black);
         g.fillRect(20, 23, 2, MeterY());
 
         //make it pretty
@@ -388,5 +401,9 @@ public abstract class RunwayView {
 
     public Rectangle getRunwayRect() {
         return runwayRect;
+    }
+
+    public int getStart() {
+        return start;
     }
 }
