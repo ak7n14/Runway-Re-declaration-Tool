@@ -55,6 +55,7 @@ public class TopPanel extends JPanel{
         URL zoomoutURL = Class.class.getResource("/View/zoomouticon.png");
         BufferedImage zoomoutimg = ImageIO.read(zoomoutURL);
         JButton zoomin = new JButton();
+        zoomin.setToolTipText("Zoom in!");
         zoomin.setIcon(new ImageIcon(zoominimg));
         zoomin.setSize(zoomin.getPreferredSize());
         zoomin.addActionListener(actionEvent -> {
@@ -72,6 +73,7 @@ public class TopPanel extends JPanel{
         });
 
         JButton zoomout = new JButton();
+        zoomout.setToolTipText("Zoom Out!");
         zoomout.addActionListener(actionEvent -> {
             if(ptTop.getZoomNum() > 1){
                 ptTop.decrementZoom();
@@ -88,6 +90,7 @@ public class TopPanel extends JPanel{
         URL RotateRightUrl = Class.class.getResource("/View/rotate_right.png");
         BufferedImage RotateRightimg = ImageIO.read(RotateRightUrl);
         JButton rotateRight = new JButton();
+        rotateRight.setToolTipText("Rotate");
         rotateRight.addActionListener(actionEvent -> {
             ptTop.toggleTurnToCompassHeading();
             ptTop.repaint();
@@ -105,8 +108,10 @@ public class TopPanel extends JPanel{
         }
 
         JButton open = new JButton("Open");
+        open.setToolTipText("Open Log!");
         open.addActionListener(new logOpenListener(logsList,logs));
         JButton settings = new JButton();
+        settings.setToolTipText("Settings");
         settings.setIcon(new ImageIcon(settingsimg));
         settings.addActionListener(new SettingsListener());
         panel1.add(zoomin);

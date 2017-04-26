@@ -220,6 +220,7 @@ public class InputPanel extends JPanel {
         btnCalculate = new JButton("Calculate");
         //Listener for calculate button
         btnCalculate.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 16));
+        btnCalculate.setToolTipText("Calculate the values");
         panel.add(btnCalculate);
         btnCalculate.addActionListener(new CalculateListener(airport,runWayComboBox,importer,obsComboBox,obsDistTh,obsDisCL,leftRight,actionComboBox,towardsAway,plane,frame));
     }

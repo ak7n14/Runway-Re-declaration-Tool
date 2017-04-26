@@ -32,15 +32,16 @@ public class OutputPanel extends JPanel {
     public void printObsOutOfRunway(Calculations calc, String Direction){
         this.removeAll();
         this.updateUI();
-        this.setBackground(Color.GREEN);
+        this.setBackground(ColourPalette.green);
+        this.setToolTipText("Safe!");
         this.setOpaque(true);
         JLabel label = new JLabel("Object out of graded Area");
 
-        label.setBackground(Color.GREEN);
+        label.setBackground(ColourPalette.green);
         label.setOpaque(true);
         this.add(label);
         JLabel l = new JLabel();
-        l.setBackground(Color.green);
+        l.setBackground(ColourPalette.green);
         l.setOpaque(true);
         this.add(l);
 
@@ -49,10 +50,10 @@ public class OutputPanel extends JPanel {
             this.setLayout(new GridLayout(2,2));
             JLabel label1= new JLabel("LDA");
             label1.setOpaque(true);
-            label1.setBackground(Color.GREEN);
+            label1.setBackground(ColourPalette.green);
             label1.setFont(Bold);
             JLabel label2= new JLabel(String.format("= %d meters",calc.getRunway().getLDA()));
-            label2.setBackground(Color.GREEN);
+            label2.setBackground(ColourPalette.green);
             label2.setOpaque(true);
             label2.setFont(Bold);
             this.add(label1);
@@ -64,11 +65,11 @@ public class OutputPanel extends JPanel {
             this.setLayout(new GridLayout(3, 1));
             JLabel label2 = new JLabel(String.format("TORA = %d meters", calc.getRunway().getTORA()));
             label2.setFont(Bold);
-            label2.setBackground(Color.GREEN);
+            label2.setBackground(ColourPalette.green);
             label2.setOpaque(true);
             this.add(label2);
             JLabel label3 = new JLabel(String.format("TODA = %d meters", calc.getRunway().getTODA()));
-            label3.setBackground(Color.GREEN);
+            label3.setBackground(ColourPalette.green);
             label3.setOpaque(true);
             label3.setFont(Bold);
             this.add(label3);
@@ -112,9 +113,11 @@ public class OutputPanel extends JPanel {
         //Updating color of the panel depending on if the runway distance is sufficient or not
         if(calc.getReLda()>plane.getMinLandingDis()+tol){
             this.setBackground(ColourPalette.green);
+            this.setToolTipText("Safe!");
         }
         else if(calc.getReLda()<plane.getMinLandingDis()){
             this.setBackground(ColourPalette.red.brighter().brighter());
+            this.setToolTipText("NOT SAFE!");
             JLabel la3 =new JLabel("Min Dist req");
             la3.setFont(Bold);
             this.add(la3);
@@ -122,6 +125,7 @@ public class OutputPanel extends JPanel {
         }
         else{
             this.setBackground(ColourPalette.yellow);
+            this.setToolTipText("Safe but close!");
         }
         this.setOpaque(true);
         frame.validate();
@@ -151,14 +155,17 @@ public class OutputPanel extends JPanel {
         //Changing color of the panel according to the condition(If runway is sufficient)
         if (calc.getReLda() > plane.getMinLandingDis() + tol) {
             this.setBackground(ColourPalette.green);
+            this.setToolTipText("Safe!");
         } else if (calc.getReLda() < plane.getMinLandingDis()) {
             this.setBackground(ColourPalette.red.brighter().brighter());
+            this.setToolTipText("NOT SAFE!");
             JLabel la6= new JLabel("Min Dist req ");
             la6.setFont(Bold);
             this.add(la6);
             this.add(new JLabel(String.format("= %d meters", plane.getMinLandingDis())));
         } else {
             this.setBackground(ColourPalette.yellow);
+            this.setToolTipText("Safe but close!");
         }
         this.setOpaque(true);
         frame.validate();
@@ -203,10 +210,12 @@ public class OutputPanel extends JPanel {
                 && calc.getReTODA() > plane.getMinTakeoffDis() + tol
                 && calc.getReASDA() > plane.getMinTakeoffDis() + tol) {
             this.setBackground(ColourPalette.green);
+            this.setToolTipText("Safe!");
         } else if (calc.getReTORA() < plane.getMinTakeoffDis()
                 && calc.getReTODA() < plane.getMinTakeoffDis()
                 && calc.getReASDA() < plane.getMinTakeoffDis()) {
             this.setBackground(ColourPalette.red.brighter().brighter());
+            this.setToolTipText("NOT SAFE!");
             JLabel la13=new JLabel("Min Dist req");
             la13.setFont(Bold);
             this.add(la13);
@@ -215,6 +224,7 @@ public class OutputPanel extends JPanel {
             this.add(la14);
         } else {
             this.setBackground(ColourPalette.yellow);
+            this.setToolTipText("Safe but close!");
         }
         this.setOpaque(true);
         frame.validate();
@@ -275,16 +285,19 @@ public class OutputPanel extends JPanel {
                 && calc.getReTODA() > plane.getMinTakeoffDis() + tol
                 && calc.getReASDA() > plane.getMinTakeoffDis() + tol) {
             this.setBackground(ColourPalette.green);
+            this.setToolTipText("Safe!");
         } else if (calc.getReTORA() < plane.getMinTakeoffDis()
                 && calc.getReTODA() < plane.getMinTakeoffDis()
                 && calc.getReASDA() < plane.getMinTakeoffDis()) {
             this.setBackground(ColourPalette.red.brighter().brighter());
+            this.setToolTipText("NOT SAFE!");
             JLabel la21 = new JLabel("Min Dist req");
             this.add(la21);
             JLabel la22 = new JLabel(String.format("= %d meters", plane.getMinTakeoffDis()));
             this.add(la22);
         } else {
             this.setBackground(ColourPalette.yellow);
+            this.setToolTipText("Safe but close!");
         }
         this.setOpaque(true);
         frame.validate();
