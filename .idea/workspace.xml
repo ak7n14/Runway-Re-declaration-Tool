@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4b548e7-a480-4a1c-98dc-7b389781b8f6" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Model/LogWindow.java" afterPath="$PROJECT_DIR$/src/View/LogWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Main.java" afterPath="$PROJECT_DIR$/src/Controller/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/Log.java" afterPath="$PROJECT_DIR$/src/Model/Log.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/View/CalculationGUI.java" afterPath="$PROJECT_DIR$/src/View/CalculationGUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/View/LogWindow.java" afterPath="$PROJECT_DIR$/src/View/LogWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/View/MainFrame.java" afterPath="$PROJECT_DIR$/src/View/MainFrame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/View/NotificationPanel.java" afterPath="$PROJECT_DIR$/src/View/NotificationPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/View/NotificationWindow.java" afterPath="$PROJECT_DIR$/src/View/NotificationWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/View/OutputPanel.java" afterPath="$PROJECT_DIR$/src/View/OutputPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/View/SettingsGUI.java" afterPath="$PROJECT_DIR$/src/View/SettingsGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/View/TopPanel.java" afterPath="$PROJECT_DIR$/src/View/TopPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,21 +22,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Main.java">
+      <file leaf-file-name="TopPanel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/View/TopPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LogWindow.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/View/LogWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="2156">
+              <caret line="143" column="24" lean-forward="false" selection-start-line="143" selection-start-column="24" selection-end-line="143" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -56,6 +48,13 @@
         <option value="$PROJECT_DIR$/src/Controller/Main.java" />
         <option value="$PROJECT_DIR$/src/Model/Log.java" />
         <option value="$PROJECT_DIR$/src/View/LogWindow.java" />
+        <option value="$PROJECT_DIR$/src/View/MainFrame.java" />
+        <option value="$PROJECT_DIR$/src/View/NotificationPanel.java" />
+        <option value="$PROJECT_DIR$/src/View/CalculationGUI.java" />
+        <option value="$PROJECT_DIR$/src/View/OutputPanel.java" />
+        <option value="$PROJECT_DIR$/src/View/SettingsGUI.java" />
+        <option value="$PROJECT_DIR$/src/View/NotificationWindow.java" />
+        <option value="$PROJECT_DIR$/src/View/TopPanel.java" />
       </list>
     </option>
   </component>
@@ -158,6 +157,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Runway-Re-declaration-Tool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Runway-Re-declaration-Tool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -454,6 +467,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/XMLExporter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8712">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/XMLImporter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-672">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/LogWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="158" column="33" lean-forward="false" selection-start-line="158" selection-start-column="33" selection-end-line="158" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/MainFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="76" column="29" lean-forward="false" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/CalculationGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="126" column="36" lean-forward="false" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/NotificationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="41" column="36" lean-forward="false" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -462,10 +523,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/LogWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/View/OutputPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="-5352">
+          <caret line="30" column="33" lean-forward="false" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/SettingsGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1596">
+          <caret line="88" column="48" lean-forward="false" selection-start-line="88" selection-start-column="48" selection-end-line="88" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/NotificationWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="41" column="30" lean-forward="false" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/TopPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2156">
+          <caret line="143" column="24" lean-forward="false" selection-start-line="143" selection-start-column="24" selection-end-line="143" selection-end-column="24" />
           <folding />
         </state>
       </provider>

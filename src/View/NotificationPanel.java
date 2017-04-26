@@ -22,6 +22,7 @@ public class NotificationPanel extends JPanel {
 
 
            // panel.setLayout();
+            //Initializing the panel
             panel.setPreferredSize(new Dimension(360,110));
             JScrollPane scrollFrame = new JScrollPane(panel);
             this.add(new JLabel ("Values Updated!"));
@@ -38,6 +39,7 @@ public class NotificationPanel extends JPanel {
             this.updateUI();
         }
         else{
+            //If wrong input entered
             JPanel panel = new JPanel();
             panel.add(new JLabel("Invalid inputs!"));
             this.add(panel);

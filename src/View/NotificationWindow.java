@@ -20,6 +20,7 @@ public class NotificationWindow {
 
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
+        //If valid inputs enterd show values updated ane key
         if(st=="Valid") {
            
             panel.add(new JLabel("Values Updated!"));
@@ -38,13 +39,14 @@ public class NotificationWindow {
             window.setSize(200,100);
             panel.add(new JLabel("Invalid inputs!"));
         }
+        //Close on buttonclick
         JButton close = new JButton("Close");
         close.addActionListener(new CloseListsner(window));
         panel.add(close);
         cont.add(panel);
         window.dispose();
     }
-
+//if invalid inputs entered show invalid input notification
     class CloseListsner implements ActionListener{
         JFrame window;
         public CloseListsner(JFrame window){

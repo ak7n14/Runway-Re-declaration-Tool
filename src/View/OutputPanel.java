@@ -15,6 +15,7 @@ public class OutputPanel extends JPanel {
     JFrame frame;
     Plane plane;
     int tol;
+    //Constructor to define initial values
     public OutputPanel(JFrame frame,Plane plane,int tol){
         this.setPreferredSize(new Dimension(380,270));
         this.setBorder(BorderFactory.createTitledBorder("Output Panel"));
@@ -27,7 +28,7 @@ public class OutputPanel extends JPanel {
         this.tol=tol;
         Bold = new Font(font.getName(),Font.BOLD, font.getSize());
     }
-
+//If object is outside the runway
     public void printObsOutOfRunway(Calculations calc, String Direction){
         this.removeAll();
         this.updateUI();

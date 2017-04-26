@@ -48,6 +48,7 @@ public class TopPanel extends JPanel{
         logsList = importer.importLogs(airport);
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
+        //Adding custom icons
         URL zoominURL = Class.class.getResource("/View/zoominicon.png");
         BufferedImage zoominimg = ImageIO.read(zoominURL);
         URL zoomoutURL = Class.class.getResource("/View/zoomouticon.png");
@@ -104,7 +105,7 @@ public class TopPanel extends JPanel{
                 logs.addItem(logsList.get(logsList.size()-1-i).getName());
             }
         }
-
+    //open logs
         JButton open = new JButton("Open");
         open.setToolTipText("Open Log!");
         open.addActionListener(new logOpenListener(logsList,logs));
@@ -124,6 +125,7 @@ public class TopPanel extends JPanel{
         this.add(panel2);
 
     }
+    //update logs list
     public void updateLogsList(int MaxSize){
         maxLogDisplay=MaxSize;
         logs.removeAllItems();
@@ -139,7 +141,7 @@ public class TopPanel extends JPanel{
         logs.updateUI();
         TopPanel.this.updateUI();
     }
-
+//undate log to max size
     public void update(Log log) throws IOException{
         logsList.add(log);
         updateLogsList(maxLogDisplay);

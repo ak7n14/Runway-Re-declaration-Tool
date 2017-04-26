@@ -28,7 +28,7 @@ public class MainFrame {
         this.plane=plane;
         tol=100;
     }
-
+    //Initialize the panel
     public void initialize(Airport airport,Plane plane){
         frame = new JFrame(airport.getName());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -74,6 +74,7 @@ public class MainFrame {
         frame.setVisible(true);
 
     }
+    //=====getter methods ===
     public InputPanel getInputPanel() {
         return inputPanel;
     }

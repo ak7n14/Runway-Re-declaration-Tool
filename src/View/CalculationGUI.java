@@ -44,11 +44,11 @@ public class CalculationGUI{
 		dropDown.setSelectedIndex(-1);
 		planes.setSelectedIndex(-1);
 		Add.addActionListener(new AddButtonListener(dropDown,planes,airports,planesList));
-		for(Airport airport : airports){
+		for(Airport airport : airports){//Adding airports to the dropdown list
 			dropDown.addItem(airport.getName());
 
 		}
-		for(Plane plane : planesList){
+		for(Plane plane : planesList){//Adding planes
 			planes.addItem(plane.getName());
 
 		}
@@ -63,6 +63,7 @@ public class CalculationGUI{
 		window.setVisible(true);
 		submit.addActionListener(new SubmitActionListener(window,dropDown,planes));
 	}
+	//Update the airports.
 	public void updateAirportsList(){
 		dropDown.removeAllItems();
 		for(Airport airport : airports){
@@ -71,6 +72,7 @@ public class CalculationGUI{
 		dropDown.updateUI();
 		frame.updateUI();
 	}
+	//update planes list
 	public void updatePlanesList(){
 		planes.removeAllItems();
 		for(Plane pl : planesList){
@@ -79,6 +81,7 @@ public class CalculationGUI{
 		planes.updateUI();
 		frame.updateUI();
 	}
+	//initialize the second screen
 	void initSecondFrame(String airportName,String planeName){
 		XMLImporter importer= new XMLImporter();
 		importer.importAirports();
@@ -87,7 +90,7 @@ public class CalculationGUI{
 		plane =importer.getPlaneByName(planeName);
 
 	}
-
+//=======getter methods====
 	public ArrayList<Plane> getPlanesList() {
 		return planesList;
 	}
@@ -99,7 +102,7 @@ public class CalculationGUI{
 	public XMLImporter getImporter() {
 		return importer;
 	}
-
+// Initialize new screen on button click
 	class SubmitActionListener implements ActionListener{
 		JFrame frame;
 		JComboBox dropdown;
@@ -121,6 +124,7 @@ public class CalculationGUI{
 		}
 
 	}
+	//Add new airports and aircrafts
 	class AddButtonListener implements ActionListener{
 		JComboBox airport;
 		JComboBox plane;

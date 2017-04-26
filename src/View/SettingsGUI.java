@@ -40,7 +40,7 @@ public class SettingsGUI extends JFrame{
 		JTextField txtRESA = new JTextField(ms.getInputPanel().getRESA()+"");
 		JTextField txtBlast = new JTextField(ms.getInputPanel().getEngineBlastAllowance()+"");
 		JButton btnSave = new JButton("Save");
-
+	//Change general settings on button click
 		btnSave.addActionListener(e ->
 		{
 			int Blast;
@@ -69,7 +69,6 @@ public class SettingsGUI extends JFrame{
 		general.add(txtBlast);
 		general.add(btnSave);
 
-		//tabs in airport
 
 
 		//tabs in obstacle
@@ -87,6 +86,7 @@ public class SettingsGUI extends JFrame{
 		JButton btoImpSub = new JButton("Submit");
 		btoImpSub.addActionListener(new ActionListener() {
 			@Override
+			//Adding new Obstacles from XML file
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<ObstacleBack> temp,original;
 				original=ms.getObsList();

@@ -15,14 +15,15 @@ import java.awt.event.ActionListener;
  */
 public class LogWindow extends JFrame{
     public LogWindow(Log log){
-        super("Log:"+log.getName());
+        super("Log:"+log.getName());//Keep the title of the window log followed by time stamp
         initialize(log);
     }
 
     public void initialize(Log log) {
-        Boolean activate;
+        Boolean activate;//To check if the runways have to be drawn
         Container container = this.getContentPane();
         JPanel panel = new JPanel();
+        //Initializing panel
         container.add(panel);
         panel.setLayout(new BorderLayout());
         JPanel nedsPanel = new JPanel();
@@ -38,6 +39,7 @@ public class LogWindow extends JFrame{
         InputsPanel.setBorder(BorderFactory.createTitledBorder("Inputs Entered"));
         InputsPanel.setPreferredSize(new Dimension(390, 450));
         InputsPanel.add(new JLabel(""));
+        //Show all the inpots entered
         InputsPanel.add(new JLabel("All Distances are in meters"));
         InputsPanel.add(new JLabel("Runway:"));
         InputsPanel.add(new JLabel(log.getRunway().getDesignator()));
@@ -57,6 +59,7 @@ public class LogWindow extends JFrame{
         InputsPanel.add(new JLabel(String.valueOf(log.getRESA())));
         InputsPanel.add(new JLabel("Engine Blast Allowence: "));
         InputsPanel.add(new JLabel(String.valueOf(log.getEngineBlastAllowence())));
+        //Closing the window
         JButton close = new JButton("Close");
 
         close.addActionListener(new ActionListener() {
@@ -70,6 +73,8 @@ public class LogWindow extends JFrame{
         InputsPanel.setAutoscrolls(true);
         scrollFrameInput.setPreferredSize(new Dimension(390, 270));
         rightPanel.add(scrollFrameInput);
+
+        //Perform and show all the calculations
         Calculations calc = new Calculations(log.getRunway(), log.getObsticle().getHeight(), log.getDistTH(), log.getRESA(), log.getEngineBlastAllowence());
         if (log.getDistCL() > log.getRunway().getRunwayWidth() / 2) {
             activate=true;
@@ -151,7 +156,7 @@ public class LogWindow extends JFrame{
             ptTop.updatePaint(calc, offsetX, log.getObsticle(), log.getDirectionAc(),log.getAction());
 
         }
-
+        //Adding the output panel
         JScrollPane scrollFrameOutput = new JScrollPane(outputPanel);
         outputPanel.setAutoscrolls(true);
         scrollFrameOutput.setPreferredSize(new Dimension(390, 270));
