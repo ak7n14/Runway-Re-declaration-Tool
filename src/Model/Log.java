@@ -4,6 +4,7 @@ package Model;
  * Created by Anish on 4/22/17.
  */
 public class Log {
+    //Values stored in the logs
     String name;
     Runway runway;
     ObstacleBack obsticle;
@@ -16,6 +17,7 @@ public class Log {
     int engineBlastAllowence;
     Plane plane;
     Airport airport;
+    //Constructor to create an instance of the log
     public Log(String name,Airport airport,Runway runway,ObstacleBack obsticle,int DistCL, int DistTH,String action, String DirectionCL, String DirectionAc,int RESA,int eng,Plane plane){
         this.name=name;
         this.runway=runway;
@@ -29,7 +31,7 @@ public class Log {
         this.plane = plane;
         this.airport=airport;
     }
-
+    //==============Getter methods below ===================
     public int getDistCL() {
         return DistCL;
     }

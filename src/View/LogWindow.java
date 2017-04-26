@@ -1,10 +1,11 @@
-package Model;
+package View;
 
 import Controller.GraphicsPanel;
-import View.OutputPanel;
+import Model.Calculations;
+import Model.Log;
+import Model.Runway;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
