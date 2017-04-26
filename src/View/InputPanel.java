@@ -455,6 +455,7 @@ public class InputPanel extends JPanel {
                  notificationPanel.initialize("Valid");
 
                 if(activate) {
+                    System.out.println("activated");
                     int offsetX = obsLocCenteLine;
                     if(sd.getSelectedItem() == "left"){
                         offsetX *= -1;

@@ -22,10 +22,10 @@ public class RunwaySideView extends RunwayView{
     //draws runway, seperators and labels
     public void drawAll(Graphics2D g){
         this.drawRunway(g);
-        if(getTakeOffOrLand() == "Taking off")
+        if(getTakeOffOrLand() == "Taking off") {
             this.drawClearWay(g);
-        this.drawStopWay(g);
-
+            this.drawStopWay(g);
+        }
         //draws separator labels
         this.drawLabels(g);
         this.drawScaleX(g);

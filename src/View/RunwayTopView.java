@@ -36,9 +36,10 @@ public class RunwayTopView extends RunwayView{
         //draw components
         drawClearedAndGraded(g2);
         this.drawRunway(g2);
-        if(getTakeOffOrLand() == "Taking off")
+        if(getTakeOffOrLand() == "Taking off") {
             this.drawClearWay(g2);
-        this.drawStopWay(g2);
+            this.drawStopWay(g2);
+        }
         this.drawAllSeparators(g2);
         //draws separator labels
         this.drawLabels(g2);
@@ -59,21 +60,36 @@ public class RunwayTopView extends RunwayView{
         int x4 = 0;
         int x5 = 0;
         int x6 = 0;
-        int ASDA = getRunwayEnds().get("ASDA");
+        int ASDA = 0;
         //System.out.println(ASDA);
         int TODA = 0;
+        int LDA = 0;
+
+        if(!(getRunwayEnds().get("LDA") == null)) {
+            LDA = getRunwayEnds().get("LDA");
+        }
+        if(!(getRunwayEnds().get("ASDA") == null)){
+            ASDA = getRunwayEnds().get("ASDA");
+        }
         if(!(getRunwayEnds().get("TODA") == null)){
             TODA = getRunwayEnds().get("TODA");
         }
-        if(ASDA > TODA) {
-            x4 = scaling(ASDA -300) +START + getStart();
-            x5 = scaling(ASDA - 150) + START  + getStart();
-            x6 = scaling(60 + ASDA)+START  + getStart();
+        if(getTakeOffOrLand().equals("Landing")){
+            System.out.println("landing");
+            x4 = scaling(LDA - 300) + START + getStart();
+            x5 = scaling(LDA - 150) + START + getStart();
+            x6 = scaling(LDA) + getStart() - START;
         }
-        else{
-            x4 = scaling(TODA -300) +START  + scaling(getStart());
-            x5 = scaling(TODA - 150) + START  + scaling(getStart());
-            x6 = scaling(60 + TODA)+START  + scaling(getStart());
+        else {
+            if (ASDA > TODA) {
+                x4 = scaling(ASDA - 300) + START + getStart();
+                x5 = scaling(ASDA - 150) + START + getStart();
+                x6 = scaling(60 + ASDA) + START + getStart();
+            } else {
+                x4 = scaling(TODA - 300) + START + scaling(getStart());
+                x5 = scaling(TODA - 150) + START + scaling(getStart());
+                x6 = scaling(60 + TODA) + START + scaling(getStart());
+            }
         }
 
         int x2 = scaling(210-60)+START;

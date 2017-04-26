@@ -95,7 +95,6 @@ public abstract class RunwayView {
         }
         else {
             runwayEnds.put("LDA", calc.getReLda());
-            runwayEnds.put("ASDA", calc.getReASDA() - start);
             START =  scaling((runway.getStripLength() - calc.getReLda())/2);
         }
 
@@ -112,9 +111,10 @@ public abstract class RunwayView {
     //draws runway, seperators and labels
     public void drawAll(Graphics2D g){
         this.drawRunway(g);
-        if(takeOffOrLand == "Taking off")
+        if(takeOffOrLand == "Taking off") {
             this.drawClearWay(g);
-        this.drawStopWay(g);
+            this.drawStopWay(g);
+        }
         //draws separator labels
         this.drawLabels(g);
         this.drawScaleX(g);
