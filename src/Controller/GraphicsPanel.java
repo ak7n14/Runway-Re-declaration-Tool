@@ -81,8 +81,8 @@ public class GraphicsPanel extends JPanel {
         if (zoom) {
             if(rsw instanceof RunwaySideView) {
                 //y axis stays the same, x axis is zoomed and jpanel is increased in size to allow for this and allow scrollinf
-                g2.scale(zoomNum,1);
-                setPreferredSize(new Dimension(jPanelWidth * 2 * zoomNum, jPanelHeight));
+                g2.scale(zoomNum,zoomNum);
+                setPreferredSize(new Dimension(jPanelWidth * 2 * zoomNum, jPanelHeight * zoomNum));
             }
             else{
                 //same as above but y-axis is zoomed as well.
@@ -116,26 +116,6 @@ public class GraphicsPanel extends JPanel {
 
     public void setZoomNum(int zoomNum){
         this.zoomNum = zoomNum;
-    }
-    public static void main(String[] args) {
-        JFrame jFrame = new JFrame();
-
-        jFrame.setSize(2000, 1000);
-        jFrame.setLayout(new GridLayout(2,1));
-        GraphicsPanel ptSide = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "side", 1000, 500);
-        GraphicsPanel ptTop = new GraphicsPanel(new Runway("20R", 1000, 1700, 1500, 300, 0, 1000, 100, 2000, 500), "top", 1000, 500);
-        JScrollPane scrollPane = new JScrollPane(ptSide);
-        JScrollPane scrollPane2 = new JScrollPane(ptTop);
-        jFrame.add(scrollPane);
-        jFrame.add(scrollPane2);
-        ptSide.setZoomNum(1);
-        ptTop.setZoomNum(1);
-//        ptSide.toggleTurnToCompassHeading();
-//        ptTop.toggleTurnToCompassHeading();
-        jFrame.setVisible(true);
-        ptSide.updatePaint(new Calculations(ptSide.getRw(), 20, 1000), 0, new ObstacleBack("nuke", 20, 100, 100), "Towards", "Taking off");
-        ptTop.updatePaint(new Calculations(ptTop.getRw(), 20, 1000), 0, new ObstacleBack("nuke", 20, 100, 100), "Towards", "Taking off");
-
     }
 
     public void toggleTurnToCompassHeading() {
