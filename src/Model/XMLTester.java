@@ -42,7 +42,7 @@ public class XMLTester
 
 
 
-        exporter.encrypt(new File("Data/Airports.xml"), new File("Data/Airports.xml"));
+        exporter.encrypt(new File("Data/log.csv"), new File("Data/log.csv"));
 
         //importer.decrypt(new File("Data/test2.xml"), new File("Data/test3.xml"));
     }
