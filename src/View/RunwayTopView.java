@@ -75,16 +75,16 @@ public class RunwayTopView extends RunwayView{
             TODA = getRunwayEnds().get("TODA");
         }
         if(getTakeOffOrLand().equals("Landing")){
-            System.out.println("landing");
-            x4 = scaling(LDA - 300) + START + getStart();
-            x5 = scaling(LDA - 150) + START + getStart();
-            x6 = scaling(LDA) + getStart() - START;
+            System.out.println(START + getStart() + LDA);
+            x4 = scaling(LDA - 300) + START + scaling(getStart());
+            x5 = scaling(LDA - 150) + START + scaling(getStart());
+            x6 = scaling(60 + LDA) + scaling(getStart()) + START;
         }
         else {
             if (ASDA > TODA) {
-                x4 = scaling(ASDA - 300) + START + getStart();
-                x5 = scaling(ASDA - 150) + START + getStart();
-                x6 = scaling(60 + ASDA) + START + getStart();
+                x4 = scaling(ASDA - 300) + START + scaling(getStart());
+                x5 = scaling(ASDA - 150) + START + scaling(getStart());
+                x6 = scaling(60 + ASDA) + START + scaling(getStart());
             } else {
                 x4 = scaling(TODA - 300) + START + scaling(getStart());
                 x5 = scaling(TODA - 150) + START + scaling(getStart());
@@ -146,7 +146,7 @@ public class RunwayTopView extends RunwayView{
         //due to rotation axes flip, x' = -y, y' = x
         //gets runway end shifts by 10 left (scales
         //shifts left by START
-        g2.drawString(runwayNumber,  - RUNWAY_Y() - this.scalingHeight(runwayHeight/2) - metrics.stringWidth(runwayNumber)/2, this.scaling(this.getRunwayLength()) + START - 10);
+        g2.drawString(runwayNumber,  - RUNWAY_Y() - this.scalingHeight(runwayHeight/2) - metrics.stringWidth(runwayNumber)/2, this.scaling(getRunwaydraw()) + scaling(getStart()) + START - 10);
 
         //LEFT NUMBER
         //makes text vertical facing towards left edge of runway
