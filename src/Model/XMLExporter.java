@@ -266,6 +266,7 @@ public class XMLExporter
 
     }
 
+    // This method is used to export the logs to an encrypted csv file and unencrypted xml
     public void exportLog(Log log) throws IOException {
 
 
@@ -306,6 +307,7 @@ public class XMLExporter
 
     }
 
+    // This method saves a given list of logs to a specified xml file
     public void logsXML(String filename, ArrayList<Log> logs)
     {
         try
@@ -340,6 +342,7 @@ public class XMLExporter
         }
     }
 
+    // This method creates a Node object containing information about a given Log object
     public Node getLog(Document doc, Log log)
     {
         Element logNode = doc.createElement("log");
@@ -396,6 +399,7 @@ public class XMLExporter
     }
 
 
+    // This method is used to add a single airport to a given xml file
     public void addAirport(String filename, Airport airport)
     {
         ArrayList<Airport> airports = importer.importCustomAirports(filename);
@@ -403,6 +407,7 @@ public class XMLExporter
         exportAiports(filename, airports);
     }
 
+    // This method is used to add a single plane to a given xml file
     public void addPlane(String filename, Plane plane)
     {
         ArrayList<Plane> planes = importer.importCustomPlanes(filename);
@@ -410,6 +415,7 @@ public class XMLExporter
         exportPlanes(filename, planes);
     }
 
+    // This method is used to add a single obstacle to a given xml file
     public void addObstacle(String filename, ObstacleBack obstacle)
     {
         ArrayList<ObstacleBack> obstacles = importer.importCustomObstacles(filename);
@@ -417,6 +423,7 @@ public class XMLExporter
         exportObstacles(filename, obstacles);
     }
 
+    // This method uses the AES algorithm to encrypt a given file and output to the second given file
     public void encrypt (File input, File output)
     {
         try

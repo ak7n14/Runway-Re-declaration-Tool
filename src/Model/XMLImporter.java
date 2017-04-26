@@ -19,7 +19,15 @@ public class XMLImporter
         return importCustomAirports("Data/Airports.xml", true);
     }
 
+    // This method takes only the file name and doesn't decrypt the given file
+    public ArrayList<Airport> importCustomAirports(String filename)
+    {
+        return importCustomAirports(filename, false);
+    }
 
+    // this method reads a given XML file
+    // if decrypt is true, then the file is decrypted
+    // otherwise decryption doesn't take place
     public ArrayList<Airport> importCustomAirports(String filename, boolean decrypt)
     {
         ArrayList<Airport> airports = new ArrayList<Airport>();
@@ -87,23 +95,26 @@ public class XMLImporter
         return airports;
     }
 
-    public ArrayList<Airport> importCustomAirports(String filename)
-    {
-        return importCustomAirports(filename, false);
-    }
+
+
+
+
     // method reads a default XML file containing obstacle data
     // returns an ArrayList of ObstacleBack type
-
     public ArrayList<ObstacleBack> importObstacles()
     {
         return importCustomObstacles("Data/Obstacles.xml", true);
     }
 
+    // This method takes only the file name and doesn't decrypt the given file
     public ArrayList<ObstacleBack> importCustomObstacles(String filename)
     {
         return importCustomObstacles(filename, false);
     }
 
+    // this method reads a given XML file
+    // if decrypt is true, then the file is decrypted
+    // otherwise decryption doesn't take place
     public ArrayList<ObstacleBack> importCustomObstacles(String filename, boolean decrypt)
     {
         ArrayList<ObstacleBack> obstacles = new ArrayList<ObstacleBack>();
@@ -160,11 +171,15 @@ public class XMLImporter
         return importCustomPlanes("Data/Planes.xml", true);
     }
 
+    // This method takes only the file name and doesn't decrypt the given file
     public ArrayList<Plane> importCustomPlanes(String filename)
     {
         return importCustomPlanes(filename, false);
     }
 
+    // this method reads a given XML file
+    // if decrypt is true, then the file is decrypted
+    // otherwise decryption doesn't take place
     public ArrayList<Plane> importCustomPlanes(String filename, boolean decrypt)
     {
         ArrayList<Plane> planes = new ArrayList<>();
@@ -228,7 +243,6 @@ public class XMLImporter
         return null;
     }
 
-
     public Plane getPlaneByName(String name){
         ArrayList<Plane> planes = importPlanes();
 
@@ -240,6 +254,7 @@ public class XMLImporter
 
         return null;
     }
+
     public ObstacleBack getObsticalByName(String name){
         ArrayList<ObstacleBack> obstacle = importObstacles();
 
@@ -252,6 +267,7 @@ public class XMLImporter
         return null;
     }
 
+    // This method is used to import logs from a CSV file
     public ArrayList<Log> importLogs(Airport airportn)throws IOException{
         ArrayList<Log> Logs = new ArrayList();
         BufferedReader br;
@@ -287,6 +303,7 @@ public class XMLImporter
         return Logs;
     }
 
+    // This method uses the AES algorithm to decrypt the first file and save it to the second file
     public void decrypt(File input, File output)
     {
         try
