@@ -16,17 +16,23 @@ public class XMLImporter
     // returns an ArrayList of Airport type
     public ArrayList<Airport> importAirports()
     {
-        return importCustomAirports("Data/Airports.xml");
+        return importCustomAirports("Data/Airports.xml", true);
     }
 
 
-    public ArrayList<Airport> importCustomAirports(String filename)
+    public ArrayList<Airport> importCustomAirports(String filename, boolean decrypt)
     {
         ArrayList<Airport> airports = new ArrayList<Airport>();
         try
         {
             File airportFile = new File(filename);
             File temp = new File("Data/temp.xml");
+            if(decrypt)
+                decrypt(airportFile,temp);
+            else
+                Files.copy(airportFile.toPath(), temp.toPath());
+
+
             decrypt(airportFile, temp);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -81,22 +87,37 @@ public class XMLImporter
         return airports;
     }
 
+    public ArrayList<Airport> importCustomAirports(String filename)
+    {
+        return importCustomAirports(filename, false);
+    }
     // method reads a default XML file containing obstacle data
     // returns an ArrayList of ObstacleBack type
 
     public ArrayList<ObstacleBack> importObstacles()
     {
-        return importCustomObstacles("Data/Obstacles.xml");
+        return importCustomObstacles("Data/Obstacles.xml", true);
     }
 
     public ArrayList<ObstacleBack> importCustomObstacles(String filename)
+    {
+        return importCustomObstacles(filename, false);
+    }
+
+    public ArrayList<ObstacleBack> importCustomObstacles(String filename, boolean decrypt)
     {
         ArrayList<ObstacleBack> obstacles = new ArrayList<ObstacleBack>();
         try
         {
             File obstacleFile = new File(filename);
             File temp = new File("Data/temp.xml");
-            decrypt(obstacleFile, temp);
+
+            if(decrypt)
+                decrypt(obstacleFile, temp);
+            else
+                Files.copy(obstacleFile.toPath(), temp.toPath());
+
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -136,10 +157,15 @@ public class XMLImporter
     // returns an ArrayList of Plane type
     public ArrayList<Plane> importPlanes()
     {
-        return importCustomPlanes("Data/Planes.xml");
+        return importCustomPlanes("Data/Planes.xml", true);
     }
 
     public ArrayList<Plane> importCustomPlanes(String filename)
+    {
+        return importCustomPlanes(filename, false);
+    }
+
+    public ArrayList<Plane> importCustomPlanes(String filename, boolean decrypt)
     {
         ArrayList<Plane> planes = new ArrayList<>();
 
@@ -147,7 +173,12 @@ public class XMLImporter
         {
             File planeFile = new File(filename);
             File temp = new File("Data/temp.xml");
-            decrypt(planeFile, temp);
+
+            if(decrypt)
+                decrypt(planeFile, temp);
+            else
+                Files.copy(planeFile.toPath(), temp.toPath());
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -226,7 +257,9 @@ public class XMLImporter
         BufferedReader br;
         String line;
 
-        br = new BufferedReader(new FileReader("Data/log.csv"));
+        decrypt(new File("Data/log.csv"), new File("Data/temp.csv"));
+
+        br = new BufferedReader(new FileReader("Data/temp.csv"));
         while ((line = br.readLine()) != null) {
             String[] log = line.split(",");
             String name = log[0];
@@ -248,6 +281,9 @@ public class XMLImporter
         if (br != null) {
             br.close();
         }
+
+        Files.delete(new File("Data/temp.csv").toPath());
+
         return Logs;
     }
 

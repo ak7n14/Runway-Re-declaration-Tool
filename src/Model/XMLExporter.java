@@ -3,11 +3,13 @@ import org.w3c.dom.*;
 
 import javax.crypto.*;
 import javax.crypto.spec.*;
+import javax.print.Doc;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.nio.file.Files;
 import java.security.*;
 import java.util.*;
 import java.io.File;
@@ -267,7 +269,7 @@ public class XMLExporter
     public void exportLog(Log log) throws IOException {
 
 
-        FileWriter pw = new FileWriter("Data/log.csv",true);
+        FileWriter pw = new FileWriter("Data/temp.csv",true);
         pw.append(log.getName());
         pw.append(",");
         pw.append(log.getAirport().getName());
@@ -295,8 +297,102 @@ public class XMLExporter
         pw.flush();
         pw.close();
 
+        encrypt(new File("Data/temp.csv"), new File("Data/log.csv"));
+        Files.delete(new File("Data/temp.csv").toPath());
+
+        ArrayList<Log> tempList = new XMLImporter().importLogs(log.getAirport());
+        tempList.add(log);
+        logsXML("Data/log.xml",tempList);
+
+    }
+
+    public void logsXML(String filename, ArrayList<Log> logs)
+    {
+        try
+        {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.newDocument();
+
+            Element root = document.createElement("logs");
+
+            document.appendChild(root);
+
+            for(Log log : logs)
+            {
+                root.appendChild(getLog(document, log));
+            }
+
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+            Transformer transformer = tFactory.newTransformer();
+
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource source = new DOMSource(document);
+
+            StreamResult file = new StreamResult(new File (filename));
+            transformer.transform(source, file);
 
 
+        }
+        catch (Exception e)
+        {
+            System.err.println(e);
+        }
+    }
+
+    public Node getLog(Document doc, Log log)
+    {
+        Element logNode = doc.createElement("log");
+
+        Element name = doc.createElement("name");
+        name.appendChild(doc.createTextNode(log.getName()));
+        logNode.appendChild(name);
+
+        Element runway = doc.createElement("runway");
+        runway.appendChild(doc.createTextNode(log.getRunway().getDesignator()));
+        logNode.appendChild(runway);
+
+        Element obstacle = doc.createElement("obstacle");
+        obstacle.appendChild(doc.createTextNode(log.getObsticle().getName()));
+        logNode.appendChild(obstacle);
+
+        Element distCL = doc.createElement("DistCL");
+        distCL.appendChild(doc.createTextNode(log.getDistCL()+""));
+        logNode.appendChild(distCL);
+
+        Element distTH = doc.createElement("DistTH");
+        distTH.appendChild(doc.createTextNode(log.getDistTH()+""));
+        logNode.appendChild(distTH);
+
+        Element action = doc.createElement("action");
+        action.appendChild(doc.createTextNode(log.getAction()));
+        logNode.appendChild(action);
+
+        Element directionCL = doc.createElement("DirectionCL");
+        directionCL.appendChild(doc.createTextNode(log.getDirectionCL()));
+        logNode.appendChild(directionCL);
+
+        Element directionAc = doc.createElement("DirectionAc");
+        directionAc.appendChild(doc.createTextNode(log.getDirectionAc()));
+        logNode.appendChild(directionAc);
+
+        Element RESA = doc.createElement("RESA");
+        RESA.appendChild(doc.createTextNode(log.getRESA()+""));
+        logNode.appendChild(RESA);
+
+        Element engineBlastAllowence = doc.createElement("engineBlastAllowence");
+        engineBlastAllowence.appendChild(doc.createTextNode(log.getEngineBlastAllowence()+""));
+        logNode.appendChild(engineBlastAllowence);
+
+        Element plane = doc.createElement("plane");
+        plane.appendChild(doc.createTextNode(log.getPlane().getName()));
+        logNode.appendChild(plane);
+
+        Element airport = doc.createElement("airport");
+        airport.appendChild(doc.createTextNode(log.getAirport().getName()));
+        logNode.appendChild(airport);
+
+        return logNode;
     }
 
 
