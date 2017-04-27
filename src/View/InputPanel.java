@@ -396,12 +396,12 @@ public class InputPanel extends JPanel {
                 if(obsLocCenteLine>runway.getRunwayWidth()/2){
 
                     if (Action=="Landing") {
-                            activate=true;
+                            activate=false;
                         outputPanel.printObsOutOfRunway(calc, "Landing");//Calling landing case
 
 
                     }else
-                        activate=true;
+                        activate=false;
                     outputPanel.printObsOutOfRunway(calc,"Taking");//Calling taking off case
                 }
                 else{
