@@ -82,12 +82,12 @@ public class GraphicsPanel extends JPanel {
             if(rsw instanceof RunwaySideView) {
                 //y axis stays the same, x axis is zoomed and jpanel is increased in size to allow for this and allow scrollinf
                 g2.scale(zoomNum,zoomNum);
-                setPreferredSize(new Dimension(jPanelWidth * 2 * zoomNum, jPanelHeight * zoomNum));
+                setPreferredSize(new Dimension(jPanelWidth * 2 * zoomNum, jPanelHeight * 2 * zoomNum));
             }
             else{
                 //same as above but y-axis is zoomed as well.
                 g2.scale(zoomNum,zoomNum);
-                setPreferredSize(new Dimension(jPanelWidth * 2 * zoomNum, jPanelHeight * zoomNum));
+                setPreferredSize(new Dimension(jPanelWidth * 2 * zoomNum, jPanelHeight * 2 * zoomNum));
             }
         }
 
