@@ -1,0 +1,29 @@
+<airports>
+	<airport name="SHOREHAM AIRPORT">
+		<runway>
+			<designator>09 </designator>
+			<TORA>1655</TORA>
+			<TODA>1655</TODA>
+			<ASDA>1655</ASDA>
+			<LDA>1540</LDA>
+			<displacement>0</displacement>
+			<runwayLength>1655</runwayLength>
+ 			<runwayWidth>46</runwayWidth>
+			<stripLength>1789</stripLength>
+ 			<stripWidth>300</stripWidth>
+		</runway>
+		
+		<runway>
+			<designator>27 </designator>
+			<TORA>1655</TORA>
+			<TODA>1655</TODA>
+			<ASDA>1655</ASDA>
+			<LDA>1540</LDA>
+			<displacement>0</displacement>
+			<runwayLength>1655</runwayLength>
+ 			<runwayWidth>46</runwayWidth>
+			<stripLength>1789</stripLength>
+ 			<stripWidth>300</stripWidth>
+		</runway>
+	</airport>
+</airports>
