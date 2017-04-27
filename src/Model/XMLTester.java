@@ -40,9 +40,9 @@ public class XMLTester
 
         //System.out.println(importer.importPlanes().size());
 
+//importer.decrypt(new File("Data/Obstacles.xml"), new File("Data/a.xml"));
 
-
-        exporter.encrypt(new File("Data/log.csv"), new File("Data/log.csv"));
+        exporter.encrypt(new File("Data/a.xml"), new File("Data/Obstacles.xml"));
 
         //importer.decrypt(new File("Data/test2.xml"), new File("Data/test3.xml"));
     }
