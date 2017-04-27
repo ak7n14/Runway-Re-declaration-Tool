@@ -1,0 +1,7 @@
+<obstacles>
+  <obstacle name="737 wreck">
+    <height>5</height>
+    <length>17</length>
+    <depth>10</depth>
+  </obstacle>
+</obstacles>
