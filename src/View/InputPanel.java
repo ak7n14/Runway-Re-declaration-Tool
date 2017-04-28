@@ -429,8 +429,8 @@ public class InputPanel extends JPanel {
                     else{//Cases of taking off
                         if(Direction.equals("Towards")){
                             calc.calculateTORA("Towards");//When taking off towards the object
-                            if(calc.getReTORA()<plane.getMinLandingDis() || calc.getReTODA()<plane.getMinLandingDis()
-                                    ||calc.getReASDA()<plane.getMinLandingDis()){
+                            if(calc.getReTORA()<plane.getMinTakeoffDis() || calc.getReTODA()<plane.getMinTakeoffDis()
+                                    ||calc.getReASDA()<plane.getMinTakeoffDis()){
                                 activate=false;
                             }
                             else{
@@ -441,8 +441,8 @@ public class InputPanel extends JPanel {
                         }
                         else{
                             calc.calculateTORA("Away");//When taking off after the object
-                            if(calc.getReTORA()<plane.getMinLandingDis() || calc.getReTODA()<plane.getMinLandingDis()
-                                    ||calc.getReASDA()<plane.getMinLandingDis()){
+                            if(calc.getReTORA()<plane.getMinTakeoffDis() || calc.getReTODA()<plane.getMinTakeoffDis()
+                                    ||calc.getReASDA()<plane.getMinTakeoffDis()){
                                 activate=false;
                             }
                             else{
