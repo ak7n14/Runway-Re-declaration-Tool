@@ -144,7 +144,11 @@ public class AirportPlanes extends JFrame {
                             panel.updateUI();
                             return;
                         }
-
+                        if(LDA<0||threshold<0||ASDA<0||TODA<0||TORA<0||Length<0||Width<0||StripLength<0||StripWidth<0){
+                            panel.add(new JLabel("Invalid Inputs Please Check"));
+                            panel.updateUI();
+                            return;
+                        }
                         runways.add(new Runway(txtDesignator.getText(),TORA,TODA,ASDA,LDA,threshold,Length,Width,StripLength,StripWidth));
                         noRunways.setText(String.valueOf(runways.size()));
                         noRunways.updateUI();

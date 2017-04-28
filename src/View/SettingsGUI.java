@@ -55,6 +55,11 @@ public class SettingsGUI extends JFrame{
 				general.updateUI();
 				return;
 			}
+			if(Blast<0||RESA<0||Recents<0){
+				general.add(new JLabel("Invalid inputs please check!"));
+				general.updateUI();
+				return;
+			}
 			ms.getInputPanel().setRESA(RESA);
 			ms.getInputPanel().setEngineBlastAllowance(Blast);
 			ms.updateLogsList(Recents);
@@ -130,7 +135,12 @@ public class SettingsGUI extends JFrame{
 					length=Integer.parseInt(txtoLength.getText());
 					depth=Integer.parseInt(txtoDepth.getText());
 				}catch (NumberFormatException er){
-					oAdd.add(new JLabel("Invalid inputs plase check!"));
+					oAdd.add(new JLabel("Invalid inputs please check!"));
+					oAdd.updateUI();
+					return;
+				}
+				if(height<0||length<0||depth<0){
+					oAdd.add(new JLabel("Invalid inputs please check!"));
 					oAdd.updateUI();
 					return;
 				}
