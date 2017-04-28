@@ -2,5 +2,5 @@
   <plane name="Spitfire Mk.V">
     <takeoffLength>1500</takeoffLength>
     <landingLength>970</landingLength>
-  <plane>
+  </plane>
 </planes>
