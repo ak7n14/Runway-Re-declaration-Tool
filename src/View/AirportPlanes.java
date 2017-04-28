@@ -248,10 +248,8 @@ public class AirportPlanes extends JFrame {
                     return;
                 }
                 if(minLanLen<0||minTFLen<0){
-                    JFrame frame = new JFrame("INVALID");
-                    frame.getContentPane().add(new JLabel("Invalid inputs!"));
-                    frame.setSize(300,100);
-                    frame.setVisible(true);
+                    acAdd.add(new JLabel("Invalid inputs please check!"));
+                    acAdd.updateUI();
                     return;
                 }
                 Plane plane = new Plane(txtacName.getText(),minLanLen,minTFLen);
