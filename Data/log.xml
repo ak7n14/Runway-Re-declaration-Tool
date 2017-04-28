@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <logs>
 <log>
-<name>2017-04-27 11:22:05.226</name>
-<runway>27L</runway>
+<name>2017-04-28 12:23:04.333</name>
+<runway>09R</runway>
 <obstacle>737 Wreck</obstacle>
 <DistCL>0</DistCL>
 <DistTH>0</DistTH>
-<action>Landing</action>
+<action>Taking off</action>
 <DirectionCL>Right</DirectionCL>
-<DirectionAc>Away</DirectionAc>
+<DirectionAc>Towards</DirectionAc>
 <RESA>240</RESA>
 <engineBlastAllowence>300</engineBlastAllowence>
 <plane>Boeing 787-9</plane>
 <airport>LONDON HEATHROW</airport>
 </log>
 <log>
-<name>2017-04-27 11:22:05.226</name>
-<runway>27L</runway>
+<name>2017-04-28 12:23:04.333</name>
+<runway>09R</runway>
 <obstacle>737 Wreck</obstacle>
 <DistCL>0</DistCL>
 <DistTH>0</DistTH>
-<action>Landing</action>
+<action>Taking off</action>
 <DirectionCL>Right</DirectionCL>
-<DirectionAc>Away</DirectionAc>
+<DirectionAc>Towards</DirectionAc>
 <RESA>240</RESA>
 <engineBlastAllowence>300</engineBlastAllowence>
 <plane>Boeing 787-9</plane>

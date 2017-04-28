@@ -38,9 +38,9 @@ public class Calculations {
 	
 	//Call the appropriate method according to condition
 	public void calculateLda(String direction){
-		if (direction=="Towards")
+		if (direction.equals("Towards"))
 			calculateLdaTowards();
-		else if(direction=="Away")
+		else if(direction.equals("Away"))
 			calculateLdaOver();
 	}
 
@@ -59,26 +59,26 @@ public class Calculations {
 	
 	//Call the appropriate method according to condition
 	public void calculateTORA(String direction){
-		if (direction=="Towards")
+		if (direction.equals("Towards"))
 			calculateTORATowards();
-		else if(direction=="Away")
+		else if(direction.equals("Away"))
 			calculateTORAAfter();
 	}
 	
 	public int getStartPoint(String action, String direction) throws Exception{
-		if(action == "Landing"){
-			if(direction == "Towards"){
+		if(action.equals("Landing")){
+			if(direction.equals("Towards")){
 				return getSPLandindTowards();
 			}
-			else if(direction == "Away"){
+			else if(direction.equals("Away")){
 				return getSPLandindOver();
 			}
 		}
-		else if (action == "Taking off"){
-				if(direction == "Towards"){
+		else if (action.equals("Taking off")){
+				if(direction.equals("Towards")){
 					return getSPTakingOffTowards();
 				}
-				else if(direction == "Away"){
+				else if(direction.equals("Away")){
 					return getSPTakingoffAfter();
 				}
 		}

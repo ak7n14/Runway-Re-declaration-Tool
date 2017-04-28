@@ -395,7 +395,7 @@ public class InputPanel extends JPanel {
 
                 if(obsLocCenteLine>runway.getRunwayWidth()/2){
 
-                    if (Action=="Landing") {
+                    if (Action.equals("Landing")) {
                             activate=false;
                         outputPanel.printObsOutOfRunway(calc, "Landing");//Calling landing case
 
@@ -405,8 +405,8 @@ public class InputPanel extends JPanel {
                     outputPanel.printObsOutOfRunway(calc,"Taking");//Calling taking off case
                 }
                 else{
-                    if(Action=="Landing"){//Cases of landing
-                        if(Direction=="Towards"){
+                    if(Action.equals("Landing")){//Cases of landing
+                        if(Direction.equals("Towards")){
                             calc.calculateLda("Towards");//When landing towards
                             if(calc.getReLda()<plane.getMinLandingDis()) {
                                 activate = false;
@@ -427,7 +427,7 @@ public class InputPanel extends JPanel {
                         }
                     }
                     else{//Cases of taking off
-                        if(Direction=="Towards"){
+                        if(Direction.equals("Towards")){
                             calc.calculateTORA("Towards");//When taking off towards the object
                             if(calc.getReTORA()<plane.getMinLandingDis() || calc.getReTODA()<plane.getMinLandingDis()
                                     ||calc.getReASDA()<plane.getMinLandingDis()){
@@ -458,7 +458,7 @@ public class InputPanel extends JPanel {
                 if(activate) {
                     System.out.println("activated");
                     int offsetX = obsLocCenteLine;
-                    if(sd.getSelectedItem() == "left"){
+                    if(sd.getSelectedItem().equals("left")){
                         offsetX *= -1;
                     }
                     frame.getPtSide().setRunway(runway);
